@@ -51,3 +51,23 @@
 ### 3. Success Metrics for Cohort 1
 - **Target Conversion:** 70% (10/15) onboarded within 7 days.
 - **Primary KPI:** Time-to-First-Narrative (TTFN).
+
+## v2.1 'Frictionless Entry' Campaign Execution (2026-05-20)
+
+### 1. Growth Campaign Deployment
+- **Social Media (X/LinkedIn):** 
+    - Deployed "Before vs. After" series from `marketing/v2-growth-campaign-assets.md`.
+    - Post 1: "The JSON Wall of Pain" (Target: Log-weary devs).
+    - Post 2: "The Loop of Death" (Target: Cost-conscious builders).
+    - Post 3: "The Aha! Moment" (Target: High-level architects).
+- **Video Asset:** Finalized storyboard for "The 5-Minute Debug" video; queued for production.
+
+### 2. Technical Enablement (The 'Frictionless' Bridge)
+- **Framework Recipes:** Published `marketing/framework-recipes.md` to the public documentation site.
+    - Added specific recipes for LangChain, CrewAI, and AutoGen.
+    - Positioning: "From `pip install` to `tw live` in under 60 seconds."
+- **Onboarding Flow:** Coordinated with Designer to ensure the landing page leads directly to these recipes to minimize the "Integration Gap."
+
+### 3. Metrics & Tracking Setup
+- **Tracking System:** Initialized manual log in `marketing/v2-metrics-tracking-plan.md` to track the transition from "Awareness" (Social reach) to "Activation" (SDK Init).
+- **KPI Focus:** Monitoring "Time-to-First-Narrative" (TTFN) for new signups coming through the v2.1 campaign.
