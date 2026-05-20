@@ -4,7 +4,7 @@
 TraceWhisper is the bridge between the chaotic internal monologue of an AI agent and human understanding. The brand represents **Clarity from Chaos**.
 
 ### Brand Promise
-"Turning the noise of agent logs into the signal of human insight."
+\"Turning the noise of agent logs into the signal of human insight.\"
 
 ### Tone of Voice
 - **Precise:** We deal with technical traces; accuracy is paramount.
@@ -21,8 +21,8 @@ TraceWhisper is the bridge between the chaotic internal monologue of an AI agent
 - **Whisper:** The act of filtering out the noise, the distilled essence, the clear communication.
 
 ### Logo Concept (Visual Direction)
-The logo should evoke the transition from "noise" to "signal."
-- **Symbol:** A series of fragmented, chaotic lines on the left that converge into a single, clean, horizontal line or a stylized "speech bubble" on the right.
+The logo should evoke the transition from \"noise\" to \"signal.\"
+- **Symbol:** A series of fragmented, chaotic lines on the left that converge into a single, clean, horizontal line or a stylized \"speech bubble\" on the right.
 - **Metaphor:** A prism that takes in white noise and outputs a clear beam of light.
 
 ### Color Palette
@@ -32,8 +32,8 @@ The palette is designed to feel like a modern IDE—dark, focused, and high-cont
 | :--- | :--- | :--- | :--- |
 | **Obsidian** | `#0F172A` | Primary Background | Depth, stability, technical focus |
 | **Signal Blue** | `#38BDF8` | Primary Accent | Clarity, trust, intelligence |
-| **Noise Gray** | `#64748B` | Secondary Text/UI | The "background noise" to be filtered |
-| **Insight Green** | `#4ADE80` | Success/Positive Signal | Health, resolution, "Aha!" moments |
+| **Noise Gray** | `#64748B` | Secondary Text/UI | The \"background noise\" to be filtered |
+| **Insight Green** | `#4ADE80` | Success/Positive Signal | Health, resolution, \"Aha!\" moments |
 | **Alert Amber** | `#FBBF24` | Warning/Friction | Attention, potential loop, bottleneck |
 | **Pure White** | `#F8FAFC` | Primary Text | Maximum readability |
 
@@ -49,7 +49,22 @@ We use a pairing of a clean Sans-Serif for narratives and a high-legibility Mono
 
 ---
 
-## 3. Design Principles
+## 3. v2.2 'Correction Preview' Beta Visual Language
+
+The v2.2 update introduces the "Reasoning IDE" and the "Fix-It" engine. The visual language for this phase focuses on the **Correction Loop**.
+
+### Visual Metaphors for Correction
+- **The Breaking Point:** Represented by **Alert Amber** with a high-contrast marker. It is the "moment of failure" that anchors the diagnostic process.
+- **The Correction Bridge:** A visual link (e.g., `+---[ CORRECTION ]--->`) in **Insight Green** that connects a failed reasoning path to a successful one.
+- **The Delta View:** A side-by-side comparison where the "Before" (failed) state is muted in **Noise Gray** and the "After" (corrected) state is highlighted in **Pure White**, with specific prompt improvements explicitly called out in **Insight Green**.
+
+### Beta Interaction Cues
+- **Pulsing Alerts:** In `tw live` mode, a detected Reasoning Loop should pulse in **Alert Amber** to draw immediate attention.
+- **Success Glow:** When a "Fix-It" correction is verified in the preview, the resulting trace should be framed with a subtle **Insight Green** border.
+
+---
+
+## 4. Design Principles
 - **Signal over Noise:** If a piece of information doesn't help the user reach a conclusion, it is hidden or deemphasized.
 - **Narrative First:** The story of the agent's journey is the primary interface; the raw data is the supporting evidence.
 - **Technical Elegance:** The UI should feel like a high-end developer tool—efficient, keyboard-centric, and devoid of unnecessary ornamentation.
