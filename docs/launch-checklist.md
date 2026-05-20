@@ -21,3 +21,11 @@
 - [ ] **Case Studies:** Turn early user success stories into blog posts (Pending)
 - [ ] **Framework Integration:** Reach out to agent framework maintainers for integration (Pending)
 - [ ] **Roadmap Update:** Update public roadmap based on requested features (Pending)
+
+## v2 Beta Launch Checklist (Additional)
+- [x] **Cohort 1 Segmentation:** Segmented 15 diverse users for initial onboarding.
+- [x] **Invitation Sequence:** Sent invitations using `marketing/v2-beta-invitation-email.md`.
+- [x] **Onboarding Assets:** Created `marketing/v2-welcome-onboarding-email.md` for legal sign-offs.
+- [x] **Case Study:** Developed `marketing/case-study-research-agent.md` to demonstrate v2 value.
+- [ ] **Tracking:** Monitor conversion from invitation -> legal -> SDK integration in `marketing/v2-beta-waitlist-tracker.md`.
+- [ ] **Feedback Collection:** Schedule 15-min calls with Cohort 1 users.
