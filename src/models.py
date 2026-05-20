@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 from enum import Enum
+import uuid
 
 class LogComponent(str, Enum):
     THOUGHT = "Thought"
@@ -16,11 +17,30 @@ class ReasoningEvent(str, Enum):
     TOOL_HALLUCINATION = "[Tool Hallucination]"
     INFORMATION_GAP = "[Information Gap]"
 
+class TemplateCategory(str, Enum):
+    LOOP = "LOOP"
+    CONTRADICTION = "CONTRADICTION"
+    HALLUCINATION = "HALLUCINATION"
+    DRIFT = "DRIFT"
+    TOOL_BLINDNESS = "TOOL_BLINDNESS"
+
+class ReasoningTemplate(BaseModel):
+    template_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    category: TemplateCategory
+    symptom_signature: str  # Regex or a specific pattern description
+    root_cause: str
+    proven_fix: str
+    example_trace_id: Optional[str] = None
+    version: int = 1
+    confidence_weight: float = 1.0
+
 class PromptFix(BaseModel):
     analysis: str
     suggested_modification: str
     rationale: str
     confidence_score: Optional[str] = "Medium"
+    template_id: Optional[str] = None  # Linked to a template if applicable
 
 class RawLogEntry(BaseModel):
     timestamp: datetime
