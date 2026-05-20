@@ -2,7 +2,7 @@
 
 This document defines the user stories for the v2.2 release, focusing on the transition from "Detection" to "Correction".
 
-## 1. The "Fix-It" Suite (Automated Correction)
+## 1. The "Fix-It" & Verification Suite (Automated Correction)
 
 ### US2.2.1.1: Automated Prompt Suggestion
 **As a** prompt engineer,
@@ -20,6 +20,33 @@ This document defines the user stories for the v2.2 release, focusing on the tra
 - **Acceptance Criteria:**
     - The CLI provides a way to output just the suggested fix for easy piping.
     - The UI/Report provides a "Copy Fix" button.
+
+### US2.2.2.1: The Verification Loop (Automated Validation)
+**As a** prompt engineer,
+**I want** TraceWhisper to not only suggest a fix but to automatically apply it, re-run the failing input, and verify the result,
+**so that** I don't have to manually cycle between the debugger and my agent.
+- **Acceptance Criteria:**
+    - A "Apply & Verify" button exists in the UI/CLI.
+    - The system automatically updates the system prompt and triggers a re-run of the original input.
+    - The system provides a clear "Verdict" (Fixed/Unresolved/Regression) based on the new trace.
+
+### US2.2.2.2: Regression Testing (The Verification Set)
+**As a** developer,
+**I want** the verification process to run the new prompt against a "Verification Set" of known-good inputs,
+**so that** I can ensure that fixing one bug hasn't introduced a regression elsewhere.
+- **Acceptance Criteria:**
+    - Users can define a set of "Gold Standard" inputs/outputs.
+    - The Verification Loop automatically executes this set whenever a fix is applied.
+    - The "Verdict" is marked as "Regression" if any input in the set fails.
+
+### US2.2.2.3: Safe Rollback (Snapshotting)
+**As a** prompt engineer,
+**I want** the system to automatically snapshot my prompt before applying a fix,
+**so that** I can instantly revert to a known-working state if the fix fails or causes regressions.
+- **Acceptance Criteria:**
+    - A backup of the prompt is created automatically before any update.
+    - A "Rollback" button is available when a "Regression" or "Unresolved" verdict is reached.
+    - Rollback restores the original prompt exactly.
 
 ## 2. Quantitative Engineering (A/B Testing)
 
