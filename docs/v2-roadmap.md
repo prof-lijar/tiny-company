@@ -27,19 +27,20 @@ While v1 solved the \"log fatigue\" problem by providing a human-readable narrat
 - **Priority:** P2 (Medium)
 
 ### 2.5 Interactive Trace-Chat
-- **Description:** A conversational interface over a specific trace. Users can ask questions like *\"Why did the agent ignore the third constraint?\"* or *\"What was the exact observation that triggered the pivot to strategy Z?\"*
+- **Description:** A conversational interface over a specific trace. Users can ask questions like \"Why did the agent ignore the third constraint?\" or \"What was the exact observation that triggered the pivot to strategy Z?\"
 - **Value:** Provides deeper granularity than a summary report without forcing the user back into the raw logs.
 - **Priority:** P2 (Medium)
 
 ## 3. Prioritized Roadmap & Milestones
 
-### Milestone 0: The "Frictionless Entry" Phase (Immediate / v2.1)
-- **Goal:** Remove administrative and technical barriers to the "Aha!" moment.
+### Milestone 0: The \"Frictionless Entry\" Phase (Immediate / v2.1)
+- **Goal:** Remove administrative and technical barriers to the \"Aha!\" moment and align product positioning with user needs.
 - **Deliverables:**
     - **Click-Wrap Agreement:** Replace manual signatures with integrated CLI/Web consent.
-    - **Framework Recipes:** "Copy-Paste" integration guides for LangChain/CrewAI/AutoGen.
+    - **Framework Recipes:** \"Copy-Paste\" integration guides for LangChain/CrewAI/AutoGen.
     - **First-Run CLI Guide:** Interactive guidance to lead users from `init()` to `tw live`.
     - **SDK Hardening:** Prevent silent failures during initialization.
+    - **Debug-First Narrative Tuning:** Refine LLM prompts to highlight reasoning loops and contradictions, shifting from \"reporting\" to \"debugging.\"
 - **Estimated Time:** 1-2 weeks.
 
 ### Milestone 1: The Connectivity Phase (Short-term)
