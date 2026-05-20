@@ -7,6 +7,7 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
 
 ### 2.1 Live Whisper (Real-time Narrative)
 **Goal:** Provide a rolling narrative of an agent's reasoning as it happens.
+**Priority:** P0 (Critical)
 
 - **Functional Requirements:**
     - **Stream Ingestion:** Ability to tail a local log file or connect to a WebSocket stream of logs.
@@ -19,6 +20,7 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
 
 ### 2.2 Trace Comparison (A/B Testing)
 **Goal:** Quantitatively and qualitatively compare two execution traces.
+**Priority:** P1 (High)
 
 - **Functional Requirements:**
     - **Comparison Mode:** `tw compare <trace_a> <trace_b>`.
@@ -30,18 +32,21 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
     - Provide a "Winner" recommendation based on predefined metrics (e.g., fewest steps).
 
 ### 2.3 Framework-Native Integrations
-**Goal:** Eliminate manual log exporting.
+**Goal:** Eliminate manual log exporting and the "JSON Tax".
+**Priority:** P0 (Critical) - *Elevated from P1 based on v1 user feedback.*
 
 - **Functional Requirements:**
-    - **SDK Wrappers:** Provide a Python library that can be wrapped around agent calls.
-    - **Automatic Export:** Seamlessly stream logs to TraceWhisper in the background.
-    - **Supported Frameworks:** Initial support for LangChain and CrewAI.
+    - **One-Line Setup:** Provide a configuration that allows developers to enable TraceWhisper with minimal code changes (e.g., a single decorator or config line).
+    - **SDK Wrappers:** Provide a Python library that can be wrapped around agent calls for LangChain and CrewAI.
+    - **Automatic Export:** Seamlessly stream logs to TraceWhisper in the background without requiring manual file saves.
 - **Acceptance Criteria:**
-    - A developer can enable TraceWhisper with $< 5$ lines of code in their agent script.
-    - Logs are captured in the standard TraceWhisper JSON format without manual conversion.
+    - A developer can enable TraceWhisper with < 5 lines of code in their agent script.
+    - Integration is seamless with existing framework logger/callback systems.
+    - Logs are captured in the standard TraceWhisper JSON format automatically.
 
 ### 2.4 Prompt Optimization Engine ("The Fixer")
 **Goal:** Turn failure analysis into actionable prompt improvements.
+**Priority:** P2 (Medium)
 
 - **Functional Requirements:**
     - **Root Cause Analysis:** Deep-dive into the "Failure Analysis" section to identify if the failure was due to: (a) Tool hallucination, (b) Logic loop, (c) Missing information.
@@ -53,6 +58,7 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
 
 ### 2.5 Interactive Trace-Chat
 **Goal:** Allow users to query a trace using natural language.
+**Priority:** P2 (Medium)
 
 - **Functional Requirements:**
     - **Contextual Querying:** An interactive session where the user asks questions about a specific trace.
