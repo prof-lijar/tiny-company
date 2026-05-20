@@ -1,80 +1,82 @@
 # Technical Architecture: TraceWhisper
 
 ## 1. Architecture Overview
-TraceWhisper follows a **Pipe-and-Filter architecture**. Raw log data flows through a series of transformation stages, moving from high-volume noise to a high-signal narrative report.
+TraceWhisper has evolved from a static post-mortem analysis tool (v1) into a proactive observability ecosystem (v2). The architecture now supports both asynchronous batch processing and real-time streaming.
 
-### Data Flow Pipeline
+### Data Flow Versions
+
+#### v1: Batch Pipeline (Post-Mortem)
 `Raw Log File` $\rightarrow$ `Log Parser` $\rightarrow$ `Trace Filter` $\rightarrow$ `Narrative Engine` $\rightarrow$ `Report Generator` $\rightarrow$ `Final Report`
+
+#### v2: Integrated Ecosystem (Proactive)
+`SDK/Live Stream` $\rightarrow$ `Storage Layer (SQLite)` $\rightarrow$ `Live Whisper / Analysis Engine` $\rightarrow$ `Real-time Dashboard / Reports`
 
 ## 2. System Diagram
 ```mermaid
 graph TD
-    A[Raw Log File] --> B[Log Parser]
-    B --> C[Trace Filter]
-    C --> D[Narrative Engine]
-    D --> E[Report Generator]
-    E --> F[Markdown/HTML Report]
-    
-    subgraph "Narrative Engine"
-        D1[Context Chunker] --> D2[LLM Synthesis]
-        D2 --> D3[Pydantic Validator]
+    subgraph "Ingestion Layer"
+        A[Log Files] --> B[Log Parser]
+        C[Framework SDKs] --> D[Stream Handler]
     end
-    
-    subgraph "LLM Interface"
-        D2 <--> G[LiteLLM]
-        G <--> H[OpenAI/Anthropic/Ollama]
+
+    B --> E[Storage Layer]
+    D --> E[Storage Layer]
+
+    subgraph "Storage Layer (SQLite)"
+        E --> E1[(Traces Table)]
+        E --> E2[(Logs Table)]
+        E --> E3[(Narratives Table)]
     end
+
+    E1 & E2 --> F[Analysis Engine]
+    E3 --> G[Live Dashboard]
+
+    subgraph "Analysis Engine"
+        F --> F1[Trace Filter]
+        F1 --> F2[Narrative Engine]
+        F2 --> F3[Report Generator]
+    end
+
+    F3 --> H[Markdown/HTML Report]
+    G --> I[Rich CLI Live View]
 ```
 
 ## 3. Data Model
-We use Pydantic models to ensure type safety and data integrity across the pipeline.
+We use Pydantic models for type safety and SQLite for persistence.
 
-### 3.1 Log Ingestion Model
-- `RawLogEntry`: Represents a single line of log.
-  - `timestamp`: datetime
-  - `trace_id`: str
-  - `level`: str (INFO, ERROR, DEBUG)
-  - `component`: str (Thought, Action, Observation)
-  - `content`: str
-  - `metadata`: dict
+### 3.1 Core Models
+- `RawLogEntry`: Single log line (timestamp, trace_id, level, component, content, metadata).
+- `ProcessedTrace`: Chronological collection of `RawLogEntry` objects grouped by `trace_id`.
+- `ExecutionReport`: Final structured object containing summary, narrative segments, tool usage, and failure analysis.
 
-### 3.2 Processing Model
-- `ProcessedTrace`: A collection of `RawLogEntry` objects grouped by `trace_id`, sorted chronologically.
-- `KeyDecisionPoint (KDP)`: A subset of the trace identified as a critical pivot in the agent's reasoning.
-
-### 3.3 Output Model
-- `ExecutionReport`: The final structured object.
-  - `summary`: str (Executive Summary)
-  - `narrative`: List[NarrativeSegment]
-  - `tool_usage`: List[ToolSummary]
-  - `failure_analysis`: Optional[str]
+### 3.2 Storage Schema (v2)
+- **Traces**: High-level metadata (`id`, `agent_id`, `session_id`, `start_time`, `end_time`, `metadata`, `status`).
+- **Logs**: Individual entries (`id`, `trace_id`, `timestamp`, `level`, `message`, `raw_payload`, `step_index`).
+- **Narratives**: Synthesized segments (`id`, `trace_id`, `step_range`, `content`, `timestamp`).
 
 ## 4. Component Specifications
 
-### 4.1 Log Parser
-- **Responsibility:** Read files from disk, handle encoding, and deserialize JSON/Text into `RawLogEntry` objects.
-- **Interface:** `parse_logs(file_path: Path) -> List[RawLogEntry]`
+### 4.1 Log Parser & Stream Handler
+- **Parser**: Reads static files and deserializes them into `RawLogEntry` objects.
+- **Stream Handler**: Provides an SDK (LangChain/CrewAI callbacks) to stream logs directly to the storage layer in real-time.
 
-### 4.2 Trace Filter
-- **Responsibility:** 
-  - Group entries by `trace_id`.
-  - Remove "noise" (heartbeats, repetitive system prompts).
-  - Identify KDPs based on patterns (e.g., "Error encountered", "Changing strategy to...").
-- **Interface:** `filter_trace(entries: List[RawLogEntry]) -> ProcessedTrace`
+### 4.2 Storage Layer (`src/storage.py`)
+- **Responsibility**: Manages the SQLite database.
+- **Key APIs**: `save_trace()`, `append_log()`, `save_narrative()`, `get_trace_logs()`.
 
 ### 4.3 Narrative Engine
-- **Responsibility:** 
-  - Chunk `ProcessedTrace` to fit LLM context windows.
-  - Prompt the LLM to synthesize a narrative focusing on the *why* and *how*.
-  - Validate LLM output against the `ExecutionReport` schema.
-- **Interface:** `synthesize_narrative(trace: ProcessedTrace) -> ExecutionReport`
+- **Responsibility**: 
+  - **Batch Mode**: Processes a full trace to generate a report.
+  - **Live Mode**: Processes sliding windows of logs to update a rolling narrative.
+- **Interface**: `synthesize_narrative(trace: ProcessedTrace) -> ExecutionReport`.
 
-### 4.4 Report Generator
-- **Responsibility:** Map the `ExecutionReport` object into a human-readable format using Jinja2 templates.
-- **Interface:** `generate_file(report: ExecutionReport, format: Format) -> Path`
+### 4.4 Live Whisper (`src/live.py`)
+- **Responsibility**: Tailing logs (via file or DB) and triggering the Narrative Engine upon "Key Decision Points" (KDPs).
+- **UI**: Uses `rich` for a split-screen CLI dashboard.
 
-## 5. Deployment Strategy
-- **Distribution:** The tool will be distributed as a Python package.
-- **Execution:** Local CLI execution.
-- **Configuration:** API keys and model preferences will be managed via environment variables or a `.env` file.
-- **Dependency Management:** Managed via `uv` for fast, reproducible environments.
+## 5. Deployment & Stack
+- **Language**: Python 3.11+
+- **Persistence**: SQLite (Embedded)
+- **LLM Interface**: LiteLLM (supporting OpenAI, Anthropic, etc.)
+- **UI**: Rich (CLI)
+- **Dependency Management**: `uv`
