@@ -1,7 +1,9 @@
-# Product Specification: TraceWhisper v2
+# Product Specification: TraceWhisper v2 (Updated for v2.2)
 
 ## 1. Introduction
 TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proactive observability and optimization ecosystem. While v1 focused on \"What happened?\", v2 focuses on \"How do I fix it and how do I prevent it in real-time?\"
+
+The overarching theme for v2.2 is **\"The Closed-Loop Debugger,\"** moving the product from **Detection** (identifying reasoning errors) to **Correction** (fixing them).
 
 ## 2. Feature Specifications
 
@@ -36,7 +38,7 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
     - No duplication of narrative segments when the window slides.
 
 ### 2.2 Trace Comparison (A/B Testing)
-**Goal:** Quantitatively and qualitatively compare two execution traces.
+**Goal:** Quantitatively and qualitatively compare two execution traces to validate prompt improvements.
 **Priority:** P1 (High)
 
 - **Functional Requirements:**
@@ -46,11 +48,11 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
     - **Outcome Evaluation:** Determine which trace reached the goal more accurately or with higher quality.
 - **Acceptance Criteria:**
     - Output a \"Comparison Report\" highlighting the divergence point.
-    - Provide a \"Winner\" recommendation based on predefined metrics (e.g., fewest steps).
+    - Provide a \"Winner\" recommendation based on predefined metrics (e.g., fewest steps to goal).
 
 ### 2.3 Framework-Native Integrations
 **Goal:** Eliminate manual log exporting and the \"JSON Tax\".
-**Priority:** P0 (Critical) - *Elevated from P1 based on v1 user feedback.*
+**Priority:** P0 (Critical)
 
 - **Functional Requirements:**
     - **One-Line Setup:** Provide a configuration that allows developers to enable TraceWhisper with minimal code changes (e.g., a single decorator or config line).
@@ -61,37 +63,62 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
     - Integration is seamless with existing framework logger/callback systems.
     - Logs are captured in the standard TraceWhisper JSON format automatically.
 
-### 2.4 Prompt Optimization Engine (\"The Fixer\")
+### 2.4 The \"Fix-It\" Button (Automated Prompt Suggestions)
 **Goal:** Turn failure analysis into actionable prompt improvements.
+**Priority:** P0 (Critical) - *Elevated from P2 to align with v2.2 strategy.*
+
+- **Functional Requirements:**
+    - **Automated Root Cause Analysis:** When a `[Reasoning Loop]` or `[Contradiction]` is detected, the system automatically triggers a deep-dive analysis.
+    - **Meta-Prompt Suggestion:** Use a specialized internal prompt to analyze the failure and generate a specific \"Instruction\" to be added to the agent's system prompt to prevent the failure.
+    - **Before/After Comparison:** Present the current prompt vs. the suggested prompt.
+- **Acceptance Criteria:**
+    - The engine provides a \"Proposed Prompt Change\" grounded in the specific evidence found in the trace.
+    - Suggestions are delivered directly in the CLI/UI adjacent to the detected error.
+
+### 2.5 Interactive Break-points (The \"Intervention\")
+**Goal:** Allow developers to live-debug and correct agent reasoning in real-time.
+**Priority:** P1 (High)
+
+- **Functional Requirements:**
+    - **Reasoning Break-points:** Ability to set triggers in the SDK (e.g., `set_breakpoint(on='contradiction')`).
+    - **Execution Pause:** When a trigger is hit, the agent execution is paused.
+    - **Manual Injection:** The developer can inject a "Correction" or "Nudge" into the agent's current context via the CLI.
+    - **Resume Execution:** Resume the agent with the updated context.
+- **Acceptance Criteria:**
+    - Agent pauses execution within 1 second of a trigger event.
+    - Developer can successfully modify the agent's memory/context and see the agent pivot its reasoning on resume.
+
+### 2.6 Reasoning Template Library & Team Sharing
+**Goal:** Transform individual debugging into organizational knowledge.
 **Priority:** P2 (Medium)
 
 - **Functional Requirements:**
-    - **Root Cause Analysis:** Deep-dive into the \"Failure Analysis\" section to identify if the failure was due to: (a) Tool hallucination, (b) Logic loop, (c) Missing information.
-    - **Prompt Suggestion:** Generate a specific \"Instruction\" to be added to the agent's system prompt to avoid this specific failure.
-    - **Hypothesis Generation:** Suggest a new tool or a change in tool definition.
+    - **Pattern Library:** A curated database of common reasoning failures (e.g., \"The Infinite Loop\") and their proven prompt fixes.
+    - **Logic Audit Reports:** Generate permanent, shareable URLs for specific traces that include the narrative and the identified errors.
+    - **Collaborative Annotation:** Allow team members to add notes to a shared trace.
 - **Acceptance Criteria:**
-    - The engine provides a \"Proposed Prompt Change\" (Before vs. After).
-    - Suggestions are grounded in the specific evidence found in the trace.
+    - User can search the library for a failure pattern and find a suggested fix.
+    - Shareable URLs are accessible without requiring the recipient to have the raw log files.
 
-### 2.5 Interactive Trace-Chat
-**Goal:** Allow users to query a trace using natural language.
+### 2.7 CI/CD Reasoning Guardrails
+**Goal:** Prevent reasoning regressions from reaching production.
 **Priority:** P2 (Medium)
 
 - **Functional Requirements:**
-    - **Contextual Querying:** An interactive session where the user asks questions about a specific trace.
-    - **Evidence Linking:** Every answer must link back to the specific log line or \"Whisper\" segment it is referencing.
-    - **Agent Persona:** The chat agent should act as a \"Forensic Analyst\" specializing in AI agents.
+    - **Regression Testing:** A CLI tool that runs a set of gold-standard inputs through the agent.
+    - **Reasoning Audit:** Automatically detect if any new `[Reasoning Loops]` are introduced or if the \"Efficiency Score\" drops below a threshold.
+    - **Build Failure:** Integrate with CI/CD pipelines to fail the build if reasoning regressions are detected.
 - **Acceptance Criteria:**
-    - Ability to answer \"Why did the agent do X?\" with 100% accuracy based on the logs.
-    - Response time for queries under 3 seconds.
+    - The tool can be integrated into a GitHub Action or GitLab CI pipeline.
+    - Build fails with a clear report indicating which test case introduced the reasoning loop.
 
 ## 3. Technical Considerations
-- **State Management:** v2 will require a local database (e.g., SQLite) to store traces for comparison and chat, rather than relying solely on flat files.
-- **LLM Cost:** Real-time synthesis and interactive chat will increase token consumption; implementation of caching for repeated segments is required.
-- **Concurrency:** Live Whisper must handle asynchronous log streams without blocking the narrative engine.
+- **State Management:** v2 requires a local database (e.g., SQLite) to store traces for comparison, history, and the template library.
+- **LLM Cost:** Real-time synthesis and the \"Fix-It\" engine increase token consumption; implementation of caching for repeated segments is required.
+- **Concurrency:** Live Whisper and Interactive Break-points must handle asynchronous log streams and execution pausing without crashing the agent.
 
 ## 4. Success Metrics
-- **Mean Time to Fix (MTTF):** Reduction in time from failure detection to prompt deployment.
+- **Mean Time to Resolve (MTTR):** Reduction in time from failure detection to prompt deployment.
+- **Fix-It Acceptance Rate:** % of automated prompt suggestions adopted by the user.
 - **Integration Adoption:** Percentage of users using the SDK vs. CLI file parsing.
-- **Analytical Depth:** Number of queries per trace in the Interactive Chat.
 - **Onboarding Conversion:** % of invited users reaching the first narrative (Target > 40%).
