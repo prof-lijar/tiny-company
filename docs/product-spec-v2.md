@@ -5,20 +5,22 @@ TraceWhisper v2 evolves the product from a post-mortem analysis tool into a proa
 
 ## 2. Feature Specifications
 
-### 2.0 Onboarding & Friction Reduction (v2.1 "Frictionless Entry")
-**Goal:** Minimize the time from discovery to the "Aha!" moment (TTFN).
+### 2.0 Onboarding & Friction Reduction (v2.1 \"Frictionless Entry\")
+**Goal:** Minimize the time from discovery to the \"Aha!\" moment (TTFN) and align product positioning with user needs.
 **Priority:** P0 (Critical)
 
 - **Functional Requirements:**
     - **Click-Wrap Consent:** Replace manual Beta Agreement signatures with a digital consent flow integrated into the `tw login` or initial setup process.
-    - **Framework-Specific Recipes:** A library of "copy-paste" integration snippets for LangChain, CrewAI, and AutoGen.
-    - **First-Run Guided Experience:** A CLI "wizard" or explicit console hints that guide the user to run `tw live` immediately after their first successful `init()`.
+    - **Framework-Specific Recipes:** A library of \"copy-paste\" integration snippets for LangChain, CrewAI, and AutoGen.
+    - **First-Run Guided Experience:** A CLI \"wizard\" or explicit console hints that guide the user to run `tw live` immediately after their first successful `init()`.
     - **SDK Health Checks:** Implement validation in `tracewhisper.init()` that checks for environment issues (e.g., missing API keys, write permissions) and provides actionable error messages instead of silent failures.
+    - **Debug-First Narrative Tuning:** Update the narrative generation prompts to shift from \"summary reporting\" to \"debugging analysis.\" The output must explicitly highlight reasoning loops, contradictions, and critical pivots.
 - **Acceptance Criteria:**
     - User can onboard and agree to terms without leaving the terminal/web-app flow.
     - Integration into a standard LangChain agent takes < 60 seconds.
     - New users are explicitly prompted to use `tw live` upon their first successful execution.
-    - SDK provides a clear "Ready" or "Error: [Reason]" message on startup.
+    - SDK provides a clear \"Ready\" or \"Error: [Reason]\" message on startup.
+    - Narratives produced in v2.1 explicitly call out \"Reasoning Loop Detected\" or \"Strategic Pivot\" using a consistent taxonomy.
 
 ### 2.1 Live Whisper (Real-time Narrative)
 **Goal:** Provide a rolling narrative of an agent's reasoning as it happens.
