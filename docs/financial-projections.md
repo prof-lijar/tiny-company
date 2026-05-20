@@ -1,71 +1,71 @@
-# Financial Projections: TraceWhisper
+# Financial Projections: TraceWhisper (v2 Update)
 
 ## 1. Executive Summary
-TraceWhisper is currently in a "Low-Burn/High-Equity" phase. Our financial strategy is to minimize capital expenditure by utilizing free tiers and open-source infrastructure, while scaling costs linearly with user growth through a tiered monetization model.
+TraceWhisper is in the v2 development cycle. Our financial strategy remains "Low-Burn/High-Equity," but we are adjusting for increased compute requirements associated with **Live Whisper** (real-time processing). We aim to maintain a runway that extends through the 24-30 week v2 development timeline.
 
 ---
 
-## 2. 3-Month Outlook: The Development Phase
-**Focus:** MVP Completion & Alpha Testing.
+## 2. Short-Term Outlook: v2 Development Phase (Months 1-4)
+**Focus:** Implementation of v2 Architecture, Live Whisper, and Persistence Layers.
 
 - **Revenue:** $0 (Pre-monetization).
 - **Estimated Costs:**
-    - LLM APIs (Dev/Testing): ~$40/month.
+    - LLM APIs (Dev/Testing): ~$60 - $100/month (Increased due to real-time processing tests for Live Whisper).
     - Domain/Misc: ~$1/month.
-- **Net Cash Flow:** ~($41/month).
-- **Total 3-Month Burn:** ~$123.
-- **Financial Goal:** Reach a stable MVP with a verified "Whisper" synthesis engine.
+- **Net Cash Flow:** ~($61 - $101/month).
+- **Financial Goal:** Complete v2 core features and enter closed beta without exceeding a $100/mo API cap.
 
 ---
 
-## 3. 6-Month Outlook: The Launch Phase
-**Focus:** Public Beta & Early Adopter Acquisition.
+## 3. Mid-Term Outlook: v2 Beta & Launch Phase (Months 5-8)
+**Focus:** Closed Beta, User Feedback Loop, and Public v2 Launch.
 
-- **Revenue:** Initial trickle from "Pro" early adopters.
-    - Estimated Monthly Revenue (Month 4-6 avg): ~$125/month.
+- **Revenue:** Initial revenue from "Pro" early adopters of v2.
+    - Estimated Monthly Revenue (Month 6-8 avg): ~$250/month.
 - **Estimated Costs:**
-    - LLM APIs (Increased volume): ~$60/month.
-    - Hosting (Potential upgrade to paid tier if traffic spikes): ~$20/month.
+    - LLM APIs (Beta volume): ~$120 - $150/month (Higher volume of real-time traces).
+    - Hosting (Potential upgrade to paid tier for v2 backend): ~$20/month.
     - Domain/Misc: ~$1/month.
-- **Net Cash Flow:** ~$44/month (Positive).
-- **Total 6-Month Cumulative Burn/Profit:** ~$123 (Burn) + ~$132 (Profit) = **~$9 Net Profit**.
-- **Financial Goal:** Achieve "Cash Flow Neutrality" where early Pro users cover the infrastructure and API costs.
+- **Net Cash Flow:** ~$80 - $130/month (Positive).
+- **Financial Goal:** Achieve "Cash Flow Neutrality" by Month 6, ensuring v2 infrastructure is self-sustaining.
 
 ---
 
-## 4. 12-Month Outlook: The Growth Phase
-**Focus:** Scaling User Base & Enterprise Pilots.
+## 4. Long-Term Outlook: Scaling Phase (Months 9-12)
+**Focus:** Scaling User Base & Enterprise Pilots for v2.
 
-- **Revenue:** Scaling with MAU growth.
-    - Estimated Monthly Revenue (Month 10-12 avg): ~$5,000 - $11,000/month.
+- **Revenue:** Scaling with MAU growth and Enterprise pilots.
+    - Estimated Monthly Revenue (Month 10-12 avg): ~$6,000 - $12,000/month.
 - **Estimated Costs:**
-    - LLM APIs (Scaled): ~$500 - $2,000/month (Assuming managed API costs).
-    - Hosting/Compute (Paid Tiers): ~$100 - $300/month.
-    - Marketing/Acquisition: ~$200/month.
-- **Net Cash Flow:** ~$3,000 - $8,000/month.
-- **Financial Goal:** Build a sustainable treasury to fund future full-time hires or expanded R&D.
+    - LLM APIs (Scaled): ~$800 - $2,500/month (Assuming optimized routing and caching).
+    - Hosting/Compute (Paid Tiers): ~$200 - $400/month.
+    - Marketing/Acquisition: ~$300/month.
+- **Net Cash Flow:** ~$4,500 - $9,000/month.
+- **Financial Goal:** Build a sustainable treasury to fund expanded R&D for v3.
 
 ---
 
-## 5. Summary Table (Consolidated)
+## 5. Summary Table (Consolidated v2)
 
-| Metric | Month 3 (End) | Month 6 (End) | Month 12 (End) |
+| Metric | Month 3 (Dev) | Month 6 (Beta/Launch) | Month 12 (Scaling) |
 | :--- | :--- | :--- | :--- |
-| **Monthly Revenue** | $0 | ~$380 | ~$11,400 |
-| **Monthly Expenses** | ~$41 | ~$81 | ~$2,300 |
-| **Net Monthly Flow** | -($41) | +$299 | +$9,100 |
-| **Cumulative Position** | -($123) | ~$9 | ~$35,000+ |
+| **Monthly Revenue** | $0 | ~$250 | ~$12,000 |
+| **Monthly Expenses** | ~$80 | ~$170 | ~$2,900 |
+| **Net Monthly Flow** | -($80) | +$80 | +$9,100 |
+| **Cumulative Position** | -($240) | ~$100 | ~$35,000+ |
 
 ---
 
-## 6. Break-Even Analysis
+## 6. Runway & Break-Even Analysis
+
+**v2 Development Runway:**
+- **Estimated Burn (v2 Dev):** ~$80/month.
+- **Estimated Timeline:** 24-30 weeks (~7 months).
+- **Total Required Capital:** ~$560.
+- **Status:** With current assumed seed funding, the runway is sufficient to reach the Beta phase, provided API caps are strictly enforced.
 
 **Break-Even Point (Monthly):**
-To cover the basic operating costs of ~$80/month (post-launch), we need:
-- **Pro Users:** ~5 users at $19/month.
+To cover the increased v2 operating costs of ~$170/month (post-launch), we need:
+- **Pro Users:** ~9 users at $19/month.
 
-**Break-Even Point (Cumulative):**
-To recover the initial $123 seed burn, we need:
-- **Pro Users:** ~7 total monthly subscriptions for one month.
-
-**Verdict:** The project has an extremely low barrier to financial sustainability due to the "BYO Key" model for the free tier, which offloads the primary cost (LLM APIs) to the users themselves.
+**Verdict:** The financial risk is low due to the "BYO Key" model for free users, but the "Live Whisper" feature increases our internal testing costs. We must optimize token usage in v2 to prevent a spike in the burn rate.
