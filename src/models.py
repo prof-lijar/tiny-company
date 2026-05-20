@@ -84,3 +84,27 @@ class ExecutionReport(BaseModel):
     failure_analysis: Optional[str] = None
     duration_seconds: float
     logic_audit: Optional[LogicAuditReport] = None
+
+# --- v2.2.2 Verification Loop Models ---
+
+class GoldStandard(BaseModel):
+    input_text: str
+    expected_output: str
+    critical_constraints: List[str] = Field(default_factory=list)
+
+class VerificationSet(BaseModel):
+    set_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    cases: List[GoldStandard]
+
+class VerificationStatus(str, Enum):
+    SUCCESS = "SUCCESS"
+    FAILURE = "FAILURE"
+    REGRESSION = "REGRESSION"
+
+class VerificationResult(BaseModel):
+    status: VerificationStatus
+    trigger_resolved: bool
+    benchmark_passed: bool
+    details: str
+    metrics: Dict[str, Any] = Field(default_factory=dict)
