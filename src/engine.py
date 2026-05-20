@@ -1,91 +1,118 @@
 from typing import List
 import time
-from src.models import ProcessedTrace, ExecutionReport, NarrativeSegment, ToolSummary
+from src.models import ProcessedTrace, ExecutionReport, NarrativeSegment, ToolSummary, LogicAuditReport, ReasoningEvent
 from litellm import completion
 from src.telemetry import telemetry
 
 class NarrativeEngine:
-    def __init__(self, model: str = \"gpt-4o\"):
+    def __init__(self, model: str = "gpt-4o"):
         self.model = model
 
     def _build_prompt(self, trace: ProcessedTrace) -> str:
-        log_text = \"\\n\".join([
-            f\"[{e.timestamp}] {e.component}: {e.content}\" 
+        log_text = "\n".join([
+            f"[{e.timestamp}] {e.component}: {e.content}" 
             for e in trace.entries
         ])
         
-        prompt = f\"\"\"
-        Analyze the following AI agent logs and transform them into a cohesive narrative.
-        
+        prompt = f"""
+        You are a Forensic AI Analyst. Your goal is to perform a 'Logic Audit' on the following AI agent logs.
+        Instead of summarizing what the agent did, you must diagnose HOW the agent reasoned and identify logical failures.
+
+        ### Diagnostic Taxonomy:
+        - [Reasoning Loop]: Agent repeats the same thought/tool call without new info.
+        - [Contradiction]: Agent's current step contradicts previous conclusions or constraints.
+        - [Strategic Pivot]: Agent explicitly recognizes failure and changes plan.
+        - [Tool Hallucination]: Agent provides impossible arguments or ignores tool output.
+        - [Information Gap]: Agent attempts a task without necessary prerequisite info.
+
+        ### Instructions:
+        1. Analyze the logs for the events listed in the taxonomy.
+        2. Transform the logs into a narrative that highlights these diagnostic markers.
+        3. Provide a Logic Audit Report including:
+           - Critical Failures (Loops, Contradictions)
+           - Pivot Analysis (where and why it pivoted)
+           - Efficiency Score (Productive Steps vs Wasted Steps)
+
         Logs:
         {log_text}
         
-        Please provide a structured response in the following format:
-        1. Executive Summary: A high-level result (Success/Failure) and total duration.
-        2. The Journey: A chronological narrative of the agent's logic (why it did what it did).
-        3. Tool Usage: A list of tools called, their inputs, and outcomes.
-        4. Failure Analysis: If the agent failed, explain the breaking point.
-        
-        Be concise and focus on Key Decision Points (KDPs).
-        \"\"\"
+        Please provide a structured response. 
+        For the narrative, use the markers like [Reasoning Loop] directly in the text.
+        """
         return prompt
 
     def synthesize(self, trace: ProcessedTrace) -> ExecutionReport:
-        \"\"\"
-        Synthesizes a narrative report from a ProcessedTrace.
-        \"\"\"
+        """
+        Synthesizes a forensic narrative report from a ProcessedTrace.
+        """
         start_time = time.time()
         prompt = self._build_prompt(trace)
         
         try:
             response = completion(
                 model=self.model, 
-                messages=[{\"role\": \"user\", \"content\": prompt}]
+                messages=[{"role": "user", "content": prompt}]
             )
             
-            # In a real implementation, we would use Pydantic output parsing 
-            # to convert the LLM string into an ExecutionReport object.
-            # For this MVP, we will simulate the parsing.
             content = response.choices[0].message.content
             
         except Exception as e:
-            telemetry.error(\"llm_synthesis_error\", {\"model\": self.model, \"error\": str(e)})
+            telemetry.error("llm_synthesis_error", {"model": self.model, "error": str(e)})
             raise e
             
-        telemetry.track_duration(\"llm_synthesis\", start_time, {
-            \"model\": self.model,
-            \"prompt_tokens\": len(prompt), # Simplified token count
-            \"trace_id\": trace.trace_id
+        telemetry.track_duration("llm_synthesis", start_time, {
+            "model": self.model,
+            "prompt_tokens": len(prompt), 
+            "trace_id": trace.trace_id
         })
         
         return self._simulate_parsing(content, trace)
 
     def _simulate_parsing(self, text: str, trace: ProcessedTrace) -> ExecutionReport:
-        # This is a mock-up of the parsing logic for the MVP.
-        # It would actually parse the LLM's markdown output into the Pydantic models.
+        # Mocking the parsing of the forensic LLM output
+        # In a production system, this would use Pydantic output parsing.
+        
+        # Simulate a detected loop for the MVP demonstration
+        narrative = [
+            NarrativeSegment(
+                timestamp=trace.entries[0].timestamp, 
+                text="The agent started the task and identified the need to search.",
+                is_kdp=True
+            ),
+            NarrativeSegment(
+                timestamp=trace.entries[len(trace.entries)//2].timestamp, 
+                text="The agent is attempting the same search query for the third time. [Reasoning Loop]: The previous results were already processed.",
+                is_kdp=True,
+                event_type=ReasoningEvent.REASONING_LOOP
+            ),
+            NarrativeSegment(
+                timestamp=trace.entries[-1].timestamp, 
+                text="The agent finally pivoted to a different search term and found the answer. [Strategic Pivot].",
+                is_kdp=True,
+                event_type=ReasoningEvent.STRATEGIC_PIVOT
+            )
+        ]
+        
+        audit = LogicAuditReport(
+            critical_failures=["Reasoning Loop detected at step 5"],
+            pivot_analysis="Agent pivoted from keyword search to conceptual search after failing 3 times.",
+            efficiency_score=0.6,
+            detailed_findings=["Agent ignored output of search_tool in attempt 2 and 3."]
+        )
+
         return ExecutionReport(
             trace_id=trace.trace_id,
-            summary=\"The agent successfully completed the task.\",
-            narrative=[
-                NarrativeSegment(
-                    timestamp=trace.entries[0].timestamp, 
-                    text=\"The agent started the task and identified the need to search for information.\",
-                    is_kdp=True
-                ),
-                NarrativeSegment(
-                    timestamp=trace.entries[-1].timestamp, 
-                    text=\"The agent found the correct answer and finalized the report.\",
-                    is_kdp=False
-                )
-            ],
+            summary="Task completed, but with significant reasoning inefficiencies.",
+            narrative=narrative,
             tool_usage=[
                 ToolSummary(
-                    tool_name=\"search_tool\", 
-                    input=\"AI observability\", 
-                    output=\"Found 3 results\", 
-                    status=\"Success\"
+                    tool_name="search_tool", 
+                    input="AI observability", 
+                    output="Found 3 results", 
+                    status="Success"
                 )
             ],
             failure_analysis=None,
-            duration_seconds=(trace.end_time - trace.start_time).total_seconds()
+            duration_seconds=(trace.end_time - trace.start_time).total_seconds(),
+            logic_audit=audit
         )
