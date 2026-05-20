@@ -71,3 +71,17 @@
 ### 3. Metrics & Tracking Setup
 - **Tracking System:** Initialized manual log in `marketing/v2-metrics-tracking-plan.md` to track the transition from "Awareness" (Social reach) to "Activation" (SDK Init).
 - **KPI Focus:** Monitoring "Time-to-First-Narrative" (TTFN) for new signups coming through the v2.1 campaign.
+
+## v2.2 'Reasoning IDE' Teaser & Outreach Execution (2026-05-20)
+
+### 1. Teaser Campaign Phase 1
+- **Waitlist Outreach:** Sent "Stop guessing. Start fixing." teaser email to the full v2 Beta waitlist (150 applicants) using `marketing/v2-2-teaser-campaign.md`.
+- **Social Teasers:** Deployed Post 1 ("The Prompt Guessing Pain") and Post 2 ("Detection vs. Correction") across X and LinkedIn to build anticipation around the 'Reasoning IDE' positioning.
+
+### 2. Framework Partner Outreach
+- **Strategic Outreach:** Initiated contact with founders/product leads at **LangChain**, **CrewAI**, and **AutoGPT** using the "Better Together" (Strategic Partnership) template from `marketing/framework-outreach-templates.md`.
+- **Technical Outreach:** Contacted lead maintainers at **AutoGen** and **PydanticAI** using the "Developer Value" (Technical Integration) template.
+
+### 3. Technical Content Distribution
+- **Blog Publication:** Published "The Anatomy of a Reasoning Loop (And How to Kill It)" (`marketing/blog-anatomy-of-reasoning-loop.md`) to the company blog and cross-posted to Hacker News and r/LocalLLaMA.
+- **Goal:** Establish the "Correction Gap" narrative and position the v2.2 'Fix-It' button as the industry's first structural solution.
