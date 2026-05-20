@@ -1,66 +1,62 @@
-# Bootstrapped Budget Model (First 6 Months)
+# Operating Budget: TraceWhisper (v2 Aligned)
 
 ## Overview
-Tiny Company is operating as a bootstrapped AI startup. Our primary financial goal is to maintain a near-zero burn rate while building the MVP. We will leverage free tiers, open-source software, and pay-as-you-go models to minimize risk.
+Tiny Company is operating as a bootstrapped AI startup. Our primary financial goal is to maintain a low-burn rate while scaling v2. We have transitioned from a centralized architecture to a **Local-First (SQLite)** model, which significantly reduces infrastructure costs but increases variable API consumption for real-time synthesis.
 
 ## Assumptions
 - **Team:** All founders/contributors are working for equity; no salaries are paid.
-- **Infrastructure:** Heavy reliance on serverless and static hosting.
+- **Infrastructure:** Heavy reliance on serverless, static hosting, and local-first storage.
 - **Development:** Use of free-tier CI/CD and project management tools.
-- **Scaling:** Costs are estimated for a small development team (1-3 people) and initial alpha testers.
+- **Scaling:** Costs are tiered based on the development phase (Dev $\rightarrow$ Beta $\rightarrow$ Scaling).
 
 ## Technical Infrastructure Costs
 
 ### 1. LLM API Consumption (The "Whisper" Engine)
-The core value of TraceWhisper is the Narrative Synthesis. This is the primary variable cost.
-- **Model Strategy:** We utilize a tiered approach.
-    - **GPT-4o-mini / Claude Haiku:** Used for noise filtering and initial chunking.
-    - **GPT-4o / Claude 3.5 Sonnet:** Used for final narrative synthesis of critical path extraction.
-- **Estimated Usage (Dev/Alpha):**
-    - Average trace size: 20k - 250k tokens.
-    - Volume: ~100 reports/month.
-    - Estimated Cost: ~$30 - $50/month depending on the ratio of flagship vs. mini models.
+This is our primary variable cost. We use a tiered routing strategy to optimize spend.
+- **Tier 1 (Filtering):** GPT-4o-mini / Claude Haiku (Low cost, high volume).
+- **Tier 2 (Synthesis):** GPT-4o / Claude 3.5 Sonnet (Higher cost, low volume).
+
+**Estimated Spend by Phase:**
+- **Dev Phase (Current):** ~$60 - $100/month (Testing Live Whisper logic).
+- **Beta Phase:** ~$250/month (Sponsoring a subset of beta users).
+- **Scaling Phase:** ~$800 - $2,500/month (Offset by Pro/Enterprise revenue).
 
 ### 2. Hosting & Compute
-- **CLI Tool:** Zero hosting cost (distributed via PyPI/GitHub).
-- **Documentation/Landing Page:** GitHub Pages / Vercel (Free Tier).
-- **Demo Environment:** If a web-based "Trace Viewer" is deployed, we will use Vercel Serverless Functions (Free Tier) to handle API requests.
+- **CLI Tool:** $0 (Distributed via PyPI/GitHub).
+- **Documentation/Landing Page:** $0 (GitHub Pages / Vercel Free Tier).
+- **Compute:** $0 (Offloaded to client machines via Local-First architecture).
 
 ### 3. Data Storage
-- **Local Mode:** No cost (logs stored on user's disk).
-- **Cloud Demo:** Supabase (Free Tier) for storing sample traces and user configurations.
+- **Core Logs:** $0 (Local SQLite).
+- **Metadata/Demo:** $0 (Supabase Free Tier).
 
-## Estimated Costs (6-Month Projection)
+## Estimated Monthly Costs (v2 Lifecycle)
 
-| Item | Monthly Cost (Est.) | 6-Month Total | Notes |
-| :--- | :--- | :--- | :--- |
-| **Domain Name** | $1.00 | $12.00 | Annual registration (~$12/year) |
-| **Hosting** | $0.00 | $0.00 | Vercel / Cloudflare / GitHub Pages (Free Tiers) |
-| **LLM APIs** | $40.00 | $240.00 | Adjusted for flagship model usage during synthesis |
-| **Database** | $0.00 | $0.00 | Supabase / MongoDB Atlas (Free Tiers) |
-| **CI/CD** | $0.00 | $0.00 | GitHub Actions (Free for public repos) |
-| **Project Mgmt** | $0.00 | $0.00 | GitHub Issues / Trello (Free Tiers) |
-| **Communication** | $0.00 | $0.00 | Discord / Slack (Free Tiers) |
-| **Total** | **$41.00** | **$252.00** | |
+| Item | Dev Phase (Est.) | Beta Phase (Est.) | Scaling Phase (Est.) | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Domain Name** | $1.00 | $1.00 | $1.00 | Annual registration (~$12/year) |
+| **Hosting** | $0.00 | $0.00 | $200 - $400 | Shift to paid tiers during scaling |
+| **LLM APIs** | $60 - $100 | $250.00 | $800 - $2,500 | Variable based on usage/sponsorship |
+| **Database** | $0.00 | $0.00 | $50 - $100 | Paid tiers for cloud sync/metadata |
+| **Other Tools** | $0.00 | $0.00 | $300 | Marketing/Acquisition tools |
+| **Total** | **$61 - $101** | **$251.00** | **$1,351 - $3,301** | |
 
 ## Cost Management Strategy
 
-### 1. \"Free-First\" Architecture
-- Prioritize tools with generous free tiers (e.g., Supabase for DB, Vercel for Frontend).
-- Use static site generation (SSG) to eliminate server costs.
+### 1. "Local-First" Cost Avoidance
+By utilizing SQLite and client-side processing, we have eliminated the need for expensive managed database clusters and backend compute for the core product.
 
-### 2. API Budget Caps
-- Set hard limits on LLM API accounts to prevent unexpected overages.
-- Utilize smaller, more efficient models (e.g., GPT-4o-mini, Claude Haiku) for routine tasks and only use flagship models for complex reasoning.
+### 2. Tiered API Routing
+To prevent "API blow-up" during Live Whisper streaming:
+- All streams are filtered by a "Noise Filter" (Mini model).
+- Flagship models are only invoked for "Key Decision Points" (KDPs).
 
-### 3. Open Source Preference
-- Use open-source libraries and self-hosted options if they can be run on free-tier cloud instances.
-
-### 4. Monitoring
-- Monthly review of API usage and cloud billing.
-- Immediate pivot to alternative providers if free tiers are exhausted or pricing changes.
+### 3. Hard Spending Caps
+- **Dev/Beta Cap:** A hard limit of **$100/month** is set on development API keys.
+- **Beta Sponsorship Cap:** Total company-sponsored API spend for Beta is capped at **$250/month**.
 
 ## Financial Risks
-- **API Scaling:** If the product gains rapid traction, API costs will scale linearly with users. We will need a monetization strategy (Freemium/Sponsorships) before this happens.
-- **Domain Renewal:** Small but necessary annual cost.
-- **Tooling Migration:** Moving from free to paid tiers as the team grows.
+- **Rapid Beta Adoption:** If sponsored users exceed 200, API costs will spike.
+- **Mitigation:** Transition to "Bring Your Own Key" (BYOK) exclusively if the $250 cap is breached.
+- **API Pricing Volatility:** Changes in token pricing for flagship models.
+- **Mitigation:** Maintain model-agnostic routing to switch between OpenAI and Anthropic based on cost/performance.
