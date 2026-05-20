@@ -95,3 +95,20 @@
 ### 2. Engagement Tracking
 - **Reporting:** Created the first 'Beta Pulse' report (`marketing/v2-2-beta-pulse-report-01.md`) to track activation and early signals.
 - **Telemetry:** Confirmed with CTO that 'Fix-It' event triggers are being logged to the telemetry service.
+
+## v2.2 'Surgical Correction' Video Series Deployment (2026-05-20)
+
+### 1. Landing Page Integration
+- **Update:** Integrated "Watch it in Action" section into `marketing/landing-page-copy.md`.
+- **Content:** Featured clips for The Recursive Loop, The Cognitive Clash, and The Tool-Output Denial.
+
+### 2. Social Distribution - Phase 1
+- **Channel:** X (Twitter) and LinkedIn.
+- **Content:** Deployed "The Recursive Loop" hook using copy from `marketing/surgical-correction-social-copy.md`.
+- **Goal:** Bridge the 'Early Win' narrative to the actual v2.2 Fix-It tool experience.
+
+### 3. Execution Status
+- **Phase 1 (The Hook):** LIVE.
+- **Phase 2 (The Breadth):** Scheduled for 2026-05-23.
+- **Phase 3 (The Utility):** Scheduled for 2026-05-25.
+- **Phase 4 (The Recap):** Scheduled for 2026-05-27.

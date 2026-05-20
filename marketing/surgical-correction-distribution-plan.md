@@ -5,7 +5,7 @@
 ## 🎯 Strategic Positioning
 While the 'Early Win' campaign focuses on the *narrative* of a specific win (The Recursive Loop), the 'Surgical Correction' series focuses on the *experience* of the tool. It is the "Proof in Motion" that demonstrates the v2.2 Fix-It button's value across different failure patterns.
 
-## 🗓 Distribution Schedule
+## 📅 Distribution Schedule
 
 | Phase | Timing | Channel | Content / Clip | Goal |
 | :--- | :--- | :--- | :--- | :--- |
@@ -22,7 +22,7 @@ While the 'Early Win' campaign focuses on the *narrative* of a specific win (The
 3. **The CTA:** "Join the Correction Preview Beta. [Link]"
 
 **Channel-Specific Tweaks:**
-- **X (Twitter):** Fast, punchy, use of "🧵" for the montage recap. Focus on the "Aha!" moment.
+- **X (Twitter):** Fast, punchy, use of "🎥" for the montage recap. Focus on the "Aha!" moment.
 - **LinkedIn:** Focus on "Developer Productivity" and "Agentic Reliability." Frame it as a professional standard for AI engineering.
 - **Landing Page:** Embed clips in the "How it Works" section to reduce friction and increase conversion.
 
@@ -36,12 +36,12 @@ While the 'Early Win' campaign focuses on the *narrative* of a specific win (The
 
 | Phase | Scheduled Date | Actual Date | Status | Result/Metric |
 | :--- | :--- | :--- | :--- | :--- |
-| **Phase 1: The Hook** | 2026-05-21 | - | Ready (Copy Done) | Pending Launch |
-| **Phase 2: The Breadth** | 2026-05-23 | - | Ready (Copy Done) | Pending Launch |
-| **Phase 3: The Utility** | 2026-05-25 | - | Ready (Copy Done) | Pending Launch |
-| **Phase 4: The Recap** | 2026-05-27 | - | Ready (Copy Done) | Pending Launch |
+| **Phase 1: The Hook** | 2026-05-21 | 2026-05-20 | Deployed | Initial reach; Landing page updated |
+| **Phase 2: The Breadth** | 2026-05-23 | - | Ready | Pending Launch |
+| **Phase 3: The Utility** | 2026-05-25 | - | Ready | Pending Launch |
+| **Phase 4: The Recap** | 2026-05-27 | - | Ready | Pending Launch |
 
 **Execution Notes:**
 - Social copy finalized in `marketing/surgical-correction-social-copy.md`.
-- Visual assets are in PR #181; awaiting merge to finalize the "Surgical Gallery" montage.
-- Distribution will commence immediately upon asset merge.
+- Landing page updated to feature the series.
+- Distribution of Phase 1 commenced on 2026-05-20.
