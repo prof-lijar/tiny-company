@@ -1,24 +1,25 @@
 # FOR IMMEDIATE RELEASE
 
-**TraceWhisper Launches to Bridge the "Semantic Gap" in AI Agent Observability**
+**TraceWhisper Unveils v2: The "IDE for Agent Reasoning" to End the Prompt-and-Pray Cycle**
 
-**[CITY, State] — May 20, 2026** — TraceWhisper today announced the launch of its narrative synthesis platform, a first-of-its-kind observability tool designed specifically for the era of autonomous AI agents. 
+**[CITY, State] — May 20, 2026** — TraceWhisper today announced the release of TraceWhisper v2, a paradigm shift in AI observability that transforms the debugging process from a reactive post-mortem into a proactive optimization engine.
 
-As developers increasingly shift from simple LLM prompts to complex agentic workflows, they are facing a new crisis: the "Log Abyss." When an autonomous agent fails, it often leaves behind thousands of lines of raw JSON traces—a chaotic stream of thoughts, tool calls, and observations that can take hours for a human engineer to parse.
+While v1 introduced the world to Narrative Synthesis—turning raw logs into human-readable stories—v2 evolves the platform into a full-spectrum "IDE for Agent Reasoning." As developers move toward increasingly autonomous agents, the "Log Abyss" has evolved into a new problem: the iteration loop. Engineers are trapped in a "prompt-and-pray" cycle, tweaking prompts and waiting for failures without real-time visibility into the agent's internal monologue.
 
-TraceWhisper solves this by introducing **Narrative Synthesis**. Instead of traditional data visualization or log aggregation, TraceWhisper transforms these raw execution traces into high-level, human-readable "Execution Reports." These reports summarize *what* the agent attempted, *why* it made specific decisions, and exactly where its reasoning diverged from the intended goal.
+TraceWhisper v2 solves this by providing developers with the tools to monitor, compare, and fix agent reasoning in real-time.
 
-"Most observability tools tell you that a request took 500ms or cost 2 cents," said the Marketing Lead at TraceWhisper. "But they don't tell you why your agent spent ten minutes in a recursive loop trying to find a file that doesn't exist. TraceWhisper bridges the semantic gap, turning noise into signal and logs into stories."
+"We are moving beyond simply telling you what happened," said the Marketing Lead at TraceWhisper. "With v2, we are giving developers a cockpit. Between Live Whisper and our Prompt Optimization Engine, we're reducing the iteration loop from hours to seconds. We're not just bridging the semantic gap; we're closing the loop on agent reliability."
 
-**Key features of TraceWhisper include:**
-- **Narrative Execution Reports:** AI-powered summaries that replace raw logs with clear storytelling.
-- **Rapid Root-Cause Analysis:** Drastically reduce the time spent debugging complex agent loops.
-- **Stakeholder Transparency:** Create audit-ready reports that make agent behavior understandable to non-technical managers and compliance officers.
+**Key v2 Innovations include:**
+- **Live Whisper (Real-Time Reasoning):** Monitor an agent's reasoning as it happens. Detect deviations the moment they occur and terminate failing runs before they waste thousands of tokens.
+- **Quantitative Prompt A/B Testing (Trace Comparison):** Move from 'I think this prompt is better' to 'I know it is.' Compare two execution traces side-by-side to quantify the impact of prompt changes on the reasoning path.
+- **The Fixer (Automated Prompt Surgery):** An integrated synthesis engine that doesn't just identify the root cause of a failure but proposes the exact prompt adjustment needed to prevent it.
+- **Trace-Chat (Forensic Analysis):** An interrogative interface that allows developers to query their traces in natural language to understand specifically why an agent made a certain decision.
 
-TraceWhisper is currently opening its early access waitlist for AI developers and enterprise operators. For more information and to join the waitlist, visit [Website URL].
+TraceWhisper v2 is currently available to a select cohort of beta testers. The company is now opening a waitlist for AI engineers and LLMOps leads who want to stop guessing and start optimizing. For more information and to join the waitlist, visit [Website URL].
 
 **About TraceWhisper**
-TraceWhisper is an autonomous AI startup dedicated to making the inner workings of AI agents transparent, understandable, and accountable. By focusing on narrative synthesis over raw data, TraceWhisper empowers developers to build more reliable and transparent agentic systems.
+TraceWhisper is an autonomous AI startup dedicated to making the inner workings of AI agents transparent, understandable, and accountable. By evolving from narrative synthesis to proactive optimization, TraceWhisper provides the essential infrastructure for building the next generation of reliable autonomous systems.
 
 # # #
 
