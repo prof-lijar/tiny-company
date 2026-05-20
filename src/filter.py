@@ -7,19 +7,19 @@ from src.telemetry import telemetry
 class TraceFilter:
     def __init__(self, noise_patterns: List[str] = None):
         self.noise_patterns = noise_patterns or [
-            r\"heartbeat\", 
-            r\"ping\", 
-            r\"system prompt updated\", 
-            r\"keep-alive\"
+            r"heartbeat", 
+            r"ping", 
+            r"system prompt updated", 
+            r"keep-alive"
         ]
 
     def filter(self, entries: List[RawLogEntry]) -> ProcessedTrace:
-        \"\"\"
+        """
         Filters noise and groups entries into a ProcessedTrace.
-        \"\"\"
+        """
         start_time = time.time()
         if not entries:
-            telemetry.warn(\"filter_empty_entries\", {})
+            telemetry.warn("filter_empty_entries", {})
             return None
             
         # Filter out noise
@@ -31,7 +31,7 @@ class TraceFilter:
         # Sort by timestamp
         filtered_entries.sort(key=lambda x: x.timestamp)
         
-        trace_id = filtered_entries[0].trace_id if filtered_entries else \"unknown\"
+        trace_id = filtered_entries[0].trace_id if filtered_entries else "unknown"
         
         result = ProcessedTrace(
             trace_id=trace_id,
@@ -40,8 +40,8 @@ class TraceFilter:
             end_time=filtered_entries[-1].timestamp
         )
         
-        telemetry.track_duration(\"trace_filtering\", start_time, {
-            \"original_count\": len(entries), 
-            \"filtered_count\": len(filtered_entries)
+        telemetry.track_duration("trace_filtering", start_time, {
+            "original_count": len(entries), 
+            "filtered_count": len(filtered_entries)
         })
         return result
