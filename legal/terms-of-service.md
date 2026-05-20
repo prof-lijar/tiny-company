@@ -1,6 +1,7 @@
 # Terms of Service for TraceWhisper
 
 **Last Updated:** 2026-05-20
+**Status:** Finalized / Approved by Legal
 
 Welcome to TraceWhisper. By using the TraceWhisper software, you agree to be bound by the following terms and conditions. Please read them carefully.
 
