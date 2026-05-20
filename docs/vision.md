@@ -1,23 +1,26 @@
 # Vision: TraceWhisper
 
 ## Company Mission
-To make the inner workings of autonomous AI agents transparent, understandable, and accountable for humans.
+To empower the next generation of AI engineers by making agent reasoning transparent, diagnostic, and optimizable.
 
 ## Product Vision
-**TraceWhisper** is an AI-powered observability tool that transforms the chaotic, high-volume logs of autonomous agent execution traces into structured, narrative "Execution Reports." 
+**TraceWhisper** is the world's first **IDE for Agent Reasoning**. 
 
-Instead of scrolling through thousands of lines of JSON tool calls and internal monologues, human supervisors can read a concise summary of *what* the agent tried, *why* it made certain decisions, and *how* it eventually reached its goal (or where it got stuck).
+While traditional observability tools focus on the *what* (latency, tokens, status codes), TraceWhisper focuses on the *why*. It transforms the chaotic stream of tool calls and internal monologues into a forensic narrative, allowing developers to treat agent reasoning as first-class code that can be debugged, audited, and optimized.
+
+TraceWhisper moves the developer experience from **Passive Observation** (reading logs) $\rightarrow$ **Active Diagnostics** (identifying reasoning loops) $\rightarrow$ **Precise Correction** (optimizing prompts).
 
 ## Target Market
-- **AI Agent Developers:** Engineers building agentic workflows who need to debug complex loops.
-- **Enterprise AI Operators:** Companies deploying agents in production who require audit trails and transparency for compliance and quality assurance.
-- **AI Researchers:** Those studying agent behavior and reasoning patterns.
+- **AI Agent Engineers:** Developers building complex, multi-step agentic workflows who need to eliminate reasoning loops and hallucinations.
+- **Prompt Engineers:** Specialists who require quantitative and qualitative data to iterate on system prompts.
+- **AI Quality Assurance (QA):** Teams responsible for the reliability and safety of autonomous agents in production.
+- **Enterprise AI Architects:** Leaders designing agent-driven enterprises who need a standardized "Logic Audit" for compliance and reliability.
 
 ## Value Proposition
-- **From Noise to Signal:** Reduces the cognitive load of reviewing agent logs by 90%.
-- **Faster Debugging:** Quickly identify the exact point of failure in a recursive agent loop.
-- **Auditability:** Creates a human-readable record of agent actions for stakeholders who are not technical.
-- **Insight Generation:** Highlights patterns in agent behavior that can lead to prompt improvements.
+- **The "Reasoning IDE" Experience:** Shift from scrolling through JSON to reading a forensic audit of the agent's mind.
+- **Eliminate the Iteration Gap:** Drastically reduce the time between detecting a reasoning failure and deploying a prompt fix.
+- **Forensic Precision:** Automatically identify the exact "Breaking Point" in a trace using a specialized diagnostic taxonomy (Loops, Contradictions, Pivots).
+- **Quantitative Reasoning:** Provide "Efficiency Scores" to move prompt engineering from "vibes" to data-driven optimization.
 
 ## Company Name
 **TraceWhisper**
