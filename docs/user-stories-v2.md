@@ -69,3 +69,12 @@ This document extends the original user stories to cover the proactive observabi
     - The tool provides an interactive shell `tw chat <trace_id>`.
     - The AI's answer is strictly grounded in the log data.
     - The AI provides references to the specific log lines used to answer the question.
+
+### US2.3.2: One-Line Framework Setup
+**As a** developer using LangChain or CrewAI,
+**I want to** enable TraceWhisper with a single configuration line or decorator,
+**so that** I can start analyzing my traces without writing custom export scripts.
+- **Acceptance Criteria:**
+    - The setup requires no more than 2 lines of code change.
+    - Integration is seamless with existing framework logger/callback systems.
+    - Logs are automatically formatted for TraceWhisper without manual intervention.
