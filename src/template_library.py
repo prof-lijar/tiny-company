@@ -17,40 +17,40 @@ class TemplateLibrary:
                 category=TemplateCategory.LOOP,
                 symptom_signature=r"(tool_call_.*){3,}", # Simplified regex for 3+ identical calls
                 root_cause="Lack of termination condition or failure to process tool output",
-                proven_fix="If you find yourself calling the same tool with the same arguments more than twice without progress, stop and re-evaluate your strategy. Explicitly state why the previous attempts failed before trying a different approach.",
+                proven_fix="If you have called the same tool with the same arguments more than twice without receiving new information, stop and analyze why the result is not changing. Do not repeat the same call a third time; instead, pivot your strategy or report the limitation.",
                 confidence_weight=0.95
             ),
             ReasoningTemplate(
-                name="The Contradiction Gap",
+                name="The Direct Contradiction",
                 category=TemplateCategory.CONTRADICTION,
                 symptom_signature=r"I previously stated .*?\n?.*?(but now I see|however, now I see|but I now see)", 
-                root_cause="Failure to maintain state consistency across reasoning steps",
-                proven_fix="When you encounter a contradiction in your own reasoning, you must explicitly resolve the conflict before proceeding. Document the correction clearly in your thought process.",
+                root_cause="Lack of a working memory verification step",
+                proven_fix="Before committing to a conclusion, explicitly cross-reference it with your previous thoughts in this trace. If you find a contradiction, pause and explain the discrepancy before proceeding.",
                 confidence_weight=0.90
             ),
             ReasoningTemplate(
-                name="Tool-Blindness",
+                name="The Tool-Output Blindness",
                 category=TemplateCategory.TOOL_BLINDNESS,
-                symptom_signature=r"I don't have a tool to .*|I cannot find a way to .*",
-                root_cause="Ignoring available tools in the system prompt",
-                proven_fix="Review the available toolset carefully. Before concluding a task is impossible, verify if a combination of existing tools can achieve the goal.",
+                symptom_signature=r"(?s)Tool returns .*?Agent Thought: (?:the tool successfully retrieved|it seems the tool worked)",
+                root_cause="Ignoring actual observation from the environment / Hallucinating output",
+                proven_fix="When a tool returns a result, you must explicitly summarize the key finding from that output in your next 'Thought' block before deciding on the next action. Do not assume the outcome of a tool call before it has returned.",
                 confidence_weight=0.85
             ),
             ReasoningTemplate(
-                name="Hallucinated Parameter",
-                category=TemplateCategory.HALLUCINATION,
-                symptom_signature=r"Invalid parameter .*|Unknown argument .*",
-                root_cause="Assuming tool capabilities not defined in the spec",
-                proven_fix="Strictly adhere to the tool definitions provided in the system prompt. Do not invent parameters or options that are not explicitly listed.",
-                confidence_weight=0.98
+                name="The Goal Drift",
+                category=TemplateCategory.DRIFT,
+                symptom_signature=r"(?s)(?:Step|Thought) \d+.*?(?:focusing on|researching|looking at) .*? (?:for more than 3 steps|extensively)",
+                root_cause="Lack of Goal Persistence instructions",
+                proven_fix="At every 3rd step, explicitly state your current progress relative to the primary goal: [Primary Goal]. If you find yourself focusing on a sub-task for more than 3 steps, evaluate if this is essential to the primary goal or a distraction.",
+                confidence_weight=0.80
             ),
             ReasoningTemplate(
-                name="Reasoning Drift",
-                category=TemplateCategory.DRIFT,
-                symptom_signature=r"Moving on to .*|Actually, let's look at .*", # Simplified drift detection
-                root_cause="Loss of focus on the primary objective",
-                proven_fix="At the end of every thought block, explicitly relate your current action back to the primary objective to ensure alignment.",
-                confidence_weight=0.80
+                name="The Hallucination Spiral",
+                category=TemplateCategory.HALLUCINATION,
+                symptom_signature=r"Invalid parameter .*|Unknown argument .*|Unknown tool .*",
+                root_cause="Over-reliance on internal weights over the provided system context",
+                proven_fix="You are strictly limited to the tools provided in the current session. Before calling a tool, verify its name and parameters against the provided tool definitions. Do not invent tools or parameters based on prior knowledge.",
+                confidence_weight=0.98
             )
         ]
         for tmpl in gold_standards:
