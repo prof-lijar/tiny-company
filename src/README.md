@@ -66,3 +66,24 @@ Run the test suite to ensure stability:
 ```bash
 pytest tests/
 ```
+
+## 📈 Production Monitoring & Telemetry
+
+TraceWhisper includes a built-in telemetry system for production observability.
+
+### Telemetry Implementation
+The system uses structured JSON logging to track:
+- **Performance**: Execution duration of key components (Parsing, Filtering, LLM Synthesis).
+- **Errors**: Detailed error tracking for file I/O, JSON parsing, and LLM API failures.
+- **Volume**: Counting of log entries processed per trace.
+
+### Monitoring the Application
+By default, telemetry logs are sent to `stdout` as JSON strings. In a production environment, you should:
+1. **Redirect stdout** to a log aggregator (e.g., CloudWatch, ELK, or Datadog).
+2. **Filter for `level: "ERROR"`** to set up real-time alerting.
+3. **Aggregate `duration_seconds`** to monitor LLM latency and parsing performance.
+
+Example telemetry log:
+```json
+{"timestamp": "2026-05-20T13:00:00Z", "service": "TraceWhisper", "level": "INFO", "event": "llm_synthesis_duration", "data": {"model": "gpt-4o", "duration_seconds": 1.24, "trace_id": "tr-123"}}
+```

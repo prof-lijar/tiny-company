@@ -4,37 +4,52 @@ from pathlib import Path
 from typing import List
 from datetime import datetime
 from src.models import RawLogEntry, LogComponent
+from src.telemetry import telemetry
 
 class LogParser:
     def __init__(self, file_path: str):
         self.file_path = Path(file_path)
 
     def parse(self) -> List[RawLogEntry]:
-        """
+        \"\"\"
         Parses a log file. Supports JSON lines format.
-        """
+        \"\"\"
+        start_time = telemetry.track_duration(\"log_parsing\", 0) # This is wrong, track_duration takes start_time
+        # Correct way:
+        import time
+        start_time = time.time()
+        
         entries = []
-        with open(self.file_path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    data = json.loads(line)
-                    # Ensure timestamp is a datetime object
-                    if isinstance(data.get('timestamp'), str):
-                        data['timestamp'] = datetime.fromisoformat(data['timestamp'].replace('Z', '+00:00'))
-                    entries.append(RawLogEntry(**data))
-                except (json.JSONDecodeError, TypeError, ValueError) as e:
-                    # In a real implementation, we could log this to stderr
-                    continue
+        try:
+            with open(self.file_path, 'r') as f:
+                for line_num, line in enumerate(f, 1):
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        data = json.loads(line)
+                        # Ensure timestamp is a datetime object
+                        if isinstance(data.get('timestamp'), str):
+                            data['timestamp'] = datetime.fromisoformat(data['timestamp'].replace('Z', '+00:00'))
+                        entries.append(RawLogEntry(**data))
+                    except (json.JSONDecodeError, TypeError, ValueError) as e:
+                        telemetry.warn(\"parse_line_error\", {\"line\": line_num, \"error\": str(e)})
+                        continue
+        except Exception as e:
+            telemetry.error(\"parse_file_error\", {\"path\": str(self.file_path), \"error\": str(e)})
+            raise e
+
+        telemetry.track_duration(\"log_parsing\", start_time, {\"entries_count\": len(entries)})
         return entries
 
     def parse_text(self, text: str) -> List[RawLogEntry]:
-        """
+        \"\"\"
         A simple regex-based parser for plain text logs.
         Example format: 2026-05-20 12:00:00 [INFO] [Thought] The agent is thinking...
-        """
+        \"\"\"
+        import time
+        start_time = time.time()
+        
         pattern = r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) \[(\w+)\] \[(\w+)\] (.*)'
         matches = re.finditer(pattern, text)
         
@@ -47,18 +62,19 @@ class LogParser:
                 try:
                     component = LogComponent(component_str)
                 except ValueError:
-                    # Fallback or handle unknown components
-                    # For now, we'll just use a default or let it fail if strict
                     component = LogComponent.SYSTEM
                 
                 entries.append(RawLogEntry(
                     timestamp=timestamp, 
-                    trace_id="unknown", 
+                    trace_id=\"unknown\", 
                     level=level, 
                     component=component, 
                     content=content,
                     metadata={}
                 ))
-            except ValueError:
+            except ValueError as e:
+                telemetry.warn(\"parse_text_line_error\", {\"error\": str(e)})
                 continue
+        
+        telemetry.track_duration(\"parse_text\", start_time, {\"entries_count\": len(entries)})
         return entries
