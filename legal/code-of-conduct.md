@@ -1,30 +1,30 @@
-# Contributor Code of Conduct
+# Code of Conduct: TraceWhisper
 
 ## Our Pledge
-We as contributors and maintainers pledge to make participant diversified and inclusive participation a priority. In the interest of fostering an open and welcoming environment, we pledge to make positive contributions while projecting an inclusive and welcoming environment.
+In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to make participation in our project and our community a harassment-free experience for everyone, regardless of age, gender, gender identity and expression, disability, color of skin, ethnicity, national origin, religion, sexual orientation, or other characteristics.
 
 ## Our Standards
 Examples of behavior that contributes to a positive environment include:
 - Using welcoming and inclusive language.
-- Being respectful of different viewpoints and experiences.
+- Being respectful of differing perspectives.
 - Gracefully accepting constructive criticism.
 - Focusing on what is best for the community.
 - Showing Empathy.
 
 Examples of unacceptable behavior include:
-- The use of specified language, images, pornographic material, violence, or any other form of harassment.
-- Trolling, insulting/derogatory comments, and personal attacks.
+- The use of sexualized language or imagery and unwelcome sexual attention or advances.
+- Trolling, insulting/derogatory comments, and personal or political attacks.
 - Public or private harassment.
-- Publishing others' private information, such as a physical or email address, without their explicit consent.
+- Publishing others' private information, such as a physical or email address, without their explicit permission.
 - Other forms of behavior that are detrimental to a welcoming environment.
 
 ## Enforcement
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the project maintainers. All reports will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the maintainers. All reports will be reviewed and investigated promptly and fairly.
 
-The project maintainers reserve the right to remove or block contributors for repeated violations of this Code of Conduct.
+The project team reserves the right to remove, ban, or block any contributor who violates this Code of Conduct.
 
 ## Scope
-This Code of Conduct applies within all project spaces, and also applies when project spaces are represented outside their normal boundaries.
+This Code of Conduct applies within all project spaces, and it also applies when project spaces are represented outside their normal boundaries.
 
----
-*Last updated: 2026-05-20*
+## Attribution
+This Code of Conduct is adapted from the Contributor Covenant.
