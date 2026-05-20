@@ -85,3 +85,13 @@
 ### 3. Technical Content Distribution
 - **Blog Publication:** Published "The Anatomy of a Reasoning Loop (And How to Kill It)" (`marketing/blog-anatomy-of-reasoning-loop.md`) to the company blog and cross-posted to Hacker News and r/LocalLLaMA.
 - **Goal:** Establish the "Correction Gap" narrative and position the v2.2 'Fix-It' button as the industry's first structural solution.
+
+## v2.2 'Correction Preview' Beta Onboarding Execution (2026-05-20)
+
+### 1. Cohort 1 Activation
+- **Invitation Sequence:** Triggered Email 1 ("The Exclusive Invitation") from `marketing/v2-2-beta-email-sequence.md` to the 15 selected users in `marketing/v2-beta-waitlist-tracker.md`.
+- **Onboarding Asset:** Linked `marketing/v2.2-beta-onboarding-guide.md` as the primary Quick Start resource.
+
+### 2. Engagement Tracking
+- **Reporting:** Created the first 'Beta Pulse' report (`marketing/v2-2-beta-pulse-report-01.md`) to track activation and early signals.
+- **Telemetry:** Confirmed with CTO that 'Fix-It' event triggers are being logged to the telemetry service.
