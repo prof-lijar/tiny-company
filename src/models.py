@@ -108,3 +108,37 @@ class VerificationResult(BaseModel):
     benchmark_passed: bool
     details: str
     metrics: Dict[str, Any] = Field(default_factory=dict)
+
+# --- v2.3 Intelligence Layer Models ---
+
+class ReasoningPattern(BaseModel):
+    pattern_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    failure_description: str
+    failure_embedding: Optional[bytes] = None
+    correction_prompt: str
+    project_id: str
+    success_rate: float = 1.0
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class ReasoningTest(BaseModel):
+    test_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    input_text: str
+    expected_cognitive_path: List[str]  # Keywords or steps that MUST appear
+    expected_output: str
+    priority: str = \"medium\"
+
+class PruningReport(BaseModel):
+    trace_id: str
+    original_token_count: int
+    suggested_token_count: int
+    efficiency_score: float  # Actual Steps / Minimum Required Steps
+    bloat_segments: List[Dict[str, Any]] = Field(default_factory=list) # {segment: ..., reason: ...}
+    suggested_prompt_modifications: List[str] = Field(default_factory=list)
+
+class FragilityReport(BaseModel):
+    prompt_id: str
+    total_tests_run: int
+    failure_rate: float
+    critical_weak_points: List[str] = Field(default_factory=list)
+    adversarial_examples: List[Dict[str, Any]] = Field(default_factory=list)
