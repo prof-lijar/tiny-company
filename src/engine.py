@@ -3,10 +3,12 @@ import time
 from src.models import ProcessedTrace, ExecutionReport, NarrativeSegment, ToolSummary, LogicAuditReport, ReasoningEvent
 from litellm import completion
 from src.telemetry import telemetry
+from src.correction_engine import CorrectionEngine
 
 class NarrativeEngine:
     def __init__(self, model: str = "gpt-4o"):
         self.model = model
+        self.correction_engine = CorrectionEngine()
 
     def _build_prompt(self, trace: ProcessedTrace) -> str:
         log_text = "\n".join([
@@ -39,14 +41,14 @@ class NarrativeEngine:
         Please provide a structured response. 
         For the narrative, use the markers like [Reasoning Loop] directly in the text.
         """
-        return prompt
+        return prompt, log_text
 
     def synthesize(self, trace: ProcessedTrace) -> ExecutionReport:
         """
         Synthesizes a forensic narrative report from a ProcessedTrace.
         """
         start_time = time.time()
-        prompt = self._build_prompt(trace)
+        prompt, log_text = self._build_prompt(trace)
         
         try:
             response = completion(
@@ -66,13 +68,31 @@ class NarrativeEngine:
             "trace_id": trace.trace_id
         })
         
-        return self._simulate_parsing(content, trace)
+        return self._simulate_parsing(content, trace, log_text)
 
-    def _simulate_parsing(self, text: str, trace: ProcessedTrace) -> ExecutionReport:
+    def _simulate_parsing(self, text: str, trace: ProcessedTrace, log_text: str) -> ExecutionReport:
         # Mocking the parsing of the forensic LLM output
         # In a production system, this would use Pydantic output parsing.
         
-        # Simulate a detected loop for the MVP demonstration
+        # We identify failures and trigger the CorrectionEngine for the "Fix-It" logic
+        system_prompt = trace.system_prompt or "Standard Agent Prompt"
+        
+        # Simulate a detected loop
+        loop_segment_text = "The agent is attempting the same search query for the third time. [Reasoning Loop]: The previous results were already processed."
+        loop_fix = self.correction_engine.suggest_fix(
+            system_prompt=system_prompt,
+            trace=log_text if "API_TIMEOUT" in log_text else f"{log_text} API_TIMEOUT", # Force trigger for demo
+            failure_type=ReasoningEvent.REASONING_LOOP
+        )
+
+        # Simulate a contradiction
+        contradiction_segment_text = "The agent identifies the user as a Minor but then grants access based on Adult permissions. [Contradiction]."
+        contradiction_fix = self.correction_engine.suggest_fix(
+            system_prompt=system_prompt,
+            trace=log_text if "User Age" in log_text else f"{log_text} User Age", # Force trigger for demo
+            failure_type=ReasoningEvent.CONTRADICTION
+        )
+
         narrative = [
             NarrativeSegment(
                 timestamp=trace.entries[0].timestamp, 
@@ -81,9 +101,17 @@ class NarrativeEngine:
             ),
             NarrativeSegment(
                 timestamp=trace.entries[len(trace.entries)//2].timestamp, 
-                text="The agent is attempting the same search query for the third time. [Reasoning Loop]: The previous results were already processed.",
+                text=loop_segment_text,
                 is_kdp=True,
-                event_type=ReasoningEvent.REASONING_LOOP
+                event_type=ReasoningEvent.REASONING_LOOP,
+                suggested_fix=loop_fix
+            ),
+            NarrativeSegment(
+                timestamp=trace.entries[-1].timestamp, 
+                text=contradiction_segment_text,
+                is_kdp=True,
+                event_type=ReasoningEvent.CONTRADICTION,
+                suggested_fix=contradiction_fix
             ),
             NarrativeSegment(
                 timestamp=trace.entries[-1].timestamp, 
@@ -94,15 +122,15 @@ class NarrativeEngine:
         ]
         
         audit = LogicAuditReport(
-            critical_failures=["Reasoning Loop detected at step 5"],
+            critical_failures=["Reasoning Loop detected at step 5", "Contradiction detected at final step"],
             pivot_analysis="Agent pivoted from keyword search to conceptual search after failing 3 times.",
             efficiency_score=0.6,
-            detailed_findings=["Agent ignored output of search_tool in attempt 2 and 3."]
+            detailed_findings=["Agent ignored output of search_tool in attempt 2 and 3.", "Agent contradicted user age constraint."]
         )
 
         return ExecutionReport(
             trace_id=trace.trace_id,
-            summary="Task completed, but with significant reasoning inefficiencies.",
+            summary="Task completed, but with significant reasoning inefficiencies and a contradiction.",
             narrative=narrative,
             tool_usage=[
                 ToolSummary(
