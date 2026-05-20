@@ -37,3 +37,10 @@
 - [ ] **Landing Page:** Update copy to "Reasoning IDE" positioning (Done: `marketing/v2-landing-page-copy.md`)
 - [ ] **Rollout:** Execute phase-based deployment per `marketing/v2-2-rollout-schedule.md`
 - [ ] **Metrics:** Implement tracking for "Correction Rate" (loops fixed in 1 iteration)
+
+## v2.2 Execution Progress (2026-05-20)
+- [x] **Teaser Campaign:** Phase 1 executed (Social posts 1 & 2, Beta email sent).
+- [x] **Technical Content:** "Anatomy of a Reasoning Loop" blog post published.
+- [x] **Framework Outreach:** Initial outreach to LangChain, CrewAI, AutoGPT, AutoGen, PydanticAI completed.
+- [x] **Engagement Tracking:** Initial report `marketing/v2-2-teaser-engagement-report.md` created.
+- [x] **Demo Assets:** Script for the "Fix-It" button demo video created (`marketing/v2-2-fix-it-demo-script.md`).
