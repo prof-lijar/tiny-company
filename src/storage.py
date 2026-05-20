@@ -5,10 +5,11 @@ from typing import List, Dict, Any, Optional
 from pathlib import Path
 
 class TraceStorage:
-    """
+    \"\"\"
     Handles persistence of agent traces, logs, and narratives using SQLite.
-    """
-    def __init__(self, db_path: str = "tracewhisper.db"):
+    Updated for v2.3 to support the Pattern Vault.
+    \"\"\"
+    def __init__(self, db_path: str = \"tracewhisper.db\"):
         self.db_path = db_path
         self._init_db()
 
@@ -16,7 +17,7 @@ class TraceStorage:
         return sqlite3.connect(self.db_path)
 
     def _init_db(self):
-        """Initializes the database schema."""
+        \"\"\"Initializes the database schema.\"\"\"
         with self._get_connection() as conn:
             cursor = conn.cursor()
             
@@ -58,11 +59,24 @@ class TraceStorage:
                     FOREIGN KEY (trace_id) REFERENCES traces (id)
                 )
             ''')
+
+            # Pattern Vault table: Store of proven fixes (v2.3)
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS pattern_vault (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    failure_embedding BLOB,
+                    failure_description TEXT,
+                    correction_prompt TEXT,
+                    project_id TEXT,
+                    success_rate REAL,
+                    created_at TIMESTAMP
+                )
+            ''')
             conn.commit()
 
     def save_trace(self, trace_id: str, agent_id: str, session_id: str, 
-                   metadata: Dict[str, Any], status: str = "running"):
-        """Creates or updates a trace record."""
+                   metadata: Dict[str, Any], status: str = \"running\"):
+        \"\"\"Creates or updates a trace record.\"\"\"
         with self._get_connection() as conn:
             cursor = conn.cursor()
             start_time = datetime.utcnow().isoformat()
@@ -75,8 +89,8 @@ class TraceStorage:
             ''', (trace_id, agent_id, session_id, start_time, json.dumps(metadata), status))
             conn.commit()
 
-    def update_trace_end(self, trace_id: str, status: str = "completed"):
-        """Marks a trace as finished."""
+    def update_trace_end(self, trace_id: str, status: str = \"completed\"):
+        \"\"\"Marks a trace as finished.\"\"\"
         end_time = datetime.utcnow().isoformat()
         with self._get_connection() as conn:
             cursor = conn.cursor()
@@ -84,9 +98,9 @@ class TraceStorage:
                            (end_time, status, trace_id))
             conn.commit()
 
-    def append_log(self, trace_id: str, message: str, level: str = "INFO", 
+    def append_log(self, trace_id: str, message: str, level: str = \"INFO\", 
                    raw_payload: Optional[Dict[str, Any]] = None, step_index: Optional[int] = None):
-        """Appends a single log entry to a trace."""
+        \"\"\"Appends a single log entry to a trace.\"\"\"
         timestamp = datetime.utcnow().isoformat()
         payload_json = json.dumps(raw_payload) if raw_payload else None
         
@@ -99,7 +113,7 @@ class TraceStorage:
             conn.commit()
 
     def save_narrative(self, trace_id: str, step_range: str, content: str):
-        """Saves a synthesized narrative segment."""
+        \"\"\"Saves a synthesized narrative segment.\"\"\"
         timestamp = datetime.utcnow().isoformat()
         with self._get_connection() as conn:
             cursor = conn.cursor()
@@ -110,7 +124,7 @@ class TraceStorage:
             conn.commit()
 
     def get_trace_logs(self, trace_id: str) -> List[Dict[str, Any]]:
-        """Retrieves all logs for a given trace, ordered by step index."""
+        \"\"\"Retrieves all logs for a given trace, ordered by step index.\"\"\"
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
@@ -126,7 +140,7 @@ class TraceStorage:
             return logs
 
     def get_recent_traces(self, limit: int = 10) -> List[Dict[str, Any]]:
-        """Returns a list of the most recently started traces."""
+        \"\"\"Returns a list of the most recently started traces.\"\"\"
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
@@ -134,7 +148,7 @@ class TraceStorage:
             return [dict(row) for row in cursor.fetchall()]
 
     def get_trace_metadata(self, trace_id: str) -> Optional[Dict[str, Any]]:
-        """Retrieves metadata for a specific trace."""
+        \"\"\"Retrieves metadata for a specific trace.\"\"\"
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
@@ -146,3 +160,25 @@ class TraceStorage:
                     data['metadata'] = json.loads(data['metadata'])
                 return data
         return None
+
+    # --- v2.3 Pattern Vault Methods ---
+
+    def save_pattern(self, failure_embedding: bytes, failure_description: str, 
+                     correction_prompt: str, project_id: str, success_rate: float):
+        \"\"\"Saves a reasoning pattern to the vault.\"\"\"
+        timestamp = datetime.utcnow().isoformat()
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO pattern_vault (failure_embedding, failure_description, correction_prompt, project_id, success_rate, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (failure_embedding, failure_description, correction_prompt, project_id, success_rate, timestamp))
+            conn.commit()
+
+    def query_patterns(self, limit: int = 5) -> List[Dict[str, Any]]:
+        \"\"\"Retrieves the most recent patterns from the vault.\"\"\"
+        with self._get_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM pattern_vault ORDER BY created_at DESC LIMIT ?', (limit,))
+            return [dict(row) for row in cursor.fetchall()]
