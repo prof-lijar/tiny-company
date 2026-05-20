@@ -1,10 +1,10 @@
-# UI/UX Specification: TraceWhisper v2
+# UI/UX Specification: TraceWhisper
 
 ## 1. Design Philosophy
 TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, density of information, and the reduction of cognitive load. We follow the **Narrative-First** principle: the high-level story is the primary entry point, but the raw technical evidence is always one click/keystroke away.
 
 ### Core Interaction Patterns
-- **Drill-Down:** High-level summary $\rightarrow$ Detailed Whisper segment $\rightarrow$ Raw Log lines.
+- **Drill-Down:** High-level summary $\\rightarrow$ Detailed Whisper segment $\\rightarrow$ Raw Log lines.
 - **Parallelism:** Comparative views for A/B testing.
 - **Contextual Awareness:** The UI adapts based on whether the user is in "Live Mode" (observing) or "Forensic Mode" (analyzing).
 
@@ -39,6 +39,32 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
    - **Before:** Current system prompt.
    - **After:** Suggested improvement (highlighting the new instruction in **Insight Green**).
 
+### 2.4 The Intelligence Layer Flow (v2.3)
+**Goal:** Proactive optimization and organizational knowledge sharing.
+
+#### 2.4.1 The Pattern Vault Integration
+1. **Detection:** While in "The Fixer" flow, the system queries the Pattern Vault.
+2. **Suggestion:** If a similar failure pattern is found in other projects, a "Vault Insight" card is injected: *"Similar reasoning failure solved in [Project X]. Suggested Fix: [Brief Description]"*.
+3. **Application:** User can apply the vaulted fix with one click.
+
+#### 2.4.2 Cognitive Pruning Analysis
+1. **Entry:** User runs `tw prune <trace_id>`.
+2. **Bloat Identification:** The UI highlights "Circular Reasoning" or "Redundant Steps" in a muted grey "Fog" overlay.
+3. **Comparison:** A side-by-side view shows the original trace vs. the hypothetical pruned trace.
+4. **Metric:** An "Efficiency Score" (e.g., 72%) is displayed, along with "Tokens Saved" potential.
+
+#### 2.4.3 Reasoning Unit Testing (CRI)
+1. **Entry:** `tw verify-all` in CI/CD or local CLI.
+2. **Cognitive Diff:** If a test fails, the UI displays a "Cognitive Path Diff":
+   - **Expected Path:** $\text{Step A} \rightarrow \text{Step B} \rightarrow \text{Step C}$ (Green)
+   - **Actual Path:** $\text{Step A} \rightarrow \text{Step B} \rightarrow \text{Step X}$ (Red/Amber)
+3. **Divergence Point:** The exact step where the reasoning deviated is highlighted.
+
+#### 2.4.4 IDE Integration (VS Code)
+1. **Side-by-Side:** The Prompt file is on the left; the Narrative Trace is on the right.
+2. **Live-Link:** Clicking a line in the Narrative Trace highlights the corresponding prompt instruction on the left.
+3. **Quick-Fix:** A lightbulb icon appears next to prompt lines that contributed to a failure; clicking it opens the "Fixer" or "Vault" suggestion.
+
 ---
 
 ## 3. Interface Layouts (Conceptual)
@@ -51,14 +77,14 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 | [NARRATIVE]                                    | [RAW LOGS]            |
 |                                               |                       |
 | 10:02:01 - Agent decided to search for        | 10:02:01 [INFO] Call:  |
-| "quantum computing" but found too many        | search_api(q="quant...")|
+| \"quantum computing\" but found too many        | search_api(q=\"quant...\")|
 | results. Pivot: narrowing search to           | 10:02:02 [DEBUG] Resp: |
-| "topological qubits".                         | { "results": [...], }  |
+| \"topological qubits\".                         | { \"results\": [...], }  |
 |                                               |                       |
 | 10:02:15 - Agent encountered a loop:          | 10:02:15 [WARN] Loop   |
 | repeating the same query 3 times.             | detected: query_id_42  |
 | Suggestion: Change search parameters.         | 10:02:16 [INFO] Call:  |
-|                                               | search_api(q="topol...")|
+|                                               | search_api(q=\"topol...\")|
 |                                               |                       |
 +-----------------------------------------------------------------------+
 | [P]ause | [S]top | [C]hat | [F]ix | [H]elp                           |
@@ -70,6 +96,48 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 - **Sync-Scroll:** Scrolling one trace scrolls the other to the corresponding timestamp.
 - **Divergence Marker:** A bold horizontal line across both columns where the agents' paths diverged.
 - **Metric Header:** A summary bar at the top comparing: `Steps (A vs B)`, `Tokens (A vs B)`, `Time (A vs B)`.
+
+### 3.3 v2.3 Intelligence Layer Layouts
+
+#### 3.3.1 The Cognitive Diff (CRI)
+```text
++-----------------------------------------------------------------------+
+| VERIFICATION FAILURE: Test Case #42 (Edge Case: Recursive Loop)        |
++-----------------------------------------------------------------------+
+| EXPECTED COGNITIVE PATH:                                              |
+| [OK] Step 1: Parse User Intent                                        |
+| [OK] Step 2: Validate Constraints                                     |
+| [OK] Step 3: Execute Primary Search                                    |
+| [OK] Step 4: Synthesize Answer                                        |
+|                                                                       |
+| ACTUAL COGNITIVE PATH:                                                |
+| [OK] Step 1: Parse User Intent                                        |
+| [OK] Step 2: Validate Constraints                                     |
+| [!!] Step 3: Execute Primary Search <--- DIVERGENCE POINT              |
+| [!!] Step 4: Re-validate Constraints (Loop Detected)                  |
+| [!!] Step 5: Execute Primary Search (Repeat)                          |
++-----------------------------------------------------------------------+
+| Recommendation: tighten the "Constraint Validation" prompt block.     |
++-----------------------------------------------------------------------+
+```
+
+#### 3.3.2 Pruning Report
+```text
++-----------------------------------------------------------------------+
+| COGNITIVE PRUNING ANALYSIS: Trace #882                                 |
++-----------------------------------------------------------------------+
+| EFFICIENCY SCORE: 64% | POTENTIAL SAVINGS: 1,240 Tokens                |
++-----------------------------------------------------------------------+
+| [ORIGINAL TRACE]                      | [PRUNED TRACE]                 |
+| Step 1: Initial Thought               | Step 1: Initial Thought        |
+| Step 2: Reasoning A                   | Step 2: Reasoning A            |
+| Step 3: Reasoning A (Repeat) [BLOAT]  | (Step Removed)                  |
+| Step 4: Reasoning A (Repeat) [BLOAT]  | (Step Removed)                  |
+| Step 5: Final Conclusion              | Step 3: Final Conclusion       |
++-----------------------------------------------------------------------+
+| Suggestion: "Avoid repeating the verification step after Step 2."      |
++-----------------------------------------------------------------------+
+```
 
 ---
 
@@ -83,9 +151,13 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 | **Reasoning Loop** | Alert Amber | Background highlight | Agent is stuck; needs intervention |
 | **Success/Goal** | Insight Green | Checkmark icon | Goal reached successfully |
 | **Critical Failure** | Obsidian/Red | Bold Red text | Hard stop/exception |
+| **Cognitive Bloat** | Fog Grey | Muted/Strikethrough | Redundant reasoning (v2.3) |
+| **Vault Insight** | Vault Purple | Bordered Card | Cross-project knowledge (v2.3) |
 
 ### 4.2 Interaction Shortcuts (CLI)
 - `Space`: Pause/Resume stream.
 - `Ctrl+F`: Search within the current narrative.
 - `Ctrl+X`: Export current report to Markdown.
 - `/`: Open Interactive Trace-Chat.
+- `p`: Trigger Pruning Analysis (v2.3).
+- `v`: Open Vault Suggestions (v2.3).
