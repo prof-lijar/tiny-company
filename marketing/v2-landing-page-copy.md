@@ -7,7 +7,7 @@
 
 ## 1. Hero Section
 **Headline:** Stop guessing why your agent failed. Optimize it in real-time.
-**Sub-headline:** TraceWhisper v2 moves beyond the post-mortem. Monitor reasoning as it happens, A/B test your prompts with quantitative data, and close the loop with automated prompt surgery.
+**Sub-headline:** TraceWhisper v2 moves beyond the post-mortem. Monitor reasoning as it happens, A/B test your prompts with quantitative data, and close the loop with automated prompt surgery. **Get from `pip install` to your first narrative in under 60 seconds.**
 **Primary CTA:** Join the v2 Early Access List
 **Secondary CTA:** See the "IDE for Reasoning" in action [Video]
 
@@ -28,6 +28,9 @@ You're not debugging code; you're debugging *reasoning*. And you can't do that w
 
 ### [Feature Grid]
 
+**Frictionless Integration (v2.1)**
+*Stop the integration struggle.* Whether you use LangChain, CrewAI, or AutoGen, our one-click recipes mean you're up and running in seconds. No complex wrappers, no boilerplate—just pure visibility.
+
 **Real-Time Reasoning (Live Whisper)**
 *Stop the bleed.* Monitor your agent's internal monologue in real-time. Get alerted the moment a reasoning path deviates from the goal, and kill the run before you waste 1,000 tokens.
 
@@ -45,7 +48,7 @@ You're not debugging code; you're debugging *reasoning*. And you can't do that w
 ## 4. Value Proposition by Persona
 
 **For the AI Engineer**
-"Reduce your iteration loop from hours to seconds. Move from 'I think this works' to 'I have the trace to prove it.'"
+"Reduce your iteration loop from hours to seconds. Move from 'I think this works' to 'I have the trace to prove it.' Get integrated in < 60 seconds."
 
 **For the LLMOps Lead**
 "Move from chaotic logs to a structured reasoning pipeline. Ensure consistency and reliability across every agentic run."
