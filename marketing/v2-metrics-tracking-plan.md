@@ -86,3 +86,29 @@ Based on initial replies to the "60-Second Win" email and CLI feedback:
 1. **Double down on Recipes:** Create recipes for additional frameworks (e.g., PydanticAI, Semantic Kernel) to capture more of the ecosystem.
 2. **Simplify `tw compare`:** Investigate a UI or a simpler CLI flag to compare the "last two traces" without IDs.
 3. **Accelerate v2.2:** The gap between *Detection* and *Correction* is the primary churn risk. Move the "Fix-It" prototype forward in the roadmap.
+
+
+## v2.2.2 'Verification Loop' Tracking Framework (14-Day Window)
+
+To measure the impact of the v2.2.2 release, we are tracking the transition from "Detection" to "Verified Resolution."
+
+### 1. Core KPIs for v2.2.2
+| Metric | Definition | Target (14-Day) | Goal |
+| :--- | :--- | :--- | :--- |
+| **Feature Adoption Rate** | % of active Beta users who use "Apply & Verify" at least once. | $> 50\%$ | Validate the value of the automated loop. |
+| **Verification Success Rate** | % of "Apply & Verify" attempts that result in a $\text{\u2705 Fixed \& Stable}$ verdict. | $> 60\%$ | Measure the quality of the Gold Standard Registry. |
+| **Regression Catch Rate** | % of attempts resulting in $\text{\u26a0\ufe0f Fixed but Unstable}$. | $10\% - 20\%$ | Prove the "Safety Net" value (preventing regressions). |
+| **TTR Reduction (Qualitative)** | % of users reporting a significant drop in Time-to-Resolution. | $> 40\%$ | Validate the primary value prop: "End of Trial-and-Error." |
+
+### 2. Event Trigger Mapping (v2.2.2)
+| Event Name | Trigger Condition | Data to Capture | Goal |
+| :--- | :--- | :--- | :--- |
+| `apply_verify_clicked` | User clicks the "Apply & Verify" button. | `fix_id`, `user_id` | Measure intent and feature discovery. |
+| `verification_verdict_stable` | System returns $\text{\u2705 Fixed \& Stable}$. | `latency`, `benchmark_count` | Measure "Aha!" moment of certainty. |
+| `verification_verdict_regression` | System returns $\text{\u26a0\ufe0f Fixed but Unstable}$. | `regression_trace_id` | Measure the "Save" (preventing a bad commit). |
+| `rollback_executed` | User clicks "Rollback" after a regression is detected. | `timestamp` | Measure reliability of the snapshot system. |
+
+### 3. Analysis Cadence
+- **Daily Pulse:** Monitor `apply_verify_clicked` vs. `verification_verdict_stable` to ensure the tool is actually solving problems.
+- **Day 7 Review:** Synthesis of qualitative feedback from the "Verdict" screen.
+- **Day 14 Report:** Final TTR impact analysis and recommendation for v2.3 strategic moats.
