@@ -56,8 +56,10 @@
 
 ## v2.3 'Intelligence Layer' Pre-Launch Checklist
 - [x] **Strategic Positioning**: Define the shift from Reactive Correction to Proactive Intelligence (`marketing/v2.3-strategic-positioning.md`).
+- [x] **Teaser Campaign**: Draft tactical teaser content and calendar (`marketing/v2.3-teaser-campaign.md`).
+- [x] **Landing Page**: Draft v2.3 specific value props and CTA copy (`marketing/v2.3-landing-page-copy.md`).
 - [ ] **Institutional Memory**: Draft content for the \"Pattern Vault\" (The GitHub for Reasoning).
 - [ ] **CI/CD Narrative**: Create the \"Cognitive CI/CD\" guide for Continuous Reasoning Integration (CRI).
 - [ ] **Efficiency Play**: Draft \"Token ROI\" case study for Cognitive Pruning.
-- [ ] **IDE Integration**: Coordinate VS Code extension demo and "Unified Workspace" messaging.
+- [ ] **IDE Integration**: Coordinate VS Code extension demo and \"Unified Workspace\" messaging.
 - [ ] **Resilience Strategy**: Develop content for Adversarial Synthesis (AI Red Teaming).
