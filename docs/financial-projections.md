@@ -1,72 +1,67 @@
-# Financial Projections: TraceWhisper (v2 Update)
+# Financial Projections: TraceWhisper (v2 Updated)
 
 ## 1. Executive Summary
-TraceWhisper is in the v2 development cycle. Our financial strategy remains "Low-Burn/High-Equity," but we are adjusting for increased compute requirements associated with **Live Whisper** (real-time processing) and the shift to a **Local-First architecture**. We aim to maintain a runway that extends through the v2 development and beta timeline.
+TraceWhisper has transitioned to a **Local-First architecture**, which has fundamentally shifted our cost structure from fixed infrastructure to variable API consumption. This projection is updated to align with the `docs/v2-revenue-growth-model.md`, reflecting the current Beta status and the phased rollout of the Managed API and Pro Dashboard.
 
----
+## 2. Short-Term Outlook: v2 Beta Phase (Months 1-3)
+**Focus:** Validating the "Aha! moment" with Beta Cohorts and establishing the Managed API bridge.
 
-## 2. Short-Term Outlook: v2 Development Phase (Months 1-4)
-**Focus:** Implementation of v2 Architecture, Live Whisper, and Persistence Layers.
-
-- **Revenue:** $0 (Pre-monetization).
+- **Revenue:** Initial revenue from Managed API bundles and early consulting.
+    - **Expected Monthly Revenue:** $400 $\rightarrow$ $1,700.
 - **Estimated Costs:**
-    - LLM APIs (Dev/Testing): ~$60 - $100/month (Increased due to real-time processing tests for Live Whisper).
+    - LLM APIs (Sponsored Beta users): ~$250/month.
     - Domain/Misc: ~$1/month.
-- **Net Cash Flow:** ~($61 - $101/month).
-- **Financial Goal:** Complete v2 core features and enter closed beta without exceeding a $100/mo API cap.
+- **Net Cash Flow:** Positive (Expected).
+- **Financial Goal:** Validate the conversion rate from Free CLI $\rightarrow$ Managed API.
 
 ---
 
-## 3. Mid-Term Outlook: v2 Beta & Launch Phase (Months 5-8)
-**Focus:** Closed Beta, User Feedback Loop, and Public v2 Launch.
+## 3. Mid-Term Outlook: Commercial Launch (Months 4-6)
+**Focus:** Launch of the Pro Dashboard (SaaS) and scaling the user base.
 
-- **Revenue:** Initial revenue from "Managed API" bridge and early Pro adopters.
-    - Estimated Monthly Revenue (Month 6-8 avg): ~$150 - $300/month.
+- **Revenue:** Diversified streams (Managed API + Pro Dashboard + Consulting).
+    - **Expected Monthly Revenue:** $2,300 $\rightarrow$ $4,400.
+    - **Conservative Lower Bound:** $500 $\rightarrow$ $800.
 - **Estimated Costs:**
-    - LLM APIs (Beta volume for sponsored users): ~$211/month (Adjusted based on v2-beta-launch-review.md).
-    - Hosting (Docs/Landing): $0 (Free Tier).
+    - LLM APIs (Scaling sponsorship): ~$500 - $1,000/month.
+    - Hosting/Compute (Transition to paid tiers): ~$100 - $300/month.
     - Domain/Misc: ~$1/month.
-- **Net Cash Flow:** ~($212) to +$88/month.
-- **Financial Goal:** Achieve "Cash Flow Neutrality" by Month 6-7, ensuring v2 infrastructure is self-sustaining.
+- **Net Cash Flow:** Strongly Positive.
+- **Financial Goal:** Achieve a steady Monthly Recurring Revenue (MRR) that covers all operating costs with a $>50\%$ margin.
 
 ---
 
-## 4. Long-Term Outlook: Scaling Phase (Months 9-12)
-**Focus:** Scaling User Base & Enterprise Pilots for v2.
+## 4. Long-Term Outlook: Scaling Phase (Months 7-12)
+**Focus:** Enterprise expansion and Pro Dashboard optimization.
 
-- **Revenue:** Scaling with MAU growth and Enterprise pilots.
-    - Estimated Monthly Revenue (Month 10-12 avg): ~$6,000 - $12,000/month.
+- **Revenue:** High-growth phase driven by Pro tiers and Enterprise pilots.
+    - **Expected Monthly Revenue:** $5,000 $\rightarrow$ $15,000+.
 - **Estimated Costs:**
-    - LLM APIs (Scaled): ~$800 - $2,500/month (Assuming optimized routing and caching).
-    - Hosting/Compute (Paid Tiers): ~$200 - $400/month.
-    - Marketing/Acquisition: ~$300/month.
-- **Net Cash Flow:** ~$4,500 - $9,000/month.
-- **Financial Goal:** Build a sustainable treasury to fund expanded R&D for v3.
+    - LLM APIs (Optimized routing): ~$1,500 - $3,000/month.
+    - Hosting/Compute (Enterprise grade): ~$500 - $1,500/month.
+    - Marketing/Acquisition: ~$300 - $1,000/month.
+- **Net Cash Flow:** High positive cash flow.
+- **Financial Goal:** Build a treasury reserve to fund v3 R&D and potentially hire dedicated support staff.
 
 ---
 
-## 5. Summary Table (Consolidated v2)
+## 5. Summary Table (Expected Scenario)
 
-| Metric | Month 3 (Dev) | Month 6 (Beta/Launch) | Month 12 (Scaling) |
-| :--- | :--- | :--- | :--- |
-| **Monthly Revenue** | $0 | ~$225 | ~$12,000 |
-| **Monthly Expenses** | ~$80 | ~$212 | ~$2,900 |
-| **Net Monthly Flow** | -($80) | +$13 | +$9,100 |
-| **Cumulative Position** | -($240) | ~$0 | ~$35,000+ |
+| Metric | Month 1 (Beta) | Month 3 (Beta) | Month 6 (Launch) | Month 12 (Scaling) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Monthly Revenue** | $400 | $1,700 | $4,400 | ~$15,000 |
+| **Monthly Expenses** | ~$251 | ~$300 | ~$1,300 | ~$4,500 |
+| **Net Monthly Flow** | +$149 | +$1,400 | +$3,100 | +$10,500 |
+| **Cumulative Position**| +$149 | ~$2,000 | ~$8,000 | ~$40,000+ |
 
 ---
 
 ## 6. Runway & Break-Even Analysis
 
-**v2 Development Runway:**
-- **Estimated Burn (v2 Dev):** ~$80/month.
-- **Estimated Timeline:** 24-30 weeks (~7 months).
-- **Total Required Capital:** ~$560.
-- **Status:** With current assumed seed funding, the runway is sufficient to reach the Beta phase, provided API caps are strictly enforced.
-
 **Break-Even Point (Monthly):**
-To cover the v2 Beta operating costs of ~$212/month, we need:
-- **Managed API Users:** ~11 users paying $20/month (assuming 100% margin) or ~17 users (assuming 37% margin as per `docs/v2-beta-budget.md`).
-- **Pro Users:** ~11 users at $19/month.
+To cover the basic Beta operating costs of ~$251/month, we need:
+- **Managed API Users:** $\sim 17$ users per month (assuming 37% margin).
+- **Pro Users:** $\sim 14$ users at $19/month.
 
-**Verdict:** The financial risk remains extremely low due to the "BYO Key" model for the majority of users and the successful reduction of fixed infrastructure costs via the Local-First architecture.
+**Verdict:** 
+The financial risk is now **negligible**. The combination of the Local-First architecture (reducing fixed costs) and the BYO Key model (shifting API costs to users) ensures that the company remains solvent even in the most conservative growth scenarios. The focus has shifted from "survival" to "margin optimization."
