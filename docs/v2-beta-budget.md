@@ -1,47 +1,48 @@
-# v2 Beta Operating Budget
+# v2.2 Beta Operating Budget: The Reasoning IDE
 
 ## 1. Architectural Cost Analysis: Local-First vs. Centralized
-The transition to a **Local-First architecture (SQLite)** fundamentally shifts our cost profile from infrastructure-heavy to API-heavy.
+The transition to a **Local-First architecture (SQLite)** fundamentally shifts our cost profile from infrastructure-heavy to API-heavy. For v2.2, this is critical as the "Correction Suite" (Fix-It) relies on iterative LLM calls.
 
-| Component | Previous Model (Centralized) | v2 Model (Local-First) | Financial Impact |
+| Component | Previous Model (Centralized) | v2.2 Model (Local-First) | Financial Impact |
 | :--- | :--- | :--- | :--- |
 | **Database** | Cloud DB (e.g., Supabase/MongoDB) | Local SQLite | **Reduction:** Near-zero cloud storage costs for core logs. |
 | **Data Transfer** | High (Logs streamed to server) | Low (Only narratives/metadata) | **Reduction:** Lower bandwidth costs and lower latency. |
 | **Compute** | Server-side processing | Client-side processing | **Reduction:** Offloads compute to user's machine. |
-| **API Usage** | Batch processing (Periodic) | Live Whisper (Streaming/Real-time) | **Increase:** Higher frequency of LLM calls for real-time synthesis. |
+| **API Usage** | Batch processing (Periodic) | Live Correction Loops | **Increase:** Higher frequency of LLM calls for iterative "Fix-Its". |
 
-**Summary:** We have traded "Fixed Infrastructure Costs" for "Variable API Costs." This is ideal for a bootstrapped startup as it keeps the burn rate proportional to actual usage.
+**Summary:** We have traded "Fixed Infrastructure Costs" for "Variable API Costs." This keeps the burn rate proportional to actual usage and allows us to scale the Beta without increasing fixed overhead.
 
 ---
 
 ## 2. Estimated Beta Monthly Burn
-We assume a Beta period of 3-6 months with a target of ~1,000 beta testers. 
+We are currently in the **Initial Activation Phase (Cohort 1)**. The budget is designed to support a gradual ramp-up of beta testers.
 
 ### Assumptions
-- **User API Keys:** 80% of Beta users provide their own API keys.
-- **Company Sponsored:** 20% of Beta users (strategic partners/power users) are provided API access via a company proxy.
-- **Usage:** Average of 10 narrative reports per sponsored user per month.
-- **Model Mix:** 90% GPT-4o-mini (Filtering/Chunking), 10% GPT-4o (Final Synthesis).
+- **User API Keys:** ~70% of Beta users are expected to provide their own API keys (BYOK).
+- **Company Sponsored:** ~30% of Beta users (Strategic Partners/Power Users) are provided API access via a company proxy to remove friction and gather high-quality telemetry.
+- **Usage:** Average of 50 "Corrections" per sponsored user per month.
+- **Unit Cost:** ~$0.0345 per correction (based on `docs/v2.2-cost-per-correction.md`).
+- **Model Mix:** Tiered routing (GPT-4o-mini for analysis, GPT-4o/Claude 3.5 for the final fix).
 
-### Monthly Cost Breakdown
+### Monthly Cost Breakdown (Expected Beta Phase)
 | Item | Calculation | Estimated Cost | Notes |
 | :--- | :--- | :--- | :--- |
-| **LLM APIs (Sponsored)** | 200 users * 10 reports * avg. cost | $250.00 | Estimated $1.25 per user/mo |
-| **Domain/DNS** | Annual fee / 12 | $1.00 | Fixed cost |
+| **LLM APIs (Sponsored)** | 100 users * 50 corrections * $0.0345 | $172.50 | Variable based on actual volume |
+| **Domain/DNS** | Annual fee / 12 | $1.00 | Fixed cost (~$12/year) |
 | **Hosting (Docs/Landing)** | Vercel/GitHub Pages Free Tier | $0.00 | Free |
 | **Beta Management Tools** | GitHub Issues / Discord | $0.00 | Free |
-| **Total Monthly Burn** | | **$251.00** | |
+| **Total Monthly Burn** | | **$173.50** | **Target range: $150 - $600** |
 
 ---
 
 ## 3. Cost per Beta User
-To understand the viability of the "Managed API" revenue stream, we track the cost per user.
+To understand the viability of the "Managed API" revenue stream in the Pro tier, we track the cost per user.
 
 - **Infrastructure Cost per User:** ~$0.00 (due to Local-First).
-- **API Cost per User (Sponsorship):** ~$1.25 / month.
-- **Total Cost per User:** **~$1.25 / month**.
+- **API Cost per User (Sponsorship):** ~$1.73 / month (at 50 corrections).
+- **Total Cost per User:** **~$1.73 / month**.
 
-*Note: This is the cost to the company. For users providing their own keys, the cost to the company is $0.*
+*Note: For users providing their own keys, the cost to the company is $0.*
 
 ---
 
@@ -50,14 +51,14 @@ We will monitor the following thresholds to trigger budget adjustments or moneti
 
 | Metric | Threshold | Action |
 | :--- | :--- | :--- |
-| **Sponsored User Count** | > 500 users | Implement strict API quotas or move to "Bring Your Own Key" (BYOK) exclusively. |
-| **Monthly API Spend** | > $500 / month | Accelerate launch of "Managed API" (Strategy B) to generate offsetting revenue. |
+| **Sponsored User Count** | > 300 users | Implement strict API quotas or shift to BYOK exclusively. |
+| **Monthly API Spend** | > $600 / month | Accelerate launch of "Managed API" (Pro Tier) to generate offsetting revenue. |
 | **Cloud Storage (Metadata)** | > 5GB (Free Tier limit) | Evaluate Supabase paid tier ($25/mo) or optimize metadata pruning. |
-| **MAU (Monthly Active Users)** | > 2,000 users | Trigger a review of the Pro Dashboard (SaaS) timeline to capture value. |
+| **MAU (Monthly Active Users)** | > 500 users | Trigger a review of the conversion funnel to Pro/Enterprise tiers. |
 
 ---
 
 ## 5. Alignment with Revenue Model
-This budget supports the **Conservative Growth Model** in `docs/revenue-growth-model.md`:
-- The low burn rate ($250/mo) allows us to remain in the "v2 Beta / Bridge" phase (Months 4-6) without requiring external funding.
-- The "Cost per User" of $1.25 confirms that the proposed "Managed API" pricing ($20 for 100 reports) provides a healthy margin, as 100 reports would cost the company approximately $12.50 in API fees, leaving a ~37% gross margin.
+This budget provides the financial runway for the v2.2 Beta to validate the "Correction Suite" value proposition before full commercial launch.
+- The low burn rate (~$200 - $600/mo) ensures we can sustain the Beta phase without external funding.
+- The "Cost per User" of ~$1.73 confirms that the proposed Pro pricing ($39/mo) provides a massive contribution margin (~95%), validating the pricing strategy in `docs/v2.2-revenue-projection.md`.
