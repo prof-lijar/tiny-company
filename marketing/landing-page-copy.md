@@ -24,16 +24,27 @@
 3. **Correct**: Receive a precise prompt adjustment designed to resolve that specific failure pattern.
 4. **Verify**: Use **Comparative Trace Analysis** to prove the fix works before you deploy.
 
+## [Watch it in Action: The Surgical Correction Series]
+**Headline:** Proof in Motion.
+**Body:** See the v2.2 Fix-It button eliminate the most common failure patterns in real-time. No more log-diving—just surgical precision.
+
+**Featured Clips:**
+- **The Recursive Loop**: Watch a 2-hour debugging session shrink to a 10-second fix. [Watch Clip]
+- **The Cognitive Clash**: Resolving complex reasoning conflicts where agents hit a logic wall. [Watch Clip]
+- **The Tool-Output Denial**: See the 'Pivot' capability in action—switching tools when the current one fails. [Watch Clip]
+
+**CTA:** [Join the Beta to use these tools]
+
 ## [The Prompt Surgery Gallery]
 **Headline:** Evidence-Based Optimization.
 **Body:** We don't just claim it works; we show you the surgery. Explore our gallery of real-world reasoning failures—from "Infinite Search" loops to "Tool-Output Denial"—and see exactly how a surgical prompt adjustment resolves them.
 **CTA:** [Explore the Gallery $\rightarrow$]
 
 ## [Key Benefits]
-- **🪄 AI-Powered 'Fix-It' Button**: Move from "I think this is the problem" to a suggested solution in one click.
+- **🚀 AI-Powered 'Fix-It' Button**: Move from "I think this is the problem" to a suggested solution in one click.
 - **📉 Reduced Time-to-First-Fix (TTFF)**: Shrink your iteration cycle from hours to seconds.
 - **🧠 Deep Reasoning Insight**: Understand the *why* behind the failure through automated rationales.
-- **⚖️ Quantitative Validation**: A/B test your prompts with hard metrics on efficiency and token usage.
+- **⚙️ Quantitative Validation**: A/B test your prompts with hard metrics on efficiency and token usage.
 
 ## [The Shift]
 **Headline:** From Observability to Optimization.
