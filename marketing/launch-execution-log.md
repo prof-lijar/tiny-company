@@ -36,3 +36,18 @@
 - [x] `marketing/press-release.md` $\rightarrow$ Distributed
 - [x] `marketing/waitlist-email.md` $\rightarrow$ Sent
 - [x] `marketing/sample-reports.md` $\rightarrow$ Attached to HN/Reddit posts
+
+## v2 Beta Onboarding: Cohort 1 (2026-05-20)
+
+### 1. Segmentation & Outreach
+- **Cohort 1 Selection:** 15 users selected based on persona diversity (Prompt Engineers, Architects, Enterprise Leads, Tool Devs).
+- **Invitation Sequence:** Triggered using `marketing/v2-beta-invitation-email.md`.
+- **Tracking:** `marketing/v2-beta-waitlist-tracker.md` initialized to monitor conversion from invitation -> legal sign-off -> SDK integration.
+
+### 2. Technical Coordination
+- **SDK Readiness:** Confirmed with CTO that v2 SDK base is implemented and API key generation is ready for the first 15 users.
+- **Legal Bridge:** Invitation email includes the link to the Beta Testing Agreement.
+
+### 3. Success Metrics for Cohort 1
+- **Target Conversion:** 70% (10/15) onboarded within 7 days.
+- **Primary KPI:** Time-to-First-Narrative (TTFN).
