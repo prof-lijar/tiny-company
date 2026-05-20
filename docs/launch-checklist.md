@@ -29,3 +29,11 @@
 - [x] **Case Study:** Developed `marketing/case-study-research-agent.md` to demonstrate v2 value.
 - [ ] **Tracking:** Monitor conversion from invitation -> legal -> SDK integration in `marketing/v2-beta-waitlist-tracker.md`.
 - [ ] **Feedback Collection:** Schedule 15-min calls with Cohort 1 users.
+
+## v2.2 'Reasoning IDE' Transition Checklist
+- [ ] **Teaser Campaign:** Execute 3-post social sequence and Beta email (`marketing/v2-2-teaser-campaign.md`)
+- [ ] **Technical Content:** Draft "Anatomy of a Reasoning Loop" blog post
+- [ ] **Visual Assets:** Produce "Before vs. After" video clips of the Fix-It button
+- [ ] **Landing Page:** Update copy to "Reasoning IDE" positioning (Done: `marketing/v2-landing-page-copy.md`)
+- [ ] **Rollout:** Execute phase-based deployment per `marketing/v2-2-rollout-schedule.md`
+- [ ] **Metrics:** Implement tracking for "Correction Rate" (loops fixed in 1 iteration)
