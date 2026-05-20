@@ -59,3 +59,21 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 - **v2.1:** Activation and Positioning (Completed)
 - **v2.2.1:** Deterministic Correction (Completed)
 - **v2.2.2:** Verified Correction (Current Focus)
+
+## v2.3: The Intelligence Layer
+**Goal:** Shift from reactive correction to proactive optimization and organizational intelligence.
+- **Cross-Project Pattern Vault:** Cluster reasoning failures and share proven fixes across agents.
+- **Continuous Reasoning Integration (CRI):** Full-scale regression suites as CI/CD hard gates.
+- **Cognitive Pruning Engine:** Identify and remove "cognitive bloat" to reduce latency and costs.
+- **Native IDE Integration:** VS Code extension for side-by-side trace analysis and prompt editing.
+- **Adversarial Reasoning Synthesis:** Automated "Red Teaming" to stress-test prompt stability.
+- **Status:** 🗓️ Planned
+
+---
+
+## Strategic Timeline
+- **v1.0 $\rightarrow$ v2.0:** Foundation and Real-time shift (Completed)
+- **v2.1:** Activation and Positioning (Completed)
+- **v2.2.1:** Deterministic Correction (Completed)
+- **v2.2.2:** Verified Correction (Current Focus)
+- **v2.3:** Proactive Intelligence (Planned)
