@@ -12,17 +12,17 @@ The primary real-time observability view.
 | [ NARRATIVE STREAM ]                      | [ RAW LOG STREAM ]         |
 |                                           |                           |
 | 14:01:02 - Agent begins research on       | 14:01:02 [INFO] Initializing|
-| "Autonomous AI Startups".                  | agent_session_id: 8821     |
+| \"Autonomous AI Startups\".                  | agent_session_id: 8821     |
 |                                           |                           |
 | 14:01:15 - [PIVOT] User request was too    | 14:01:15 [DEBUG] Call:     |
-| broad. Agent narrowing scope to           | search_tool(q="AI start...")|
-| "AI Agents in 2026".                       | 14:01:16 [DEBUG] Response:  |
-|                                           | { "results": [ ... ], }    |
-|                                           |                           |
+| broad. Agent narrowing scope to           | search_tool(q=\"AI start...\")|
+| \"AI Agents in 2026\".                       | 14:01:16 [DEBUG] Response:  |
+|                                           | { \"results\": [ ... ], }    |
+|                                          |                           |
 | 14:01:40 - [LOOP] Agent is repeatedly     | 14:01:40 [WARN] Loop detect:|
-| searching for the same term.              | repeat_query: "AI Agents"   |
+| searching for the same term.              | repeat_query: \"AI Agents\"   |
 | Suggestion: Adjust search parameters.     | 14:01:41 [INFO] Call:      |
-|                                           | search_tool(q="AI Agents") |
+|                                           | search_tool(q=\"AI Agents\") |
 |                                           |                           |
 |                                           |                           |
 +-------------------------------------------+---------------------------+
@@ -37,27 +37,35 @@ Side-by-side analysis of two different execution paths.
 +-----------------------------------------------------------------------+
 | TRACE COMPARISON | Trace A: [ID_1] vs Trace B: [ID_2]                  |
 +-----------------------------------------------------------------------+
-| METRICS: | Steps: A(42) < B(115) | Tokens: A(12k) < B(35k) | Time: A < B|
-+-------------------------------------------+---------------------------+
-| TRACE A (Optimized)                        | TRACE B (Loopy)            |
-|                                           |                           |
-| 00:01 - Start Research                    | 00:01 - Start Research     |
-| 00:05 - Found key source A                | 00:05 - Found key source A |
-|                                           |                           |
-| ----------------- DIVERGENCE POINT ----------------------------------- |
-|                                           |                           |
-| 00:10 - Synthesizes result                | 00:10 - Tries to re-verify  |
-| 00:12 - Finalizes report                  | 00:15 - Search loop starts  |
-|                                           | 00:20 - Search loop cont.   |
-|                                           | 00:25 - Search loop cont.   |
-|                                           | 00:30 - Finally synthesizes|
-|                                           |                           |
-+-------------------------------------------+---------------------------+
+| METRICS COMPARISON:                                                   |
+| Steps: A(42) -> B(18) [-57% v] | Tokens: A(12k) -> B(9k) [-25% v]      |
+| Time: A(45s) -> B(32s) [-28% v] | Efficiency Score: A(65%) -> B(88%) [+]|
++-----------------------------------------------------------------------+
+| TRACE A (Original)                  | TRACE B (Optimized)              |
+|                                    |                                  |
+| 00:01 - Start Research              | 00:01 - Start Research           |
+| 00:05 - Found key source A          | 00:05 - Found key source A       |
+| 00:08 - Search for 'AI Agents'      | 00:08 - Search for 'AI Agents'    |
+|                                    |                                  |
+| ===--- DIVERGENCE POINT: Step 4 ---=================================== |
+|                                    |                                  |
+| 00:10 - [LOOP] Re-verify Source A   | 00:10 - Synthesize Final Answer   |
+| 00:12 - [LOOP] Search 'AI Agents'   | 00:12 - Format Report            |
+| 00:15 - [LOOP] Search 'AI Agents'   | 00:15 - Output Result            |
+| 00:20 - Synthesize Final Answer     |                                  |
+| 00:22 - Format Report               |                                  |
+| 00:25 - Output Result               |                                  |
+|                                    |                                  |
++------------------------------------+-----------------------------------+
+| VERDICT: Trace B is significantly more efficient. It avoided the       |
+| reasoning loop at Step 4 by directly synthesizing instead of          |
+| redundant verification.                                                |
++-----------------------------------------------------------------------+
 | [V]iew Raw Logs | [E]xport Comparison | [Q]uery Divergence             |
 +-----------------------------------------------------------------------+
 ```
 
-## 3. "The Fixer" Prompt Proposal (`tw fix <point>`)
+## 3. \"The Fixer\" Prompt Proposal (`tw fix <point>`)
 The interface for turning a failure into a prompt improvement.
 
 ```text
@@ -65,15 +73,15 @@ The interface for turning a failure into a prompt improvement.
 | THE FIXER: Prompt Optimization Proposal                                |
 +-----------------------------------------------------------------------+
 | DETECTED ISSUE: Reasoning Loop                                        |
-| Evidence: Agent repeated "search_tool" 4 times with identical queries. |
+| Evidence: Agent repeated \"search_tool\" 4 times with identical queries. |
 |                                                                       |
-| [ CURRENT SYSTEM PROMPT ]                                             |
-| "You are a research assistant. Find information and summarize it."    |
+| [ CURRENT SYSTEM PROMPT ]                                              |
+| \"You are a research assistant. Find information and summarize it.\"    |
 |                                                                       |
-| [ PROPOSED IMPROVEMENT ]                                              |
-| "You are a research assistant. Find information and summarize it.     |
+| [ PROPOSED IMPROVEMENT ]                                               |
+| \"You are a research assistant. Find information and summarize it.     |
 |  IF a search query returns no new information twice, STOP the loop    |
-|  and pivot your search terms or ask for clarification." <--- [NEW]     |
+|  and pivot your search terms or ask for clarification.\" <--- [NEW]     |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | [A]pply Change | [R]efine Suggestion | [C]ancel                        |
@@ -88,16 +96,59 @@ A forensic chat interface to query a specific trace.
 | FORENSIC CHAT | Trace: [ID_1]                                         |
 +-----------------------------------------------------------------------+
 | User: Why did the agent pivot at 14:01:15?                             |
-|                                                                       |
-| Whisper: The agent found that the initial query "Autonomous AI        |
-| Startups" returned 5,000+ results, which exceeded its processing      |
-| window. It pivoted to "AI Agents in 2026" to increase precision.       |
+|                                                                        |
+| Whisper: The agent found that the initial query \"Autonomous AI        |
+| Startups\" returned 5,000+ results, which exceeded its processing      |
+| window. It pivoted to \"AI Agents in 2026\" to increase precision.       |
 |                                                                       |
 | Evidence:                                                             |
-| -> Log Line 412: search_api(q="Autonomous AI Startups") -> 5k results  |
-| -> Log Line 415: "Too many results. Narrowing scope..."                |
+| -> Log Line 412: search_api(q=\"Autonomous AI Startups\") -> 5k results  |
+| -> Log Line 415: \"Too many results. Narrowing scope...\"                |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Query: _                                                               |
++-----------------------------------------------------------------------+
+```
+
+## 5. Reasoning Trace Visualizer (`tw trace <id>`)
+Visualizing the forensic path from failure to fix.
+
+```text
++-----------------------------------------------------------------------+
+| REASONING TRACE: [ID_1] | Status: FIXED [v2.2]                        |
++-----------------------------------------------------------------------+
+| THE PATH:                                                             |
+|                                                                       |
+| (Start)                                                               |
+|    |                                                                  |
+|    v                                                                  |
+| [Thought] Search for "AI Agents"                                      |
+|    |                                                                  |
+|    v                                                                  |
+| [Tool Call] search_api(q="AI Agents")                                  |
+|    |                                                                  |
+|    v                                                                  |
+| [Observation] 500 results found                                       |
+|    |                                                                  |
+|    v                                                                  |
+| [BREAKING POINT] <--- ! REASONING LOOP DETECTED !                      |
+|    |   (Agent repeats search_api 3x with no new data)                  |
+|    |                                                                  |
+|    +----[ CORRECTION APPLIED ]----------------------------------------+
+|    |    \"If no new data, pivot search terms\"                         |
+|    v                                                                  |
+| [Thought] Pivot to "AI Agents 2026"                                    |
+|    |                                                                  |
+|    v                                                                  |
+| [Tool Call] search_api(q="AI Agents 2026")                             |
+|    |                                                                  |
+|    v                                                                  |
+| [Observation] 12 highly relevant results found                         |
+|    |                                                                  |
+|    v                                                                  |
+| (Goal Reached)                                                        |
+|                                                                       |
++-----------------------------------------------------------------------+
+| [V]iew Raw Log | [C]ompare with Baseline | [R]un Fix-It                |
 +-----------------------------------------------------------------------+
 ```
