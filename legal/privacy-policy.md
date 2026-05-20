@@ -1,4 +1,4 @@
-# Privacy Policy for TraceWhisper
+# Privacy Policy for TraceWhisper v2.2
 
 **Last Updated: May 20, 2026**
 
@@ -8,9 +8,9 @@ Tiny Company ("we," "us," or "our") is committed to protecting your privacy. Thi
 
 ### 1.1 User-Provided Data
 - **Account Information:** When you authenticate via `tw login`, we collect your email address and basic profile information to manage your account, access, and team sharing permissions.
-- **Logs and Traces:** To provide the Service's core functionality (synthesis, narratives, and the "Fix-It" engine), TraceWhisper processes the logs and execution traces of your AI agents. 
-    - **Local Processing:** By default, traces are stored in a local SQLite database on your machine.
-    - **Remote Processing:** For narrative generation and automated prompt suggestions, specific segments of these logs are streamed to LLM providers via API.
+- **Logs, Traces, and System Prompts:** To provide the Service's core and functionality (synthesis, narratives, and the "Fix-It" engine), TraceWhisper processes the logs, execution traces, and the system prompts of your AI agents. 
+    - **Local Processing:** By default, traces and prompts are stored in a local SQLite database on your machine.
+    - **Remote Processing:** For narrative generation, automated prompt suggestions (the "Fix-It" button), and regression analysis (CI/CD Guardrails), specific segments of these logs and the corresponding system prompts are streamed to LLM providers via API.
 - **Shared Traces:** When you use the "Team Sharing" feature to generate a shareable URL, the specific trace data associated with that URL is uploaded to our secure storage to enable accessibility via the web.
 
 ### 1.2 Automatically Collected Data
@@ -20,6 +20,7 @@ Tiny Company ("we," "us," or "our") is committed to protecting your privacy. Thi
 ## 2. How We Use Your Data
 We use the collected data for the following purposes:
 - **Service Delivery:** To generate narratives, identify reasoning loops, perform root cause analysis for the "Fix-It" button, and provide prompt suggestions.
+- **Quality Assurance:** To facilitate the CI/CD Reasoning Guardrails by comparing current agent behavior against "Gold Standard" baselines.
 - **Account Management:** To authenticate users and manage access.
 - **Team Collaboration:** To host and serve shareable logic audit reports via the Team Sharing feature.
 - **Product Improvement:** To analyze telemetry and improve the SDK and CLI tools.
@@ -28,13 +29,13 @@ We use the collected data for the following purposes:
 ## 3. Data Sharing and Disclosure
 
 ### 3.1 LLM Providers
-TraceWhisper is a synthesis tool. To generate narratives and "Fix-It" suggestions, your logs and traces are sent to LLM providers (e.g., OpenAI, Anthropic, Google) via API. Your use of the Service is subject to the privacy policies of these third-party providers.
+TraceWhisper is a synthesis tool. To generate narratives, "Fix-It" suggestions, and guardrail analysis, your logs, traces, and system prompts are sent to LLM providers (e.g., OpenAI, Anthropic, Google) via API. Your use of the Service is subject to the privacy policies of these third-party providers.
 
 ### 3.2 Legal Requirements
 We may disclose your information if required to do so by law or in response to valid requests by public authorities.
 
 ### 3.3 No Sale of Data
-We do not sell, rent, or trade your personal data or agent logs to third parties for marketing purposes.
+We do not sell, rent, or trade your personal data, agent logs, or system prompts to third parties for marketing purposes.
 
 ## 4. GDPR Compliance (For EU/EEA Users)
 If you are located in the European Economic Area (EEA), you have the following rights under the General Data Protection Regulation (GDPR):
@@ -48,12 +49,12 @@ If you are located in the European Economic Area (EEA), you have the following r
 
 ## 5. Data Retention
 - **Account Data:** Retained as long as your account is active.
-- **Local Logs/Traces:** Managed by the user on their own hardware.
+- **Local Logs/Traces/Prompts:** Managed by the user on their own hardware.
 - **Shared Traces:** Retained on our servers until the user deletes the share link or the account is closed.
 - **Telemetry:** Anonymized telemetry is retained for a period of 12 months.
 
 ## 6. Security
-We implement industry-standard security measures to protect your data. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security. Users are responsible for ensuring that shared traces do not contain sensitive secrets (e.g., API keys).
+We implement industry-standard security measures to protect your data. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security. Users are responsible for ensuring that shared traces and prompts do not contain sensitive secrets (e.g., API keys).
 
 ## 7. Changes to This Privacy Policy
 We may update this Privacy Policy from time to time. We will notify you of any significant changes by updating the "Last Updated" date at the top of this document.
