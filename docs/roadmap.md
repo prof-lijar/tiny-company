@@ -19,7 +19,7 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 - **Status:** ✅ Completed
 
 ## v2.1: Frictionless Entry & Debug-First Tuning
-**Goal:** Remove all barriers to the "Aha! Moment" and shift positioning to a "Reasoning IDE."
+**Goal:** Remove all barriers to the "Aha! Moment" and shift positioning to a "Reasoning Idea."
 - **Frictionless Onboarding:** 
     - Click-wrap legal agreements.
     - Framework-specific "copy-paste" recipes (LangChain, CrewAI, AutoGen).
@@ -33,16 +33,29 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 
 ## v2.2: From Detection to Correction (Current Focus)
 **Goal:** Close the loop between seeing a bug and fixing it.
-- **Automated Prompt Suggestions:** The "Fix-It" button that suggests system prompt changes to resolve detected loops.
-- **Comparative Trace Analysis:** A/B testing for reasoning (comparing "Efficiency Scores" between prompt versions).
-- **Interactive Break-points:** Ability to pause agent execution upon detection of a `[Contradiction]` and manually inject a correction.
-- **Team Logic Sharing:** Shareable URLs for Logic Audit Reports to enable collaborative debugging.
-- **CI/CD Guardrails:** Automated builds failure if reasoning regressions (loops/contradictions) are detected in gold-standard tests.
-- **Status:** 🚀 Active (Beta Phase)
+
+### v2.2.1: The Seed Engine (Quick Wins)
+- **Seed Pattern Engine:** Deterministic fixes for common reasoning failures.
+- **Fix-It UI:** Integrated button to suggest prompt adjustments.
+- **Status:** ✅ Completed
+
+### v2.2.2: The Verification Loop (Active)
+- **Auto-Verify Workflow:** Automate the "Apply $\rightarrow$ Re-run $\rightarrow$ Compare" cycle.
+- **Safety Guardrails:** Prompt snapshotting and one-click rollback.
+- **Regression Testing:** Mini-benchmark suites to prevent "Whack-a-Mole" bugs.
+- **Explainability:** "The Why" snippets for every suggested fix.
+- **Status:** 🚀 Active (Implementation Phase)
+
+### v2.2.x: Enterprise Guardrails
+- **Comparative Trace Analysis:** A/B testing for reasoning efficiency.
+- **Interactive Break-points:** Pause execution on `[Contradiction]` and inject fixes.
+- **CI/CD Guardrails:** Automated build failure if reasoning regressions are detected.
+- **Status:** 📅 Planned
 
 ---
 
 ## Strategic Timeline
 - **v1.0 $\rightarrow$ v2.0:** Foundation and Real-time shift (Completed)
 - **v2.1:** Activation and Positioning (Completed)
-- **v2.2:** Active Correction and Enterprise Guardrails (Current Focus)
+- **v2.2.1:** Deterministic Correction (Completed)
+- **v2.2.2:** Verified Correction (Current Focus)
