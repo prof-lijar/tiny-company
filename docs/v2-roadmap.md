@@ -1,4 +1,5 @@
 # TraceWhisper v2 Roadmap: From Post-Mortem to Proactive Observability
+[Updated 2026-05-20 based on v1 Feedback Analysis Report]
 
 ## 1. Vision for v2
 While v1 solved the "log fatigue" problem by providing a human-readable narrative of *what happened*, v2 aims to transform TraceWhisper into a proactive agent-debugging ecosystem. The goal is to move from static report generation to real-time insight and automated optimization, reducing the iteration loop for agent developers.
@@ -18,7 +19,7 @@ While v1 solved the "log fatigue" problem by providing a human-readable narrativ
 ### 2.3 Framework-Native Integrations
 - **Description:** Official SDK wrappers and plugins for popular agent frameworks (e.g., LangChain, CrewAI, AutoGPT). This removes the need for manual JSON export.
 - **Value:** Lowers the barrier to entry and integrates TraceWhisper directly into the development workflow.
-- **Priority:** P1 (High)
+- **Priority:** P0 (Critical) - *Elevated from P1 based on v1 user feedback regarding "JSON Tax".*
 
 ### 2.4 Prompt Optimization Engine ("The Fixer")
 - **Description:** An extension of the "Failure Analysis" feature. TraceWhisper will not only identify the breaking point but will use the LLM to propose a specific prompt modification to prevent that failure in the future.
@@ -33,23 +34,23 @@ While v1 solved the "log fatigue" problem by providing a human-readable narrativ
 ## 3. Prioritized Roadmap & Milestones
 
 ### Milestone 1: The Connectivity Phase (Short-term)
-- **Goal:** Make TraceWhisper easier to use and more immediate.
+- **Goal:** Eliminate ingestion friction and enable real-time monitoring.
 - **Deliverables:** 
-    - Framework-Native Integrations (LangChain/CrewAI).
-    - Live Whisper (MVP: Tailing a local log file).
+    - Framework-Native Integrations (LangChain/CrewAI) - **P0**.
+    - Live Whisper (MVP: Tailing a local log file) - **P0**.
 - **Estimated Time:** 4-6 weeks.
 
 ### Milestone 2: The Analysis Phase (Mid-term)
-- **Goal:** Provide tools for iterative improvement.
+- **Goal:** Provide tools for iterative improvement and deep-dive querying.
 - **Deliverables:**
-    - Trace Comparison tool.
-    - Interactive Trace-Chat (CLI version).
+    - Trace Comparison tool - **P1**.
+    - Interactive Trace-Chat (CLI version) - **P2**.
 - **Estimated Time:** 6-8 weeks.
 
 ### Milestone 3: The Optimization Phase (Long-term)
 - **Goal:** Move from "what happened" to "how to fix it".
 - **Deliverables:**
-    - Prompt Optimization Engine.
+    - Prompt Optimization Engine - **P2**.
     - Advanced analytics dashboard (Visualizing agent "thought patterns" across multiple traces).
 - **Estimated Time:** 8-12 weeks.
 
