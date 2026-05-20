@@ -69,3 +69,27 @@ The v2.2 update introduces the "Reasoning IDE" and the "Fix-It" engine. The visu
 - **Narrative First:** The story of the agent's journey is the primary interface; the raw data is the supporting evidence.
 - **Technical Elegance:** The UI should feel like a high-end developer tool—efficient, keyboard-centric, and devoid of unnecessary ornamentation.
 - **Accessibility:** Contrast ratios must meet WCAG AA standards to ensure observability for all users.
+
+---
+
+## 5. v2.3 'Intelligence Layer' Visual Language
+
+The v2.3 update transforms TraceWhisper from a diagnostic tool into an intelligence layer. The visual language shifts from **Correction** to **Optimization and Wisdom**.
+
+### New Visual Tokens
+To support the Intelligence Layer, we introduce two new high-significance colors:
+
+| Color | Hex | Role | Psychology |
+| :--- | :--- | :--- | :--- |
+| **Vault Purple** | `#A855F7` | Knowledge/Intelligence | Wisdom, organizational memory, premium insight |
+| **Bloat Fog** | `#94A3B8` | Redundancy/Waste | Muted, redundant, "noise" to be pruned |
+
+### Visual Metaphors for Intelligence
+- **The Pattern Vault:** Represented by **Vault Purple**. It is treated as a "Library of Truth." When a Vault Insight is presented, it should feel like a prestigious suggestion—a proven solution from the organizational memory.
+- **Cognitive Bloat:** Represented by **Bloat Fog**. Bloat is visualized as a "fog" or "grey-out" effect. Redundant reasoning steps are not just marked; they are visually diminished (strikethrough, muted opacity) to emphasize that they are waste.
+- **The Gold Standard:** In CRI (Cognitive Reasoning Integrity), the "Expected Path" is the Gold Standard. It is rendered in **Insight Green** or **Pure White**, while the "Actual Path" is compared against it, with the **Divergence Point** flashing in **Alert Amber**.
+
+### v2.3 Interaction Cues
+- **The Vault Pulse:** When the system detects a pattern that exists in the Vault, a subtle purple glow or badge appears near the failure point, signaling that a "Proven Fix" is available.
+- **Pruning Transition:** The transition from a "Bloated" trace to a "Pruned" trace should be a visual "clearing of the fog," where the Fog Grey elements vanish to reveal a lean, efficient path.
+- **IDE Bridge:** The link between the prompt and the trace is a "Tether." Clicking a trace segment should "pull" the prompt editor to the exact line responsible, creating a physical sense of connection between cause and effect.
