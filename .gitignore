@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+uv.lock
+.ruff_cache/
+
+# Agent infrastructure (not part of the company output)
+app/
+config.py
+run.py
+pyproject.toml
