@@ -1,46 +1,44 @@
 # Product Roadmap: TraceWhisper
 
-This roadmap outlines the phased development of TraceWhisper, moving from a basic CLI utility to a comprehensive agent observability tool.
+This roadmap outlines the evolution of TraceWhisper from a basic narrative parser to a comprehensive "Reasoning IDE" for AI Agents.
 
-## Phase 1: The MVP (Minimum Viable Product)
-**Goal:** Enable a developer to turn a single JSON log file into a basic narrative Markdown report.
+## v1.0: The Foundation (The Narrative Parser)
+**Goal:** Turn raw JSON logs into human-readable stories.
+- **Narrative Engine:** Implementation of the `Thought -> Action -> Observation` synthesis.
+- **Basic CLI:** `tw parse` for static log files.
+- **Markdown Reporting:** Generation of "The Journey" and Executive Summaries.
+- **Initial Framework Support:** Basic JSON log ingestion.
 
-- **Milestone 1.1: Foundation**
-    - Implement the CLI entry point (`tw parse`).
-    - Basic JSON log ingestion and validation.
-    - Integration with a chosen LLM (e.g., via OpenAI/Anthropic API).
-- **Milestone 1.2: Basic Narrative Engine**
-    - Implementation of the `Thought -> Action -> Observation` parsing.
-    - Initial prompt engineering for narrative synthesis.
-    - Generation of the "The Journey" section in Markdown.
-- **Milestone 1.3: Basic Reporting**
-    - Implementation of the Executive Summary and Tool Usage Table.
-    - Ability to save the output to a `.md` file.
+## v2.0: The Live Observability Era (The Beta)
+**Goal:** Move from post-mortem analysis to real-time observation.
+- **Live Streaming:** Implementation of `tw live` for real-time narrative synthesis.
+- **SDK Integration:** Direct SDK for capturing traces without manual log exports.
+- **Narrative Synthesis v2:** Improved prompts for higher fidelity and reduced hallucination.
+- **Beta Cohort Launch:** Initial user feedback loop and product-market fit validation.
 
-## Phase 2: Advanced Intelligence & Robustness
-**Goal:** Handle production-scale logs and provide deeper debugging insights.
+## v2.1: Frictionless Entry & Debug-First Tuning (Current Phase)
+**Goal:** Remove all barriers to the "Aha! Moment" and shift positioning to a "Reasoning IDE."
+- **Frictionless Onboarding:** 
+    - Click-wrap legal agreements.
+    - Framework-specific "copy-paste" recipes (LangChain, CrewAI, AutoGen).
+    - Enhanced First-Run CLI guidance.
+- **Debug-First Narrative:** 
+    - Forensic Analyst persona for the LLM.
+    - Diagnostic Taxonomy: `[Reasoning Loop]`, `[Contradiction]`, `[Strategic Pivot]`, `[Tool Hallucination]`.
+    - Visual "Aha!" markers in the CLI (color-coded alerts).
+- **SDK Robustness:** Prevention of silent failures during initialization.
 
-- **Milestone 2.1: Large Trace Handling**
-    - Implementation of intelligent chunking for logs exceeding context windows.
-    - State management across chunks to maintain narrative flow.
-- **Milestone 2.2: Deep Failure Analysis**
-    - Specialized prompts to identify "The Breaking Point."
-    - Automatic detection of common agent failure modes (e.g., infinite loops, hallucinated tool arguments).
-- **Milestone 2.3: Noise Reduction**
-    - Advanced filtering to collapse redundant retries and heartbeat logs.
+## v2.2: From Detection to Correction (Upcoming)
+**Goal:** Close the loop between seeing a bug and fixing it.
+- **Automated Prompt Suggestions:** The "Fix-It" button that suggests system prompt changes to resolve detected loops.
+- **Comparative Trace Analysis:** A/B testing for reasoning (comparing "Efficiency Scores" between prompt versions).
+- **Interactive Break-points:** Ability to pause agent execution upon detection of a `[Contradiction]` and manually inject a correction.
+- **Team Logic Sharing:** Shareable URLs for Logic Audit Reports to enable collaborative debugging.
+- **CI/CD Guardrails:** Automated builds failure if reasoning regressions (loops/contradictions) are detected in gold-standard tests.
 
-## Phase 3: Ecosystem & Experience
-**Goal:** Expand accessibility and integration into the AI developer workflow.
+---
 
-- **Milestone 3.1: Enhanced Output Formats**
-    - Support for HTML reports with interactive elements (e.g., clickable links to raw log lines).
-    - PDF export for formal audit reports.
-- **Milestone 3.2: Multi-Framework Support**
-    - Adapters for popular agent frameworks (e.g., LangGraph, CrewAI, AutoGPT) so users don't have to manually format logs.
-- **Milestone 3.3: Integration Hooks**
-    - Ability to trigger a TraceWhisper report automatically upon an agent's failure in a CI/CD pipeline.
-
-## Timeline (Estimated)
-- **Phase 1:** Weeks 1-4
-- **Phase 2:** Weeks 5-8
-- **Phase 3:** Weeks 9-12
+## Strategic Timeline
+- **v1.0 $\rightarrow$ v2.0:** Foundation and Real-time shift (Completed)
+- **v2.1:** Current Focus - Activation and Positioning (Active)
+- **v2.2:** Future Focus - Active Correction and Enterprise Guardrails (Planned)
