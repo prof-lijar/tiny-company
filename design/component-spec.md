@@ -73,6 +73,20 @@ A vertical axis representing the agent's execution history.
     - `Intervention Node`: Larger, colored marker indicating human nudge.
     - `Breaking Point`: An amber diamond indicating a detected loop.
 
+### 4.3 Verification Loop Components (v2.2.2)
+Specific components for the Verification Loop Visualizer.
+- **Verification Checklist**: A dynamic list of benchmarks.
+    - `Pending`: Grey text, empty checkbox.
+    - `Running`: Pulse animation, Signal Blue.
+    - `Passed`: Insight Green, checkmark.
+    - `Failed`: Obsidian Red, crossmark.
+- **Verdict Banner**: High-visibility status bar.
+    - `Success`: Green background, "FIXED & STABLE".
+    - `Failure`: Red background, "FIX FAILED".
+    - `Regression`: Amber background, "FIXED BUT UNSTABLE".
+- **Rollback Button**: High-priority action button.
+    - `Style`: Obsidian Grey background, bold white text, undo icon.
+
 ---
 
 ## 5. CLI Component Mapping (Rich Library)
@@ -85,3 +99,6 @@ Since TraceWhisper is CLI-first, these components map to `rich` elements:
 | Prompt Diff | `Table` | Two columns, `style="green"` for additions |
 | Intervention Panel | `Live` / `Prompt` | Blocking input with `Console.print` banners |
 | Timeline | `Tree` | Vertical structure with custom icons |
+| Verification Checklist | `Table` / `Live` | Columns: `[Status] [Benchmark Name]`, dynamic updates |
+| Verdict Banner | `Panel` | `style="bold white on green/red/yellow"`, centered |
+| Rollback Button | `Text` / `Prompt` | `style="bold white on slate"`, high contrast |
