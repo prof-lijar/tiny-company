@@ -78,3 +78,41 @@ This document extends the original user stories to cover the proactive observabi
     - The setup requires no more than 2 lines of code change.
     - Integration is seamless with existing framework logger/callback systems.
     - Logs are automatically formatted for TraceWhisper without manual intervention.
+
+## 6. Frictionless Entry (v2.1)
+
+### US2.6.1: Digital Consent Flow
+**As a** new user,
+**I want to** agree to the Beta Testing Agreement via a click-wrap interface during sign-up or login,
+**so that** I can start using the tool immediately without waiting for manual legal approval.
+- **Acceptance Criteria:**
+    - The `tw login` command or web sign-up presents the agreement text.
+    - User must explicitly accept the terms before an API key is issued.
+    - Acceptance is logged and tied to the user account.
+
+### US2.6.2: SDK Health Diagnostics
+**As a** developer,
+**I want** the SDK to tell me exactly why it failed to initialize,
+**so that** I don't spend hours debugging my own code when the issue is a missing API key or network error.
+- **Acceptance Criteria:**
+    - `tracewhisper.init()` performs a pre-flight check.
+    - Failures result in a human-readable error message (e.g., "Error: API Key not found in environment variables").
+    - Success results in a confirmation message (e.g., "TraceWhisper initialized successfully").
+
+### US2.6.3: First-Run Onboarding Guide
+**As a** first-time user,
+**I want** the CLI to guide me to the "Aha! Moment" (Live Whisper),
+**so that** I know exactly how to see the value of the tool immediately after integration.
+- **Acceptance Criteria:**
+    - After the first successful trace is captured, the CLI displays a prominent hint.
+    - The hint explicitly instructs the user to run `tw live` in a separate terminal.
+    - The hint provides the exact command to run.
+
+### US2.6.4: Debug-First Narrative Output
+**As a** developer,
+**I want** the narratives to explicitly call out reasoning loops and contradictions,
+**so that** I can use the tool as a debugging environment rather than just a summary report.
+- **Acceptance Criteria:**
+    - Narratives use specific labels like "[REASONING LOOP]" or "[CONTRADICTION]" when detected.
+    - The narrative explains *why* it is a loop or contradiction based on the log evidence.
+    - The output prioritizes these "debugging" insights over general summaries.
