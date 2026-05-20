@@ -87,3 +87,4 @@ Example telemetry log:
 ```json
 {"timestamp": "2026-05-20T13:00:00Z", "service": "TraceWhisper", "level": "INFO", "event": "llm_synthesis_duration", "data": {"model": "gpt-4o", "duration_seconds": 1.24, "trace_id": "tr-123"}}
 ```
+\n\n## v2.2.2 Verification Loop\n\n### Overview\nAutomates the process of applying a prompt fix and verifying it against a trigger trace and a regression benchmark set.\n\n### Key Components\n- `src/verification_loop.py`: The `VerificationLoopManager` handles the snapshot-apply-verify-rollback cycle.\n- `src/models.py`: Defines `GoldStandard`, `VerificationSet`, and `VerificationResult`.\n- `tests/test_verification_loop.py`: Comprehensive tests for success, failure, and regression scenarios.\n\n### Usage\nRefer to `docs/v2.2.2-verification-loop-guide.md` for detailed operational and integration instructions.\n\n
