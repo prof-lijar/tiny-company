@@ -1,18 +1,20 @@
 from typing import List
+import time
 from src.models import ProcessedTrace, ExecutionReport, NarrativeSegment, ToolSummary
 from litellm import completion
+from src.telemetry import telemetry
 
 class NarrativeEngine:
-    def __init__(self, model: str = "gpt-4o"):
+    def __init__(self, model: str = \"gpt-4o\"):
         self.model = model
 
     def _build_prompt(self, trace: ProcessedTrace) -> str:
-        log_text = "\n".join([
-            f"[{e.timestamp}] {e.component}: {e.content}" 
+        log_text = \"\\n\".join([
+            f\"[{e.timestamp}] {e.component}: {e.content}\" 
             for e in trace.entries
         ])
         
-        prompt = f"""
+        prompt = f\"\"\"
         Analyze the following AI agent logs and transform them into a cohesive narrative.
         
         Logs:
@@ -25,50 +27,63 @@ class NarrativeEngine:
         4. Failure Analysis: If the agent failed, explain the breaking point.
         
         Be concise and focus on Key Decision Points (KDPs).
-        """
+        \"\"\"
         return prompt
 
     def synthesize(self, trace: ProcessedTrace) -> ExecutionReport:
-        """
+        \"\"\"
         Synthesizes a narrative report from a ProcessedTrace.
-        """
+        \"\"\"
+        start_time = time.time()
         prompt = self._build_prompt(trace)
         
-        response = completion(
-            model=self.model, 
-            messages=[{"role": "user", "content": prompt}]
-        )
+        try:
+            response = completion(
+                model=self.model, 
+                messages=[{\"role\": \"user\", \"content\": prompt}]
+            )
+            
+            # In a real implementation, we would use Pydantic output parsing 
+            # to convert the LLM string into an ExecutionReport object.
+            # For this MVP, we will simulate the parsing.
+            content = response.choices[0].message.content
+            
+        except Exception as e:
+            telemetry.error(\"llm_synthesis_error\", {\"model\": self.model, \"error\": str(e)})
+            raise e
+            
+        telemetry.track_duration(\"llm_synthesis\", start_time, {
+            \"model\": self.model,
+            \"prompt_tokens\": len(prompt), # Simplified token count
+            \"trace_id\": trace.trace_id
+        })
         
-        # In a real implementation, we would use Pydantic output parsing 
-        # to convert the LLM string into an ExecutionReport object.
-        # For this MVP, we will simulate the parsing.
-        
-        return self._simulate_parsing(response.choices[0].message.content, trace)
+        return self._simulate_parsing(content, trace)
 
     def _simulate_parsing(self, text: str, trace: ProcessedTrace) -> ExecutionReport:
         # This is a mock-up of the parsing logic for the MVP.
         # It would actually parse the LLM's markdown output into the Pydantic models.
         return ExecutionReport(
             trace_id=trace.trace_id,
-            summary="The agent successfully completed the task.",
+            summary=\"The agent successfully completed the task.\",
             narrative=[
                 NarrativeSegment(
                     timestamp=trace.entries[0].timestamp, 
-                    text="The agent started the task and identified the need to search for information.",
+                    text=\"The agent started the task and identified the need to search for information.\",
                     is_kdp=True
                 ),
                 NarrativeSegment(
                     timestamp=trace.entries[-1].timestamp, 
-                    text="The agent found the correct answer and finalized the report.",
+                    text=\"The agent found the correct answer and finalized the report.\",
                     is_kdp=False
                 )
             ],
             tool_usage=[
                 ToolSummary(
-                    tool_name="search_tool", 
-                    input="AI observability", 
-                    output="Found 3 results", 
-                    status="Success"
+                    tool_name=\"search_tool\", 
+                    input=\"AI observability\", 
+                    output=\"Found 3 results\", 
+                    status=\"Success\"
                 )
             ],
             failure_analysis=None,
