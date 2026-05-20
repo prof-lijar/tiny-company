@@ -1,7 +1,7 @@
-# v2 Revenue Projection & Growth Model
+# v2 Revenue Projection & Growth Model (v2.1 Accelerated)
 
 ## 1. Executive Summary
-Following the transition to a **Local-First architecture**, TraceWhisper has significantly lowered its fixed infrastructure overhead. This allows the company to focus its financial resources on API consumption and scaling the user base. This document provides a 6-month revenue projection focusing on the transition from Beta to the initial commercial launch of the Pro Dashboard.
+Following the release of v2.1 and the **'Frictionless Entry'** campaign, TraceWhisper has shifted its growth trajectory. By reducing the 'Integration Gap' via Framework Integration Recipes, we anticipate a faster ramp-up in Monthly Active Users (MAU) and a higher conversion rate to Managed API bundles. This document reflects the accelerated growth baseline.
 
 ## 2. Pricing Strategy (v2 Aligned)
 We utilize a multi-pronged monetization approach to balance growth with sustainability.
@@ -25,47 +25,47 @@ High-touch integration for enterprise pipelines.
 
 ---
 
-## 3. 6-Month Growth Scenarios
-We project growth over the next 6 months, starting from the current Beta phase (Month 0).
+## 3. 6-Month Growth Scenarios (Updated for v2.1)
+We project growth starting from June 2026 (Month 1 of the v2.1 launch).
 
 ### Scenario 1: Conservative (Low Conversion)
-*Focuses on stability and organique growth with minimal marketing spend.*
+*Focuses on stability and organic growth with minimal marketing spend.*
 
 | Month | MAU | Managed API Users | Consulting Projects | Est. Monthly Revenue |
 | :--- | :--- | :--- | :--- | :--- |
-| Month 1 | 1,000 | 10 | 0 | $200 |
-| Month 2 | 1,200 | 15 | 0 | $300 |
-| Month 3 | 1,500 | 20 | 1 | $600 |
-| Month 4 | 1,800 | 25 | 0 | $500 |
-| Month 5 | 2,000 | 30 | 1 | $800 |
-| Month 6 | 2,500 | 40 | 0 | $800 |
+| Month 1 (June) | 1,000 | 10 | 0 | $200 |
+| Month 2 (July) | 1,200 | 15 | 0 | $300 |
+| Month 3 (Aug) | 1,500 | 20 | 1 | $600 |
+| Month 4 (Sept) | 1,800 | 25 | 0 | $500 |
+| Month 5 (Oct) | 2,000 | 30 | 1 | $800 |
+| Month 6 (Nov) | 2,500 | 40 | 0 | $800 |
 | **Total** | | | **2** | **~$3,200** |
 
-### Scenario 2: Expected (Moderate Growth)
-*Assumes successful v2 Beta feedback and steady acquisition via developer channels.*
+### Scenario 2: Expected (Accelerated by 'Frictionless Entry')
+*Assumes high adoption of Integration Recipes and rapid 'Aha!' moments.*
 
 | Month | MAU | Managed API Users | Consulting Projects | Est. Monthly Revenue |
 | :--- | :--- | :--- | :--- | :--- |
-| Month 1 | 1,000 | 20 | 0 | $400 |
-| Month 2 | 2,000 | 40 | 1 | $1,200 |
-| Month 3 | 3,500 | 70 | 1 | $1,700 |
-| Month 4 | 5,000 | 100 | 1 | $2,300 |
-| Month 5 | 7,000 | 150 | 2 | $3,600 |
-| Month 6 | 10,000 | 200 | 1 | $4,400 |
-| **Total** | | | **6** | **~$13,600** |
+| Month 1 (June) | 1,500 | 30 | 0 | $600 |
+| Month 2 (July) | 3,000 | 60 | 1 | $1,400 |
+| Month 3 (Aug) | 5,000 | 110 | 1 | $2,500 |
+| Month 4 (Sept) | 7,500 | 160 | 2 | $3,800 |
+| Month 5 (Oct) | 10,000 | 220 | 2 | $5,200 |
+| Month 6 (Nov) | 15,000 | 300 | 3 | $8,000 |
+| **Total** | | | **9** | **~$21,500** |
 
 ### Scenario 3: Aggressive (Viral Growth)
-*Assumes high adoption, positive "Aha!" moments in Beta, and rapid Enterprise interest.*
+*Assumes massive adoption of the 'Frictionless' flow and rapid Enterprise interest.*
 
 | Month | MAU | Managed API Users | Consulting Projects | Est. Monthly Revenue |
 | :--- | :--- | :--- | :--- | :--- |
-| Month 1 | 1,000 | 50 | 1 | $1,500 |
-| Month 2 | 3,000 | 150 | 2 | $5,000 |
-| Month 3 | 7,000 | 350 | 3 | $10,000 |
-| Month 4 | 15,000 | 750 | 4 | $17,000 |
-| Month 5 | 30,000 | 1,500 | 5 | $32,000 |
-| Month 6 | 60,000 | 3,000 | 6 | $62,000 |
-| **Total** | | | **21** | **~$127,500** |
+| Month 1 (June) | 2,000 | 60 | 1 | $2,000 |
+| Month 2 (July) | 5,000 | 180 | 2 | $6,000 |
+| Month 3 (Aug) | 12,000 | 400 | 4 | $14,000 |
+| Month 4 (Sept) | 25,000 | 800 | 6 | $26,000 |
+| Month 5 (Oct) | 50,000 | 1,500 | 10 | $50,000 |
+| Month 6 (Nov) | 100,000 | 3,000 | 15 | $100,000 |
+| **Total** | | | **38** | **~$198,000** |
 
 ---
 
@@ -77,7 +77,7 @@ We continue to sponsor a subset of power users (approx 20% of the Beta cohort) t
 - **Cost per Sponsored User:** ~$1.25 / month.
 - **Scaling Impact:** At 10,000 MAU, if 20% are sponsored, monthly cost = $2,500.
 
-### B. Hosting & Database (Fixed/Tiered)
+### B. Hosting and Database (Fixed/Tiered)
 | MAU Range | Estimated Monthly Cost | Primary Drivers |
 | :--- | :--- | :--- |
 | 0 - 2,000 | $0 - $50 | Free tiers (Vercel, GitHub Pages, Supabase). |
