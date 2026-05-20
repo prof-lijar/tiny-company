@@ -7,11 +7,16 @@ TraceWhisper is evolving from a **Diagnostic Tool** (v1) to an **Optimization En
 - **v2 Narrative:** "Stop guessing why your agent failed; optimize it in real-time." (Proactive/IDE)
 - **The North Star:** TraceWhisper is the **"IDE for Agent Reasoning."**
 
+### v2 Phase Evolution
+- **v2.1 (Detection):** Focus on "Frictionless Entry" and "Debug-First Value". The goal is to make the 'Aha! Moment' (detecting a reasoning error) happen as fast as possible.
+- **v2.2 (Correction):** Focus on "The Closed-Loop Debugger". The goal is to bridge the gap between detecting a bug and fixing the prompt (The "Fix-It" button).
+
 ## 2. Target Audience & Refined Pain Points
 
 ### Primary Segment: AI Agent Developers (The "Builders")
 - **Profile:** Engineers building agents using frameworks like LangChain, AutoGPT, or custom loops.
-- **v2 Pain Point:** The **"Iteration Gap"**—the grueling cycle of *Tweak $\rightarrow$ Run $\rightarrow$ Wait for Failure $\rightarrow$ Parse Logs $\rightarrow$ Guess Fix*.
+- **v2.1 Pain Point:** The **"Integration Gap"**—the friction of getting observability running.
+- **v2.2 Pain Point:** The **"Correction Gap"**—knowing a bug exists but not knowing the exact prompt change to fix it.
 - **Goal:** Collapse the iteration loop from hours to seconds.
 
 ### Secondary Segment: LLMOps & Enterprise Leads (The "Operators")
@@ -36,7 +41,7 @@ We are no longer just bridging the "Semantic Gap"; we are closing the "Optimizat
 ### Feature $\rightarrow$ Value Mapping
 - **Live Whisper:** "Stop the bleed" $\rightarrow$ Real-time intervention.
 - **Trace Comparison:** "Stop guessing" $\rightarrow$ Quantitative A/B testing for prompts.
-- **The Fixer:** "Close the loop" $\rightarrow$ Automated prompt surgery.
+- **The Fixer (v2.2):** "Close the loop" $\rightarrow$ Automated prompt surgery.
 - **Trace-Chat:** "Interrogate your agent" $\rightarrow$ Forensic reasoning analysis.
 
 ## 4. Distribution Channels & Tactics
