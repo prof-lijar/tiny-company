@@ -6,16 +6,18 @@
 TraceWhisper is committed to protecting your privacy. This Privacy Policy explains how data is handled when using the TraceWhisper software.
 
 ## 1. Data Collection and Processing
-TraceWhisper is designed as a developer tool. The way data is processed depends on how you deploy and use the tool:
+TraceWhisper is designed as a developer tool. The way data is processed depends on how you deploy and use the tool.
 
-### 1.1 Local Processing
-By default, TraceWhisper is designed to operate locally. When run locally:
-- **No data is sent to our servers.** We do not host a central server that collects your logs or reports.
-- Your logs, configuration files, and generated reports remain on your local machine or within your own controlled infrastructure.
+### 1.1 Local Processing and "Frictionless Entry"
+TraceWhisper is built for local-first operation. In alignment with our "Frictionless Entry" philosophy:
+- **No Centralized Collection:** By default, TraceWhisper does not send your logs, trace data, or reasoning narratives to Tiny Company servers.
+- **Local Storage:** Your logs, configuration files, and generated "Logic Audit Reports" remain on your local machine or within your own controlled infrastructure.
+- **Installation Telemetry:** We do not collect telemetry on installation or usage patterns unless explicitly opted-in via a separate configuration.
 
-### 1.2 Third-Party LLM Providers
-To synthesize narratives, TraceWhisper requires access to a Large Language Model (LLM). 
+### 1.2 Third-Party LLM Providers and "Debug-First" Analysis
+To enable "Debug-First" tuning and forensic narrative synthesis (including the detection of reasoning loops, contradictions, and hallucinations), TraceWhisper requires access to a Large Language Model (LLM).
 - **API Usage:** If you configure TraceWhisper to use a third-party API (e.g., OpenAI, Anthropic, Google), your log data (or chunks of it) will be sent to that provider for processing.
+- **Forensic Analysis:** The "forensic" analysis is performed by the LLM provider based on the prompts provided by TraceWhisper. Tiny Company does not see or store the data sent to these providers.
 - **Data Handling:** The processing of your data by these third parties is governed by their respective privacy policies and data processing agreements. We encourage users to review the privacy terms of their chosen LLM provider.
 
 ## 2. Types of Data Processed
