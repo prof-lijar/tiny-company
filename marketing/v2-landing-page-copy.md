@@ -9,7 +9,7 @@
 **Headline:** Stop guessing why your agent failed. Start fixing it.
 **Sub-headline:** TraceWhisper is evolving. We've moved beyond observability to create the world's first **Reasoning IDE**. Monitor internal monologues in real-time, quantify prompt changes with data, and close the loop with automated prompt surgery. **Get from `pip install` to your first fix in under 60 seconds.**
 **Primary CTA:** Get Early Access to the Reasoning IDE
-**Secondary CTA:** See the "Fix-It" Button in Action [Video]
+**Secondary CTA:** See the "Surgical Correction" Gallery [Video]
 
 ---
 
@@ -45,7 +45,28 @@ You aren't just debugging code; you're debugging *logic*. You can't solve a logi
 
 ---
 
-## 4. Value Proposition by Persona
+## 4. Proof in Motion: The Surgical Gallery
+**Headline:** See the "Surgical Correction" in Action.
+**Sub-headline:** Stop digging through raw logs. Experience the transition from Noise to Signal.
+
+**[Video Grid]**
+
+*   **Clip 1: The Recursive Loop**
+    *   *The Noise:* An agent trapped in a logic loop, repeating the same failed step.
+    *   *The Surgery:* One click of the [Fix-It] button.
+    *   *The Signal:* A precision prompt adjustment that breaks the loop and hits the goal.
+*   **Clip 2: The Cognitive Clash**
+    *   *The Noise:* A complex reasoning conflict where the agent hallucinates a workaround.
+    *   *The Surgery:* TraceWhisper identifies the exact point of divergence.
+    *   *The Signal:* A surgical strike to the reasoning path, restoring logic and alignment.
+*   **Clip 3: The Tool-Output Denial**
+    *   *The Noise:* An agent hitting a wall because it's using the wrong tool for the job.
+    *   *The Surgery:* The "Pivot" capability detects tool-denial.
+    *   *The Signal:* An automated suggestion to switch to a more capable utility.
+
+---
+
+## 5. Value Proposition by Persona
 
 **For the AI Engineer**
 "Collapse your iteration loop from hours to seconds. Move from 'I think this prompt is better' to 'I have the trace to prove it.' Stop guessing, start engineering."
@@ -58,7 +79,7 @@ You aren't just debugging code; you're debugging *logic*. You can't solve a logi
 
 ---
 
-## 5. Final CTA
+## 6. Final CTA
 **Headline:** Ready to close the Correction Gap?
 **Sub-headline:** Join the elite cohort of developers building the next generation of reliable autonomous agents with the Reasoning IDE.
 **CTA:** Join the v2.2 Early Access List
