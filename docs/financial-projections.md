@@ -23,10 +23,10 @@ TraceWhisper is in the v2 development cycle. Our financial strategy remains "Low
 - **Revenue:** Initial revenue from "Managed API" bridge and early Pro adopters.
     - Estimated Monthly Revenue (Month 6-8 avg): ~$150 - $300/month.
 - **Estimated Costs:**
-    - LLM APIs (Beta volume for sponsored users): ~$250/month.
+    - LLM APIs (Beta volume for sponsored users): ~$211/month (Adjusted based on v2-beta-launch-review.md).
     - Hosting (Docs/Landing): $0 (Free Tier).
     - Domain/Misc: ~$1/month.
-- **Net Cash Flow:** ~($100) to +$50/month.
+- **Net Cash Flow:** ~($212) to +$88/month.
 - **Financial Goal:** Achieve "Cash Flow Neutrality" by Month 6-7, ensuring v2 infrastructure is self-sustaining.
 
 ---
@@ -50,8 +50,8 @@ TraceWhisper is in the v2 development cycle. Our financial strategy remains "Low
 | Metric | Month 3 (Dev) | Month 6 (Beta/Launch) | Month 12 (Scaling) |
 | :--- | :--- | :--- | :--- |
 | **Monthly Revenue** | $0 | ~$225 | ~$12,000 |
-| **Monthly Expenses** | ~$80 | ~$251 | ~$2,900 |
-| **Net Monthly Flow** | -($80) | -($26) | +$9,100 |
+| **Monthly Expenses** | ~$80 | ~$212 | ~$2,900 |
+| **Net Monthly Flow** | -($80) | +$13 | +$9,100 |
 | **Cumulative Position** | -($240) | ~$0 | ~$35,000+ |
 
 ---
@@ -65,8 +65,8 @@ TraceWhisper is in the v2 development cycle. Our financial strategy remains "Low
 - **Status:** With current assumed seed funding, the runway is sufficient to reach the Beta phase, provided API caps are strictly enforced.
 
 **Break-Even Point (Monthly):**
-To cover the v2 Beta operating costs of ~$251/month, we need:
-- **Managed API Users:** ~13 users paying $20/month (assuming 100% margin) or ~20 users (assuming 37% margin as per `docs/v2-beta-budget.md`).
-- **Pro Users:** ~13 users at $19/month.
+To cover the v2 Beta operating costs of ~$212/month, we need:
+- **Managed API Users:** ~11 users paying $20/month (assuming 100% margin) or ~17 users (assuming 37% margin as per `docs/v2-beta-budget.md`).
+- **Pro Users:** ~11 users at $19/month.
 
-**Verdict:** The financial risk remains low due to the "BYO Key" model for the majority of users. The primary risk is the "sponsored" beta user cohort, which we will manage via strict API quotas and the early rollout of the Managed API bridge.
+**Verdict:** The financial risk remains extremely low due to the "BYO Key" model for the majority of users and the successful reduction of fixed infrastructure costs via the Local-First architecture.
