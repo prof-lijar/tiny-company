@@ -16,6 +16,12 @@ class ReasoningEvent(str, Enum):
     TOOL_HALLUCINATION = "[Tool Hallucination]"
     INFORMATION_GAP = "[Information Gap]"
 
+class PromptFix(BaseModel):
+    analysis: str
+    suggested_modification: str
+    rationale: str
+    confidence_score: Optional[str] = "Medium"
+
 class RawLogEntry(BaseModel):
     timestamp: datetime
     trace_id: str
@@ -29,12 +35,14 @@ class ProcessedTrace(BaseModel):
     entries: List[RawLogEntry]
     start_time: datetime
     end_time: datetime
+    system_prompt: Optional[str] = None
 
 class NarrativeSegment(BaseModel):
     timestamp: datetime
     text: str
     is_kdp: bool = False  # Key Decision Point
     event_type: Optional[ReasoningEvent] = None
+    suggested_fix: Optional[PromptFix] = None
 
 class ToolSummary(BaseModel):
     tool_name: str
