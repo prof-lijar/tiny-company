@@ -4,9 +4,10 @@
 TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, density of information, and the reduction of cognitive load. We follow the **Narrative-First** principle: the high-level story is the primary entry point, but the raw technical evidence is always one click/keystroke away.
 
 ### Core Interaction Patterns
-- **Drill-Down:** High-level summary $\rightarrow$ Detailed Whisper segment $\rightarrow$ Raw Log lines.
+- **Drill-Down:** High-level summary $\\rightarrow$ Detailed Whisper segment $\\rightarrow$ Raw Log lines.
 - **Parallelism:** Comparative views for A/B testing.
 - **Contextual Awareness:** The UI adapts based on whether the user is in "Live Mode" (observing) or "Forensic Mode" (analyzing).
+- **Debug-First:** The path from anomaly detection to prompt optimization is minimized.
 
 ---
 
@@ -14,20 +15,26 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 
 ### 2.1 Frictionless Onboarding (v2.1)
 **Goal:** Get the user to their first "Aha!" moment in < 60 seconds.
-1. **Initial Setup:** User runs `tw init`.
-2. **Consent:** A clear, concise "Beta Terms" block appears in the terminal. User types `Y` to agree (Click-wrap equivalent for CLI).
+1. **Initial Setup:** User runs `tw init` or `tw live` for the first time.
+2. **Welcome Sequence:** A streamlined checklist appears:
+   - [x] SDK Installed
+   - [ ] Framework Integrated
+   - [ ] First Trace Captured
 3. **Integration Choice:** User is asked: "Which framework are you using? (LangChain / CrewAI / AutoGen / Other)".
-4. **The Recipe:** The CLI outputs a 3-line code snippet tailored to their framework.
-5. **The Hook:** After the first successful trace is detected, the CLI prompts: *"Your first trace is ready. Run `tw live` to see the narrative unfold in real-time."*
+4. **The Recipe:** The CLI outputs a 3-line code snippet (Integration Recipe) tailored to their framework.
+5. **The Hook:** Upon first successful trace detection, a high-visibility **Success Banner** appears: "✨ SUCCESS: First Narrative Captured!".
+6. **Call to Action:** User is prompted to run `tw live` to see the narrative unfold.
 
 ### 2.2 Live Whisper Observation
 **Goal:** Real-time transparency of agent reasoning.
 1. **Entry:** User runs `tw live`.
-2. **The Dashboard:** A split-screen terminal view (using `rich` or similar).
-   - **Top/Left (Narrative):** A scrolling feed of "Whispers" (distilled reasoning).
+2. **The Dashboard:** A split-screen terminal view.
+   - **Top/Left (Narrative):** A scrolling feed of "Whispers".
    - **Bottom/Right (Raw):** A fast-scrolling feed of raw logs.
-3. **Interruption:** User hits `Space` to pause the stream. This freezes both feeds for inspection.
-4. **Focus:** User can highlight a Whisper segment to see exactly which raw logs generated it.
+3. **Contextual Guidance (v2.1):** When an anomaly (Loop, Contradiction, Pivot) is detected, a **Debug-First Tip** is appended to the narrative:
+   - *Example (Loop):* "💡 DEBUG-FIRST TIP: Reasoning loops often occur when the system prompt lacks a termination condition. Quick Fix: Run `tw fix --point [timestamp]`."
+4. **Interruption:** User hits `Space` to pause the stream.
+5. **Focus:** User can highlight a Whisper segment to see exactly which raw logs generated it.
 
 ### 2.3 Forensic Analysis & "The Fixer"
 **Goal:** Move from "What happened?" to "How do I fix it?".
@@ -47,23 +54,20 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 ```text
 +-----------------------------------------------------------------------+
 | TRACEWHISPER LIVE | Agent: Research-Bot-01 | Status: RUNNING          |
-+-----------------------------------------------------------------------+
-| [NARRATIVE]                                    | [RAW LOGS]            |
++-----------------------------------------------------------------------+\n| [NARRATIVE]                                    | [RAW LOGS]            |
 |                                               |                       |
 | 10:02:01 - Agent decided to search for        | 10:02:01 [INFO] Call:  |
-| "quantum computing" but found too many        | search_api(q="quant...")|
+| \"quantum computing\" but found too many        | search_api(q=\"quant...\")|
 | results. Pivot: narrowing search to           | 10:02:02 [DEBUG] Resp: |
-| "topological qubits".                         | { "results": [...], }  |
+| \"topological qubits\".                         | { \"results\": [...], }  |
 |                                               |                       |
-| 10:02:15 - Agent encountered a loop:          | 10:02:15 [WARN] Loop   |
-| repeating the same query 3 times.             | detected: query_id_42  |
-| Suggestion: Change search parameters.         | 10:02:16 [INFO] Call:  |
-|                                               | search_api(q="topol...")|
+| 10:02:15 - [LOOP] Agent is repeatedly         | 10:02:15 [WARN] Loop   |
+| searching for the same query 3 times.             | detected: query_id_42  |
+| 💡 DEBUG-FIRST TIP: Prompt lacks termination  | 10:02:16 [INFO] Call:  |
+| condition. Run 'tw fix' to improve.           | search_api(q=\"topol...\")|
 |                                               |                       |
-+-----------------------------------------------------------------------+
-| [P]ause | [S]top | [C]hat | [F]ix | [H]elp                           |
-+-----------------------------------------------------------------------+
-```
++-----------------------------------------------------------------------+\n| [P]ause | [S]top | [C]hat | [F]ix | [H]elp                           |
++-----------------------------------------------------------------------+\n```
 
 ### 3.2 Trace Comparison (A/B)
 - **Layout:** Side-by-side vertical columns.

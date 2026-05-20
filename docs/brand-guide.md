@@ -3,6 +3,11 @@
 ## 1. Brand Essence
 TraceWhisper is the bridge between the chaotic internal monologue of an AI agent and human understanding. The brand represents **Clarity from Chaos**.
 
+### Positioning: The Reasoning IDE
+TraceWhisper is not just an observability tool; it is the world's first **IDE for Agent Reasoning**. 
+- **Traditional Observability:** Focuses on the *what* (latency, tokens, status).
+- **Reasoning IDE:** Focuses on the *why* (logic, intent, breaking points).
+
 ### Brand Promise
 "Turning the noise of agent logs into the signal of human insight."
 
@@ -54,3 +59,4 @@ We use a pairing of a clean Sans-Serif for narratives and a high-legibility Mono
 - **Narrative First:** The story of the agent's journey is the primary interface; the raw data is the supporting evidence.
 - **Technical Elegance:** The UI should feel like a high-end developer tool—efficient, keyboard-centric, and devoid of unnecessary ornamentation.
 - **Accessibility:** Contrast ratios must meet WCAG AA standards to ensure observability for all users.
+- **Debug-First:** The interface should lead the user directly from the detection of a reasoning failure to a proposed fix.
