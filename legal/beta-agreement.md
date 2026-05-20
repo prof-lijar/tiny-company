@@ -1,6 +1,7 @@
 # TraceWhisper v2 Beta Testing Agreement
 
 **Last Updated:** 2026-05-20
+**Status:** Finalized / Approved by Legal
 
 This Beta Testing Agreement ("Agreement") is entered into between Tiny Company ("the Company") and the individual or entity participating in the beta testing of TraceWhisper v2 ("the Beta Tester").
 

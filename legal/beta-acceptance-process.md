@@ -1,7 +1,8 @@
 # Beta Testing Agreement Acceptance Process
 
 **Version:** 1.0
-**Status:** Required for v2 Beta Launch
+**Status:** Finalized / Approved by Legal
+**Required for v2 Beta Launch**
 
 To ensure that the Beta Testing Agreement is legally binding and enforceable, the following "Click-wrap" acceptance process must be implemented in the v2 onboarding flow.
 
