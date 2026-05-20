@@ -19,7 +19,7 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 - **Status:** ✅ Completed
 
 ## v2.1: Frictionless Entry & Debug-First Tuning
-**Goal:** Remove all barriers to the "Aha! Moment" and shift positioning to a "Reasoning Idea."
+**Goal:** Remove all barriers to the "Aha! Moment" and shift positioning to a "Reasoning IDE."
 - **Frictionless Onboarding:** 
     - Click-wrap legal agreements.
     - Framework-specific "copy-paste" recipes (LangChain, CrewAI, AutoGen).
@@ -50,24 +50,33 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 - **Comparative Trace Analysis:** A/B testing for reasoning efficiency.
 - **Interactive Break-points:** Pause execution on `[Contradiction]` and inject fixes.
 - **CI/CD Guardrails:** Automated build failure if reasoning regressions are detected.
-- **Status:** 📅 Planned
+- **Status:** ⏳ Planned
 
 ---
-
-## Strategic Timeline
-- **v1.0 $\rightarrow$ v2.0:** Foundation and Real-time shift (Completed)
-- **v2.1:** Activation and Positioning (Completed)
-- **v2.2.1:** Deterministic Correction (Completed)
-- **v2.2.2:** Verified Correction (Current Focus)
 
 ## v2.3: The Intelligence Layer
 **Goal:** Shift from reactive correction to proactive optimization and organizational intelligence.
-- **Cross-Project Pattern Vault:** Cluster reasoning failures and share proven fixes across agents.
-- **Continuous Reasoning Integration (CRI):** Full-scale regression suites as CI/CD hard gates.
-- **Cognitive Pruning Engine:** Identify and remove "cognitive bloat" to reduce latency and costs.
-- **Native IDE Integration:** VS Code extension for side-by-side trace analysis and prompt editing.
-- **Adversarial Reasoning Synthesis:** Automated "Red Teaming" to stress-test prompt stability.
-- **Status:** 🗓️ Planned
+
+### Milestone 1: The Knowledge Foundation
+- **Pattern Vault:** Embedding-based storage for Failure $\rightarrow$ Correction pairs across projects.
+- **Continuous Reasoning Integration (CRI):** `.tw-test` format and `tw verify-all` CLI for CI/CD hard gates.
+- **Vault-to-UI Integration:** Surface "Similar fixes" in the Fix-It interface.
+
+### Milestone 2: The Efficiency Engine
+- **Cognitive Pruning Engine:** Detect "Cognitive Bloat" (circular reasoning, redundancies).
+- **Efficiency Scoring:** Implementation of `Actual Steps / Min Steps` ratio.
+- **Pruning Suggestions:** Automated prompt modifications to reduce latency and cost.
+
+### Milestone 3: The Developer Experience
+- **Native IDE Integration:** VS Code extension for side-by-side Prompt/Trace view.
+- **Direct Patching:** One-click application of fixes from the trace to the prompt file.
+- **Live-Link:** Mapping trace lines directly to prompt segments.
+
+### Milestone 4: The Hardening Phase
+- **Adversarial Reasoning Synthesis:** Automated "Red Teaming" to generate stress tests for prompt stability.
+- **Fragility Reporting:** Summary report identifying prompt weak points and edge-case failures.
+
+- **Status:** 📅 Planned (Detailed in `docs/v2.3-release-plan.md`)
 
 ---
 
@@ -76,4 +85,4 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 - **v2.1:** Activation and Positioning (Completed)
 - **v2.2.1:** Deterministic Correction (Completed)
 - **v2.2.2:** Verified Correction (Current Focus)
-- **v2.3:** Proactive Intelligence (Planned)
+- **v2.3:** Proactive Intelligence (Next Major Version)
