@@ -1,7 +1,7 @@
 # Technical Architecture: TraceWhisper
 
 ## 1. Architecture Overview
-TraceWhisper has evolved from a static post-mortem analysis tool (v1) into a proactive observability ecosystem (v2). The architecture now supports both asynchronous batch processing and real-time streaming.
+TraceWhisper has evolved from a static post-mortem analysis tool (v1) into a proactive observability and corrective ecosystem (v2.2). The architecture now supports both asynchronous batch processing, real-time streaming, and automated prompt correction.
 
 ### Data Flow Versions
 
@@ -10,6 +10,9 @@ TraceWhisper has evolved from a static post-mortem analysis tool (v1) into a pro
 
 #### v2: Integrated Ecosystem (Proactive)
 `SDK/Live Stream` $\rightarrow$ `Storage Layer (SQLite)` $\rightarrow$ `Live Whisper / Analysis Engine` $\rightarrow$ `Real-time Dashboard / Reports`
+
+#### v2.2: Closed-Loop Correction (Corrective)
+`Analysis Engine (Detection)` $\rightarrow$ `Correction Engine (Meta-Prompt)` $\rightarrow$ `Suggested Prompt Adjustment` $\rightarrow$ `User Application` $\rightarrow$ `Updated Agent Prompt`
 
 ## 2. System Diagram
 ```mermaid
@@ -35,10 +38,12 @@ graph TD
         F --> F1[Trace Filter]
         F1 --> F2[Narrative Engine]
         F2 --> F3[Report Generator]
+        F2 --> F4[Correction Engine]
     end
 
     F3 --> H[Markdown/HTML Report]
-    G --> I[Rich CLI Live View]
+    F4 --> I[Prompt Fix Suggestions]
+    G --> J[Rich CLI Live View]
 ```
 
 ## 3. Data Model
@@ -48,6 +53,7 @@ We use Pydantic models for type safety and SQLite for persistence.
 - `RawLogEntry`: Single log line (timestamp, trace_id, level, component, content, metadata).
 - `ProcessedTrace`: Chronological collection of `RawLogEntry` objects grouped by `trace_id`.
 - `ExecutionReport`: Final structured object containing summary, narrative segments, tool usage, and failure analysis.
+- `PromptFix`: Structured suggestion for prompt modification (analysis, suggested_modification, rationale, confidence_score).
 
 ### 3.2 Storage Schema (v2)
 - **Traces**: High-level metadata (`id`, `agent_id`, `session_id`, `start_time`, `end_time`, `metadata`, `status`).
@@ -64,13 +70,17 @@ We use Pydantic models for type safety and SQLite for persistence.
 - **Responsibility**: Manages the SQLite database.
 - **Key APIs**: `save_trace()`, `append_log()`, `save_narrative()`, `get_trace_logs()`.
 
-### 4.3 Narrative Engine
+### 4.3 Narrative Engine (`src/engine.py`)
 - **Responsibility**: 
   - **Batch Mode**: Processes a full trace to generate a report.
   - **Live Mode**: Processes sliding windows of logs to update a rolling narrative.
 - **Interface**: `synthesize_narrative(trace: ProcessedTrace) -> ExecutionReport`.
 
-### 4.4 Live Whisper (`src/live.py`)
+### 4.4 Correction Engine (`src/correction_engine.py`)
+- **Responsibility**: Implements the "Fix-It" logic. It uses a Meta-Prompt to analyze detected reasoning failures (Loops, Contradictions) and suggests precise system prompt modifications.
+- **Interface**: `suggest_fix(system_prompt, trace, failure_type) -> PromptFix`.
+
+### 4.5 Live Whisper (`src/live.py`)
 - **Responsibility**: Tailing logs (via file or DB) and triggering the Narrative Engine upon "Key Decision Points" (KDPs).
 - **UI**: Uses `rich` for a split-screen CLI dashboard.
 
