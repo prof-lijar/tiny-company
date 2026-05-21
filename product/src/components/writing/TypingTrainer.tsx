@@ -64,9 +64,10 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
       setEndTime(finishTime);
       setIsFinished(true);
       
-      const timeTaken = (finishTime - (startTime || finishTime)) / 1000;
+      const start = startTime || finishTime;
+      const timeTaken = (finishTime - start) / 1000;
       const minutes = timeTaken / 60;
-      const wpm = Math.round((text.text.length / 5) / minutes);
+      const wpm = minutes > 0 ? Math.round((text.text.length / 5) / minutes) : 0;
       const accuracy = Math.round(((text.text.length - errors) / text.text.length) * 100);
       
       onComplete({ 
@@ -87,6 +88,19 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
     setElapsedTime(0);
     setErrors(0);
     if (inputRef.current) inputRef.current.focus();
+  };
+
+  const calculateWPM = () => {
+    if (!startTime || !endTime) return 0;
+    const timeTakenSeconds = (endTime - startTime) / 1000;
+    if (timeTakenSeconds <= 0) return 0;
+    const minutes = timeTakenSeconds / 60;
+    return Math.round((text.text.length / 5) / minutes);
+  };
+
+  const calculateAccuracy = () => {
+    if (text.text.length === 0) return 0;
+    return Math.round(((text.text.length - errors) / text.text.length) * 100);
   };
 
   const renderText = () => {
@@ -151,11 +165,11 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
           <div className="flex gap-6 text-sm font-medium">
             <div className="text-center">
               <div className="text-xs uppercase text-emerald-600 font-bold">WPM</div>
-              <div className="text-xl font-black">{Math.round((text.text.length / 5) / (((endTime! - (startTime || endTime)) / 1000) / 60))}</div>
+              <div className="text-xl font-black">{calculateWPM()}</div>
             </div>
             <div className="text-center">
               <div className="text-xs uppercase text-emerald-600 font-bold">Accuracy</div>
-              <div className="text-xl font-black">{Math.round(((text.text.length - errors) / text.text.length) * 100)}%</div>
+              <div className="text-xl font-black">{calculateAccuracy()}%</div>
             </div>
           </div>
         </div>
