@@ -4,9 +4,10 @@
 TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, density of information, and the reduction of cognitive load. We follow the **Narrative-First** principle: the high-level story is the primary entry point, but the raw technical evidence is always one click/keystroke away.
 
 ### Core Interaction Patterns
-- **Drill-Down:** High-level summary $\rightarrow$ Detailed Whisper segment $\rightarrow$ Raw Log lines.
+- **Drill-Down:** High-level summary $\\rightarrow$ Detailed Whisper segment $\\rightarrow$ Raw Log lines.
 - **Parallelism:** Comparative views for A/B testing.
 - **Contextual Awareness:** The UI adapts based on whether the user is in "Live Mode" (observing) or "Forensic Mode" (analyzing).
+- **Governance-First (v2.4):** For the Enterprise portal, every administrative action must be backed by technical evidence (a reasoning trace).
 
 ---
 
@@ -15,7 +16,7 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 ### 2.1 Frictionless Onboarding (v2.1)
 **Goal:** Get the user to their first "Aha!" moment in < 60 seconds.
 1. **Initial Setup:** User runs `tw init`.
-2. **Consent:** A clear, concise "Beta Terms" block appears in the terminal. User types `Y` to agree (Click-wrap equivalent for CLI).
+2. **Consent:** A clear, concise "Beta Terms" block appears in the terminal. User types `Y` to agree.
 3. **Integration Choice:** User is asked: "Which framework are you using? (LangChain / CrewAI / AutoGen / Other)".
 4. **The Recipe:** The CLI outputs a 3-line code snippet tailored to their framework.
 5. **The Hook:** After the first successful trace is detected, the CLI prompts: *"Your first trace is ready. Run `tw live` to see the narrative unfold in real-time."*
@@ -23,10 +24,10 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 ### 2.2 Live Whisper Observation
 **Goal:** Real-time transparency of agent reasoning.
 1. **Entry:** User runs `tw live`.
-2. **The Dashboard:** A split-screen terminal view (using `rich` or similar).
+2. **The Dashboard:** A split-screen terminal view.
    - **Top/Left (Narrative):** A scrolling feed of "Whispers" (distilled reasoning).
    - **Bottom/Right (Raw):** A fast-scrolling feed of raw logs.
-3. **Interruption:** User hits `Space` to pause the stream. This freezes both feeds for inspection.
+3. **Interruption:** User hits `Space` to pause the stream.
 4. **Focus:** User can highlight a Whisper segment to see exactly which raw logs generated it.
 
 ### 2.3 Forensic Analysis & "The Fixer"
@@ -36,29 +37,36 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 3. **Failure Identification:** The UI highlights "Reasoning Loops" or "Strategic Pivots" in **Alert Amber**.
 4. **Fix Trigger:** User selects a failure point and triggers "The Fixer."
 5. **The Proposal:** The UI presents a "Before vs. After" prompt comparison.
-   - **Before:** Current system prompt.
-   - **After:** Suggested improvement (highlighting the new instruction in **Insight Green**).
+
+### 2.4 Enterprise Governance (v2.4)
+**Goal:** Scale reasoning optimization from the individual to the organization.
+1. **Governance Oversight:** Org Admins use the Web Portal to monitor "Compliance Rates" (how many agents follow the "Golden Path").
+2. **Reasoning Peer Review:** 
+   - An engineer proposes a prompt change.
+   - The system automatically attaches a **Reasoning Diff** (Before vs. After traces).
+   - A Team Lead reviews the "cognitive impact" of the change and approves it.
+3. **Audit Trail:** Auditors can trace any prompt change back to the specific reasoning failure (trace ID) that justified the modification.
+4. **RBAC Management:** Admins manage access to the `Global -> Dept -> Team -> Private` vault hierarchy.
 
 ---
 
-## 3. Interface Layouts (Conceptual)
+## 3. Interface Layouts
 
 ### 3.1 CLI Live Dashboard
 ```text
 +-----------------------------------------------------------------------+
 | TRACEWHISPER LIVE | Agent: Research-Bot-01 | Status: RUNNING          |
-+-----------------------------------------------------------------------+
-| [NARRATIVE]                                    | [RAW LOGS]            |
++---------------------------------------------------------------------+\n| [NARRATIVE]                                    | [RAW LOGS]            |
 |                                               |                       |
 | 10:02:01 - Agent decided to search for        | 10:02:01 [INFO] Call:  |
-| "quantum computing" but found too many        | search_api(q="quant...")|
+| \"quantum computing\" but found too many        | search_api(q=\"quant...\")|
 | results. Pivot: narrowing search to           | 10:02:02 [DEBUG] Resp: |
-| "topological qubits".                         | { "results": [...], }  |
+| \"topological qubits\".                         | { \"results\": [...], }  |
 |                                               |                       |
 | 10:02:15 - Agent encountered a loop:          | 10:02:15 [WARN] Loop   |
 | repeating the same query 3 times.             | detected: query_id_42  |
 | Suggestion: Change search parameters.         | 10:02:16 [INFO] Call:  |
-|                                               | search_api(q="topol...")|
+|                                               | search_api(q=\"topol...\")|
 |                                               |                       |
 +-----------------------------------------------------------------------+
 | [P]ause | [S]top | [C]hat | [F]ix | [H]elp                           |
@@ -70,6 +78,12 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 - **Sync-Scroll:** Scrolling one trace scrolls the other to the corresponding timestamp.
 - **Divergence Marker:** A bold horizontal line across both columns where the agents' paths diverged.
 - **Metric Header:** A summary bar at the top comparing: `Steps (A vs B)`, `Tokens (A vs B)`, `Time (A vs B)`.
+
+### 3.3 Enterprise Governance Portal (v2.4 - Web)
+- **Dashboard:** High-level KPI cards (Token Cost, Compliance Rate, Avg. Cost Reduction).
+- **User/Role Matrix:** A grid for managing RBAC across the organization.
+- **Audit Log:** A searchable table of every change to the reasoning vaults, linked to trace IDs.
+- **Reasoning Diff View:** A visual representation of cognitive path pruning (Before vs. After).
 
 ---
 
@@ -83,6 +97,7 @@ TraceWhisper is a "Developer-First" tool. The interface prioritizes efficiency, 
 | **Reasoning Loop** | Alert Amber | Background highlight | Agent is stuck; needs intervention |
 | **Success/Goal** | Insight Green | Checkmark icon | Goal reached successfully |
 | **Critical Failure** | Obsidian/Red | Bold Red text | Hard stop/exception |
+| **Compliance Gap** | Warning Orange | Dashed border | Agent deviated from Golden Path (v2.4) |
 
 ### 4.2 Interaction Shortcuts (CLI)
 - `Space`: Pause/Resume stream.
