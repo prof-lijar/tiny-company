@@ -30,8 +30,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: checkoutSession.url });
-  } catch (error: any) {
-    console.error('Stripe Checkout Error:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    console.error('Stripe Checkout Error:', errorMessage);
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
