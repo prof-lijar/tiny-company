@@ -31,7 +31,7 @@ We will evolve the v2.4 tiered model into an **Autonomy-Based Model**.
 1. **Healing Credits (Usage-Based):**
    - Instead of just "APO runs," we introduce **"Healing Cycles."**
    - A Healing Cycle = $\text{Detection} \rightarrow \text{Diagnosis} \rightarrow \text{Synthesis} \rightarrow \text{Verification}$.
-   - These are high-value events and will be priced as premium credits.
+   - **Target Price:** $25 - $75 per successful Healing Cycle (depending on complexity).
 2. **Stability SLA (Premium Subscription):**
    - A high-tier subscription where TraceWhisper guarantees a specific "Reasoning Stability" metric (PAR variance), backed by the self-healing loop.
 
@@ -41,26 +41,38 @@ We will evolve the v2.4 tiered model into an **Autonomy-Based Model**.
 
 The "Self-Healing Loop" is significantly more compute-intensive than passive governance.
 
-### 3.1 Cost per Healing Cycle
-We estimate the cost of a single autonomous repair loop:
-- **Detection:** (Low) Sampled telemetry analysis $\rightarrow$ ~$0.05 - $0.20.
-- **Diagnosis:** (Medium) Drift trace vs. Golden Path analysis $\rightarrow$ ~$0.50 - $2.00.
-- **Synthesis:** (High) APO engine + Frontier Model (GPT-4o/Claude 3.5) $\rightarrow$ ~$2.00 - $10.00.
-- **Verification:** (Medium) Running regression sets through CRI $\rightarrow$ ~$1.00 - $5.00.
-- **Total Estimated Cost per Fix:** **$3.55 - $17.20**
+### 3.1 Detailed Cost per Healing Cycle (2026 Projections)
+We estimate the cost of a single autonomous repair loop based on 2026 API pricing (e.g., Claude 3.5/4.6, GPT-4o).
 
-### 3.2 Margin Protection Strategy
-To prevent "Compute Runaway" (where the system spends more on fixing a prompt than the prompt is worth), we will implement:
+| Phase | Model Tier | Tokens/Activity | Est. Cost (Low) | Est. Cost (High) | Justification |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Detection** | Mid-Tier | Sampled telemetry analysis | $0.05 | $0.20 | Low-overhead monitoring. |
+| **Diagnosis** | Mid-Tier | Trace vs. Golden Path analysis | $0.20 | $1.00 | Root cause identification. |
+| **Synthesis** | Frontier | APO engine + $\sim 20$ iterations | $1.50 | $12.00 | High token usage for synthesis. |
+| **Verification** | Mid-Tier | Regression set execution | $0.50 | $5.00 | Testing across critical paths. |
+| **Total** | | | **$2.25** | **$18.20** | **Avg: ~$10.20 per fix** |
+
+### 3.2 Unit Economics: Cost vs. Revenue
+The "Healing Credit" model ensures that we maintain high margins even with the increased compute cost.
+
+- **Avg. Cost per Cycle:** ~$10.20
+- **Avg. Revenue per Cycle:** ~$50.00
+- **Gross Margin per Cycle:** $\approx 80\%$
+
+This allows us to absorb the "compute spike" of the autonomous loop while providing the customer with a massive saving compared to the hourly rate of an AI Engineer (~$90/hr).
+
+### 3.3 Margin Protection Strategy
+To prevent "Compute Runaway," we will implement:
 - **Healing Quotas:** Maximum number of autonomous cycles per path per day.
-- **Complexity Caps:** If a fix requires $> X$ cycles without convergence, the system halts and escalates to a human (preventing infinite loops).
-- **Tiered Routing:** Diagnosis and Verification will be routed to mid-tier models; only Synthesis will use Frontier models.
+- **Complexity Caps:** If a fix requires $> X$ cycles without convergence, the system halts and escalates to a human.
+- **Intelligent Model Routing (IR-1, IR-2):** Routing Diagnosis and Verification to mid-tier models (e.g., Llama 3.1/3.2) to keep costs at the "Low" end of the spectrum.
 
 ---
 
 ## 4. Financial Projections & Impact
 
 ### 4.1 Impact on Gross Margin
-While COGS per user will increase due to the autonomous loops, the **Weighted ARPU** should increase proportionally.
+While COGS per user will increase due to the autonomous loops, the **Weighted ARPU** should increase proportionally due to the shift to credit-based pricing.
 - **v2.4 Gross Margin:** $\approx 90\%$.
 - **v3.0 Target Gross Margin:** $\approx 75-85\%$.
 - *Note:* We accept a slight margin compression in exchange for significantly higher LTV and deeper institutional lock-in.
