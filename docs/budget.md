@@ -37,21 +37,27 @@ This remains our primary variable cost.
 - **Core Logs:** $0 (Local SQLite).
 - **v2.3 Pattern Vault:** ~$25 - $100/month (Managed Vector DB).
 - **v2.4 Enterprise Infrastructure:**
-    - **Multi-tenancy:** Shift to schema-per-tenant or DB-per-tenant for isolation. Estimated +$200 - $800/month.
-    - **Audit Logging:** Immutable storage for compliance. Estimated +$50 - $200/month.
-    - **IdP Integration:** SAML/OIDC managed services. Estimated $0 - $150/month.
+    - **Multi-tenancy:** Shift to schema-per-tenant or DB-per-tenant for isolation. 
+        - *Implementation:* ~$100 - $300/month.
+        - *Scale-Up:* ~$500 - $1,500/month.
+    - **Audit Logging:** Immutable storage for compliance.
+        - *Implementation:* ~$50 - $100/month.
+        - *Scale-Up:* ~$200 - $500/month.
+    - **IdP Integration:** SAML/OIDC managed services.
+        - *Implementation:* ~$0 - $50/month.
+        - *Scale-Up:* ~$100 - $300/month.
 
 ## Estimated Monthly Costs (Lifecycle)
 
-| Item | Dev/R&D (Est.) | v2.3 Scaling (Est.) | v2.4 Enterprise (Est.) | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| **Domain Name** | $1.00 | $1.00 | $1.00 | Annual registration (~$12/year) |
-| **Hosting/Compute** | $0.00 | $200 - $400 | $400 - $1,000 | Multi-tenant orchestrators |
-| **LLM APIs** | $100 - $300 | $2,000 - $7,000 | Variable (Usage-based) | Includes APO & CRI |
-| **Database (Vault/Iso)** | $0.00 | $50 - $200 | $250 - $1,000 | Shift to isolated DBs |
-| **Compliance/Audit** | $0.00 | $0.00 | $50 - $200 | Immutable audit logs |
-| **Other Tools** | $0.00 | $300 | $500 | Marketing/SOC2 tools |
-| **Total (Fixed/Base)** | **$101 - $301** | **$2,551 - $7,901** | **$1,251 - $2,651 + APIs** | |
+| Item | Dev/R&D (Est.) | v2.3 Scaling (Est.) | v2.4 Implementation (Est.) | v2.4 Scale-Up (Est.) | Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Domain Name** | $1.00 | $1.00 | $1.00 | $1.00 | Annual registration (~$12/year) |
+| **Hosting/Compute** | $0.00 | $200 - $400 | $200 - $500 | $400 - $1,000 | Multi-tenant orchestrators |
+| **LLM APIs** | $100 - $300 | $2,000 - $7,000 | Variable | Variable | Includes APO & CRI |
+| **Database (Vault/Iso)** | $0.00 | $50 - $200 | $100 - $300 | $500 - $1,500 | Shift to isolated DBs |
+| **Compliance/Audit** | $0.00 | $0.00 | $50 - $100 | $200 - $500 | Immutable audit logs |
+| **Other Tools** | $0.00 | $300 | $300 | $500 | Marketing/SOC2 tools |
+| **Total (Fixed/Base)** | **$101 - $301** | **$2,551 - $7,901** | **$651 - $1,201 + APIs** | **$1,601 - $3,501 + APIs** | |
 
 ## Cost Management Strategy
 
