@@ -104,3 +104,31 @@ The AI feedback engine should evaluate based on:
 3. **Vocabulary Sophistication**: Use of Level 5-6 words instead of basic Level 3 words.
 4. **Grammatical Accuracy**: Correct use of formal written style (plain form) and complex connectors.
 5. **Coherence**: Effective use of transition words (e.g., 따라서, 반면에, 더욱이).
+
+## 2026 Exam Format Updates (CRITICAL)
+The 2026 reform has fundamentally changed the exam structure. All content and simulators must align with these specs:
+
+### 1. Section Changes
+- **Listening**: 
+    - Questions: Increased from 50 $\rightarrow$ 60.
+    - Speed: Audio plays approximately 8% faster (approx 1.1x speed).
+    - Pacing: Less time between questions.
+- **Reading**: 
+    - Questions: Decreased from 50 $\rightarrow$ 40.
+    - Time Pressure: Less time per question; higher speed required.
+- **Writing**: 
+    - Questions: Still 4 tasks.
+    - Grading: New rubric heavily penalizes "formulaic" or "memorized" templates.
+
+### 2. Scoring Thresholds (TOPIK II)
+| Level | 2025 Requirement | 2026 Requirement | Change |
+|---|---|---|---|
+| Level 3 | 120 points | 120 points | No change |
+| Level 4 | 150 points | 140 points | -10 (Easier threshold) |
+| Level 5 | 150 points | 170 points | +20 (Harder) |
+| Level 6 | 190 points | 190 points | Same (but harder to reach) |
+
+### 3. IBT Environment
+- Full transition to computer-based interface.
+- No annotations allowed on digital text.
+- Typing speed in Korean is now a critical factor for the Writing section.
