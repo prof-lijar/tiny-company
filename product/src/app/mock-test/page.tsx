@@ -6,7 +6,7 @@ import { MockTestResult, MockTestQuestion } from '@/lib/types';
 
 export default function MockTestSimulator() {
   const [currentTest, setCurrentTest] = useState(0);
-  const [currentSectionIndex] = useState(0);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | number>>({});
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTestActive, setIsTestActive] = useState(false);
@@ -50,7 +50,6 @@ export default function MockTestSimulator() {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          // Use setTimeout to avoid synchronous state updates within the effect/interval
           setTimeout(() => {
             finishTest();
           }, 0);
@@ -73,6 +72,14 @@ export default function MockTestSimulator() {
   };
 
   const totalQuestions = test.sections.reduce((acc, s) => acc + s.questions.length, 0);
+
+  // 2026 Reform Scoring Logic
+  const getLevel = (score: number) => {
+    if (score >= 170) return 'Level 5';
+    if (score >= 140) return 'Level 4';
+    if (score >= 100) return 'Level 3';
+    return 'Level 2 or below';
+  };
 
   return (
     <div className="max-w-5xl mx-auto py-12 px-4">
@@ -175,6 +182,9 @@ export default function MockTestSimulator() {
             <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
               <div className="text-sm text-slate-500 uppercase font-bold mb-2">Overall Score</div>
               <div className="text-5xl font-bold text-indigo-600">{results?.totalScore} / {totalQuestions}</div>
+              <div className="text-lg font-semibold text-slate-700 mt-2">
+                {results ? getLevel(results.totalScore) : 'Calculating...'}
+              </div>
             </div>
             <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
               <div className="text-sm text-slate-500 uppercase font-bold mb-2">Time Taken</div>
