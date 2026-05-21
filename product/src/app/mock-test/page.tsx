@@ -31,9 +31,19 @@ export default function MockTestSimulator() {
       totalScore += secScore;
     });
     
+    // 2026 Reform: We assume each correct answer is worth a certain weight.
+    // For a real app, we'd have weights per question.
+    // Total score is normalized to 300 (Listening 100, Reading 100, Writing 100).
+    // Mock tests currently use simplified 1:1 scoring for correct answers.
+    // We will map the raw count to a 300-point scale for the 2026 Reform levels.
+    
+    const totalQuestions = test.sections.reduce((acc, s) => acc + s.questions.length, 0);
+    const rawPercentage = (totalScore / totalQuestions) * 100;
+    const normalizedScore = Math.round(rawPercentage * 3); // Map 0-100% to 0-300
+    
     setResults({
       sectionScores,
-      totalScore,
+      totalScore: normalizedScore,
       timeTakenSeconds: (section.durationMinutes * 60) - timeLeft,
     });
   }, [test, answers, section, timeLeft]);
@@ -137,8 +147,13 @@ export default function MockTestSimulator() {
                 )}
                 {q.audioUrl && (
                   <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-100 flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white">▶</div>
-                    <div className="text-sm text-indigo-600 font-medium">Audio Clip: {q.audioUrl}</div>
+                    <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white">
+                      <span className="sr-only">Play Audio</span>
+                      ▶️
+                    </div>
+                    <div className="text-sm text-indigo-600 font-medium">
+                      Audio Clip: {q.audioUrl} (Simulated 1.1x speed for 2026 Reform)
+                    </div>
                   </div>
                 )}
 
@@ -181,7 +196,7 @@ export default function MockTestSimulator() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
               <div className="text-sm text-slate-500 uppercase font-bold mb-2">Overall Score</div>
-              <div className="text-5xl font-bold text-indigo-600">{results?.totalScore} / {totalQuestions}</div>
+              <div className="text-5xl font-bold text-indigo-600">{results?.totalScore} / 300</div>
               <div className="text-lg font-semibold text-slate-700 mt-2">
                 {results ? getLevel(results.totalScore) : 'Calculating...'}
               </div>
@@ -193,7 +208,7 @@ export default function MockTestSimulator() {
             <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
               <div className="text-sm text-slate-500 uppercase font-bold mb-2">Accuracy</div>
               <div className="text-2xl font-bold text-slate-800">
-                {results ? ((results.totalScore / totalQuestions) * 100).toFixed(1) : '0'}%
+                {results ? ((results.totalScore / 300) * 100).toFixed(1) : '0'}%
               </div>
             </div>
           </div>
