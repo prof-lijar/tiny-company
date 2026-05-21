@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { authDb } from '@/lib/auth-db';
+import { Stripe } from 'stripe';
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -14,8 +15,8 @@ export async function POST(req: NextRequest) {
     );
 
     switch (event.type) {
-      case 'checkout.session.completed':
-        const session = event.data.object as any;
+      case 'checkout.session.completed': {
+        const session = event.data.object as Stripe.Checkout.Session;
         const userId = session.metadata?.userId || session.client_reference_id;
         
         if (userId) {
@@ -27,10 +28,12 @@ export async function POST(req: NextRequest) {
           }
         }
         break;
+      }
 
-      case 'customer.subscription.deleted':
-        const subSession = event.data.object as any;
-        const subUserId = subSession.metadata?.userId || subSession.client_reference_id;
+      case 'customer.subscription.deleted': {
+        const subscription = event.data.object as Stripe.Subscription;
+        const subUserId = subscription.metadata?.userId || 
+          (typeof subscription.customer === 'string' ? subscription.customer : undefined);
         
         if (subUserId) {
           const user = await authDb.getUserById(subUserId);
@@ -40,11 +43,13 @@ export async function POST(req: NextRequest) {
           }
         }
         break;
+      }
     }
 
     return NextResponse.json({ received: true });
-  } catch (err: any) {
-    console.error('Webhook Error:', err.message);
-    return NextResponse.json({ error: 'Webhook Error', message: err.message }, { status: 400 });
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : 'Webhook Error';
+    console.error('Webhook Error:', errorMessage);
+    return NextResponse.json({ error: 'Webhook Error', message: errorMessage }, { status: 400 });
   }
 }
