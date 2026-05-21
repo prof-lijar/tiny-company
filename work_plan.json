@@ -1,8 +1,8 @@
 {
-  "cycle_reasoning": "Prioritize fixing the P0 build failure (#380) and P1 type issues (#381) reported by QA to stabilize the MVP before proceeding to P3 features.",
+  "cycle_reasoning": "Prioritizing the implementation of the Dynamic Study Plan (P3) and fixing a UI bug in the Vocabulary section, while maintaining QA and Product oversight.",
   "assignments": [
     {"role": "cto", "turns": 5, "priority": "P0"},
     {"role": "qa", "turns": 1, "priority": "P1"},
-    {"role": "product", "turns": 1, "priority": "P2"}
+    {"role": "product", "turns": 1, "priority": "P1"}
   ]
 }
