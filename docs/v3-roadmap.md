@@ -1,7 +1,7 @@
-# Execution Roadmap: TraceWhisper v3.0 \\u2014 The Self-Healing Orchestrator
+# Execution Roadmap: TraceWhisper v3.0 — The Self-Healing Orchestrator
 
 ## 1. Executive Summary
-TraceWhisper v3.0 marks the transition from **Governance** to **Autonomy**. The goal is to build a system that detects reasoning drift in production and autonomously proposes verified fixes. This roadmap outlines the path from the current state to General Availability (GA), divided into six strategic milestones.
+TraceWhisper v3.0 marks the transition from **Governance** to **Autonomy**. The goal is to build a system that predicts and detects reasoning drift in production and autonomously proposes verified fixes with built-in safety guards. This roadmap outlines the path from the current state to General Availability (GA), divided into six strategic milestones.
 
 ## 2. High-Level Timeline
 - **Current Date:** May 21, 2026
@@ -13,40 +13,46 @@ TraceWhisper v3.0 marks the transition from **Governance** to **Autonomy**. The 
 
 ## 3. Detailed Milestones
 
-### Milestone 1: The Sentinel (Real-time Detection & Diagnosis)
-**Focus:** Establishing the "Detection" half of the self-healing loop.
+### Milestone 1: The Sentinel (Predictive & Reactive Detection)
+**Focus:** Establishing the "Detection" half of the self-healing loop with a focus on early warning.
 - **Key Features:**
     - Integration of v2.5 Golden Paths as the baseline.
     - Implementation of Real-time Drift Detection (SH-1).
+    - **Predictive Drift Analysis**: Monitor provider telemetry to predict drift (SH-1b).
     - Automated Root Cause Analysis (SH-2) to identify failing cognitive milestones.
+    - **Adaptive Healing Sensitivity**: Criticality-based thresholds for alerts (SH-7).
 - **Acceptance Criteria:**
-    - System can detect a drop in PAR (Path Adherence Rate) in a live stream of traces within < 5 minutes.
+    - System can detect a drop in PAR in a live stream of traces within < 5 minutes.
+    - Predictive warnings correctly identify "At Risk" agents 80% of the time before PAR drops.
     - Diagnosis accurately identifies the failing milestone in 90% of test cases.
 - **Dependencies:** 
-    - Technical Architecture for real-time trace monitoring.
+    - Technical Architecture for real-time trace monitoring and telemetry integration.
 - **Target Date:** June 2026
 
-### Milestone 2: The Apothecary (Automated Synthesis & Verification)
-**Focus:** Building the "Synthesis" and "Verification" engine.
+### Milestone 2: The Apothecary (Collaborative Synthesis & Verification)
+**Focus:** Building the "Synthesis" and "Verification" engine using a multi-agent approach.
 - **Key Features:**
     - Integration of Pattern Vault for historical failure analysis (SH-3).
-    - APO (Autonomous Prompt Optimization) engine for fix synthesis (SH-3).
+    - **Collaborative Fix Synthesis**: Implementation of the "Council of Agents" (Diagnoser $\rightarrow$ Fixer $\rightarrow$ Verifier) (SH-3).
     - Shadow Verification environment for regression testing (SH-4).
 - **Acceptance Criteria:**
     - System can synthesize a corrective prompt that increases PAR for the failing milestone.
     - Shadow verification confirms zero regressions in other milestones for 95% of proposed fixes.
+    - Council of Agents approach shows >15% improvement in fix quality over linear synthesis.
 - **Dependencies:** 
     - M1 (Detection must be functional to trigger synthesis).
 - **Target Date:** July 2026 (Alpha)
 
-### Milestone 3: The Command Center (The Healing Proposal) — [ALPHA]
-**Focus:** Closing the loop with a human-in-the-loop approval mechanism.
+### Milestone 3: The Command Center (The Healing Proposal & Safety) — [ALPHA]
+**Focus:** Closing the loop with human approval and autonomous safety guards.
 - **Key Features:**
     - Healing Proposal UI: Visual comparison of "Before" vs "After" reasoning paths (SH-5).
     - One-Click Deployment workflow to push verified fixes to production (SH-5).
+    - **Autonomous Circuit Breaking**: Automatic rollback of fixes that degrade production (SH-6).
     - Notification system for Strategic Overseers.
 - **Acceptance Criteria:**
     - Overseer can review a proposal and deploy a fix in < 30 seconds.
+    - System successfully rolls back a simulated "bad fix" in production within 60 seconds of deployment.
     - UI clearly highlights the delta in reasoning paths.
 - **Dependencies:** 
     - M2 (Synthesis/Verification), UI/UX Mockups for Proposal Workflow.
@@ -85,7 +91,7 @@ TraceWhisper v3.0 marks the transition from **Governance** to **Autonomy**. The 
     - Ecosystem maturity: Documentation and GTM launch.
 - **Acceptance Criteria:**
     - An AI Architect can design a complete reasoning flow visually and deploy it.
-    - All v3.0 KPIs (MTTR, Human Intervention Rate) are tracked and meeting targets.
+    - All v3.0 KPIs (MTTR, Human Intervention Rate, Autonomous Recovery Rate) are tracked and meeting targets.
 - **Dependencies:** 
     - M5, UI/UX High-Fidelity Mockups for Visual Designer, Marketing Launch Plan.
 - **Target Date:** November 2026
@@ -102,6 +108,6 @@ TraceWhisper v3.0 marks the transition from **Governance** to **Autonomy**. The 
 | **v2.5 Bridge** | Baseline | - | - | - | - | - |
 
 ## 5. Success Metrics for Roadmap
-- **Alpha Success:** Successful "One-Click" repair of a known reasoning drift in a controlled environment.
+- **Alpha Success:** Successful "One-Click" repair of a known reasoning drift in a controlled environment with autonomous rollback verification.
 - **Beta Success:** Deployment of an agent composed of 3+ modular blocks with intelligent routing active.
 - **GA Success:** Reduction of MTTR for reasoning regressions from days to minutes across the fleet.

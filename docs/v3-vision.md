@@ -7,7 +7,7 @@ In v1.0 through v2.4, we focused on *Observability* (seeing the path) and *Gover
 
 **v3.0 is the transition to Autonomy.**
 
-The North Star for v3.0 is **Self-Healing Reasoning**: a system that not only detects when an agent's reasoning has drifted in production but can autonomously diagnose the cause, synthesize a fix, verify it in a shadow environment, and propose a deployment—all without human intervention in the inner loop.
+The North Star for v3.0 is **Resilient Self-Healing Reasoning**: a system that not only detects when an agent's reasoning has drifted in production but can predict potential failures, autonomously diagnose the cause via collaborative agentic analysis, synthesize a fix, verify it in a shadow environment, and autonomously rollback if stability is threatened—all while keeping the human as a Strategic Overseer.
 
 ---
 
@@ -24,12 +24,12 @@ The North Star for v3.0 is **Self-Healing Reasoning**: a system that not only de
 
 ## 3. Key Strategic Pillars
 
-### 3.1 Autonomous Remediation (The Self-Healing Loop)
-The system should close the loop between *Detection* and *Deployment*.
-- **Drift $\rightarrow$ Diagnosis:** When production drift is detected, the system automatically analyzes the "Drift Traces" against the "Golden Path" to identify exactly which cognitive milestone is failing.
-- **Diagnosis $\rightarrow$ Synthesis:** The system queries the Pattern Vault for similar failure patterns and uses the APO (Autonomous Prompt Optimization) engine to synthesize a corrective prompt.
-- **Synthesis $\rightarrow$ Verification:** The new prompt is automatically run through the CRI (Continuous Reasoning Integration) suite against a regression set.
-- **Verification $\rightarrow$ Proposal:** The system presents the human operator with a "Healing Proposal": *"I detected drift in the 'Safety Check' milestone. I've synthesized a fix that restores 98% adherence. Click here to deploy."*
+### 3.1 Autonomous Remediation (The Resilient Loop)
+The system closes the loop between *Prediction*, *Detection*, and *Deployment*.
+- **Predictive & Reactive Detection:** Using both model telemetry (predictive) and live trace monitoring (reactive) to identify drift before it becomes a failure.
+- **Collaborative Diagnosis:** Moving from linear analysis to a "Council of Agents" approach to ensure the root cause is accurately identified.
+- **Synthesis & Verification:** Querying the Pattern Vault and using the APO engine to create a fix, followed by rigorous shadow verification.
+- **Safe Deployment & Circuit Breaking:** Presenting a "Healing Proposal" for approval, while maintaining an autonomous circuit breaker to rollback any fix that degrades production stability.
 
 ### 3.2 Cognitive Modularity (The Reasoning Lego Set)
 Moving away from monolithic system prompts toward composable reasoning modules.
@@ -59,3 +59,4 @@ v3.0 is successful when:
 1. **MTTR (Mean Time To Repair)** for reasoning regressions drops from days to minutes.
 2. **Human Intervention Rate** in the prompt-tuning cycle decreases by $\ge 70\%$.
 3. **Reasoning Stability** (measured by PAR variance) remains flat even as the underlying LLM providers update their models.
+4. **Autonomous Recovery Rate:** Percentage of drifts corrected by the system without causing a secondary regression.
