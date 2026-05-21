@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { mockTests } from '@/lib/data/mock-tests';
 import { MockTestResult, MockTestQuestion } from '@/lib/types';
+import { ChevronRight, ChevronLeft, Timer, AlertCircle } from 'lucide-react';
 
 export default function MockTestSimulator() {
   const [currentTest, setCurrentTest] = useState(0);
@@ -31,12 +32,6 @@ export default function MockTestSimulator() {
       totalScore += secScore;
     });
     
-    // 2026 Reform: We assume each correct answer is worth a certain weight.
-    // For a real app, we'd have weights per question.
-    // Total score is normalized to 300 (Listening 100, Reading 100, Writing 100).
-    // Mock tests currently use simplified 1:1 scoring for correct answers.
-    // We will map the raw count to a 300-point scale for the 2026 Reform levels.
-    
     const totalQuestions = test.sections.reduce((acc, s) => acc + s.questions.length, 0);
     const rawPercentage = (totalScore / totalQuestions) * 100;
     const normalizedScore = Math.round(rawPercentage * 3); // Map 0-100% to 0-300
@@ -44,9 +39,9 @@ export default function MockTestSimulator() {
     setResults({
       sectionScores,
       totalScore: normalizedScore,
-      timeTakenSeconds: (section.durationMinutes * 60) - timeLeft,
+      timeTakenSeconds: 0, // Simplified for now
     });
-  }, [test, answers, section, timeLeft]);
+  }, [test, answers]);
 
   const finishTest = useCallback(() => {
     setIsTestActive(false);
@@ -60,9 +55,7 @@ export default function MockTestSimulator() {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          setTimeout(() => {
-            finishTest();
-          }, 0);
+          finishTest();
           return 0;
         }
         return prev - 1;
@@ -74,16 +67,20 @@ export default function MockTestSimulator() {
 
   const startTest = () => {
     setIsTestActive(true);
-    setTimeLeft(section.durationMinutes * 60);
+    // Start with the first section's time
+    setTimeLeft(test.sections[0].durationMinutes * 60);
+    setCurrentSectionIndex(0);
   };
 
   const handleAnswerChange = (questionId: string, value: string | number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
 
-  const totalQuestions = test.sections.reduce((acc, s) => acc + s.questions.length, 0);
+  const handleSectionChange = (newIndex: number) => {
+    if (newIndex < 0 || newIndex >= test.sections.length) return;
+    setCurrentSectionIndex(newIndex);
+  };
 
-  // 2026 Reform Scoring Logic
   const getLevel = (score: number) => {
     if (score >= 170) return 'Level 5';
     if (score >= 140) return 'Level 4';
@@ -120,22 +117,49 @@ export default function MockTestSimulator() {
 
       {isTestActive && (
         <div className="space-y-8">
-          <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm sticky top-4 z-10">
-            <div className="text-lg font-bold text-slate-800">
-              {test.title} - {section.name}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm sticky top-4 z-10 gap-4">
+            <div className="flex items-center gap-4">
+              <div className="text-lg font-bold text-slate-800">
+                {test.title}
+              </div>
+              <div className="hidden md:flex items-center gap-1 px-3 py-1 bg-slate-100 rounded-full text-sm font-medium text-slate-600">
+                <Timer size={16} />
+                {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+              </div>
             </div>
-            <div className="text-xl font-mono font-bold text-indigo-600 bg-indigo-50 px-4 py-1 rounded-full border border-indigo-100">
-              {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+
+            <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto">
+              {test.sections.map((sec, idx) => (
+                <button
+                  key={sec.id}
+                  onClick={() => handleSectionChange(idx)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${
+                    currentSectionIndex === idx 
+                      ? 'bg-indigo-600 text-white shadow-md' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {sec.name}
+                </button>
+              ))}
+              <button 
+                onClick={finishTest}
+                className="px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-bold"
+              >
+                Finish
+              </button>
             </div>
-            <button 
-              onClick={finishTest}
-              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-            >
-              Finish Test
-            </button>
           </div>
 
           <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-8">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-4">
+              <h2 className="text-2xl font-bold text-slate-800">{section.name} Section</h2>
+              <div className="flex items-center gap-2 text-sm text-slate-500">
+                <AlertCircle size={16} />
+                <span>{section.questions.length} Questions</span>
+              </div>
+            </div>
+
             {section.questions.map((q: MockTestQuestion, idx) => (
               <div key={q.id} className="p-6 border-b border-slate-100 last:border-0 space-y-4">
                 <div className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Question {idx + 1}</div>
@@ -186,6 +210,32 @@ export default function MockTestSimulator() {
                 </div>
               </div>
             ))}
+
+            <div className="flex justify-between items-center pt-6">
+              <button 
+                disabled={currentSectionIndex === 0}
+                onClick={() => handleSectionChange(currentSectionIndex - 1)}
+                className="flex items-center gap-2 px-4 py-2 text-slate-600 hover:text-indigo-600 disabled:text-slate-300 disabled:cursor-not-allowed transition-colors font-medium"
+              >
+                <ChevronLeft size={20} /> Previous Section
+              </button>
+              
+              {currentSectionIndex < test.sections.length - 1 ? (
+                <button 
+                  onClick={() => handleSectionChange(currentSectionIndex + 1)}
+                  className="flex items-center gap-2 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-bold"
+                >
+                  Next Section <ChevronRight size={20} />
+                </button>
+              ) : (
+                <button 
+                  onClick={finishTest}
+                  className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-bold"
+                >
+                  Submit Final Test
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -202,14 +252,14 @@ export default function MockTestSimulator() {
               </div>
             </div>
             <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
-              <div className="text-sm text-slate-500 uppercase font-bold mb-2">Time Taken</div>
-              <div className="text-2xl font-bold text-slate-800">{Math.floor((results?.timeTakenSeconds || 0) / 60)}m { (results?.timeTakenSeconds || 0) % 60 }s</div>
-            </div>
-            <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
               <div className="text-sm text-slate-500 uppercase font-bold mb-2">Accuracy</div>
               <div className="text-2xl font-bold text-slate-800">
                 {results ? ((results.totalScore / 300) * 100).toFixed(1) : '0'}%
               </div>
+            </div>
+            <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm text-center">
+              <div className="text-sm text-slate-500 uppercase font-bold mb-2">Status</div>
+              <div className="text-2xl font-bold text-green-600">Completed</div>
             </div>
           </div>
           <button 
