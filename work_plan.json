@@ -1,6 +1,8 @@
 {
-  "cycle_reasoning": "Focusing on the core execution engine of v3.0. The Dynamic Orchestrator (CM-2) is required to make the Reasoning Block Registry functional and enable the 'Cognitive OS' vision.",
+  "cycle_reasoning": "Starting TOPIK Learning Assistant build. Product refines spec, CTO builds landing page and vocabulary builder, Designer creates design system.",
   "assignments": [
-    {"role": "cto", "turns": 3, "priority": "P0"}
+    {"role": "product", "turns": 1, "priority": "P0"},
+    {"role": "cto", "turns": 3, "priority": "P0"},
+    {"role": "designer", "turns": 1, "priority": "P1"}
   ]
 }
