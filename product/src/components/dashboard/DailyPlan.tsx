@@ -12,6 +12,7 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
   const [plan, setPlan] = useState<StudyPlan | null>(initialPlan || null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [dateInput, setDateInput] = useState('');
 
   useEffect(() => {
     async function fetchPlan() {
@@ -55,6 +56,7 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
   };
 
   const setExamDate = async (date: string) => {
+    if (!date) return;
     try {
       await fetch('/api/study-plan', {
         method: 'POST',
@@ -82,11 +84,13 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
           <input 
             type="date" 
             className="px-4 py-2 rounded-lg border border-blue-300 focus:ring-2 focus:ring-blue-400 outline-none"
-            onChange={(e) => setExamDate(e.target.value)}
+            value={dateInput}
+            onChange={(e) => setDateInput(e.target.value)}
           />
           <button 
-            onClick={() => setExamDate(new Date().toISOString().split('T')[0])}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            onClick={() => setExamDate(dateInput)}
+            disabled={!dateInput}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
             Update Date
           </button>
@@ -169,7 +173,8 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
                 Start Now &rarr;
               </a>
             </div>
-          ))}\\n        </div>
+          ))}
+        </div>
       </div>
     </div>
   );
