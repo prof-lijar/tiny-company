@@ -126,7 +126,7 @@ class ReasoningTest(BaseModel):
     input_text: str
     expected_cognitive_path: List[str]  # Keywords or steps that MUST appear
     expected_output: str
-    priority: str = \"medium\"
+    priority: str = "medium"
 
 class PruningReport(BaseModel):
     trace_id: str
