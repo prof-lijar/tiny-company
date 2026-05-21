@@ -1,41 +1,67 @@
-# TOPIK Learning Assistant — MVP Product Specification
+# TOPIK Learning Assistant \u2014 MVP Product Specification
 
 ## Overview
 A web-based TOPIK (Test of Proficiency in Korean) preparation platform built with Next.js, TypeScript, and Tailwind CSS. All product code lives in the `product/` directory.
 
 ## Feature Priorities
 
-### P0 — CRITICAL: 2026 Format Alignment [IN PROGRESS]
+### P0 \u2014 CRITICAL: 2026 Format Alignment [IN PROGRESS]
 **Goal**: Update all simulators and content to match the 2026 TOPIK overhaul to prevent user failure.
 
-#### 1. 2026 Mock Test Engine Update
+#### 1. 2026 Mock Test Engine Update [NEEDS IMPROVEMENT]
 - **Requirements**:
     - Update Listening section: 60 questions.
     - Update Reading section: 40 questions.
     - Update Timer: Increase total test time by 10 minutes.
     - Update Scoring Logic: Implement new thresholds (Level 4: 140, Level 5: 170).
-- **Files affected**: `product/src/app/mock-test/page.tsx`, `product/src/lib/data/mock-tests.ts` (if exists).
+- **Files affected**: `product/src/app/mock-test/page.tsx`, `product/src/lib/data/mock-tests.ts`.
+- **Improvements needed** (from QA):
+    - [Issue #422] Timer only uses first section duration instead of total/section-specific time.
 
-#### 2. High-Speed Listening Module
-- **Requirements**:
-    - Implement audio playback at 1.1x speed for 2026-style practice.
-    - Update listening content to include 60-question sets.
+#### 2. High-Speed Listening Module [PENDING]
+- **Goal**: Implement actual 1.1x speed playback for 2026-style practice.
+- **Detailed Requirements**:
+    - **Technical Implementation**: Use the `playbackRate` property of the HTML5 Audio API.
+    - **Logic**: Set `audio.playbackRate = 1.1` upon loading the audio object.
+    - **User Interface**: 
+        - Add a "2026 Mode" toggle in the listening interface.
+        - When enabled, audio plays at 1.1x.
+        - Display a badge: "2026 Speed (1.1x)".
+    - **Content**: 
+        - Update `product/src/lib/data/listening.ts` to include 60-question sets instead of 50.
+        - Ensure audio files are mapped correctly to these new question sets.
+- **Acceptance Criteria**:
+    - Audio playback is measurably faster than 1.0x.
+    - Pitch remains natural (standard browser behavior).
+    - Toggle correctly switches between 1.0x and 1.1x.
 - **Files affected**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`.
 
-#### 3. Anti-Template Writing Feedback
-- **Requirements**:
-    - Update AI prompt to detect and penalize formulaic/memorized essay templates.
-    - Provide feedback on "natural flow" and "structural variety".
+#### 3. Anti-Template Writing Feedback [PENDING]
+- **Goal**: Update AI prompt to detect and penalize formulaic/memorized essay templates.
+- **Detailed Requirements**:
+    - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
+    - **Detection Logic**: 
+        - Instruct AI to look for "overused TOPIK templates" (e.g., overly rigid introductory phrases like "\uac1c\u5c18\uac1c\uac1c\u... \uc740 \ubc14\ub77c\uc5d0...").
+        - Penalize "memorized" structures that don't specifically address the prompt's nuances.
+    - **Feedback Output**:
+        - Explicitly label "Template Usage" in the feedback report.
+        - Suggest "Natural Alternatives" to replace formulaic phrases.
+        - Rate "Structural Variety" on a scale of 1-5.
+- **Acceptance Criteria**:
+    - AI identifies and flags common TOPIK templates.
+    - Feedback provides specific suggestions for more natural phrasing.
 - **Files affected**: `product/src/app/api/writing-feedback/route.ts`.
 
-#### 4. Reading Speed Training
+#### 4. Reading Speed Training [NEEDS IMPROVEMENT]
 - **Requirements**:
     - Adjust reading practice timers to reflect the tighter 2026 window.
 - **Files affected**: `product/src/app/reading/page.tsx`.
+- **Improvements needed** (from QA):
+    - [Issue #420] Fix lint errors and potential runtime issues in Reading page timers.
 
 ---
 
-### P0 — MVP (Build First)
+### P0 \u2014 MVP (Build First)
 
 #### 5. Landing Page [BUILT]
 - **File**: `product/src/app/page.tsx`
@@ -49,25 +75,30 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 7. Grammar Lessons [BUILT]
 - **Files**: `product/src/app/grammar/page.tsx`, `product/src/app/grammar/[level]/page.tsx`, `product/src/lib/data/grammar.ts`
 
-#### 8. Reading Comprehension Practice [BUILT]
+#### 8. Reading Comprehension Practice [NEEDS IMPROVEMENT]
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
+- **Improvements needed** (from QA):
+    - [Issue #420] Fix lint errors and potential runtime issues in Reading page timers.
 
-### P1 — Fast Follow
+### P1 \u2014 Fast Follow
 
 #### 9. Writing Practice with AI Feedback [NEEDS IMPROVEMENT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
 - **Improvements needed** (from QA):
     - [Issue #408] Backend API for AI feedback is missing/simulated.
+    - [Issue #421] Remove unused variables in Writing feedback and interface.
 
 #### 10. Mock Test Simulator [BUILT]
 - **Files**: `product/src/app/mock-test/page.tsx`, `product/src/app/mock-test/[section]/page.tsx`
-- **Note**: Now superseded by P0 "2026 Format Alignment".
+- **Note**: Now superseded by P0 \"2026 Format Alignment\".
+- **Improvements needed** (from QA):
+    - [Issue #422] Timer only uses first section duration.
 
 #### 11. Listening Practice [BUILT]
 - **Files**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`
-- **Note**: Now superseded by P0 "2026 Format Alignment".
+- **Note**: Now superseded by P0 \"2026 Format Alignment\".
 
-### P2 — Growth Features
+### P2 \u2014 Growth Features
 
 #### 12. User Authentication [BUILT]
 - **Files**: `product/src/app/api/auth/[...nextauth]/route.ts`, `product/src/app/login/page.tsx`, `product/src/app/signup/page.tsx`
@@ -78,15 +109,15 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 14. Subscription Billing [BUILT]
 - **Files**: `product/src/app/api/stripe/checkout/route.ts`, `product/src/app/api/stripe/webhook/route.ts`
 
-### P3 — AI Intelligence (Future)
+### P3 \u2014 AI Intelligence (Future)
 
 #### 15. AI-Powered Weakness Analysis [BUILT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
 
-#### 16. Dynamic Study Plan [BUILT]
+#### 16. Dynamic Study Plan [NEEDS IMPROVEMENT]
 - **Files**: `product/src/app/api/study-plan/route.ts`, `product/src/components/dashboard/DailyPlan.tsx`
 - **Improvements needed** (from QA):
-    - [Issue #407] "Update Date" button resets date to today.
+    - [Issue #407] \"Update Date\" button resets date to today.
 
 ## User Flows
 (Unchanged)
@@ -96,10 +127,10 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ## UI/UX Requirements
 - **Typography**: Noto Sans KR.
-- **Layout**: Clean, distraction-free "Study Mode".
+- **Layout**: Clean, distraction-free \"Study Mode\".
 - **Responsiveness**: Desktop-first (IBT focus).
 
 ## Content Guidelines
 - All TOPIK practice content must be ORIGINAL.
-- Label content as "TOPIK-style practice".
+- Label content as \"TOPIK-style practice\".
 - Align with 2026 Reform specs in `docs/topik-content-guide.md`.
