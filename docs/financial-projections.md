@@ -1,35 +1,36 @@
-# Financial Projections: TraceWhisper (v2.3 Intelligence Layer Aligned)
+# Financial Projections: TraceWhisper (v2.4 Enterprise Scale-Up Aligned)
 
 ## 1. Executive Summary
-TraceWhisper has evolved from a **Reasoning IDE (v2.2)** to an **Intelligence Layer (v2.3)**. This transition introduces a Hybrid Architecture (Local-First + Centralized Pattern Vault) and Continuous Reasoning Integration (CRI). 
+TraceWhisper has transitioned from an **Intelligence Layer (v2.3)** to an **Enterprise Reasoning Governance Platform (v2.4)**. This shift moves the company from a per-seat productivity tool to a value-based governance platform.
 
-The v2.3 transition is a strategic investment in product defensibility. By shifting the value proposition from "productivity" to "reasoning stability and institutional knowledge," we have increased the ARPU for both Pro and Enterprise tiers, significantly enhancing the long-term LTV of our customers.
+The v2.4 model introduces high-value Enterprise tiers (Team, Organization, and Custom) that capture the organizational utility of "Reasoning Governance" and "Institutional Knowledge." This transition significantly increases our Weighted ARPU and shifts our growth engine from purely Product-Led Growth (PLG) to a hybrid PLG/Sales-led model.
 
-This projection (May 21, 2026) incorporates the finalized **v2.3 Pricing Model**.
+This projection (May 21, 2026) incorporates the **v2.4 Enterprise Financial Model**.
 
 ---
 
 ## 2. Financial Assumptions
 
 ### 2.1 Revenue & Tier Distribution (Expected Scenario)
-We assume a weighted ARPU based on the updated v2.3 pricing strategy:
+We assume a weighted ARPU based on the v2.4 pricing strategy:
 - **Free (70%):** $0 / month (BYOK)
 - **Pro (20%):** $59 / month
-- **Enterprise (10%):** $199 / month
-- **Weighted ARPU:** $(0.20 \times 59) + (0.10 \times 199) = \mathbf{\$31.70}$
+- **Enterprise (10%):** Blended rate across Team ($249), Org (Base+Usage), and Custom tiers.
+    - *Estimated Enterprise Blended ARPU:* **$334.30**
+- **Weighted ARPU:** $(0.20 \times 59) + (0.10 \times 334.30) = \mathbf{\$45.23}$
 
 ### 2.2 Variable Costs (COGS)
-v2.3 introduces higher API consumption for CRI and Adversarial Synthesis, and managed storage for the Pattern Vault.
-- **Pro User API Cost:** ~$8.00 / month (Includes Fix-It + basic CRI)
-- **Enterprise User API Cost:** ~$20.00 / month (Includes full CRI integration + Vault access)
+v2.4 introduces significant compute costs for Autonomous Prompt Optimization (APO) and infrastructure for multi-tenancy.
+- **Pro User API Cost:** ~$8.00 / month
+- **Enterprise User API Cost:** ~$30.00 / month (Includes APO compute, multi-tenant DB overhead, and full CRI)
 - **Free User API Cost:** $0.00 (BYOK)
-- **Blended Variable Cost per MAU:** $(0.20 \times 8.00) + (0.10 \times 20.00) = \mathbf{\$3.60 / \text{MAU}}$
+- **Blended Variable Cost per MAU:** $(0.20 \times 8.00) + (0.10 \times 30.00) = \mathbf{\$4.60 / \text{MAU}}$
 
 ### 2.3 Fixed Operating Expenses (OpEx)
-Fixed costs are scaled to support the Pattern Vault infrastructure and growth.
-- **Month 1:** $3,000
-- **Month 6:** $7,000
-- **Month 12:** $10,000
+Fixed costs are increased to support Enterprise-grade infrastructure, SOC2 compliance readiness, and identity provider integrations.
+- **Month 1:** $4,000
+- **Month 6:** $10,000
+- **Month 12:** $15,000
 
 ---
 
@@ -37,19 +38,19 @@ Fixed costs are scaled to support the Pattern Vault infrastructure and growth.
 
 | Month | MAU | Gross Revenue | Variable Costs (COGS) | Fixed OpEx | Net Monthly Flow |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 2,000 | $63,400 | $7,200 | $3,000 | **+$53,200** |
-| 2 | 5,000 | $158,500 | $18,000 | $3,500 | **+$137,000** |
-| 3 | 10,000 | $317,000 | $36,000 | $4,000 | **+$277,000** |
-| 4 | 15,000 | $475,500 | $54,000 | $4,500 | **+$417,000** |
-| 5 | 18,000 | $570,600 | $64,800 | $5,000 | **+$500,800** |
-| 6 | 20,000 | $634,000 | $72,000 | $7,000 | **+$555,000** |
-| 7 | 25,000 | $792,500 | $90,000 | $7,000 | **+$695,500** |
-| 8 | 30,000 | $951,000 | $108,000 | $8,000 | **+$835,000** |
-| 9 | 35,000 | $1,109,500 | $126,000 | $8,000 | **+$975,500** |
-| 10 | 40,000 | $1,268,000 | $144,000 | $9,000 | **+$1,115,000** |
-| 11 | 45,000 | $1,426,500 | $162,000 | $9,000 | **+$1,255,500** |
-| 12 | 50,000 | $1,585,000 | $180,000 | $10,000 | **+$1,395,000** |
-| **Total** | - | **$8,851,500** | **$1,062,000** | **$73,500** | **+$7,716,000** |
+| 1 | 2,000 | $90,460 | $9,200 | $4,000 | **+$77,260** |
+| 2 | 5,000 | $226,150 | $23,000 | $5,000 | **+$198,150** |
+| 3 | 10,000 | $452,300 | $46,000 | $6,000 | **+$400,300** |
+| 4 | 15,000 | $678,450 | $69,000 | $7,000 | **+$602,450** |
+| 5 | 18,000 | $814,140 | $82,800 | $8,000 | **+$723,340** |
+| 6 | 20,000 | $904,600 | $92,000 | $10,000 | **+$802,600** |
+| 7 | 25,000 | $1,130,750 | $115,000 | $10,000 | **+$1,005,750** |
+| 8 | 30,000 | $1,356,900 | $138,000 | $12,000 | **+$1,206,900** |
+| 9 | 35,000 | $1,583,050 | $161,000 | $12,000 | **+$1,410,050** |
+| 10 | 40,000 | $1,809,200 | $184,000 | $13,000 | **+$1,612,200** |
+| 11 | 45,000 | $2,035,350 | $207,000 | $13,000 | **+$1,815,350** |
+| 12 | 50,000 | $2,261,500 | $230,000 | $15,000 | **+$2,016,500** |
+| **Total** | - | **$13,333,000** | **$1,357,000** | **$115,000** | **+$11,861,000** |
 
 ---
 
@@ -57,12 +58,12 @@ Fixed costs are scaled to support the Pattern Vault infrastructure and growth.
 
 ### 4.1 Gross Margin
 $$\text{Gross Margin} = \frac{\text{Revenue} - \text{Variable Costs}}{\text{Revenue}}$$
-$$\text{Gross Margin} = \frac{\$8,851,500 - \$1,062,000}{\$8,851,500} \approx \mathbf{88.0\%}$$
-While marginally lower than v2.2 due to the managed nature of the Pattern Vault and CRI, the gross margin remains elite.
+$$\text{Gross Margin} = \frac{\$13,333,000 - \$1,357,000}{\$13,333,000} \approx \mathbf{89.8\%}$$
+Despite the increase in APO compute and multi-tenant costs, the significant jump in Enterprise ARPU actually improves the overall gross margin.
 
 ### 4.2 LTV/CAC Impact
-- **LTV Increase:** The transition to an "Intelligence Layer" creates a high-stickiness environment. The Pattern Vault acts as a "data gravity" well; the more a company stores its reasoning patterns, the higher the cost of switching.
-- **CAC Efficiency:** By targeting CTOs and VPs of Engineering with a "Stability and Insurance" narrative, we expect higher contract values and shorter sales cycles for Enterprise clients.
+- **LTV Explosion:** The "Knowledge Graph of Agent Intelligence" creates extreme institutional lock-in. The value is no longer in the tool, but in the *governed assets* stored within the platform.
+- **CAC Shift:** We expect a higher CAC due to the shift toward Enterprise sales, but this is heavily offset by the vastly higher LTV of Organization and Custom tiers.
 
 ---
 
@@ -70,9 +71,9 @@ While marginally lower than v2.2 due to the managed nature of the Pattern Vault 
 
 | Risk | Impact | Mitigation |
 | :--- | :--- | :--- |
-| **CRI API Explosion** | Margin erosion | Implement strict per-project quotas for `tw verify-all` usage. |
-| **Vault Storage Costs** | OpEx increase | Use embedding-based clustering to prune redundant patterns. |
-| **Price Hike Churn** | Revenue volatility | Offer "Early Adopter" lock-in pricing for existing Pro users. |
-| **Enterprise Conversion** | Lower than 10% | Focus marketing on "Reasoning Stability" as a business risk mitigation. |
+| **APO Compute Spike** | Margin erosion | Implement usage-based fees for APO and hard token quotas. |
+| **Enterprise Sales Cycle** | Revenue lag | Maintain Pro tier as a primary cash-flow engine. |
+| **Custom Tier Over-servicing** | Engineering drain | Limit custom feature requests to 2 per quarter per client. |
+| **SOC2 Compliance Cost** | OpEx increase | Budget for third-party audit tools and consultants in Q3/Q4. |
 
-**Verdict:** The v2.3 financial model is highly robust. The increase in ARPU more than offsets the increased COGS, resulting in a significantly more profitable and defensible business.
+**Verdict:** The v2.4 financial model transforms TraceWhisper into a high-leverage enterprise platform. The transition to value-based pricing for governance and institutional knowledge creates a significantly more profitable and defensible business than the v2.3 model.
