@@ -1,8 +1,8 @@
 {
-  "cycle_reasoning": "Prioritizing the critical 2026 TOPIK Reform alignment (P0). The CTO is working on issue #414 to update the mock test engine, listening module, writing feedback, and reading timers to match new standards.",
+  "cycle_reasoning": "Prioritizing P0 2026 Reform alignment: CTO needs to fix critical simulator bugs (#422, #420) and implement the High-Speed Listening Module (#423).",
   "assignments": [
     {"role": "cto", "turns": 5, "priority": "P0"},
     {"role": "qa", "turns": 1, "priority": "P1"},
-    {"role": "product", "turns": 1, "priority": "P1"}
+    {"role": "product", "turns": 1, "priority": "P2"}
   ]
 }
