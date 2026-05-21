@@ -5,7 +5,7 @@ from typing import Optional
 from src.parser import LogParser
 from src.filter import TraceFilter
 from src.engine import NarrativeEngine
-from src.telemetry import telemetry
+from src.core.telemetry import telemetry
 
 app = typer.Typer()
 

@@ -2,7 +2,7 @@ import pytest
 from datetime import datetime, timedelta
 from unittest.mock import patch, MagicMock
 from src.engine import NarrativeEngine
-from src.models import ProcessedTrace, RawLogEntry, LogComponent, ReasoningEvent
+from src.core.models import ProcessedTrace, RawLogEntry, LogComponent, ReasoningEvent
 
 def test_debug_first_narrative_logic():
     # Setup a mock trace

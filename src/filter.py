@@ -1,8 +1,8 @@
 import re
 import time
 from typing import List
-from src.models import RawLogEntry, ProcessedTrace
-from src.telemetry import telemetry
+from src.core.models import RawLogEntry, ProcessedTrace
+from src.core.telemetry import telemetry
 
 class TraceFilter:
     def __init__(self, noise_patterns: List[str] = None):

@@ -2,9 +2,9 @@ import os
 import time
 import datetime
 from typing import List, Dict, Any, Optional, Callable
-from src.storage import TraceStorage
+from src.core.storage import TraceStorage
 from src.engine import NarrativeEngine
-from src.models import RawLogEntry, LogComponent, ProcessedTrace
+from src.core.models import RawLogEntry, LogComponent, ProcessedTrace
 
 class LogTailer:
     """

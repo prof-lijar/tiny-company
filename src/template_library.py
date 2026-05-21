@@ -1,6 +1,6 @@
 import re
 from typing import List, Optional, Dict
-from src.models import ReasoningTemplate, TemplateCategory, ProcessedTrace, PromptFix
+from src.core.models import ReasoningTemplate, TemplateCategory, ProcessedTrace, PromptFix
 
 class TemplateLibrary:
     def __init__(self):

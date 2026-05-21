@@ -1,8 +1,8 @@
 from typing import List, Dict, Any, Optional
-from src.models import ProcessedTrace, ReasoningPattern, PruningReport, FragilityReport
-from src.storage import TraceStorage
+from src.core.models import ProcessedTrace, ReasoningPattern, PruningReport, FragilityReport
+from src.core.storage import TraceStorage
 from src.enterprise_core import context, RBACManager
-from src.telemetry import telemetry
+from src.core.telemetry import telemetry
 import time
 
 class PatternVault:

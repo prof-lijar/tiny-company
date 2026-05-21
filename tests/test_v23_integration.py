@@ -1,11 +1,11 @@
 import pytest
 from datetime import datetime
-from src.models import (
+from src.core.models import (
     ProcessedTrace, RawLogEntry, LogComponent, 
     ReasoningPattern, PruningReport, FragilityReport,
     PromptFix
 )
-from src.storage import TraceStorage
+from src.core.storage import TraceStorage
 from src.pattern_vault import PatternVault
 from src.pruning_engine import PruningEngine
 from src.adversarial_synthesis import AdversarialSynthesis

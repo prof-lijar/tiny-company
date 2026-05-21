@@ -1,9 +1,9 @@
 import pytest
 import os
-from src.storage import TraceStorage
+from src.core.storage import TraceStorage
 from src.enterprise_core import context, RBACManager
 from src.pattern_vault import PatternVault
-from src.models import ReasoningPattern
+from src.core.models import ReasoningPattern
 
 @pytest.fixture
 def storage(tmp_path):

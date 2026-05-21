@@ -1,10 +1,10 @@
 import time
 from typing import List, Optional, Dict, Any
-from src.models import (
+from src.core.models import (
     ProcessedTrace, PromptFix, GoldStandard, 
     VerificationSet, VerificationResult, VerificationStatus
 )
-from src.telemetry import telemetry
+from src.core.telemetry import telemetry
 
 class VerificationLoopManager:
     """

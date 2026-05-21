@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from src.models import ProcessedTrace, RawLogEntry, LogComponent
+from src.core.models import ProcessedTrace, RawLogEntry, LogComponent
 from src.template_library import TemplateLibrary
 from src.correction_engine import CorrectionEngine
 

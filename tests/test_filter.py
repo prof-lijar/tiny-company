@@ -1,6 +1,6 @@
 import pytest
 from src.filter import TraceFilter
-from src.models import RawLogEntry, LogComponent
+from src.core.models import RawLogEntry, LogComponent
 from datetime import datetime
 
 def test_trace_filtering_basic():
