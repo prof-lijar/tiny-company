@@ -95,3 +95,22 @@ To distinguish the autonomous features from the core governance tools, we introd
 - **Curated Approval:** The UI should not ask the user to *configure*, but to *validate*. The system proposes; the human approves.
 - **Systemic Observability:** Shift from analyzing single traces to analyzing "Reasoning Health" across the entire agent fleet.
 - **Intent over Phrasing:** Visuals should emphasize the *intent* of a reasoning step rather than the specific prompt text.
+## 5. v2.4 Enterprise Visual Identity
+The Enterprise tier shifts from "Developer Tool" to "Governance Platform." The visual language must reflect stability, authority, and organizational scale.
+
+### Enterprise Branding Palette
+To distinguish Enterprise features from the standard tool, we introduce a "Governance" accent palette that complements the Obsidian base.
+
+| Color | Hex | Role | Psychology |
+| :--- | :--- | :--- | :--- |
+| **Enterprise Indigo** | `#6366F1` | Enterprise Primary Accent | Authority, scale, sophistication |
+| **Platinum** | `#E2E8F0` | High-Tier Borders/Dividers | Premium quality, precision |
+| **Governance Slate** | `#334155` | Enterprise UI Surfaces | Structure, organization, neutrality |
+
+### Visual Markers for Governance
+- **The "Golden Path" Badge:** A stylized gold-bordered seal used to mark approved patterns.
+- **Compliance Indicator:** A binary status icon (Check/Cross) in **Insight Green** or **Alert Amber**, but framed within an **Enterprise Indigo** border.
+- **Vault Hierarchy Breadcrumbs:** A clear visual chain (e.g., `Org` $\rightarrow$ `Dept` $\rightarrow$ `Team`) using **Platinum** separators.
+
+### Enterprise Tone of Voice
+While the standard tool is "Calming and Precise," the Enterprise layer is **"Strategic and Assuring."** It focuses on risk mitigation, ROI, and organizational alignment.
