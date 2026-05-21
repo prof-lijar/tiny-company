@@ -87,8 +87,8 @@ export default function VocabularyPage() {
         <div className="flex flex-col items-center gap-8 w-full max-w-md">
           <div className="mb-4 w-full bg-slate-200 h-2 rounded-full overflow-hidden">
             <div 
-              className="bg-blue-600 h-full transition-all duration-300" 
-              style={{ width: `${((currentIndex + 1) / filteredWords.length) * 100}%` }}
+              className="bg-blue-600 h-full transition-all duration-300 w-[var(--progress-width)]" 
+              style={{ '--progress-width': `${((currentIndex + 1) / filteredWords.length) * 100}%` } as React.CSSProperties}
             ></div>
           </div>
 
