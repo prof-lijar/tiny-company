@@ -17,10 +17,13 @@ The system must autonomously close the loop between drift detection and deployme
 | ID | Requirement | Description | Priority |
 | :--- | :--- | :--- | :--- |
 | **SH-1** | **Autonomous Drift Detection** | Real-time monitoring of production reasoning traces against defined "Golden Paths." Alert when PAR (Path Adherence Rate) drops below a threshold. | P0 |
+| **SH-1b** | **Predictive Drift Analysis** | Monitor model provider telemetry and version updates to predict potential drift *before* it manifests in production traces. | P1 |
 | **SH-2** | **Automated Root Cause Analysis** | Automatically identify the specific "Cognitive Milestone" where the reasoning diverged and categorize the failure (e.g., Logic Drift, Hallucination, Constraint Violation). | P0 |
-| **SH-3** | **Automated Fix Synthesis** | Query the Pattern Vault for similar historical failures and use the APO (Autonomous Prompt Optimization) engine to synthesize a corrective prompt. | P1 |
+| **SH-3** | **Collaborative Fix Synthesis** | Use a "Council of Agents" (Diagnoser $\rightarrow$ Fixer $\rightarrow$ Verifier) to synthesize corrective prompts, querying the Pattern Vault for historical failures. | P1 |
 | **SH-4** | **Shadow Verification** | Automatically execute the synthesized fix against a regression test set in a shadow environment to ensure no regressions in other milestones. | P1 |
 | **SH-5** | **Healing Proposal Workflow** | Present the Overseer with a "Healing Proposal" containing: (a) The detected drift, (b) The proposed fix, (c) Verification results, and (d) A "Deploy" button. | P0 |
+| **SH-6** | **Autonomous Circuit Breaking** | Automatically rollback a deployed fix to the previous stable version if production telemetry shows a regression in success rate immediately post-deployment. | P1 |
+| **SH-7** | **Adaptive Healing Sensitivity** | Allow Overseers to set "Criticality Levels" for agents; high-criticality agents trigger stricter verification and lower drift thresholds. | P2 |
 
 ### 3.2 Cognitive Modularity (The Reasoning Lego Set)
 Transition from monolithic prompts to a composable architecture.
@@ -45,7 +48,8 @@ Optimize the cost-to-reasoning ratio.
 | User Story | Acceptance Criteria |
 | :--- | :--- |
 | **As a Strategic Overseer**, I want to be notified when a production agent's reasoning drifts, so that I can maintain reliability without manually auditing logs. | 1. System detects a drop in PAR.<br>2. Notification is sent to the Overseer with the specific failing milestone highlighted. |
-| **As a Strategic Overseer**, I want the system to propose a verified fix for a reasoning error, so that I can resolve the issue in seconds rather than hours of prompt tuning. | 1. System synthesizes a fix using APO.<br>2. Fix is run against regression tests.<br>3. Proposal shows "Before" and "After" reasoning paths and the test pass rate. |
+| **As a Strategic Overseer**, I want the system to propose a verified fix for a reasoning reasoning error, so that I can resolve the issue in seconds rather than hours of prompt tuning. | 1. System synthesizes a fix using a Council of Agents.<br>2. Fix is run against regression tests.<br>3. Proposal shows "Before" and "After" reasoning paths and the test pass rate. |
+| **As a Strategic Overseer**, I want the system to automatically rollback a fix if it causes production issues, so that I don't have to monitor the deployment in real-time. | 1. System monitors success rates post-deployment.<br>2. If rate drops below baseline, system reverts to the previous version.<br>3. Overseer is notified of the autonomous rollback. |
 | **As an AI Architect**, I want to build agents using a library of verified reasoning blocks, so that I don't have to rewrite complex logic for every new agent. | 1. Ability to save a prompt segment as a "Block".<br>2. Ability to reference a Block ID in a new agent configuration. |
 | **As a Finance Lead**, I want the system to route simple tasks to cheaper models and complex tasks to expensive ones, so that we can scale our AI fleet without linear cost growth. | 1. System logs the model used for each block.<br>2. A report shows the cost saving achieved by the Model Router vs. a monolithic frontier model approach. |
 
@@ -65,14 +69,16 @@ v3.0 does not replace v2.5; it builds upon it.
 ## 7. Prioritized Feature Roadmap
 
 ### Phase 1: The Foundation (The Detection Engine)
-- Implementation of Real-time Drift Detection (SH-1).
+- Implementation of Real-time Drift Detection (SH-1) and Predictive Analysis (SH-1b).
 - Automated Root Cause Analysis (SH-2).
 - Integration of v2.5 Golden Paths as the baseline.
+- Implementation of Adaptive Healing Sensitivity (SH-7).
 
 ### Phase 2: The Closed Loop (The Healing Engine)
-- Implementation of Automated Fix Synthesis using APO (SH-3).
+- Implementation of Collaborative Fix Synthesis using a Council of Agents (SH-3).
 - Shadow Verification environment (SH-4).
 - "Healing Proposal" UI and One-Click Deployment (SH-5).
+- Autonomous Circuit Breaking/Rollback (SH-6).
 
 ### Phase 3: The Orchestrator (The Cognitive OS)
 - Reasoning Block Registry and Modularity (CM-1, CM-2).
