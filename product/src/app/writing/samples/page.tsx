@@ -5,9 +5,10 @@ import { writingSamples } from '@/lib/data/writing-samples';
 import { writingPrompts } from '@/lib/data/writing-prompts';
 import SampleCard from '@/components/writing/SampleCard';
 import { Button } from '@/components/ui/Button';
+import { WritingSample } from '@/lib/types';
 
 export default function WritingSamplesPage() {
-  const [selectedSample, setSelectedSample] = useState<any>(null);
+  const [selectedSample, setSelectedSample] = useState<WritingSample | null>(null);
   const [filterLevel, setFilterLevel] = useState<number | 'all'>( 'all');
 
   const filteredSamples = writingSamples.filter(sample => 

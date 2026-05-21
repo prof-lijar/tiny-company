@@ -9,7 +9,7 @@ interface WritingFeedback {
 
 export async function POST(req: Request) {
   try {
-    const { answer, prompt, context } = await req.json();
+    const { answer, prompt, _context } = await req.json();
 
     if (!answer || !prompt) {
       return NextResponse.json({ error: 'Answer and prompt are required' }, { status: 400 });
@@ -24,7 +24,6 @@ export async function POST(req: Request) {
     const improvements: string[] = [];
 
     // --- 2026 REFORM: Formulaic Template Detection ---
-    // Common "memorized" patterns often found in TOPIK essays
     const formulaicPatterns = [
       '현대 사회에서', 
       '많은 사람들이', 

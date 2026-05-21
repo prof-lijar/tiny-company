@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { WritingPrompt } from '@/lib/types';
+import { WritingPrompt, WritingSample } from '@/lib/types';
 import { writingPrompts } from '@/lib/data/writing-prompts';
 import { writingSamples } from '@/lib/data/writing-samples';
 import SampleCard from './SampleCard';
@@ -21,7 +21,7 @@ interface EssayOutline {
 export default function WritingInterface({ prompt, onSubmit, outline }: WritingInterfaceProps) {
   const [answer, setAnswer] = useState('');
   const [showSample, setShowSample] = useState(false);
-  const [selectedSample, setSelectedSample] = useState<any>(null);
+  const [selectedSample, setSelectedSample] = useState<WritingSample | null>(null);
 
   const handleSampleClick = () => {
     const sample = writingSamples.find(s => s.promptId === prompt.id);
@@ -51,7 +51,7 @@ export default function WritingInterface({ prompt, onSubmit, outline }: WritingI
             onClick={handleSampleClick}
             className="px-3 py-1.5 bg-white text-indigo-600 border border-indigo-200 rounded-lg text-sm font-semibold hover:bg-indigo-50 transition-colors shadow-sm flex items-center gap-2"
           >
-            <span>📖 View Model Answer</span>
+            <span className="text-lg">📖</span> View Model Answer
           </button>
         </div>
         <div className="text-slate-700 leading-relaxed mb-4">
@@ -79,15 +79,14 @@ export default function WritingInterface({ prompt, onSubmit, outline }: WritingI
           onClick={handleSubmit}
           className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-md flex items-center gap-2"
         >
-          <span>Submit for AI Feedback</span>
-          <span className="text-lg">🚀</span>
+          <span className="text-lg">🚀 Submit for AI Feedback</span>
         </button>
       </div>
 
       {outline && (
         <div className="mt-8 p-6 bg-emerald-50 rounded-2xl border border-emerald-100 shadow-sm">
           <h4 className="text-lg font-bold text-emerald-900 mb-4 flex items-center gap-2">
-            <span>✨ AI-Generated Outline</span>
+            <span className="text-lg">✨ AI-Generated Outline</span>
             <span className="text-xs bg-emerald-200 text-emerald-700 px-2 py-1 rounded-full font-bold">Pro</span>
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -103,15 +102,13 @@ export default function WritingInterface({ prompt, onSubmit, outline }: WritingI
               ))}
             </div>
             <div className="space-y-4">
-              <h5 className="font-bold text-emerald-800 text-sm uppercase-wider">Vocabulary & Connectors</h5>
+              <h5 className="font-bold text-emerald-800 text-sm uppercase tracking-wider">Vocabulary & Connectors</h5>
               <div className="flex flex-wrap gap-2">
                 {outline.vocabularySuggestions.map((item, i) => (
                   <span key={i} className="px-2 py-1 bg-white text-emerald-700 border border-emerald-200 rounded-md text-xs font-medium">
                     {item.word} ({item.meaning})
                   </span>
                 ))}
-              </div>
-              <div className="flex flex-wrap gap-2 mt-2">
                 {outline.grammarConnectors.map((item, i) => (
                   <span key={i} className="px-2 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-md text-xs font-medium">
                     {item.connector}
