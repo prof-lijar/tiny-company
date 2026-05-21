@@ -105,6 +105,19 @@ Visualizes the removal of cognitive bloat.
 Integration between the prompt editor and the trace view.
 - **Live-Link**: An invisible mapping that allows clicking a trace segment to highlight the prompt line that generated it.
 - **Quick-Fix Lightbulb**: An IDE gutter icon that appears next to prompt lines associated with a detected loop or failure.
+### 4.3 Verification Loop Components (v2.2.2)
+Specific components for the Verification Loop Visualizer.
+- **Verification Checklist**: A dynamic list of benchmarks.
+    - `Pending`: Grey text, empty checkbox.
+    - `Running`: Pulse animation, Signal Blue.
+    - `Passed`: Insight Green, checkmark.
+    - `Failed`: Obsidian Red, crossmark.
+- **Verdict Banner**: High-visibility status bar.
+    - `Success`: Green background, "FIXED & STABLE".
+    - `Failure`: Red background, "FIX FAILED".
+    - `Regression`: Amber background, "FIXED BUT UNSTABLE".
+- **Rollback Button**: High-priority action button.
+    - `Style`: Obsidian Grey background, bold white text, undo icon.
 
 ---
 
@@ -118,7 +131,6 @@ Since TraceWhisper is CLI-first, these components map to `rich` elements:
 | Prompt Diff | `Table` | Two columns, `style="green"` for additions |
 | Intervention Panel | `Live` / `Prompt` | Blocking input with `Console.print` banners |
 | Timeline | `Tree` | Vertical structure with custom icons |
-<<<<<<< HEAD
 
 ---
 
@@ -208,8 +220,11 @@ A complex view designed as a "Cognitive PR," comparing the intended reasoning pa
     - `Reject`: Ghost button, marks the issue as "Manual Intervention Required."
     - `Modify`: Secondary button, opens the prompt editor for manual fine-tuning.
     - `Approve & Deploy`: Primary `Cyber Teal` button, triggers the deployment pipeline.
-=======
 | Cognitive Diff | `Columns` | Two `Panel` elements with `style="red"` for divergence |
 | Pruning Report | `Table` | Comparison of steps with `style="dim"` for bloat |
 | Vault Card | `Panel` | `border_style="magenta"`, `title="Vault Insight"` |
->>>>>>> designer/v2.3-ui-ux-spec
+=======
+| Verification Checklist | `Table` / `Live` | Columns: `[Status] [Benchmark Name]`, dynamic updates |
+| Verdict Banner | `Panel` | `style="bold white on green/red/yellow"`, centered |
+| Rollback Button | `Text` / `Prompt` | `style="bold white on slate"`, high contrast |
+>>>>>>> designer/finalize-trace-visualizer-handoff
