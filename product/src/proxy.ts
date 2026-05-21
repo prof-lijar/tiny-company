@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = await getToken({ req: request });
 
   if (!token) {
@@ -11,6 +11,7 @@ export async function middleware(request: NextRequest) {
       pathname.startsWith('/vocabulary') || 
       pathname.startsWith('/grammar') || 
       pathname.startsWith('/reading') || 
+      pathname.startsWith('/listening') ||
       pathname.startsWith('/writing') || 
       pathname.startsWith('/mock-test')
     ) {
@@ -29,6 +30,7 @@ export const config = {
     '/vocabulary/:path*', 
     '/grammar/:path*', 
     '/reading/:path*', 
+    '/listening/:path*',
     '/writing/:path*', 
     '/mock-test/:path*'
   ],
