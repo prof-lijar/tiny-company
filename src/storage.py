@@ -7,7 +7,7 @@ from pathlib import Path
 class TraceStorage:
     """
     Handles persistence of agent traces, logs, and narratives using SQLite.
-    Updated for v2.3 to support the Pattern Vault.
+    Updated for v2.4 to support Multi-tenancy, RBAC, and Hierarchical Vaults.
     """
     def __init__(self, db_path: str = "tracewhisper.db"):
         self.db_path = db_path
@@ -17,24 +17,60 @@ class TraceStorage:
         return sqlite3.connect(self.db_path)
 
     def _init_db(self):
-        """Initializes the database schema."""
+        """Initializes the database schema with Enterprise v2.4 updates."""
         with self._get_connection() as conn:
             cursor = conn.cursor()
             
-            # Traces table: High-level metadata about an agent run
+            # Organizations for multi-tenancy
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS organizations (
+                    id TEXT PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    created_at TIMESTAMP
+                )
+            ''')
+            
+            # Users and Roles
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS users (
+                    id TEXT PRIMARY KEY,
+                    org_id TEXT,
+                    username TEXT NOT NULL,
+                    role TEXT NOT NULL,
+                    created_at TIMESTAMP,
+                    FOREIGN KEY (org_id) REFERENCES organizations (id)
+                )
+            ''')
+            
+            # Hierarchical Vaults
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS vaults (
+                    id TEXT PRIMARY KEY,
+                    org_id TEXT,
+                    name TEXT NOT NULL,
+                    parent_vault_id TEXT,
+                    created_at TIMESTAMP,
+                    FOREIGN KEY (org_id) REFERENCES organizations (id),
+                    FOREIGN KEY (parent_vault_id) REFERENCES vaults (id)
+                )
+            ''')
+
+            # Traces table: Added org_id for isolation
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS traces (
                     id TEXT PRIMARY KEY,
+                    org_id TEXT,
                     agent_id TEXT,
                     session_id TEXT,
                     start_time TIMESTAMP,
                     end_time TIMESTAMP,
                     metadata TEXT,
-                    status TEXT
+                    status TEXT,
+                    FOREIGN KEY (org_id) REFERENCES organizations (id)
                 )
             ''')
             
-            # Logs table: Individual log entries
+            # Logs table
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS logs (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -48,7 +84,7 @@ class TraceStorage:
                 )
             ''')
             
-            # Narratives table: Synthesized narratives for specific segments
+            # Narratives table
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS narratives (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,37 +96,57 @@ class TraceStorage:
                 )
             ''')
 
-            # Pattern Vault table: Store of proven fixes (v2.3)
+            # Pattern Vault table: Updated project_id -> vault_id for hierarchy support
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS pattern_vault (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    vault_id TEXT,
                     failure_embedding BLOB,
                     failure_description TEXT,
                     correction_prompt TEXT,
-                    project_id TEXT,
                     success_rate REAL,
-                    created_at TIMESTAMP
+                    created_at TIMESTAMP,
+                    FOREIGN KEY (vault_id) REFERENCES vaults (id)
                 )
             ''')
             conn.commit()
 
-    def save_trace(self, trace_id: str, agent_id: str, session_id: str, 
+    def create_organization(self, org_id: str, name: str):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO organizations (id, name, created_at) VALUES (?, ?, ?)', 
+                           (org_id, name, datetime.utcnow().isoformat()))
+            conn.commit()
+
+    def create_user(self, user_id: str, org_id: str, username: str, role: str):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO users (id, org_id, username, role, created_at) VALUES (?, ?, ?, ?, ?)', 
+                           (user_id, org_id, username, role, datetime.utcnow().isoformat()))
+            conn.commit()
+
+    def create_vault(self, vault_id: str, org_id: str, name: str, parent_vault_id: Optional[str] = None):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO vaults (id, org_id, name, parent_vault_id, created_at) VALUES (?, ?, ?, ?, ?)', 
+                           (vault_id, org_id, name, parent_vault_id, datetime.utcnow().isoformat()))
+            conn.commit()
+
+    def save_trace(self, trace_id: str, org_id: str, agent_id: str, session_id: str, 
                    metadata: Dict[str, Any], status: str = "running"):
-        """Creates or updates a trace record."""
         with self._get_connection() as conn:
             cursor = conn.cursor()
             start_time = datetime.utcnow().isoformat()
             cursor.execute('''
-                INSERT INTO traces (id, agent_id, session_id, start_time, metadata, status)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO traces (id, org_id, agent_id, session_id, start_time, metadata, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(id) DO UPDATE SET 
                     status=excluded.status, 
                     metadata=excluded.metadata
-            ''', (trace_id, agent_id, session_id, start_time, json.dumps(metadata), status))
+            ''', (trace_id, org_id, agent_id, session_id, start_time, json.dumps(metadata), status))
             conn.commit()
 
     def update_trace_end(self, trace_id: str, status: str = "completed"):
-        """Marks a trace as finished."""
         end_time = datetime.utcnow().isoformat()
         with self._get_connection() as conn:
             cursor = conn.cursor()
@@ -100,10 +156,8 @@ class TraceStorage:
 
     def append_log(self, trace_id: str, message: str, level: str = "INFO", 
                    raw_payload: Optional[Dict[str, Any]] = None, step_index: Optional[int] = None):
-        """Appends a single log entry to a trace."""
         timestamp = datetime.utcnow().isoformat()
         payload_json = json.dumps(raw_payload) if raw_payload else None
-        
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('''
@@ -113,7 +167,6 @@ class TraceStorage:
             conn.commit()
 
     def save_narrative(self, trace_id: str, step_range: str, content: str):
-        """Saves a synthesized narrative segment."""
         timestamp = datetime.utcnow().isoformat()
         with self._get_connection() as conn:
             cursor = conn.cursor()
@@ -123,14 +176,17 @@ class TraceStorage:
             ''', (trace_id, step_range, content, timestamp))
             conn.commit()
 
-    def get_trace_logs(self, trace_id: str) -> List[Dict[str, Any]]:
-        """Retrieves all logs for a given trace, ordered by step index."""
+    def get_trace_logs(self, trace_id: str, org_id: str) -> List[Dict[str, Any]]:
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('SELECT * FROM logs WHERE trace_id = ? ORDER BY step_index ASC', (trace_id,))
+            cursor.execute('''
+                SELECT l.* FROM logs l 
+                JOIN traces t ON l.trace_id = t.id 
+                WHERE l.trace_id = ? AND t.org_id = ? 
+                ORDER BY l.step_index ASC
+            ''', (trace_id, org_id))
             rows = cursor.fetchall()
-            
             logs = []
             for row in rows:
                 log = dict(row)
@@ -139,20 +195,18 @@ class TraceStorage:
                 logs.append(log)
             return logs
 
-    def get_recent_traces(self, limit: int = 10) -> List[Dict[str, Any]]:
-        """Returns a list of the most recently started traces."""
+    def get_recent_traces(self, org_id: str, limit: int = 10) -> List[Dict[str, Any]]:
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('SELECT * FROM traces ORDER BY start_time DESC LIMIT ?', (limit,))
+            cursor.execute('SELECT * FROM traces WHERE org_id = ? ORDER BY start_time DESC LIMIT ?', (org_id, limit))
             return [dict(row) for row in cursor.fetchall()]
 
-    def get_trace_metadata(self, trace_id: str) -> Optional[Dict[str, Any]]:
-        """Retrieves metadata for a specific trace."""
+    def get_trace_metadata(self, trace_id: str, org_id: str) -> Optional[Dict[str, Any]]:
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('SELECT * FROM traces WHERE id = ?', (trace_id,))
+            cursor.execute('SELECT * FROM traces WHERE id = ? AND org_id = ?', (trace_id, org_id))
             row = cursor.fetchone()
             if row:
                 data = dict(row)
@@ -161,24 +215,34 @@ class TraceStorage:
                 return data
         return None
 
-    # --- v2.3 Pattern Vault Methods ---
-
-    def save_pattern(self, failure_embedding: bytes, failure_description: str, 
-                     correction_prompt: str, project_id: str, success_rate: float):
-        """Saves a reasoning pattern to the vault."""
+    def save_pattern(self, vault_id: str, failure_embedding: bytes, failure_description: str, 
+                     correction_prompt: str, success_rate: float):
         timestamp = datetime.utcnow().isoformat()
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('''
-                INSERT INTO pattern_vault (failure_embedding, failure_description, correction_prompt, project_id, success_rate, created_at)
+                INSERT INTO pattern_vault (vault_id, failure_embedding, failure_description, correction_prompt, success_rate, created_at)
                 VALUES (?, ?, ?, ?, ?, ?)
-            ''', (failure_embedding, failure_description, correction_prompt, project_id, success_rate, timestamp))
+            ''', (vault_id, failure_embedding, failure_description, correction_prompt, success_rate, timestamp))
             conn.commit()
 
-    def query_patterns(self, limit: int = 5) -> List[Dict[str, Any]]:
-        """Retrieves the most recent patterns from the vault."""
+    def query_patterns_by_vault(self, vault_id: str, limit: int = 5) -> List[Dict[str, Any]]:
         with self._get_connection() as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('SELECT * FROM pattern_vault ORDER BY created_at DESC LIMIT ?', (limit,))
+            cursor.execute('SELECT * FROM pattern_vault WHERE vault_id = ? ORDER BY created_at DESC LIMIT ?', (vault_id, limit))
             return [dict(row) for row in cursor.fetchall()]
+
+    def get_vault_hierarchy(self, vault_id: str) -> List[str]:
+        hierarchy = []
+        current_id = vault_id
+        with self._get_connection() as conn:
+            while current_id:
+                cursor = conn.cursor()
+                cursor.execute('SELECT parent_vault_id FROM vaults WHERE id = ?', (current_id,))
+                row = cursor.fetchone()
+                if not row:
+                    break
+                hierarchy.append(current_id)
+                current_id = row[0]
+        return hierarchy[::-1]
