@@ -85,3 +85,49 @@ Since TraceWhisper is CLI-first, these components map to `rich` elements:
 | Prompt Diff | `Table` | Two columns, `style="green"` for additions |
 | Intervention Panel | `Live` / `Prompt` | Blocking input with `Console.print` banners |
 | Timeline | `Tree` | Vertical structure with custom icons |
+
+---
+
+## 6. v2.5 'The Autonomous Bridge' Components
+
+To support the transition to autonomous optimization, we introduce the following components designed for high-level fleet monitoring and cognitive mapping.
+
+### 6.1 The Health Orbit (Global Map)
+A systemic visualization of agent health.
+- **Structure:**
+    - `Agent Node`: A circular element representing an agent.
+    - `Health Glow`: An outer ring that pulses in Green (Stable), Yellow (Drifting), or Red (Critical).
+    - `Connection Line`: A thin line connecting agents who share similar Golden Paths.
+- **Interaction:**
+    - `Click/Focus`: Expands the node to show the current Path Adherence Rate (PAR).
+
+### 6.2 The Ghost Path (Divergence View)
+A specialized view for analyzing logic drift.
+- **Structure:**
+    - `Golden Path Line`: A solid, high-contrast line representing the verified standard.
+    - `Actual Path Line`: A dashed, muted line that diverges from the same origin.
+    - `Divergence Point`: A high-contrast marker (Drift Yellow)’ highlighting exactly where the logic branched.
+- **Styling:** 
+    - `Golden Path`: Electric Indigo.
+    - `Actual Path`: Noise Gray.
+    - `Divergence Point`: Drift Yellow.
+
+### 6.3 The Translation Bridge (Cognitive Porter)
+Visualizing the mapping of reasoning patterns across models.
+- **Structure:**
+    - `Intent Block`: A stylized box representing a reasoning step (e.g., "Verify Source").
+    - `Transformation Arrow`: A fluid, animated arrow connecting two blocks.
+    - `Fidelity Gauge`: A radial progress bar showing the compatibility score.
+- **Styling:**
+    - `Intent Block`: Cyber Teal.
+    - `Transformation Arrow`: Electric Indigo.
+
+### 6.4 Updated Design Tokens for v2.5
+| Token | Value | Usage |
+| :--- | :--- | :--- |
+| `--color-v25-cyber-teal` | `#2DD4BF` | Autonomous actions, Intent blocks |
+| `--color-v25-electric-indigo` | `#6366F1` | Cognitive mapping, Golden Paths |
+| `--color-v25-drift-yellow` | `#2FDE047` | Logic divergence, Divergence points |
+| `--color-v25-glow-stable` | `#4ADE80` | Health Orbit: Stable |
+| `--color-v25-glow-drift` | `#FDE047` | Health Orbit: Drifting |
+| `--color-v25-glow-critical` | `#EF4444` | Health Orbit: Critical |
