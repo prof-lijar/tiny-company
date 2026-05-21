@@ -3,7 +3,6 @@ import { StudyPlan, StudyTask } from './types';
 
 // Mock storage for study plans and tasks
 const plans: Record<string, StudyPlan> = {};
-const tasks: Record<string, StudyTask[]> = {};
 
 export const studyPlanDb = {
   async getPlan(userId: string): Promise<StudyPlan | null> {
@@ -26,15 +25,18 @@ export const studyPlanDb = {
   },
 
   async setTargetExamDate(userId: string, date: string): Promise<void> {
-    const plan = await this.updatePlan(userId, { targetExamDate: date });
-    
-    // Recalculate days remaining
     const today = new Date();
     const examDate = new Date(date);
     const diffTime = examDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
-    await this.updatePlan(userId, { daysRemaining: diffDays });
+    // We generate a fresh plan whenever the date is set
+    const plan = await this.generateDailyPlan(userId, ['Grammar: -기 때문에', 'Vocab: Environment']); 
+    await this.updatePlan(userId, { 
+      targetExamDate: date, 
+      daysRemaining: diffDays,
+      ...plan 
+    });
   },
 
   async toggleTask(userId: string, taskId: string, completed: boolean): Promise<void> {
@@ -53,8 +55,6 @@ export const studyPlanDb = {
   },
 
   async generateDailyPlan(userId: string, weaknesses: string[] = []): Promise<StudyPlan> {
-    // In a real app, this a complex algorithm
-    // For now, we implement a realistic mock generator that simulates the dynamic nature
     const today = new Date();
     const targetDate = plans[userId]?.targetExamDate || '';
     
@@ -69,18 +69,19 @@ export const studyPlanDb = {
       };
     }
 
+    // More realistic task generation
     const dailyTasks: StudyTask[] = [
       {
-        id: 'vocab-1',
+        id: `vocab-${today.getDate()}`,
         type: 'vocabulary',
-        title: 'Review 20 new vocabulary words',
+        title: 'Review 20 SRS vocabulary words',
         completed: false,
         dueDate: today.toISOString(),
         priority: 'medium',
         targetUrl: '/vocabulary',
       },
       {
-        id: 'grammar-1',
+        id: `grammar-${today.getDate()}`,
         type: 'grammar',
         title: 'Study 2 new grammar patterns',
         completed: false,
@@ -88,12 +89,21 @@ export const studyPlanDb = {
         priority: 'medium',
         targetUrl: '/grammar',
       },
+      {
+        id: `reading-${today.getDate()}`,
+        type: 'reading',
+        title: 'Complete 1 Reading comprehension passage',
+        completed: false,
+        dueDate: today.toISOString(),
+        priority: 'low',
+        targetUrl: '/reading',
+      },
     ];
 
     // Add weakness-based tasks
     if (weaknesses.length > 0) {
       dailyTasks.push({
-        id: `weakness-${weaknesses[0]}`,
+        id: `weakness-${weaknesses[0]}-${today.getDate()}`,
         type: 'reading',
         title: `Focused practice: ${weaknesses[0]}`,
         completed: false,
@@ -106,7 +116,7 @@ export const studyPlanDb = {
     // Schedule mock tests on Sundays
     if (today.getDay() === 0) {
       dailyTasks.push({
-        id: 'mock-test-1',
+        id: `mock-test-${today.getDate()}`,
         type: 'mock-test',
         title: 'Full Mock Test Simulator',
         completed: false,
