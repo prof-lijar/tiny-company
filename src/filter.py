@@ -28,6 +28,11 @@ class TraceFilter:
             if not any(re.search(pat, e.content, re.IGNORECASE) for pat in self.noise_patterns)
         ]
         
+        # Handle case where all entries are noise
+        if not filtered_entries:
+            telemetry.warn("filter_all_noise", {"original_count": len(entries)})
+            return None
+
         # Sort by timestamp
         filtered_entries.sort(key=lambda x: x.timestamp)
         
