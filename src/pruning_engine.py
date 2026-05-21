@@ -1,6 +1,7 @@
 from typing import List, Dict, Any, Optional
 from src.core.models import ProcessedTrace, PruningReport
 from src.core.telemetry import telemetry
+from config import Config
 import time
 
 class PruningEngine:
@@ -8,7 +9,7 @@ class PruningEngine:
     The Cognitive Pruning Engine reduces latency and cost by removing 'Cognitive Bloat'.
     It identifies circular reasoning and redundant steps.
     """
-    def __init__(self, model_name: str = "gpt-4o"):
+    def __init__(self, model_name: str = Config().model_name):
         self.model_name = model_name
 
     def analyze_efficiency(self, trace: ProcessedTrace) -> PruningReport:
