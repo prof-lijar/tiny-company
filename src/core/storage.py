@@ -109,7 +109,37 @@ class TraceStorage:
                     FOREIGN KEY (vault_id) REFERENCES vaults (id)
                 )
             ''')
+            
+            # v3.0 Reasoning Block Registry
+            self._init_reasoning_blocks_tables_internal(cursor)
+            
             conn.commit()
+
+    def _init_reasoning_blocks_tables_internal(self, cursor):
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS reasoning_blocks (
+                id TEXT PRIMARY KEY,
+                name TEXT NOT NULL,
+                description TEXT,
+                purpose TEXT,
+                created_at TIMESTAMP,
+                tags TEXT
+            )
+        ''')
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS reasoning_block_versions (
+                version_id TEXT PRIMARY KEY,
+                block_id TEXT,
+                version_number INTEGER,
+                content TEXT,
+                target_model TEXT,
+                golden_path_benchmark_id TEXT,
+                is_stable BOOLEAN,
+                created_at TIMESTAMP,
+                metadata TEXT,
+                FOREIGN KEY (block_id) REFERENCES reasoning_blocks (id)
+            )
+        ''')
 
     def create_organization(self, org_id: str, name: str):
         with self._get_connection() as conn:
@@ -288,3 +318,57 @@ class TraceStorage:
                     test['golden_path_keywords'] = json.loads(test['golden_path_keywords'])
                 tests.append(test)
             return tests
+
+    def save_reasoning_block(self, block: 'ReasoningBlock'):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO reasoning_blocks (id, name, description, purpose, created_at, tags)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (block.block_id, block.name, block.description, block.purpose, 
+                  block.created_at.isoformat(), json.dumps(block.tags)))
+            conn.commit()
+
+    def save_block_version(self, version: 'ReasoningBlockVersion'):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO reasoning_block_versions (version_id, block_id, version_number, content, 
+                                                    target_model, golden_path_benchmark_id, is_stable, created_at, metadata)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (version.version_id, version.block_id, version.version_number, version.content,
+                  version.target_model, version.golden_path_benchmark_id, version.is_stable, 
+                  version.created_at.isoformat(), json.dumps(version.metadata)))
+            conn.commit()
+
+    def get_block_version(self, block_id: str, version_number: Optional[int] = None) -> Optional[Dict[str, Any]]:
+        with self._get_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            if version_number:
+                cursor.execute('SELECT * FROM reasoning_block_versions WHERE block_id = ? AND version_number = ?', 
+                               (block_id, version_number))
+            else:
+                cursor.execute('SELECT * FROM reasoning_block_versions WHERE block_id = ? AND is_stable = 1 ORDER BY version_number DESC LIMIT 1', 
+                               (block_id,))
+            row = cursor.fetchone()
+            if row:
+                data = dict(row)
+                if data['metadata'] and isinstance(data['metadata'], str):
+                    data['metadata'] = json.loads(data['metadata'])
+                return data
+            return None
+
+    def list_block_versions(self, block_id: str) -> List[Dict[str, Any]]:
+        with self._get_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM reasoning_block_versions WHERE block_id = ? ORDER BY version_number DESC', (block_id,))
+            rows = cursor.fetchall()
+            results = []
+            for row in rows:
+                data = dict(row)
+                if data['metadata'] and isinstance(data['metadata'], str):
+                    data['metadata'] = json.loads(data['metadata'])
+                results.append(data)
+            return results

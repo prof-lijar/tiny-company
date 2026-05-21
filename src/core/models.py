@@ -208,3 +208,24 @@ class HealingProposal(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     approved_by: Optional[str] = None
     deployed_at: Optional[datetime] = None
+
+# --- v3.0 Reasoning Block Registry Models ---
+
+class ReasoningBlock(BaseModel):
+    block_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    purpose: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    tags: List[str] = Field(default_factory=list)
+
+class ReasoningBlockVersion(BaseModel):
+    version_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    block_id: str
+    version_number: int
+    content: str  # The actual prompt segment
+    target_model: str
+    golden_path_benchmark_id: Optional[str] = None
+    is_stable: bool = False
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
