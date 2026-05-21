@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { WritingPrompt } from '@/lib/types';
+import { WritingPrompt, EssayOutline } from '@/lib/types';
 import { writingPrompts } from '@/lib/data/writing-prompts';
 import WritingInterface from '@/components/writing/WritingInterface';
+import EssayOutliner from '@/components/writing/EssayOutliner';
 
 interface Feedback {
   score: number;
@@ -16,6 +17,8 @@ export default function WritingPage() {
   const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isOutlinerOpen, setIsOutlinerOpen] = useState(false);
+  const [currentOutline, setCurrentOutline] = useState<EssayOutline | undefined>(undefined);
 
   const currentPrompt = writingPrompts[currentPromptIndex];
 
@@ -26,18 +29,17 @@ export default function WritingPage() {
     // Simulate AI analysis delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
     
-    // In a real app, this would be a call to an LLM API
     const simulatedFeedback: Feedback = {
-      score: Math.floor(Math.random() * 20) + 60, // 60-80
+      score: Math.floor(Math.random() * 20) + 60,
       strengths: [
-        'Good use of formal written style (-ㄴ/는다)',
+        'Good use of formal written style (-\u3134/\ub294\ub2e4)',
         'Logical flow of arguments',
         'Appropriately used vocabulary for the level',
       ],
       improvements: [
         'Check for natural phrasing in the second paragraph',
         'Ensure the subject-verb agreement is consistent',
-        'Consider using more sophisticated connectors (e.g., 그리고 → 하지만, 따라서)',
+        'Consider using more sophisticated connectors (e.g., \uadf8\ub9ac\uace0 \u2192 \ud558\uc9c0\ub9cc, \ub530\ub77c\uc11c)',
       ],
       correctedText: `[Corrected Version]\n${answer}\n\n(AI would provide a more natural version here)`,
     };
@@ -57,9 +59,27 @@ export default function WritingPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-slate-800">
+              {currentPrompt.title}
+            </h2>
+            {currentPrompt.taskNumber === 54 && (
+              <button 
+                onClick={() => {
+                  setCurrentOutline(undefined);
+                  setIsOutlinerOpen(true);
+                }}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2"
+              >
+                <span>✨ Get AI Outline</span>
+              </button>
+            )}
+          </div>
+
           <WritingInterface 
             prompt={currentPrompt} 
-            onSubmit={handleSubmit} 
+            onSubmit={handleSubmit}
+            outline={currentOutline}
           />
           
           <div className="flex justify-between items-center mt-8">
@@ -68,6 +88,7 @@ export default function WritingPage() {
               onClick={() => {
                 setCurrentPromptIndex(prev => prev - 1);
                 setFeedback(null);
+                setCurrentOutline(undefined);
               }}
               className="px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg disabled:opacity-50 transition-colors"
             >
@@ -78,6 +99,7 @@ export default function WritingPage() {
               onClick={() => {
                 setCurrentPromptIndex(prev => prev + 1);
                 setFeedback(null);
+                setCurrentOutline(undefined);
               }}
               className="px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg disabled:opacity-50 transition-colors"
             >
@@ -137,6 +159,14 @@ export default function WritingPage() {
           )}
         </div>
       </div>
+
+      {isOutlinerOpen && (
+        <EssayOutliner 
+          prompt={currentPrompt.context} 
+          onOutlineGenerated={(outline) => setCurrentOutline(outline)}
+          onClose={() => setIsOutlinerOpen(false)}
+        />
+      )}
     </div>
   );
 }

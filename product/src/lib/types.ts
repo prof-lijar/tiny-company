@@ -138,3 +138,14 @@ export interface StudyPlan {
   dailyTasks: StudyTask[];
   streak: number;
 }
+
+export interface OutlineSection {
+  title: string;
+  points: string[];
+}
+
+export interface EssayOutline {
+  structure: OutlineSection[];
+  vocabularySuggestions: { word: string; meaning: string; level: number }[];
+  grammarConnectors: { connector: string; usage: string }[];
+}
