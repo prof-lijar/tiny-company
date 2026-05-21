@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { AlertTriangle, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import type { WeaknessReport as WeaknessReportType } from '@/lib/types';
 
 export default function WeaknessReport() {
   const [report, setReport] = useState<WeaknessReportType | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const analyzeWeaknesses = async () => {
     setLoading(true);
@@ -82,7 +84,12 @@ export default function WeaknessReport() {
                 <p className="text-xs text-slate-600 mb-3">
                   {weakness.recommendation}
                 </p>
-                <Button variant="outline" size="sm" className="w-full text-xs h-8 flex items-center justify-center gap-1">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full text-xs h-8 flex items-center justify-center gap-1"
+                  onClick={() => router.push(weakness.targetUrl)}
+                >
                   Go to Lesson <ArrowRight className="w-3 h-3" />
                 </Button>
               </div>
