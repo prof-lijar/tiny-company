@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant \u2014 MVP Product Specification
+# TOPIK Learning Assistant — MVP Product Specification
 
 ## Overview
 
@@ -6,13 +6,13 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ## Feature Priorities
 
-### P0 \u2014 MVP (Build First)
+### P0 — MVP (Build First)
 
 #### 1. Landing Page [BUILT]
 - **File**: `product/src/app/page.tsx`
 - **User Story**: As a prospective user, I want to understand the value proposition and pricing of the platform so that I can decide to start studying.
 - **Acceptance Criteria**:
-    - Hero section clearly states \"The Ultimate AI-Powered TOPIK II Prep Platform\".
+    - Hero section clearly states "The Ultimate AI-Powered TOPIK II Prep Platform".
     - Feature section highlights Vocabulary (SRS), Grammar, Reading, Writing (AI), and Mock Tests.
     - Pricing table compares Free vs Pro tiers.
     - Call-to-action (CTA) buttons lead to the study sections.
@@ -24,7 +24,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Acceptance Criteria**:
     - User can filter words by TOPIK level (3, 4, 5, 6).
     - Flashcard interface: Front (Korean + Audio), Back (English + Example).
-    - SRS Interaction: User marks word as \"Easy\", \"Good\", or \"Hard\".
+    - SRS Interaction: User marks word as "Easy", "Good", or "Hard".
     - Progress bar showing percentage of words mastered.
 - **Improvements needed** (from QA):
     - [Issue #391] Fix inline styles in Vocabulary progress bar.
@@ -46,15 +46,17 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - Immediate feedback: Correct/Incorrect indicator.
     - Detailed explanation for the correct answer.
 
-### P1 \u2014 Fast Follow
+### P1 — Fast Follow
 
-#### 5. Writing Practice with AI Feedback [BUILT]
+#### 5. Writing Practice with AI Feedback [NEEDS IMPROVEMENT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
 - **User Story**: As a learner, I want AI-powered feedback on my writing tasks so that I can identify and fix my grammatical and structural errors.
 - **Acceptance Criteria**:
     - Prompts for Tasks 51, 52, 53, and 54.
     - Text area with real-time character count.
     - AI Feedback provides: Corrected version, Analysis, Estimated score.
+- **Improvements needed** (from QA):
+    - [Issue #408] Backend API for AI feedback is missing/simulated.
 
 #### 6. Mock Test Simulator [BUILT]
 - **Files**: `product/src/app/mock-test/page.tsx`, `product/src/app/mock-test/[section]/page.tsx`
@@ -73,7 +75,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - Questions presented after the audio.
     - Ability to read transcripts after completion.
 
-### P2 \u2014 Growth Features
+### P2 — Growth Features
 
 #### 8. User Authentication [BUILT]
 - **Files**: `product/src/app/api/auth/[...nextauth]/route.ts`, `product/src/app/login/page.tsx`, `product/src/app/signup/page.tsx`
@@ -97,7 +99,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Grammar Completion**: % of patterns marked as 'completed' per level.
     - **Score Trends**: A line chart showing the average score of Reading and Listening practice over time.
     - **Study Streak**: A counter showing consecutive days of activity.
-    - **Estimated Level**: A dynamic label (e.g., \"Current Level: 4\") based on overall performance.
+    - **Estimated Level**: A dynamic label (e.g., "Current Level: 4") based on overall performance.
 - **Acceptance Criteria**:
     - Dashboard displays real user data from the database.
     - Score trends are visualized using a chart (e.g., Recharts).
@@ -112,13 +114,13 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - **Free**: 50 vocab words/day, basic grammar, 1 mock test/month.
         - **Pro ($12/mo)**: Unlimited vocab, full grammar, unlimited mock tests, unlimited AI writing feedback.
     - **Paywall Logic**: Middleware that checks `user.subscriptionTier` and redirects to pricing page if a Pro feature is accessed.
-    - **Checkout Flow**: Landing Page $\\rightarrow$ Pricing $\\rightarrow$ Stripe Checkout $\\rightarrow$ Confirmation $\\rightarrow$ Dashboard.
+    - **Checkout Flow**: Landing Page $\rightarrow$ Pricing $\rightarrow$ Stripe Checkout $\rightarrow$ Confirmation $\rightarrow$ Dashboard.
 - **Acceptance Criteria**:
     - Successful payment updates user tier to 'pro' in the database.
     - Pro users have access to previously locked features.
     - Users can manage or cancel their subscription via a billing portal.
 
-### P3 \u2014 AI Intelligence (Future)
+### P3 — AI Intelligence (Future)
 
 #### 11. AI-Powered Weakness Analysis [BUILT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
@@ -131,12 +133,12 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - Uses LLM to explain *why* these are common pitfalls for the user.
     - **Recommendation System**: Maps identified weaknesses to specific lessons in the Grammar Library or Vocabulary Builder.
 - **Acceptance Criteria**:
-    - User can trigger a \"Weakness Analysis\" from the Dashboard.
-    - Report displays a list of top 3-5 \"Weak Areas\".
+    - User can trigger a "Weakness Analysis" from the Dashboard.
+    - Report displays a list of top 3-5 "Weak Areas".
     - Each weak area has a direct link to the relevant study material.
     - Analysis is based on real user performance data.
 
-#### 12. Dynamic Study Plan [PENDING]
+#### 12. Dynamic Study Plan [BUILT]
 - **Files**: `product/src/app/api/study-plan/route.ts`, `product/src/components/dashboard/DailyPlan.tsx`
 - **User Story**: As a learner, I want a personalized daily study schedule based on my target exam date and weaknesses so that I can prepare efficiently without feeling overwhelmed.
 - **Detailed Requirements**:
@@ -144,7 +146,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Algorithm**: 
         - Calculate total days remaining until the exam.
         - Distribute remaining vocabulary and grammar patterns across the available days.
-        - Prioritize items identified as \"Weak Areas\" in the Weakness Analysis.
+        - Prioritize items identified as "Weak Areas" in the Weakness Analysis.
         - Allocate specific days for Mock Tests (e.g., every Sunday).
     - **Daily To-Do List**:
         - X number of Vocab words to review (SRS) and Y new words to learn.
@@ -154,23 +156,25 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Tracking**: 
         - Checkboxes for daily tasks.
         - Progress bar showing % of the total plan completed.
-        - \"Days Remaining\" countdown timer on the dashboard.
+        - "Days Remaining" countdown timer on the dashboard.
 - **Acceptance Criteria**:
     - User can set and update their target exam date.
-    - Dashboard displays a \"Today's Plan\" section with actionable tasks.
+    - Dashboard displays a "Today's Plan" section with actionable tasks.
     - The plan dynamically adjusts if the user completes tasks early or fails a mock test (increasing focus on weak areas).
     - Completion of daily tasks increments the user's study streak.
+- **Improvements needed** (from QA):
+    - [Issue #407] "Update Date" button resets date to today.
 
 ## User Flows
 
 ### 1. Vocabulary Study Flow
-`Landing Page` $\\rightarrow$ `Vocabulary Page` $\\rightarrow$ `Select Level (3-6)` $\\rightarrow$ `Flashcard Front` $\\rightarrow$ `Flip Card` $\\rightarrow$ `Rate Difficulty (Easy/Hard)` $\\rightarrow$ `Next Card` $\\rightarrow$ `Session Summary`.
+`Landing Page` $\rightarrow$ `Vocabulary Page` $\rightarrow$ `Select Level (3-6)` $\rightarrow$ `Flashcard Front` $\rightarrow$ `Flip Card` $\rightarrow$ `Rate Difficulty (Easy/Hard)` $\rightarrow$ `Next Card` $\rightarrow$ `Session Summary`.
 
 ### 2. Grammar Lesson Flow
-`Landing Page` $\\rightarrow$ `Grammar Page` $\\rightarrow$ `Select Level` $\\rightarrow$ `Select Pattern` $\\rightarrow$ `Read Explanation & Examples` $\\rightarrow$ `Mark as Completed` $\\rightarrow$ `Return to Level List`.
+`Landing Page` $\rightarrow$ `Grammar Page` $\rightarrow$ `Select Level` $\rightarrow$ `Select Pattern` $\rightarrow$ `Read Explanation & Examples` $\rightarrow$ `Mark as Completed` $\rightarrow$ `Return to Level List`.
 
 ### 3. Reading Practice Flow
-`Landing Page` $\\rightarrow$ `Reading Page` $\\rightarrow$ `Select Passage` $\\rightarrow$ `Read Text` $\\rightarrow$ `Select Multiple Choice Answers` $\\rightarrow$ `Submit` $\\rightarrow$ `Review Explanations` $\\rightarrow$ `Return to List`.
+`Landing Page` $\rightarrow$ `Reading Page` $\rightarrow$ `Select Passage` $\rightarrow$ `Read Text` $\rightarrow$ `Select Multiple Choice Answers` $\rightarrow$ `Submit` $\rightarrow$ `Review Explanations` $\rightarrow$ `Return to List`.
 
 ## Data Model (Conceptual)
 
@@ -218,12 +222,12 @@ Task
 ## UI/UX Requirements
 
 - **Typography**: Noto Sans KR for Korean text to ensure readability.
-- **Layout**: Clean, distraction-free \"Study Mode\".
+- **Layout**: Clean, distraction-free "Study Mode".
 - **Accessibility**: High contrast and clear visual cues for correct/incorrect answers.
 - **Responsiveness**: Desktop-first design (for serious study) but fully responsive for mobile review.
 
 ## Content Guidelines
 
-- All TOPIK practice content must be ORIGINAL \u2014 do not reproduce actual TOPIK questions.
-- Label content as \"TOPIK-style practice\" throughout the app.
+- All TOPIK practice content must be ORIGINAL — do not reproduce actual TOPIK questions.
+- Label content as "TOPIK-style practice" throughout the app.
 - Vocabulary and grammar must align with the levels defined in `docs/topik-content-guide.md`.
