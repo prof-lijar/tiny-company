@@ -1,21 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { EssayOutline } from '@/lib/types';
+import { EssayOutline, WritingFeedback } from '@/lib/types';
 import { writingPrompts } from '@/lib/data/writing-prompts';
 import WritingInterface from '@/components/writing/WritingInterface';
 import EssayOutliner from '@/components/writing/EssayOutliner';
-
-interface Feedback {
-  score: number;
-  strengths: string[];
-  improvements: string[];
-  correctedText: string;
-}
+import { AlertTriangle, CheckCircle2, Lightbulb } from 'lucide-react';
 
 export default function WritingPage() {
   const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
-  const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [feedback, setFeedback] = useState<WritingFeedback | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isOutlinerOpen, setIsOutlinerOpen] = useState(false);
   const [currentOutline, setCurrentOutline] = useState<EssayOutline | undefined>(undefined);
@@ -41,7 +35,7 @@ export default function WritingPage() {
         throw new Error('Failed to get AI feedback');
       }
 
-      const data: Feedback = await response.json();
+      const data: WritingFeedback = await response.json();
       setFeedback(data);
     } catch (error) {
       console.error('Error submitting writing:', error);
@@ -74,7 +68,7 @@ export default function WritingPage() {
                 }}
                 className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2"
               >
-                <span>✨ Get AI Outline</span>
+                <span className="text-sm">✨ Get AI Outline</span>
               </button>
             )}
           </div>
@@ -125,11 +119,14 @@ export default function WritingPage() {
               </div>
               
               <div className="space-y-4">
-                <h4 className="font-bold text-slate-800">Strengths</h4>
+                <h4 className="font-bold text-slate-800 flex items-center gap-2">
+                  <CheckCircle2 size={18} className="text-green-500" />
+                  Strengths
+                </h4>
                 <ul className="space-y-2">
                   {feedback.strengths.map((s, i) => (
                     <li key={i} className="flex items-start gap-2 text-slate-600 text-sm">
-                      <span className="text-green-500">✓</span>
+                      <span className="text-green-500">•</span>
                       {s}
                     </li>
                   ))}
@@ -137,16 +134,41 @@ export default function WritingPage() {
               </div>
 
               <div className="space-y-4">
-                <h4 className="font-bold text-slate-800">Improvements</h4>
+                <h4 className="font-bold text-slate-800 flex items-center gap-2">
+                  <AlertTriangle size={18} className="text-amber-500" />
+                  Improvements
+                </h4>
                 <ul className="space-y-2">
                   {feedback.improvements.map((imp, i) => (
                     <li key={i} className="flex items-start gap-2 text-slate-600 text-sm">
-                      <span className="text-amber-500">⚠</span>
+                      <span className="text-amber-500">•</span>
                       {imp}
                     </li>
                   ))}
                 </ul>
               </div>
+
+              {feedback.templateUsage && feedback.templateUsage.detectedTemplates.length > 0 && (
+                <div className="p-4 bg-amber-50 rounded-lg border border-amber-100 space-y-3">
+                  <h4 className="font-bold text-amber-800 text-sm flex items-center gap-2">
+                    <AlertTriangle size={16} />
+                    Template Analysis
+                  </h4>
+                  <div className="text-xs text-amber-700 mb-2">
+                    Structural Variety Score: <span className="font-bold">{feedback.templateUsage.structuralVarietyScore}/5</span>
+                  </div>
+                  <div className="space-y-2">
+                    {feedback.templateUsage.naturalAlternatives.map((alt, i) => (
+                      <div key={i} className="text-xs bg-white p-2 rounded border border-amber-200">
+                        <div className="text-slate-400 line-through mb-1">{alt.template}</div>
+                        <div className="flex items-center gap-1 text-amber-700 font-medium">
+                          <Lightbulb size={12} /> {alt.alternative}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-4 pt-4 border-t border-slate-100">
                 <h4 className="font-bold text-slate-800">Corrected Text</h4>
