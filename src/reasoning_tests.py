@@ -1,5 +1,6 @@
 from typing import List, Dict, Any, Optional
 from src.core.models import ReasoningTest, ReasoningTestResult, FragilityReport
+from config import Config
 import LiteLLM
 
 class CRIRunner:
@@ -7,7 +8,7 @@ class CRIRunner:
     Continuous Reasoning Integration (CRI) Runner.
     Validates the cognitive path of an agent against defined reasoning tests.
     """
-    def __init__(self, model_name: str = "gpt-4o"):
+    def __init__(self, model_name: str = Config().model_name):
         self.model_name = model_name
 
     def run_tests(self, prompt: str, test_suite: List[ReasoningTest]) -> List[Dict[str, Any]]:
@@ -25,7 +26,7 @@ class CRIRunner:
             
             # Check if the cognitive path is correct (e.g., does it contain 'SEARCH' and 'VERIFY'?)
             cognitive_path_passed = True # Mocked
-            cognitive_path_details = "Path: [SEARCH] -> [VERIFY] -> [SYNTHESIZE]"
+            cognitive_path_passed_details = "Path: [SEARCH] -> [VERIFY] -> [SYNTHESIZE]"
             
             # Check if the final output is correct
             output_passed = True # Mocked
@@ -35,7 +36,7 @@ class CRIRunner:
                 "name": test.name,
                 "cognitive_path_passed": cognitive_path_passed,
                 "output_passed": output_passed,
-                "details": cognitive_path_details
+                "details": cognitive_path_passed_details
             })
         return results
 
@@ -44,7 +45,7 @@ class CRIRunner:
         CLI command 'tw verify-all' implementation.
         Returns True if all tests pass, False if any reasoning regression is detected.
         """
-        results = run_tests = self.run_tests(prompt, test_suite)
+        results = self.run_tests(prompt, test_suite)
         if any(not r['cognitive_path_passed'] or not r['output_passed'] for r in results):
             return False
         return True
