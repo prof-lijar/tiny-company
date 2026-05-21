@@ -15,6 +15,7 @@ export const Header: React.FC = () => {
           <Link href="/grammar" className="hover:text-blue-600 transition-colors">Grammar</Link>
           <Link href="/reading" className="hover:text-blue-600 transition-colors">Reading</Link>
           <Link href="/writing" className="hover:text-blue-600 transition-colors">Writing</Link>
+          <Link href="/writing/samples" className="hover:text-blue-600 transition-colors">Samples</Link>
           <Link href="/mock-test" className="hover:text-blue-600 transition-colors">Mock Test</Link>
         </nav>
         <div className="flex items-center gap-4">
