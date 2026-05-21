@@ -149,3 +149,13 @@ export interface EssayOutline {
   vocabularySuggestions: { word: string; meaning: string; level: number }[];
   grammarConnectors: { connector: string; usage: string }[];
 }
+
+export interface WritingSample {
+  id: string;
+  promptId: string;
+  level: TopikLevel;
+  score: number;
+  text: string;
+  analysis: string;
+  expertTips: string[];
+}

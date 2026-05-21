@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { WritingPrompt, EssayOutline } from '@/lib/types';
-import { BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { WritingPrompt } from '@/lib/types';
+import { writingPrompts } from '@/lib/data/writing-prompts';
+import { writingSamples } from '@/lib/data/writing-samples';
+import SampleCard from './SampleCard';
 
 interface WritingInterfaceProps {
   prompt: WritingPrompt;
@@ -10,77 +12,124 @@ interface WritingInterfaceProps {
   outline?: EssayOutline;
 }
 
+interface EssayOutline {
+  structure: { title: string; points: string[] }[];
+  vocabularySuggestions: { word: string; meaning: string; level: number }[];
+  grammarConnectors: { connector: string; usage: string }[];
+}
+
 export default function WritingInterface({ prompt, onSubmit, outline }: WritingInterfaceProps) {
   const [answer, setAnswer] = useState('');
-  const [showOutline, setShowOutline] = useState(false);
+  const [showSample, setShowSample] = useState(false);
+  const [selectedSample, setSelectedSample] = useState<any>(null);
+
+  const handleSampleClick = () => {
+    const sample = writingSamples.find(s => s.promptId === prompt.id);
+    if (sample) {
+      setSelectedSample(sample);
+      setShowSample(true);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (!answer.trim()) {
+      alert('Please write something before submitting.');
+      return;
+    }
+    onSubmit(answer);
+  };
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <span className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
-            Task {prompt.taskNumber}
-          </span>
-          <span className="text-slate-500 text-sm">Level {prompt.level}</span>
+      <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 mb-6">
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-lg font-bold text-indigo-900">{prompt.title}</h3>
+            <span className="text-sm text-indigo-600 font-medium">Task {prompt.taskNumber}</span>
+          </div>
+          <button 
+            onClick={handleSampleClick}
+            className="px-3 py-1.5 bg-white text-indigo-600 border border-indigo-200 rounded-lg text-sm font-semibold hover:bg-indigo-50 transition-colors shadow-sm flex items-center gap-2"
+          >
+            <span>📖 View Model Answer</span>
+          </button>
         </div>
-        
-        <h3 className="text-xl font-bold text-slate-900 mb-2">{prompt.title}</h3>
-        <p className="text-slate-600 mb-4 italic">{prompt.instruction}</p>
-        
-        <div className="bg-slate-50 p-4 rounded-lg border border-slate-100 font-serif text-lg leading-relaxed text-slate-800 mb-6 whitespace-pre-wrap">
+        <div className="text-slate-700 leading-relaxed mb-4">
+          {prompt.instruction}
+        </div>
+        <div className="p-4 bg-white rounded-xl border border-indigo-200 text-slate-800 font-serif italic text-sm shadow-sm">
           {prompt.context}
         </div>
+      </div>
 
-        {outline && (
-          <div className="mb-6 border border-indigo-100 rounded-lg overflow-hidden">
-            <button 
-              onClick={() => setShowOutline(!showOutline)}
-              className="w-full px-4 py-2 bg-indigo-50 text-indigo-700 flex items-center justify-between font-medium text-sm hover:bg-indigo-100 transition-colors"
-            >
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4" />
-                View My AI Outline
-              </div>
-              {showOutline ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-            </button>
-            {showOutline && (
-              <div className="p-4 bg-white border-t border-indigo-100 space-y-4 text-sm text-slate-600">
-                {outline.structure.map((section, i) => (
-                  <div key={i} className="space-y-1">
-                    <div className="font-bold text-indigo-900">{section.title}</div>
-                    <ul className="list-disc list-inside space-y-1">
-                      {section.points.map((p, j) => <li key={j}>{p}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-        
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-slate-700 mb-2">
-            {prompt.prompt}
-          </label>
-          <textarea
-            className="w-full h-64 p-4 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all font-serif text-lg"
-            placeholder="Write your answer here in Korean..."
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            lang="ko"
-          />
-          <div className="text-right text-slate-400 text-xs mt-2">
-            Characters: {answer.length}
-          </div>
+      <div className="relative">
+        <textarea
+          className="w-full h-64 p-4 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all shadow-sm font-serif text-lg leading-relaxed bg-white"
+          placeholder="Write your answer here..."
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+        <div className="absolute bottom-4 right-4 text-xs text-slate-400 font-medium">
+          {answer.length} characters
         </div>
+      </div>
 
-        <button
-          onClick={() => onSubmit(answer)}
-          className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors shadow-md"
+      <div className="flex justify-end">
+        <button 
+          onClick={handleSubmit}
+          className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-md flex items-center gap-2"
         >
-          Submit for AI Feedback
+          <span>Submit for AI Feedback</span>
+          <span className="text-lg">🚀</span>
         </button>
       </div>
+
+      {outline && (
+        <div className="mt-8 p-6 bg-emerald-50 rounded-2xl border border-emerald-100 shadow-sm">
+          <h4 className="text-lg font-bold text-emerald-900 mb-4 flex items-center gap-2">
+            <span>✨ AI-Generated Outline</span>
+            <span className="text-xs bg-emerald-200 text-emerald-700 px-2 py-1 rounded-full font-bold">Pro</span>
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h5 className="font-bold text-emerald-800 text-sm uppercase tracking-wider">Structure</h5>
+              {outline.structure.map((section, i) => (
+                <div key={i} className="flex gap-3">
+                  <div className="text-emerald-500 font-bold text-sm">{i + 1}.</div>
+                  <div className="text-sm text-emerald-900">
+                    <span className="font-bold">{section.title}:</span> {section.points.join(', ')}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-4">
+              <h5 className="font-bold text-emerald-800 text-sm uppercase-wider">Vocabulary & Connectors</h5>
+              <div className="flex flex-wrap gap-2">
+                {outline.vocabularySuggestions.map((item, i) => (
+                  <span key={i} className="px-2 py-1 bg-white text-emerald-700 border border-emerald-200 rounded-md text-xs font-medium">
+                    {item.word} ({item.meaning})
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {outline.grammarConnectors.map((item, i) => (
+                  <span key={i} className="px-2 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-md text-xs font-medium">
+                    {item.connector}
+                    <span className="text-slate-500 text-[10px] ml-1">({item.usage})</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSample && selectedSample && (
+        <SampleCard 
+          sample={selectedSample} 
+          onClose={() => setShowSample(false)} 
+        />
+      )}
     </div>
   );
 }
