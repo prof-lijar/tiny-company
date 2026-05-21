@@ -69,3 +69,25 @@ The v2.2 update introduces the "Reasoning IDE" and the "Fix-It" engine. The visu
 - **Narrative First:** The story of the agent's journey is the primary interface; the raw data is the supporting evidence.
 - **Technical Elegance:** The UI should feel like a high-end developer tool—efficient, keyboard-centric, and devoid of unnecessary ornamentation.
 - **Accessibility:** Contrast ratios must meet WCAG AA standards to ensure observability for all users.
+
+---
+
+## 5. v2.4 Enterprise Visual Identity
+The Enterprise tier shifts from "Developer Tool" to "Governance Platform." The visual language must reflect stability, authority, and organizational scale.
+
+### Enterprise Branding Palette
+To distinguish Enterprise features from the standard tool, we introduce a "Governance" accent palette that complements the Obsidian base.
+
+| Color | Hex | Role | Psychology |
+| :--- | :--- | :--- | :--- |
+| **Enterprise Indigo** | `#6366F1` | Enterprise Primary Accent | Authority, scale, sophistication |
+| **Platinum** | `#E2E8F0` | High-Tier Borders/Dividers | Premium quality, precision |
+| **Governance Slate** | `#334155` | Enterprise UI Surfaces | Structure, organization, neutrality |
+
+### Visual Markers for Governance
+- **The "Golden Path" Badge:** A stylized gold-bordered seal used to mark approved patterns.
+- **Compliance Indicator:** A binary status icon (Check/Cross) in **Insight Green** or **Alert Amber**, but framed within an **Enterprise Indigo** border.
+- **Vault Hierarchy Breadcrumbs:** A clear visual chain (e.g., `Org` $\rightarrow$ `Dept` $\rightarrow$ `Team`) using **Platinum** separators.
+
+### Enterprise Tone of Voice
+While the standard tool is "Calming and Precise," the Enterprise layer is **"Strategic and Assuring."** It focuses on risk mitigation, ROI, and organizational alignment.
