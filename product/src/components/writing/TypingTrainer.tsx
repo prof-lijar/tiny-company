@@ -15,6 +15,7 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
   const [startTime, setStartTime] = useState<number | null>(null);
   const [endTime, setEndTime] = useState<number | null>(null);
   const [isFinished, setIsFinished] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -23,6 +24,16 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
       inputRef.current.focus();
     }
   }, [text]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (startTime && !endTime && !isFinished) {
+      interval = setInterval(() => {
+        setElapsedTime(Date.now() - (startTime || 0));
+      }, 100);
+    }
+    return () => clearInterval(interval);
+  }, [startTime, endTime, isFinished]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -51,6 +62,7 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
     setStartTime(null);
     setEndTime(null);
     setIsFinished(false);
+    setElapsedTime(0);
     if (inputRef.current) inputRef.current.focus();
   };
 
@@ -74,14 +86,13 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
         <div className="absolute top-4 right-4 flex items-center gap-2 text-slate-400 text-sm font-mono">
           <Timer size={16} />
           {startTime && !endTime && (
-            <span>{((Date.now() - startTime) / 1000).toFixed(1)}s</span>
+            <span>{(elapsedTime / 1000).toFixed(1)}s</span>
           )}
         </div>
         <div className="relative z-0 whitespace-pre-wrap">
           {renderText()}
         </div>
         
-        {/* Invisible input for capturing keystrokes */}
         <input
           ref={inputRef}
           type="text"
