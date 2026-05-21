@@ -32,20 +32,20 @@ Vocabulary should be categorized by level and theme.
 Grammar should be organized by function and level of complexity.
 
 ### Category 1: Sentence Connectors (Linking)
-- **Contrast**: -지만, -는데, -음에도 불구하고
-- **Cause/Effect**: -아서/어서, -기 때문에, -느라고, -기에
-- **Condition**: -면, -아야/어야, -는 한
-- **Sequence/Simultaneity**: -으면서, -자마자, -고 나서
+- **Contrast**: -\uc9c0\ub9cc, -\ub294\ub370, -\uc74c\uc5d0\ub3c4 \ubd88\uad6c\ud558\uace0
+- **Cause/Effect**: -\uc544\uc11c/\uc5b4\uc11c, -\uae30 \ub54c\ubb38\uc5d0, -\ub290\ub77c\uace0, -\uae30\uc5d0
+- **Condition**: -\uba74, -\uc544\uc7c8/\uc5b4\uc7c8, -\ub294 \ud55c
+- **Sequence/Simultaneity**: -\uc73c\uba74\uc11c, -\uc790\ub9c8\uc790, -\uace0 \ub098\uc11서
 
 ### Category 2: Sentence Endings (Mood/Attitude)
-- **Formal/Written**: -ㄴ/는다 (Plain form), -습니다 (Formal)
-- **Polite/Spoken**: -아요/어요
-- **Speculation/Probability**: -을 것 같다, -나 보다, -을 리가 없다
-- **Intent/Will**: -으려고 하다, -고자 하다, -기로 하다
+- **Formal/Written**: -\u3134/\ub294\ub2e4 (Plain form), -\uc2b5\ub2c8\ub2e4 (Formal)
+- **Polite/Spoken**: -\uc544\uc694/\uc5b4\uc694
+- **Speculation/Probability**: -\uc744 \uac83 \uac19\ub244, -\ub098 \ubcf4\ub2e4, -\uc744 \ub9ac\uac00 \uc5c6\ub2e4
+- **Intent/Will**: -\uc73c\ub824\uace0 \ud558\ub2e4, -\uace0\uc790 \ud558\ub2e4, -\uae30\ub85c \ud558\ub2e4
 
 ### Category 3: Advanced Structures (Level 5-6)
-- **Double Negatives/Emphasis**: -지 않을 수 없다
-- **Complex Modifiers**: -ㄴ/은/는 채로, -다가는
+- **Double Negatives/Emphasis**: -\uc9c0 \uc54a\uc744 \uc218 \uc5c6\ub2e4
+- **Complex Modifiers**: -\u3134/\uc740/\ub294 \ucc44\ub85c, -\ub244\uac00\ub294
 - **Formal Honorifics**: Specialized professional honorifics
 
 ## 4. Reading Passage Types & Difficulty Markers
@@ -69,118 +69,146 @@ The app must support the four specific tasks of the TOPIK II writing section:
 3. **Task 53 (Short Essay)**: Describe a graph or chart (200-300 characters). Focuses on objective data description without personal opinion.
 4. **Task 54 (Long Essay)**: Write a logical essay on a given social topic (600-700 characters). Focuses on structure, argumentation, and advanced vocabulary.
 
-## 6. Real Content Data (Seed Data)
+## 6. Expanded Content Data (Seed Data for CTO)
 
-This section provides specific examples of vocabulary and grammar patterns to be used in the app, categorized by level.
+This section provides a larger pool of data to populate the database.
 
-### 6.1 Vocabulary by Level & Theme
+### 6.1 Vocabulary Lists by Level
 
-| Level | Theme | Key Vocabulary (Korean - English) |
+#### Level 3 (Intermediate Low) - Focus: Public Life & Social Interaction
+| Korean | English | Context/Theme |
 |---|---|---|
-| **Level 3** | Workplace & Education | 직장 (workplace), 경험 (experience), 문화 (culture), 발표 (presentation), 준비 (preparation), 면접 (interview), 합격 (passing), 지원서 (application) |
-| **Level 4** | Society & Environment | 사회 (society), 경제 (economy), 환경 (environment), 기술 (technology), 발전 (development), 오염 (pollution), 보호 (protection), 정책 (policy) |
-| **Level 5** | Professional & Abstract | 분석 (analysis), 적용 (application), 협력 (cooperation), 전략 (strategy), 연구 (research), 효율성 (efficiency), 관점 (perspective), 논리 (logic) |
-| **Level 6** | Academic & Literary | 제안 (proposal), 통계 (statistics), 논의 (discussion), 비판 (criticism), 철학 (philosophy), 추상적 (abstract), 메커니즘 (mechanism), 함의 (implication) |
+| \uc9c1\uc7a5 | workplace | Professional |
+| \uacbd\ud5d8 | experience | General |
+| \ubb38\ud654 | culture | General |
+| \ubc1c\ud45c | presentation | Education |
+| \uc900\ube44 | preparation | General |
+| \uba74\uc811 | interview | Professional |
+| \ud569\uaca9 | passing | Education |
+| \uc9c0\uc6d0\uc11c | application | Professional |
+| \uac8c\uc740 | comfortable | Emotion |
+| \uc548\uc815 | safety | Public |
+| \uc138\ubd80 | facility | Public |
+| \uc548\ub110 | guide | Public |
+| \uc815\ubc14 | information | General |
+| \ubc1c\uc131 | generation | Society |
+| \uc138\ubd80 | facility | Public |
+
+#### Level 4 (Intermediate High) - Focus: Social Issues & General News
+| Korean | English | Context/Theme |
+|---|---|---|
+| \uc0ac\ud68c | society | Society |
+| \uacbd\uc81c | economy | Economics |
+| \ud658\uacbd | environment | Environment |
+| \uae30\uc220 | technology | Technology |
+| \ubc1c\uc804 | development | General |
+| \uc624\uc5fc | pollution | Environment |
+| \ubcf4\ud638 | protection | Environment |
+| \uc815\ucc45 | policy | Politics |
+| \uacbd\ud5a5 | trend | Society |
+| \uac00\uc7ad8 | value | Abstract |
+| \uc138\ubd80 | facility | Public |
+| \uc815\ubc14 | information | General |
+| \uc740\ubc14 | balance | Abstract |
+| \uc9c0\uc6d0 | application | Professional |
+| \uc740\ubc14 | balance | Abstract |
+
+#### Level 5 (Advanced Low) - Focus: Professional, Politics, Economics
+| Korean | English | Context/Theme |
+|---|---|---|
+| \ubd84\uc11d | analysis | Academic |
+| \uc801\uc6a9 | application | Professional |
+| \ud611\ub825 | cooperation | Professional |
+| \uc804\ub7b5 | strategy | Professional |
+| \uc5f0\uad6c | research | Academic |
+| \ud6a8\uc728\uc131 | efficiency | Economics |
+| \uad00\uc810 | perspective | Abstract |
+| \ub17c\ub9ac | logic | Abstract |
+| \uc811\uc138 | precision | Professional |
+| \uc815\uc740 | definition | Academic |
+| \uc138\ubd80 | facility | Public |
+| \uc815\ubc14 | information | General |
+| \uc740\ubc14 | balance | Abstract |
+| \uc9c0\uc6d0 | application | Professional |
+| \uc740\ubc14 | balance | Abstract |
+
+#### Level 6 (Advanced High) - Focus: Academic, Literary, Philosophical
+| Korean | English | Context/Theme |
+|---|---|---|
+| \uc81c\uc548 | proposal | Academic |
+| \ud1b5\uacc4 | statistics | Academic |
+| \ub17c\uc758 | discussion | Academic |
+| \ube44\ud310 | criticism | Literary |
+| \ucca0\ud559 | philosophy | Philosophy |
+| \ucd94\uc0c1\u0119 | abstract | Philosophy |
+| \uba54\ucee4\ub2c8\uc998 | mechanism | Science |
+| \ud568\uc758 | implication | Academic |
+| \uac1c\ub110 | concept | Philosophy |
+| \uc815\uc740 | definition | Academic |
 
 ### 6.2 Grammar Patterns by Level
 
 #### Level 3-4 (Intermediate)
-- **Cause/Reason**: `-기 때문에` (because), `-느라고` (because of - often negative result), `-길래` (since/because - spoken)
-- **Contrast**: `-는 반면에` (on the other hand), `-지만` (but), `-는데/ㄴ데` (but/and/background)
-- **Condition/Hypothesis**: `-다면` (if - hypothetical), `-기만 하면` (if only)
-- **Speculation**: `-ㄴ/은/는 것 같다` (seems like), `-ㄹ/을 것 같다` (likely to), `-나 보다` (looks like)
-- **Inevitability/Necessity**: `-ㄹ/을 수밖에 없다` (have no choice but to), `-기 마련이다` (bound to)
+- **Cause/Reason**: `-\\uae30 \\ub54c\\ubb38\\uc5d0` (because), `-\\ub290\\ub77c\\uace0` (because of - negative), `-\\uae38\\ub798` (since - spoken)
+- **Contrast**: `-\\ub294 \\ubc18\\uba74\\uc5d0` (on the other hand), `-\\uc9c0\\ub9cc` (but), `-\\ub294\\ub370/\\u3134\\ub294\\ub370` (but/background)
+- **Condition/Hypothesis**: `-\\ub244\\uba74` (if - hypothetical), `-\\uae30\\ub9cc \\ud558\\uba74` (if only)
+- **Speculation**: `-\\u3134/\\uc740/\\ub294 \\uac83 \\uac19\\ub244` (seems like), `-\\u3139/\\uc744 \\uac83 \\uac19\\ub244` (likely to), `-\\ub098 \\ubcf4\\ub2e4` (looks like)
+- **Inevitability/Necessity**: `-\\u3139/\\uc744 \\uc218\\ubc16\\uc5d0 \\uc5c6\\ub2e4` (have no choice but to), `-\\uae30 \\ub9c8\\ub828\\uc774\\ub2e4` (bound to)
 
 #### Level 5-6 (Advanced)
-- **Formal Contrast**: `-거니와` (not only... but also), `-는 법이다` (it is the rule that)
-- **Advanced Cause/Effect**: `-ㄴ/은/는 바람에` (due to - unexpected), `-거늘` (given that/since)
-- **Nuance/Emphasis**: `-기나 하다` (at least do...), `-기나 하겠어?` (would they even...?)
-- **Formal Writing Endings**: `-ㄴ/는다` (plain form), `-ㄴ/는다고 한다` (indirect quote)
+- **Formal Contrast**: `-\\uac70\\ub2c8\\uc640` (not only... but also), `-\\ub294 \\ubc95\\uc774\\ub2e4` (it is the rule that)
+- **Advanced Cause/Effect**: `-\\u3134/\\uc740/\\ub294 \\ubc14\\ub78c\\uc5d0` (due to - unexpected), `-\\uac70\\ub298` (given that/since)
+- **Nuance/Emphasis**: `-\\uae30\\ub098 \\ud558\\ub2e4` (at least do...), `-\\uae30\\ub098 \\ud558\\uaca0\\uc5b4?` (would they even...?)
+- **Formal Writing Endings**: `-\\u3134/\\ub294\\ub2e4` (plain form), `-\\u3134/\\ub294\\ub2e4\\uace0 \\ud55c\\ub2e4` (indirect quote)
 
-### 6.3 Writing Task 54 (Long Essay) Scoring Criteria
-The AI feedback engine should evaluate based on:
-1. **Task Completion**: Did the user address all parts of the prompt? (600-700 characters).
-2. **Logical Structure**: Introduction $\rightarrow$ Body (Argument 1, Argument 2) $\rightarrow$ Conclusion.
-3. **Vocabulary Sophistication**: Use of Level 5-6 words instead of basic Level 3 words.
-4. **Grammatical Accuracy**: Correct use of formal written style (plain form) and complex connectors.
-5. **Coherence**: Effective use of transition words (e.g., 따라서, 반면에, 더욱이).
+## 7. Content Generation Framework for CTO
 
-## 2026 Exam Format Updates (CRITICAL)
+Since the target is 12,000+ words and 50+ test sets, the CTO should use the following AI Prompting Strategy to generate data that is consistent and high-quality.
+
+### Strategy: The \"Thematic Chunking\" Method
+Instead of asking for \"1000 words\", ask for \"50 words related to [Theme] for [Level]\".
+
+#### Prompt Template for Vocabulary:
+> \"Act as a TOPIK II content expert. Generate a list of 50 vocabulary words for **Level [3/4/5/6]** specifically related to the theme of **[Theme from Section 7.1/7.2]**. 
+> Provide the data in JSON format: `[{ \"word\": \"...\", \"meaning\": \"...\", \"example\": \"...\", \"level\": [X] }]`. 
+> Ensure the words are representative of actual TOPIK II exam patterns and avoid overly basic words.\"
+
+#### Prompt Template for Reading Passages:
+> \"Create a TOPIK II Reading passage of type **[Passage Type]** for **Level [X]**. 
+> Theme: **[Theme]**. 
+> The passage should be approximately [Length] characters. 
+> Include 3 multiple-choice questions with 4 options each, and provide the correct answer and a brief explanation. 
+> Ensure the tone is [Formal/Academic/Literary] as per TOPIK standards.\"
+
+#### Prompt Template for Writing Task 54:
+> \"Generate a TOPIK II Writing Task 54 prompt based on the theme: **[Theme]**. 
+> The prompt must include: 
+> 1. A general statement about the issue. 
+> 2. Three specific points/questions the essay must address. 
+> Also, provide a high-scoring (Level 6) sample answer (600-700 characters) using formal plain form (-\u3134/\ub294\ub2e4).\"
+
+## 8. 2026 Exam Format Updates (CRITICAL)
 The 2026 reform has fundamentally changed the exam structure. All content and simulators must align with these specs:
 
 ### 1. Section Changes
 - **Listening**: 
-    - Questions: Increased from 50 $\rightarrow$ 60.
-    - Speed: Audio plays approximately 8% faster (approx 1.1x speed).
-    - Pacing: Less time between questions.
+    - Questions: 60 (was 50).
+    - Speed: 1.1x speed.
 - **Reading**: 
-    - Questions: Decreased from 50 $\rightarrow$ 40.
-    - Time Pressure: Less time per question; higher speed required.
+    - Questions: 40 (was 50).
+    - Time Pressure: Higher.
 - **Writing**: 
-    - Questions: Still 4 tasks.
-    - Grading: New rubric heavily penalizes "formulaic" or "memorized" templates.
+    - Grading: Heavy penalty for formulaic templates.
 
 ### 2. Scoring Thresholds (TOPIK II)
-| Level | 2025 Requirement | 2026 Requirement | Change |
-|---|---|---|---|
-| Level 3 | 120 points | 120 points | No change |
-| Level 4 | 150 points | 140 points | -10 (Easier threshold) |
-| Level 5 | 150 points | 170 points | +20 (Harder) |
-| Level 6 | 190 points | 190 points | Same (but harder to reach) |
+| Level | 2026 Requirement |
+|---|---|
+| Level 3 | 120 points |
+| Level 4 | 140 points |
+| Level 5 | 170 points |
+| Level 6 | 190 points |
 
 ### 3. IBT Environment
 - Full transition to computer-based interface.
 - No annotations allowed on digital text.
-- Typing speed in Korean is now a critical factor for the Writing section.
-
-## 7. Detailed Content Expansion Plan (2026 Alignment)
-
-To reach the goal of 50+ sets, the following themes and topics must be covered. Content should be distributed across levels 3-6.
-
-### 7.1 Writing Task 54: High-Probability Essay Topics
-These topics are categorized by the "Abstract/Social" nature of TOPIK II advanced essays.
-
-**Social Issues & Technology**
-- The impact of AI on the future of labor and employment.
-- The pros and cons of a cashless society.
-- Digital divide: The gap between generations in technology usage.
-- The role of social media in modern communication (connection vs. isolation).
-- Ethical considerations of genetic engineering or biotechnology.
-
-**Education & Youth**
-- The necessity of lifelong learning in a rapidly changing world.
-- The balance between academic achievement and emotional intelligence (EQ).
-- The effectiveness of online education vs. traditional classrooms.
-- The role of youth in solving environmental crises.
-- The importance of critical thinking over rote memorization.
-
-**Culture & Society**
-- The preservation of traditional culture in a globalized world.
-- The cause and solution for the declining birth rate in modern society.
-- The concept of 'work-life balance' and its impact on productivity.
-- The ethics of animal testing for medical advancement.
-- The influence of pop culture (Hallyu) on national image and diplomacy.
-
-**Psychology & Philosophy**
-- The definition of true happiness in a materialistic society.
-- The importance of failure in the process of achieving success.
-- Individualism vs. Collectivism: Finding a balance in modern Korea.
-- The relationship between freedom and responsibility.
-- The impact of urban living on mental health.
-
-### 7.2 Reading Passage Themes by Level
-Passages should follow these themes to ensure a realistic difficulty curve.
-
-| Level | Theme/Topic | Passage Type | Key Focus |
-|---|---|---|---|
-| **Level 3** | Daily Life / Public Services | Ads, Notices, Blogs | Practical info, schedules, simple requests. |
-| **Level 4** | General Social Issues | News, Opinion Pieces | Trends, social phenomena, basic arguments. |
-| **Level 5** | Professional / Academic | Editorial, Research Summary | Specialized vocab, complex logic, formal tone. |
-| **Level 6** | Abstract / Literary | Columns, Philosophical Essays | Nuance, implicit meaning, high-level academic discourse. |
-
-**Sample Academic Topics for Level 5-6:**
-- **Economics**: Behavioral economics, the gig economy, inflation and consumer behavior.
-- **Science**: Quantum computing basics, climate change feedback loops, neuroscience.
-- **Sociology**: Urbanization and social alienation, the evolution of family structures.
-- **Philosophy**: Utilitarianism vs. Deontology in modern ethics, the nature of consciousness.
-- **Arts**: The role of art in political protest, the evolution of minimalist architecture.
+- Korean typing speed is critical.
