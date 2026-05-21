@@ -3,53 +3,33 @@ import { MockTest } from '@/lib/types';
 export const mockTests: MockTest[] = [
   {
     id: 'mt-1',
-    title: 'TOPIK II Full Mock Test #1',
+    title: 'TOPIK II Full Mock Test #1 (2026 Reform)',
     sections: [
       {
         id: 'listening',
         name: 'Listening',
-        durationMinutes: 60,
-        questions: [
-          {
-            id: 'l1',
-            audioUrl: '/audio/l1.mp3',
-            question: 'What is the main topic of the conversation?',
-            options: ['Travel', 'Work', 'Health', 'Education'],
-            correctAnswer: 1,
-            tags: ['Main Idea', 'Workplace'],
-          },
-          {
-            id: 'l2',
-            audioUrl: '/audio/l2.mp3',
-            question: 'Why did the speaker call?',
-            options: ['To invite', 'To apologize', 'To inquire', 'To complain'],
-            correctAnswer: 2,
-            tags: ['Detail', 'Daily Life'],
-          },
-        ],
+        durationMinutes: 70, // Increased by 10 mins total (approx split)
+        questions: Array.from({ length: 60 }, (_, i) => ({
+          id: `l${i + 1}`,
+          audioUrl: `/audio/l${i + 1}.mp3`,
+          question: i < 2 ? (i === 0 ? 'What is the main topic of the conversation?' : 'Why did the speaker call?') : `Listening Question ${i + 1}: Analyze the speaker's intent.`,
+          options: i < 2 ? (i === 0 ? ['Travel', 'Work', 'Health', 'Education'] : ['To invite', 'To apologize', 'To inquire', 'To complain']) : ['Option A', 'Option B', 'Option C', 'Option D'],
+          correctAnswer: i < 2 ? (i === 0 ? 1 : 2) : 0,
+          tags: ['Listening', '2026-Reform'],
+        })),
       },
       {
         id: 'reading',
         name: 'Reading',
-        durationMinutes: 70,
-        questions: [
-          {
-            id: 'r1',
-            passage: '현대 사회에서 환경 보호는 더 이상 선택이 아니라 필수입니다. 특히 플라스틱 사용을 줄이는 것은 매우 시급한 과제입니다.',
-            question: 'What is the main point of the passage?',
-            options: ['Plastic is useful', 'Environment protection is essential', 'Modern society is complex', 'Reducing waste is hard'],
-            correctAnswer: 1,
-            tags: ['Main Idea', 'Environment'],
-          },
-          {
-            id: 'r2',
-            passage: '한국의 경제 성장은 세계적으로 유명합니다. 하지만 그 이면에는 많은 사회적 갈등과 불평등이 존재합니다.',
-            question: 'What is the "back side" (이면) mentioned in the text?',
-            options: ['Economic growth', 'Global fame', 'Social conflict and inequality', 'Fast speed'],
-            correctAnswer: 2,
-            tags: ['Vocabulary', 'Society'],
-          },
-        ],
+        durationMinutes: 70, 
+        questions: Array.from({ length: 40 }, (_, i) => ({
+          id: `r${i + 1}`,
+          passage: i < 2 ? (i === 0 ? '현대 사회에서 환경 보호는 더 이상 선택이 아니라 필수입니다. 특히 플라스틱 사용을 줄이는 것은 매우 시급한 과제입니다.' : '한국의 경제 성장은 세계적으로 유명합니다. 하지만 그 이면에는 많은 사회적 갈등과 불평등이 존재합니다.') : `Reading Passage ${i + 1}: This is a mock passage for the 2026 TOPIK reform format.`,
+          question: i < 2 ? (i === 0 ? 'What is the main point of the passage?' : 'What is the "back side" (이면) mentioned in the text?') : `Reading Question ${i + 1}: What can be inferred from the text?`,
+          options: i < 2 ? (i === 0 ? ['Plastic is useful', 'Environment protection is essential', 'Modern society is complex', 'Reducing waste is hard'] : ['Economic growth', 'Global fame', 'Social conflict and inequality', 'Fast speed']) : ['Option A', 'Option B', 'Option C', 'Option D'],
+          correctAnswer: i < 2 ? (i === 0 ? 1 : 2) : 0,
+          tags: ['Reading', '2026-Reform'],
+        })),
       },
       {
         id: 'writing',
