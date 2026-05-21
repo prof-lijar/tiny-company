@@ -101,3 +101,72 @@ A forensic chat interface to query a specific trace.
 | Query: _                                                               |
 +-----------------------------------------------------------------------+
 ```
+
+
+## 5. v2.5 The Autonomous Bridge Wireframes
+
+### 5.1 Auto-SOP Proposal View (`tw propose-sop <agent_id>`)
+The interface for promoting a discovered reasoning pattern to a Golden Path.
+
+```text
++-----------------------------------------------------------------------+
+| PROPOSED GOLDEN PATH: [Customer-Support-Bot] | Confidence: 94%         |
++-----------------------------------------------------------------------+
+| [Cluster Map]                                      [Validation]       |
+|    (.)  (.) <--- Successful Traces                   Adherence: 94%   |
+|  (.)  (.)  (.)                                       Coverage: 88%    |
+|    \  |  /                                                           |
+|     [Proposed Path]                                                   |
++-----------------------------------------------------------------------+
+| PROPOSED MILESTONES:                                                  |
+| 1. [ ] Verify User Identity (KDP_01)                                  |
+| 2. [ ] Classify Intent: Refund vs. Tech Support (KDP_02)              |
+| 3. [ ] Check Knowledge Base for Policy (KDP_03)                       |
+| 4. [ ] Synthesize Response with Empathy (KDP_04)                      |
++-----------------------------------------------------------------------+
+| [ Cancel ]                                     [ PROMOTE TO PRODUCTION ]|
++-----------------------------------------------------------------------+
+```
+
+### 5.2 Production Drift Dashboard (`tw monitor`)
+Real-time monitoring of logic stability across the agent fleet.
+
+```text
++-----------------------------------------------------------------------+
+| PRODUCTION LOGIC HEALTH                                               |
++-----------------------------------------------------------------------+
+| AGENT NAME             | STABILITY | DRIFT | STATUS       | ACTION    |
+|-----------------------|------------|-------|--------------|-----------|
+| Research-Bot-01       | [|||||  ]  | +2%   | STABLE       | View      |
+| Support-Bot-Alpha     | [||     ]  | -15%  | DRIFTING     | ANALYZE    |
+| Legal-Review-Bot      | [|      ]  | -40%  | CRITICAL     | FIX NOW   |
++-----------------------------------------------------------------------+
+| DETAIL: [Support-Bot-Alpha]                                           |
+| Golden Path:  A -> B -> C -> D                                        |
+| Actual Path:  A -> B -> X -> D  <-- Divergence at Step C               |
+| Result: Correct (Silent Failure)                                      |
++-----------------------------------------------------------------------+
+| [ Trigger Shadow APO ]                                [ View Traces ] |
++-----------------------------------------------------------------------+
+```
+
+### 5.3 Logic Porter Report (`tw port <source_model> <target_model>`)
+Comparison and validation of reasoning IP translation between models.
+
+```text
++-----------------------------------------------------------------------+
+| LOGIC PORTER: GPT-4  --->  CLAUDE 3.5                                 |
++-----------------------------------------------------------------------+
+| COGNITIVE PATH: [Verify] -> [Filter] -> [Synthesize]                   |
+| COMPATIBILITY SCORE: 82% [Good]                                       |
++-----------------------------------------------------------------------+
+| VERIFICATION BRIDGE:                                                 |
+| Test Case | Source Path | Target Path | Result    | Note              |
+|----------|-------------|-------------|-----------|-------------------|
+| TC_01    | Adherent    | Adherent    | PASS      | Exact Match       |
+| TC_02    | Adherent    | Divergent   | FAIL      | Missed Step 2      |
+| TC_03    | Adherent    | Adherent    | PASS      | Logic Preserved    |
++-----------------------------------------------------------------------+
+| [ Re-Optimize Prompt ]                        [ DEPLOY TO PRODUCTION ]|
++-----------------------------------------------------------------------+
+```
