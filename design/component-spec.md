@@ -131,3 +131,46 @@ Visualizing the mapping of reasoning patterns across models.
 | `--color-v25-glow-stable` | `#4ADE80` | Health Orbit: Stable |
 | `--color-v25-glow-drift` | `#FDE047` | Health Orbit: Drifting |
 | `--color-v25-glow-critical` | `#EF4444` | Health Orbit: Critical |
+
+## 7. v3.0 Self-Healing Orchestrator Components
+
+To support the transition to an autonomous self-healing system, we introduce components that focus on "The Healing Proposal"—moving from forensic analysis to a high-confidence approval workflow.
+
+### 7.1 The Healing Proposal Card (The Trigger)
+A high-attention notification designed to alert the Strategic Overseer of a pending autonomous fix.
+- **Structure:**
+    - `Alert Header`: Pulsing `Cyber Teal` border with an "Autonomous Action" icon.
+    - `Agent Identity`: Name and ID of the affected agent.
+    - `Issue Summary`: Concise description of the drift (e.g., "Logic Drift: Milestone 3").
+    - `Confidence Gauge`: A progress bar showing the verification success rate from the shadow environment.
+    - `Action Trigger`: A primary `Cyber Teal` button: `[ Review Proposal ]`.
+
+### 7.2 The Reasoning Diff Workspace (The Workspace)
+A complex view designed as a "Cognitive PR," comparing the intended reasoning path with the drifted path and the proposed fix.
+
+#### A. Path Divergence Visualizer (The Drift)
+- **Structure:** Side-by-side vertical timelines.
+- **Golden Path Column:** Solid, muted `Noise Gray` line showing the verified sequence.
+- **Drifted Path Column:** Dashed line showing the production failure.
+- **Divergence Marker:** A `Drift Yellow` highlight at the exact milestone where the paths diverge.
+- **Diagnosis Annotation:** A text callout explaining the root cause (e.g., "Milestone Skipped").
+
+#### B. The Cognitive Diff (The Fix)
+- **Structure:** A high-contrast prompt comparison view.
+- **Old Segment:** Red background, strike-through text.
+- **Healed Segment:** Green background, bold text.
+- **Rationale Box:** A dedicated area for the "Fix Logic" explanation provided by the Council of Agents.
+
+#### C. Shadow Verification Table (The Proof)
+- **Structure:** A data grid showing the results of the regression suite.
+- **Columns:** `Test Case ID`, `Baseline Result`, `Healed Result`, `Status`.
+- **Status Indicators:** 
+    - `[OK]`: Green checkmark.
+    - `[FIXED]`: Rocket icon with a "PAR Gain" metric (e.g., +12%).
+- **Stability Metric:** A large radial gauge showing the overall stability improvement.
+
+### 7.3 Action Center (The Resolution)
+- **Buttons:**
+    - `Reject`: Ghost button, marks the issue as "Manual Intervention Required."
+    - `Modify`: Secondary button, opens the prompt editor for manual fine-tuning.
+    - `Approve & Deploy`: Primary `Cyber Teal` button, triggers the deployment pipeline.
