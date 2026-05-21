@@ -63,7 +63,7 @@ def test_trace_filtering_all_noise():
     ]
     filter_obj = TraceFilter()
     trace = filter_obj.filter(entries)
-    assert len(trace.entries) == 0
+    assert trace is None
 
 def test_trace_filtering_custom_patterns():
     entries = [
