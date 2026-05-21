@@ -208,24 +208,48 @@ TraceWhisper is a \"Developer-First\" tool. The interface prioritizes efficiency
 | **Reasoning Loop** | Alert Amber | Background highlight | Agent is stuck; needs intervention |
 | **Success/Goal** | Insight Green | Checkmark icon | Goal reached successfully |
 | **Critical Failure** | Obsidian/Red | Bold Red text | Hard stop/exception |
-<<<<<<< HEAD
 | **Self-Healing (v3.0)** | Emerald Green | Pulsing glow | Autonomous fix applied/proposed |
 | **Drift (v3.0)** | Amber/Red | Warning icon | Deviation from Golden Path detected |
 | **Compliance Gap** | Warning Orange | Dashed border | Agent deviated from Golden Path (v2.4) |
-=======
 | **Cognitive Bloat** | Fog Grey | Muted/Strikethrough | Redundant reasoning (v2.3) |
 | **Vault Insight** | Vault Purple | Bordered Card | Cross-project knowledge (v2.3) |
->>>>>>> designer/v2.3-ui-ux-spec
 
 ### 4.2 Interaction Shortcuts (CLI)
 - `Space`: Pause/Resume stream.
 - `Ctrl+F`: Search within the current narrative.
 - `Ctrl+X`: Export current report to Markdown.
 - `/`: Open Interactive Trace-Chat.
-<<<<<<< HEAD
 - `S`: (v3.0) Jump to Strategic Health Map.
 - `D`: (v3.0) Open Architecture Designer.
-=======
 - `p`: Trigger Pruning Analysis (v2.3).
 - `v`: Open Vault Suggestions (v2.3).
->>>>>>> designer/v2.3-ui-ux-spec
+=======
+
+
+## 5. v2.2 Reasoning Trace Visualizer
+
+### 5.1 The Forensic Path View (`tw trace <id>`)
+**Goal:** To visualize the linear progression of reasoning and pinpoint exactly where a failure occurred and how it was resolved.
+
+**Visual Design:**
+- **Linear Flow:** The trace is presented as a vertical sequence of nodes (Thought $\rightarrow$ Tool Call $\rightarrow$ Observation).
+- **The Breaking Point:** When a reasoning failure (e.g., a loop) is detected, the node is highlighted in **Alert Amber** with a distinct marker: `[BREAKING POINT]`.
+- **The Correction Bridge:** A visual "bridge" or callout that connects the Breaking Point to the corrected path, explicitly stating the correction applied (e.g., the prompt optimization).
+- **Resolution:** The path continues from the correction to the final goal, highlighted in **Insight Green** upon success.
+
+### 5.2 Enhanced Trace Comparison (`tw compare <A> <B>`)
+**Goal:** Quantitative and Qualitative proof of improvement.
+
+**UI Enhancements:**
+- **Metric Delta Header:** A top-level summary bar showing the $\Delta$ (Delta) for key KPIs:
+  - `Steps: A(X) -> B(Y) [-%]`
+  - `Tokens: A(X) -> B(Y) [-%]`
+  - `Time: A(X) -> B(Y) [-%]`
+  - `Efficiency Score: A(X%) -> B(Y%) [+]`
+- **Divergence Marker:** A high-contrast horizontal line (`=== DIVERGENCE POINT ===`) that aligns both traces exactly where the paths split.
+- **Qualitative Verdict:** A summary block at the bottom providing a human-readable explanation of why Trace B outperformed Trace A.
+
+### 5.3 Interaction Patterns for v2.2
+- **Trace-to-Comparison:** From a single trace view, users can trigger `[C]ompare with Baseline` to immediately enter the A/B view.
+- **Trace-to-Fix:** From the Breaking Point in a trace, users can trigger `[R]un Fix-It` to jump directly to the prompt optimization proposal.
+>>>>>>> designer/trace-visualizer-support
