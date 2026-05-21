@@ -142,3 +142,29 @@ class FragilityReport(BaseModel):
     failure_rate: float
     critical_weak_points: List[str] = Field(default_factory=list)
     adversarial_examples: List[Dict[str, Any]] = Field(default_factory=list)
+
+# --- v2.5 Autonomous Bridge Models ---
+
+class GoldenPathStep(BaseModel):
+    step_index: int
+    intent: str  # e.g., "VERIFY_SOURCE", "SYNTHESIZE_ANSWER"
+    required_keywords: List[str] = Field(default_factory=list)
+    expected_behavior: str
+    is_critical: bool = True
+
+class GoldenPath(BaseModel):
+    path_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    agent_id: str
+    task_id: str
+    version: int = 1
+    steps: List[GoldenPathStep]
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+class DriftMetric(BaseModel):
+    trace_id: str
+    path_id: str
+    path_adherence_rate: float  # 0.0 to 1.0
+    is_drifted: bool
+    drift_type: Optional[str] = None  # e.g., "Silent Failure", "Catastrophic Divergence"
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
