@@ -9,6 +9,7 @@ import { TopikLevel } from '@/lib/types';
 export default function ListeningPage() {
   const [selectedLevel, setSelectedLevel] = useState<TopikLevel>(3);
   const [currentPassageIdx, setCurrentPassageIdx] = useState(0);
+  const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState(0);
@@ -16,6 +17,7 @@ export default function ListeningPage() {
 
   const filteredPassages = listeningData.filter(p => p.level === selectedLevel);
   const currentPassage = filteredPassages[currentPassageIdx];
+  const currentQuestion = currentPassage?.questions[currentQuestionIdx];
 
   if (!currentPassage) {
     return (
@@ -45,20 +47,33 @@ export default function ListeningPage() {
   };
 
   const handleSubmit = () => {
-    if (selectedOption === null) return;
+    if (selectedOption === null || !currentQuestion) return;
     setIsSubmitted(true);
-    if (selectedOption === currentPassage.questions[0].correctAnswer) {
+    if (selectedOption === currentQuestion.correctAnswer) {
       setScore(prev => prev + 1);
-      setTotalAnswered(prev => prev + 1);
-    } else {
-      setTotalAnswered(prev => prev + 1);
     }
+    setTotalAnswered(prev => prev + 1);
   };
 
   const handleNext = () => {
     setIsSubmitted(false);
     setSelectedOption(null);
-    setCurrentPassageIdx(prev => prev + 1);
+    
+    if (currentQuestionIdx < currentPassage.questions.length - 1) {
+      setCurrentQuestionIdx(prev => prev + 1);
+    } else {
+      setCurrentQuestionIdx(0);
+      if (currentPassageIdx < filteredPassages.length - 1) {
+        setCurrentPassageIdx(prev => prev + 1);
+      } else {
+        // End of all passages for this level
+        alert('You have completed all listening exercises for this level!');
+        setCurrentPassageIdx(0);
+        setCurrentQuestionIdx(0);
+        setScore(0);
+        setTotalAnswered(0);
+      }
+    }
   };
 
   return (
@@ -72,7 +87,13 @@ export default function ListeningPage() {
           {[3, 4, 5, 6].map(level => (
             <button
               key={level}
-              onClick={() => setSelectedLevel(level as TopikLevel)}
+              onClick={() => {
+                setSelectedLevel(level as TopikLevel);
+                setCurrentPassageIdx(0);
+                setCurrentQuestionIdx(0);
+                setIsSubmitted(false);
+                setSelectedOption(null);
+              }}
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
                 selectedLevel === level ? 'bg-white text-indigo-600 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-700'
               }`}
@@ -90,8 +111,9 @@ export default function ListeningPage() {
               <Volume2 className="text-indigo-500" size={20} />
               Audio Passage
             </h3>
+            {/* Note: In TOPIK, one audio clip often serves multiple questions */}
             <ListeningPlayer 
-              audioUrl={currentPassage.questions[0].audioUrl} 
+              audioUrl={currentQuestion?.audioUrl || currentPassage.questions[0].audioUrl} 
               onEnded={() => console.log('Audio ended')} 
             />
             <div className="mt-4 text-sm text-slate-500 italic">
@@ -100,61 +122,73 @@ export default function ListeningPage() {
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">Question</h3>
-            <p className="text-xl text-slate-800 mb-6 font-medium leading-relaxed">
-              {currentPassage.questions[0].question}
-            </p>
-            <div className="space-y-3">
-              {currentPassage.questions[0].options.map((option, idx) => (
-                <label 
-                  key={idx} 
-                  className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                    selectedOption === idx 
-                      ? 'border-indigo-600 bg-indigo-50' 
-                      : 'border-slate-100 hover:border-slate-300 bg-slate-50'
-                  } ${
-                    isSubmitted && idx === currentPassage.questions[0].correctAnswer 
-                      ? 'border-green-500 bg-green-50' 
-                      : isSubmitted && selectedOption === idx 
-                        ? 'border-red-500 bg-red-50' 
-                        : ''
-                  }`}
-                >
-                  <input 
-                    type="radio" 
-                    name="listening-option" 
-                    className="hidden" 
-                    checked={selectedOption === idx}
-                    onChange={() => handleOptionSelect(idx)}
-                  />
-                  <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 mr-3 ${
-                    selectedOption === idx ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-slate-300 text-slate-400'
-                  }`}>
-                    {idx + 1}
-                  </span>
-                  <span className="text-slate-700">{option}</span>
-                </label>
-              ))}
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-slate-800">Question</h3>
+              <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                Passage {currentPassageIdx + 1} - Q{currentQuestionIdx + 1} of {currentPassage.questions.length}
+              </span>
             </div>
+            
+            {currentQuestion && (
+              <>
+                <p className="text-xl text-slate-800 mb-6 font-medium leading-relaxed">
+                  {currentQuestion.question}
+                </p>
+                <div className="space-y-3">
+                  {currentQuestion.options.map((option, idx) => (
+                    <label 
+                      key={idx} 
+                      className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                        selectedOption === idx 
+                          ? 'border-indigo-600 bg-indigo-50' 
+                          : 'border-slate-100 hover:border-slate-300 bg-slate-50'
+                      } ${
+                        isSubmitted && idx === currentQuestion.correctAnswer 
+                          ? 'border-green-500 bg-green-50' 
+                          : isSubmitted && selectedOption === idx 
+                            ? 'border-red-500 bg-red-50' 
+                            : ''
+                      }`}
+                    >
+                      <input 
+                        type="radio" 
+                        name="listening-option" 
+                        className="hidden" 
+                        checked={selectedOption === idx}
+                        onChange={() => handleOptionSelect(idx)}
+                      />
+                      <span className={`w-6 h-6 flex items-center justify-center rounded-full border-2 mr-3 ${
+                        selectedOption === idx ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-slate-300 text-slate-400'
+                      }`}>
+                        {idx + 1}
+                      </span>
+                      <span className="text-slate-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
 
-            <div className="mt-6 flex justify-between items-center">
-              {!isSubmitted ? (
-                <button 
-                  onClick={handleSubmit}
-                  disabled={selectedOption === null}
-                  className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 disabled:bg-slate-300 transition-colors"
-                >
-                  Submit Answer
-                </button>
-              ) : (
-                <button 
-                  onClick={handleNext}
-                  className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
-                >
-                  Next Question
-                </button>
-              )}
-            </div>
+                <div className="mt-6 flex justify-between items-center">
+                  {!isSubmitted ? (
+                    <button 
+                      onClick={handleSubmit}
+                      disabled={selectedOption === null}
+                      className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 disabled:bg-slate-300 transition-colors"
+                    >
+                      Submit Answer
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={handleNext}
+                      className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+                    >
+                      {currentQuestionIdx < currentPassage.questions.length - 1 || currentPassageIdx < filteredPassages.length - 1 
+                      ? 'Next Question' 
+                      : 'Finish Session'}
+                    </button>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -173,11 +207,11 @@ export default function ListeningPage() {
             </div>
           </div>
 
-          {isSubmitted && (
+          {isSubmitted && currentQuestion && (
             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-2">Explanation</h4>
               <p className="text-slate-600 text-sm leading-relaxed">
-                {currentPassage.questions[0].explanation}
+                {currentQuestion.explanation}
               </p>
             </div>
           )}
