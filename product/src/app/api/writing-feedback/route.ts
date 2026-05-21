@@ -9,7 +9,7 @@ interface WritingFeedback {
 
 export async function POST(req: Request) {
   try {
-    const { answer, prompt, _context } = await req.json();
+    const { answer, prompt } = await req.json();
 
     if (!answer || !prompt) {
       return NextResponse.json({ error: 'Answer and prompt are required' }, { status: 400 });
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       '많은 사람들이', 
       '가장 중요한 것은', 
       '첫째로, 둘째로, 셋째로', 
-      '결론적으로 말하면'
+      '결론적으로 말하자면'
     ];
     
     let formulaicCount = 0;
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     }
 
     // Check for structural variety & logical connectors
-    const advancedConnectors = ['그럼에도 불구하고', '반면', '결과적으로', '따라서'];
+    const advancedConnectors = ['그럼에도 불구하고', '반면', '공과적으로', '더불어'];
     const hasVariety = advancedConnectors.some(conn => answer.includes(conn));
     
     if (hasVariety) {
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
       score: finalScore,
       strengths: strengths.length > 0 ? strengths : ['Basic attempt at the prompt'],
       improvements: improvements.length > 0 ? improvements : ['Continue practicing advanced vocabulary'],
-      correctedText: `[AI Corrected Version - 2026 Focus: Natural Expression]\\n\\n${answer}\\n\\n(The AI would now provide a version that removes formulaic clichés and replaces them with natural, high-level academic Korean phrasing).`,
+      correctedText: `[AI Corrected Version - 2026 Focus: Natural Expression]\\\n\n${answer}\n\n(The AI would now provide a version that removes formulaic clichés and replaces them with natural, high-level academic Korean phrasing).`,
     };
 
     return NextResponse.json(feedback);
