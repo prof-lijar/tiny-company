@@ -189,3 +189,22 @@ class ShadowVerificationReport(BaseModel):
     regression_count: int
     stability_gain: float  # (Healed PAR - Baseline PAR) / Total Tests
     detailed_results: List[TestCaseResult]
+
+# --- v3.0 Healing Proposal Models ---
+
+class ProposalStatus(str, Enum):
+    PENDING = "PENDING"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+    DEPLOYED = "DEPLOYED"
+
+class HealingProposal(BaseModel):
+    proposal_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    drift_event: Dict[str, Any]
+    rca_report: Dict[str, Any]
+    proposed_fix: PromptFix
+    verification_report: ShadowVerificationReport
+    status: ProposalStatus = ProposalStatus.PENDING
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    approved_by: Optional[str] = None
+    deployed_at: Optional[datetime] = None
