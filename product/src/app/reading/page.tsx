@@ -1,13 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { READING_PASSAGES } from '@/lib/data/reading';
+import { Timer, AlertCircle } from 'lucide-react';
 
 export default function ReadingPage() {
   const [currentPassageIndex, setCurrentPassageIndex] = useState<number | null>(null);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (currentPassageIndex !== null && !submitted) {
+      const passage = READING_PASSAGES[currentPassageIndex];
+      setTimeLeft(passage.timeLimitMinutes * 60);
+
+      timer = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            handleSubmit();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [currentPassageIndex, submitted]);
 
   const handlePassageSelect = (index: number) => {
     setCurrentPassageIndex(index);
@@ -22,7 +46,8 @@ export default function ReadingPage() {
   };
 
   const handleSubmit = () => {
-    const passage = READING_PASSAGES[currentPassageIndex!];
+    if (currentPassageIndex === null) return;
+    const passage = READING_PASSAGES[currentPassageIndex];
     let correctCount = 0;
     passage.questions.forEach((q) => {
       if (answers[q.id] === q.correctAnswer) {
@@ -38,6 +63,12 @@ export default function ReadingPage() {
     setAnswers({});
     setSubmitted(false);
     setScore(0);
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   if (currentPassageIndex === null) {
@@ -58,6 +89,9 @@ export default function ReadingPage() {
               <div className="flex items-center gap-2 mb-3">
                 <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">
                   Level {passage.level}
+                </span>
+                <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded flex items-center gap-1">
+                  <Timer size={12} /> {passage.timeLimitMinutes}m
                 </span>
               </div>
               <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
@@ -87,20 +121,32 @@ export default function ReadingPage() {
         >
           &larr; Back to list
         </button>
-        <div className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">
-          Level {passage.level}
+        <div className="flex items-center gap-4">
+          <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold ${
+            timeLeft < 60 ? 'bg-red-100 text-red-600 animate-pulse' : 'bg-blue-100 text-blue-700'
+          }`}>
+            <Timer size={16} />
+            {formatTime(timeLeft)}
+          </div>
+          <div className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">
+            Level {passage.level}
+          </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Passage Section */}
-        <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+        <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 sticky top-6 h-fit">
           <h2 className="text-2xl font-bold mb-4 text-slate-900">{passage.title}</h2>
           <div 
             className="text-lg leading-relaxed text-slate-800 font-medium" 
             lang="ko"
           >
             {passage.content}
+          </div>
+          <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100 flex items-start gap-3 text-sm text-blue-800">
+            <AlertCircle size={18} className="shrink-0 mt-0.5" />
+            <p>This is a timed exercise. You have {passage.timeLimitMinutes} minutes to complete the questions. The system will auto-submit once time expires.</p>
           </div>
         </div>
 
@@ -149,7 +195,7 @@ export default function ReadingPage() {
               </div>
               {submitted && (
                 <div className="ml-9 p-4 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-800">
-                  <strong>Explanation:</strong> {q.explanation}
+                  <strong className="block mb-1">Explanation:</strong> {q.explanation}
                 </div>
               )}
             </div>
@@ -159,12 +205,12 @@ export default function ReadingPage() {
             <button
               onClick={handleSubmit}
               disabled={Object.keys(answers).length < passage.questions.length}
-              className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+              className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors shadow-lg shadow-blue-200"
             >
               Submit Answers
             </button>
           ) : (
-            <div className="p-6 bg-white border-2 border-blue-500 rounded-2xl text-center space-y-4">
+            <div className="p-6 bg-white border-2 border-blue-500 rounded-2xl text-center space-y-4 shadow-xl">
               <div className="text-sm text-slate-600 uppercase font-bold tracking-wider">Your Result</div>
               <div className="text-5xl font-black text-blue-600">
                 {score} / {passage.questions.length}
