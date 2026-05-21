@@ -23,6 +23,7 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
           setError(data.error);
         } else {
           setPlan(data);
+          setError(null);
         }
       } catch {
         setError('Failed to fetch study plan');
@@ -65,9 +66,15 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
       });
       const res = await fetch('/api/study-plan');
       const data = await res.json();
-      setPlan(data);
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setPlan(data);
+        setError(null);
+      }
     } catch (err) {
       console.error('Error setting exam date:', err);
+      setError('Failed to update exam date');
     }
   };
 
