@@ -14,9 +14,10 @@ TraceWhisper has carved out a unique category: **Reasoning Engineering & Governa
 | :--- | :--- | :--- | :--- |
 | **Primary Goal** | Monitoring & Evaluation | Versioning & Deployment | **Logic Correction & Governance** |
 | **Analysis Depth** | Span-level / Token-level | Input/Output pairs | **Cognitive Path Analysis (Narrative)** |
-| **Actionability** | Manual analysis of traces | Prompt version switching | **Automated "Fix-It" & APO** |
+| **Actionability** | Manual analysis of traces | Prompt version switching | **Automated "Fix-It", APO & Auto-SOP** |
 | **Validation** | Bulk Eval / LLM-as-a-judge | A/B testing of outputs | **Verification Loop & CRI Hard Gates** |
 | **Governance** | Basic access control | Prompt registries | **Organizational Golden Paths & RBAC** |
+| **Optimization** | Manual prompt tuning | Manual prompt tuning | **Active Optimization (Production Drift $\rightarrow$ APO)** |
 | **Enterprise Fit** | Observability dashboard | Prompt CMS | **Reasoning IDE & Compliance Layer** |
 
 ## 3. The Strategic Moats
@@ -28,21 +29,23 @@ While other tools suggest prompt changes based on "vibes" or isolated test cases
 - **The Verification Loop:** We provide an automated `Apply -> Re-run -> Compare` cycle that prevents "Whack-a-Mole" bugs.
 - **Continuous Reasoning Integration (CRI):** By implementing `.tw-test` and `tw verify-all`, we move from a "nice-to-have" dashboard to a "must-have" CI/CD hard gate. If the reasoning path regresses, the build fails.
 
-### 3.2 The Intelligence Moat (Pattern Vault & APO)
-We are building a proprietary knowledge base of "Failure $\rightarrow$ Correction" pairs.
+### 3.2 The Intelligence Moat (Pattern Vault & Active Optimization)
+We are building a proprietary knowledge base of "Failure $\rightarrow$ Correction" pairs, moving from manual fixes to autonomous optimization.
 - **The Knowledge Graph:** As organizations store more reasoning fixes in the Pattern Vault, the cost of deploying new agents drops.
-- **Autonomous Prompt Optimization (APO):** We are moving beyond human-led tuning. Our closed-loop optimization (Bottleneck $\rightarrow$ Variation $\rightarrow$ CRI $\rightarrow$ Winner) creates a performance ceiling that manual prompt engineering cannot reach.
+- **Autonomous Prompt Optimization (APO):** Our closed-loop optimization (Bottleneck $\rightarrow$ Variation $\rightarrow$ CRI $\rightarrow$ Winner) creates a performance ceiling that manual prompt engineering cannot reach.
+- **The Autonomous Bridge (v2.5):** We are introducing **Auto-SOP (Dynamic Discovery)**, which extracts Golden Paths from successful production data, and **Logic Porter**, which translates these reasoning assets across different LLM providers to eliminate vendor lock-in.
 
 ### 3.3 The Governance Moat (Enterprise Scale-Up)
-With v2.4, we transition from a developer tool to an organizational standard.
+With v2.4 and v2.5, we transition from a developer tool to an organizational standard.
 - **Organizational Golden Paths:** By allowing enterprises to define "Standard Operating Procedures" for reasoning (e.g., a mandated `Safety Check` before any `Tool Call`), TraceWhisper becomes the governance layer for AI safety.
-- **Reasoning Peer Review:** Integrating "Reasoning Diffs" into the Git PR process makes the cognitive path a first-class citizen of the SDLC, making it nearly impossible for a company to revert to "blind" prompt engineering.
+- **Production Drift Detection:** Unlike standard observability, we detect "Logic Drift"—where an agent's reasoning diverges from the Golden Path *before* it results in a wrong answer.
+- **Reasoning Peer Review:** Integrating "Reasoning Diffs" into the Git PR process makes the cognitive path a first-class citizen of the SDLC.
 
 ## 4. Updated SWOT Analysis
 
 ### Strengths
 - **Cognitive Focus:** Only tool focusing on the `Thought -> Action -> Observation` loop as the primary unit of analysis.
-- **High Actionability:** Integrated "Fix-It" and "Verify" workflows.
+- **High Actionability:** Integrated "Fix-It", "Verify", and "Auto-SOP" workflows.
 - **Enterprise-Ready Governance:** RBAC, Multi-tenancy, and Golden Paths.
 - **Quantitative ROI:** Direct reduction in token costs via Cognitive Pruning and APO.
 
