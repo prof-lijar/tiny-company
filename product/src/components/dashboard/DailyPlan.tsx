@@ -131,7 +131,7 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">Today's Plan</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Today&apos;s Plan</h3>
           <span className="text-sm text-gray-500">{new Date().toLocaleDateString()}</span>
         </div>
         <div className="divide-y divide-gray-100">
