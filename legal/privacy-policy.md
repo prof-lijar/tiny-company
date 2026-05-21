@@ -17,7 +17,9 @@ TraceWhisper processes "Reasoning Traces"—the logs of an AI agent's thoughts, 
 - **Analysis Data:** When using the "Fix-It" engine or Intelligence Layer, specific segments of traces and prompts are processed to generate corrections or patterns.
 
 ### 1.3 The Pattern Vault (Cross-Project Intelligence)
-The v2.3 Intelligence Layer utilizes a "Pattern Vault" to enable cross-project reasoning improvements.
+The v2.3 Intelligence Layer utilizes a "Pattern Vault" to enable cross-project reasoning improvements. The nature of this vault depends on your subscription tier:
+- **Pro Tier (Personal Vault):** Users on the Pro tier have a Personal Pattern Vault. Patterns are extracted and stored to benefit the individual user's projects.
+- **Enterprise Tier (Managed Vault):** Enterprise customers have a Managed Pattern Vault, allowing for shared intelligence across an entire organization.
 - **Tenant Isolation:** All patterns extracted into the Vault are strictly isolated by Organization (Tenant). Data from one organization is never used to provide suggestions to another organization.
 - **Anonymization:** Before any pattern is stored in the Vault, it undergoes an anonymization pipeline to strip project-specific variables, secrets, and PII.
 - **Community Sharing:** Sharing patterns across different organizations is strictly opt-in.
