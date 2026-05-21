@@ -81,6 +81,7 @@ For v2.4 Enterprise Core tests:
 ```bash
 pytest tests/test_enterprise_core.py
 ```
+<<<<<<< HEAD
 For v2.3 specific integration tests:
 ```bash
 pytest tests/test_v23_integration.py
@@ -92,3 +93,6 @@ The system uses structured JSON logging via `src/telemetry.py` to track:
 - **Performance**: Execution duration of synthesis, pruning, and vault queries.
 - **Errors**: Detailed tracking for API failures and parsing errors.
 - **Volume**: Token counts and step counts per trace.
+=======
+\n\n## v2.2.2 Verification Loop\n\n### Overview\nAutomates the process of applying a prompt fix and verifying it against a trigger trace and a regression benchmark set.\n\n### Key Components\n- `src/verification_loop.py`: The `VerificationLoopManager` handles the snapshot-apply-verify-rollback cycle.\n- `src/models.py`: Defines `GoldStandard`, `VerificationSet`, and `VerificationResult`.\n- `tests/test_verification_loop.py`: Comprehensive tests for success, failure, and regression scenarios.\n\n### Usage\nRefer to `docs/v2.2.2-verification-loop-guide.md` for detailed operational and integration instructions.\n\n
+>>>>>>> cto/finalize-v222-verification-loop-docs
