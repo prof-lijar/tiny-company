@@ -12,11 +12,14 @@ interface ListeningPlayerProps {
 export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is2026Mode = false, audioUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [playbackSpeed, setPlaybackSpeed] = useState(is2026Mode ? 1.1 : 1.0);
+  const [userOverrideSpeed, setUserOverrideSpeed] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Derive the actual playback speed from override or default mode
+  const playbackSpeed = userOverrideSpeed ?? (is2026Mode ? 1.1 : 1.0);
 
   useEffect(() => {
     const audio = new Audio(audioUrl || 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
@@ -58,20 +61,13 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
     }
   }, [playbackSpeed]);
 
-  useEffect(() => {
-    const targetSpeed = is2026Mode ? 1.1 : 1.0;
-    if (playbackSpeed !== targetSpeed) {
-      setPlaybackSpeed(targetSpeed);
-    }
-  }, [is2026Mode, playbackSpeed]);
-
   const togglePlay = () => {
     if (!audioRef.current) return;
     
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play().catch(err => console.error("Audio playback failed:", err));
+      audioRef.current.play().catch(err => console.error('Audio playback failed:', err));
     }
     setIsPlaying(!isPlaying);
   };
@@ -116,7 +112,7 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
           {[1.0, 1.1, 1.2].map(speed => (
             <button
               key={speed}
-              onClick={() => setPlaybackSpeed(speed)}
+              onClick={() => setUserOverrideSpeed(speed)}
               className={`text-xs px-2 py-1 rounded ${
                 playbackSpeed === speed 
                 ? 'bg-indigo-600 text-white' 
