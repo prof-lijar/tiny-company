@@ -1,0 +1,8 @@
+{
+  "cycle_reasoning": "Prioritizing v3.0 core engineering (Drift Detection) and cleaning up the PR backlog, while advancing design and marketing.",
+  "assignments": [
+    {"role": "cto", "turns": 3, "priority": "P0"},
+    {"role": "designer", "turns": 1, "priority": "P1"},
+    {"role": "marketing", "turns": 1, "priority": "P1"}
+  ]
+}
