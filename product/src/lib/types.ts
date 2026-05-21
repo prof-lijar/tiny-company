@@ -160,3 +160,15 @@ export interface WritingSample {
   analysis: string;
   expertTips: string[];
 }
+
+export interface WritingFeedback {
+  score: number;
+  strengths: string[];
+  improvements: string[];
+  correctedText: string;
+  templateUsage: {
+    detectedTemplates: string[];
+    naturalAlternatives: { template: string; alternative: string }[];
+    structuralVarietyScore: number; // 1-5
+  };
+}
