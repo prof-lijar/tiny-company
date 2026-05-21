@@ -6,6 +6,7 @@ export interface ReadingQuestion {
   options: string[];
   correctAnswer: number; // Index (0-3)
   explanation: string;
+  tags: string[]; // Added for weakness analysis (e.g., ['Grammar: -기 때문에', 'Vocab: Environment'])
 }
 
 export interface ReadingPassage {
@@ -23,6 +24,7 @@ export interface VocabularyWord {
   exampleSentence: string;
   level: TopikLevel;
   partOfSpeech: string;
+  tags: string[]; // Added for weakness analysis (e.g., ['Academic', 'Abstract'])
 }
 
 export interface GrammarLesson {
@@ -33,6 +35,7 @@ export interface GrammarLesson {
   explanation: string;
   examples: { korean: string; english: string }[];
   usageNotes: string;
+  tags: string[]; // Added for weakness analysis
 }
 
 export interface WritingPrompt {
@@ -45,6 +48,7 @@ export interface WritingPrompt {
   prompt: string; // The specific question or gap
   sampleAnswer: string;
   scoringCriteria: string;
+  tags: string[]; // Added for weakness analysis
 }
 
 export interface MockTestQuestion {
@@ -58,6 +62,7 @@ export interface MockTestQuestion {
   taskNumber?: 51 | 52 | 53 | 54;
   context?: string;
   sampleAnswer?: string;
+  tags?: string[]; // Added for weakness analysis
 }
 
 export interface MockTestSection {
@@ -86,6 +91,7 @@ export interface ListeningQuestion {
   correctAnswer: number;
   explanation: string;
   audioUrl: string; // Path to audio file or mock URL
+  tags: string[]; // Added for weakness analysis
 }
 
 export interface ListeningPassage {
@@ -94,4 +100,21 @@ export interface ListeningPassage {
   title: string;
   transcript: string; // For admin/study purposes, not shown to user initially
   questions: ListeningQuestion[];
+}
+
+export interface UserMistake {
+  questionId: string;
+  category: 'reading' | 'listening' | 'vocabulary' | 'grammar';
+  tags: string[];
+  timestamp: number;
+}
+
+export interface WeaknessReport {
+  topWeaknesses: {
+    tag: string;
+    errorCount: number;
+    impact: 'high' | 'medium' | 'low';
+    recommendation: string;
+  }[];
+  overallAnalysis: string;
 }
