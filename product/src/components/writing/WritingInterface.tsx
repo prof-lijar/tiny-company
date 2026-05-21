@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { WritingPrompt, WritingSample } from '@/lib/types';
-import { writingPrompts } from '@/lib/data/writing-prompts';
 import { writingSamples } from '@/lib/data/writing-samples';
 import SampleCard from './SampleCard';
 
@@ -51,7 +50,7 @@ export default function WritingInterface({ prompt, onSubmit, outline }: WritingI
             onClick={handleSampleClick}
             className="px-3 py-1.5 bg-white text-indigo-600 border border-indigo-200 rounded-lg text-sm font-semibold hover:bg-indigo-50 transition-colors shadow-sm flex items-center gap-2"
           >
-            <span className="text-lg">📖</span> View Model Answer
+            <span className="text-lg">📝</span> View Model Answer
           </button>
         </div>
         <div className="text-slate-700 leading-relaxed mb-4">
