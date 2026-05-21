@@ -5,11 +5,11 @@ from typing import List, Dict, Any, Optional
 from pathlib import Path
 
 class TraceStorage:
-    """
+    '''
     Handles persistence of agent traces, logs, and narratives using SQLite.
     Updated for v2.4 to support Multi-tenancy, RBAC, and Hierarchical Vaults.
-    """
-    def __init__(self, db_path: str = "tracewhisper.db"):
+    '''
+    def __init__(self, db_path: str = 'tracewhisper.db'):
         self.db_path = db_path
         self._init_db()
 
@@ -17,7 +17,7 @@ class TraceStorage:
         return sqlite3.connect(self.db_path)
 
     def _init_db(self):
-        """Initializes the database schema with Enterprise v2.4 updates."""
+        '''Initializes the database schema with Enterprise v2.4 updates.'''
         with self._get_connection() as conn:
             cursor = conn.cursor()
             
@@ -133,7 +133,7 @@ class TraceStorage:
             conn.commit()
 
     def save_trace(self, trace_id: str, org_id: str, agent_id: str, session_id: str, 
-                   metadata: Dict[str, Any], status: str = "running"):
+                   metadata: Dict[str, Any], status: str = 'running'):
         with self._get_connection() as conn:
             cursor = conn.cursor()
             start_time = datetime.utcnow().isoformat()
@@ -146,7 +146,7 @@ class TraceStorage:
             ''', (trace_id, org_id, agent_id, session_id, start_time, json.dumps(metadata), status))
             conn.commit()
 
-    def update_trace_end(self, trace_id: str, status: str = "completed"):
+    def update_trace_end(self, trace_id: str, status: str = 'completed'):
         end_time = datetime.utcnow().isoformat()
         with self._get_connection() as conn:
             cursor = conn.cursor()
@@ -154,7 +154,7 @@ class TraceStorage:
                            (end_time, status, trace_id))
             conn.commit()
 
-    def append_log(self, trace_id: str, message: str, level: str = "INFO", 
+    def append_log(self, trace_id: str, message: str, level: str = 'INFO', 
                    raw_payload: Optional[Dict[str, Any]] = None, step_index: Optional[int] = None):
         timestamp = datetime.utcnow().isoformat()
         payload_json = json.dumps(raw_payload) if raw_payload else None
@@ -268,8 +268,9 @@ class TraceStorage:
                              expected_output: str, golden_path_keywords: List[str], priority: str = 'medium'):
         with self._get_connection() as conn:
             cursor = conn.cursor()
+            # Use REPLACE to avoid UNIQUE constraint failures during tests or updates
             cursor.execute('''
-                INSERT INTO regression_tests (id, agent_id, name, input_text, expected_output, golden_path_keywords, priority, created_at)
+                INSERT OR REPLACE INTO regression_tests (id, agent_id, name, input_text, expected_output, golden_path_keywords, priority, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ''', (test_id, agent_id, name, input_text, expected_output, json.dumps(golden_path_keywords), priority, datetime.utcnow().isoformat()))
             conn.commit()
