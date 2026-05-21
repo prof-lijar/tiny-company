@@ -11,6 +11,7 @@ import {
   Flame, 
   Clock 
 } from 'lucide-react';
+import WeaknessReport from '@/components/dashboard/WeaknessReport';
 
 // Mock data for the dashboard
 const USER_STATS = {
@@ -26,7 +27,7 @@ const USER_STATS = {
 
 const ACTIVITY_LOG = [
   { date: '2026-05-20', activity: 'Studied 20 Vocabulary words', level: 4, status: 'completed' },
-  { date: '2026-05-19', activity: 'Completed Grammar Lesson: -는데', level: 3, status: 'completed' },
+  { date: '2026-05-19', activity: 'Completed Grammar Lesson: -\ub294\ub370', level: 3, status: 'completed' },
   { date: '2026-05-18', activity: 'Reading Practice: News Article', level: 5, status: 'completed' },
   { date: '2026-05-17', activity: 'Mock Test Section: Listening', level: 4, status: 'completed' },
 ];
@@ -114,8 +115,13 @@ export default function DashboardPage() {
           </p>
         </Card>
 
+        {/* AI Weakness Analysis - NEW FEATURE */}
+        <WeaknessReport />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
         {/* Recent Activity */}
-        <Card className="p-6">
+        <Card className="lg:col-span-1 p-6">
           <h3 className="text-lg font-bold text-slate-900 mb-6">Recent Activity</h3>
           <div className="space-y-6">
             {ACTIVITY_LOG.map((log, i) => (
