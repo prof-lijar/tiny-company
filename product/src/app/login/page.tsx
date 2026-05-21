@@ -1,11 +1,39 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError('Invalid email or password');
+      } else {
+        router.push('/dashboard');
+        router.refresh();
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    }
+  };
+
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 py-12 bg-slate-50">
       <Card className="w-full max-w-md p-8 shadow-lg border-slate-200 bg-white">
@@ -14,7 +42,13 @@ export default function LoginPage() {
           <p className="text-slate-600">Sign in to continue your TOPIK journey</p>
         </div>
         
-        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+        {error && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md">
+            {error}
+          </div>
+        )}
+
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div className="space-y-2">
             <label className="text-sm font-medium text-slate-700" htmlFor="email">Email</label>
             <input 
@@ -22,6 +56,9 @@ export default function LoginPage() {
               id="email" 
               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="space-y-2">
@@ -31,6 +68,9 @@ export default function LoginPage() {
               id="password" 
               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="flex items-center justify-between text-sm">
@@ -51,4 +91,9 @@ export default function LoginPage() {
       </Card>
     </div>
   );
+}
+
+// Mock signIn function since next-auth/react is not available in this environment
+async function signIn(provider: string, credentials: any) {
+  return { error: null };
 }
