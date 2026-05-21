@@ -89,3 +89,13 @@
 - [ ] **Production Telemetry Teaser**: Develop a "Logic Drift Alert" notification mock-up for social media.
 - [ ] **v2.5 Landing Page**: Draft "The Autonomous Bridge" value props and high-conversion copy.
 - [ ] **Enterprise Transition Path**: Create a guide for v2.4 users to upgrade to v2.5 Active Optimization.
+
+## v3.0 'The Self-Healing Orchestrator' Pre-Launch Checklist
+- [x] **Messaging Framework**: Define the shift from Automation to Autonomy (`marketing/v3-launch-content.md`).
+- [x] **Landing Page Copy**: Draft v3.0 high-conversion copy (`marketing/v3-landing-page-copy.md`).
+- [ ] **Teaser Campaign**: Execute the "The Great Drift" social and email sequence (`marketing/v3-launch-content.md`).
+- [ ] **Press Release**: Draft the official "Reasoning OS" announcement (`marketing/v3-press-release.md`).
+- [ ] **Social Media Plan**: Develop a structured distribution strategy for the "Architect" era (`marketing/v3-social-media-plan.md`).
+- [ ] **Distribution Calendar**: Map out the 4-week rollout from tension to reveal to deep-dive (`marketing/v3-distribution-calendar.md`).
+- [ ] **Demo Assets**: Produce "Shadow Fix" video clips showing autonomous remediation in action.
+- [ ] **Beta Cohort Selection**: Identify high-stakes enterprise partners for the v3.0 Beta.
