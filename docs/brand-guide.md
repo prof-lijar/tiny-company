@@ -69,3 +69,29 @@ The v2.2 update introduces the "Reasoning IDE" and the "Fix-It" engine. The visu
 - **Narrative First:** The story of the agent's journey is the primary interface; the raw data is the supporting evidence.
 - **Technical Elegance:** The UI should feel like a high-end developer tool—efficient, keyboard-centric, and devoid of unnecessary ornamentation.
 - **Accessibility:** Contrast ratios must meet WCAG AA standards to ensure observability for all users.
+
+---
+
+## 5. v2.5 'The Autonomous Bridge' Visual Language
+
+The v2.5 update marks a transition from **Passive Governance** to **Active Optimization**. The visual language shifts from the "Control Tower" (rigid, authoritative) to the "Autonomous Bridge" (fluid, intelligent).
+
+### Visual Metaphors for Autonomy
+- **The Bridge (Flow):** Moving from "walls" (guardrails) to "bridges" (optimal paths). Visuals emphasize flow, streams, and connectivity.
+- **The Health Orbit:** A circular, node-based visualization representing the real-time state of all agents, moving away from linear lists to a systemic view.
+- **The Ghost Path:** A visual overlay showing the *intended* Golden Path (solid) vs. the *actual* diverging path (dashed), highlighting the "Logic Drift" point.
+- **The Translation Bridge:** A visual transition showing the prompt for one model transforming into another, representing "Cognitive Portability."
+
+### v2.5 Expanded Color Palette
+To distinguish the autonomous features from the core governance tools, we introduce a "Cognitive" palette.
+
+| Color | Hex (Suggested) | Role | Psychology |
+| :--- | :--- | :--- | :--- |
+| **Cyber Teal** | `#2DD4BF` | Autonomous Action | Intelligence, fluidity, modernism |
+| **Electric Indigo** | `#6366F1` | Cognitive Mapping | Depth, intuition, connectivity |
+| **Drift Yellow** | `#FDE047` | Logic Divergence | Caution, "Silent Failure" detection |
+
+### Design Principles for v2.5
+- **Curated Approval:** The UI should not ask the user to *configure*, but to *validate*. The system proposes; the human approves.
+- **Systemic Observability:** Shift from analyzing single traces to analyzing "Reasoning Health" across the entire agent fleet.
+- **Intent over Phrasing:** Visuals should emphasize the *intent* of a reasoning step rather than the specific prompt text.
