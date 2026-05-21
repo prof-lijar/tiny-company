@@ -92,7 +92,7 @@ export default function SignUpPage() {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700" htmlFor="email">label" htmlFor="email">Email</label>
+            <label className="text-sm font-medium text-slate-700" htmlFor="email">Email</label>
             <input 
               type="email" 
               id="email" 
