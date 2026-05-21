@@ -54,8 +54,9 @@ export default function SignUpPage() {
 
       setSuccess(true);
       router.push('/login');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred during signup';
+      setError(errorMessage);
     }
   };
 
