@@ -6,7 +6,7 @@ export interface ReadingQuestion {
   options: string[];
   correctAnswer: number; // Index (0-3)
   explanation: string;
-  tags: string[]; // Added for weakness analysis (e.g., ['Grammar: -\uac00 \ub2c8\ub2c8', 'Vocab: Environment'])
+  tags: string[]; // Added for weakness analysis (e.g., ['Grammar: -가 넵넵', 'Vocab: Environment'])
 }
 
 export interface ReadingPassage {
@@ -183,5 +183,5 @@ export interface TypingPracticeText {
   id: string;
   level: TopikLevel;
   text: string;
-  category: 'essay' | 'sentence' | 'grammar';
+  category: 'essay' | 'sentence' | 'grammar' | 'paragraph';
 }
