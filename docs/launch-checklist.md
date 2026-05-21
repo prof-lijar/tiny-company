@@ -63,3 +63,13 @@
 - [x] **Efficiency Play**: Draft \"Token ROI\" case study for Cognitive Pruning (`marketing/v2.3-token-roi-case-study.md`).
 - [x] **IDE Integration**: Coordinate VS Code extension demo and \"Unified Workspace\" messaging (`marketing/v2.3-unified-workspace-messaging.md`).
 - [ ] **Resilience Strategy**: Develop content for Adversarial Synthesis (AI Red Teaming).
+
+## v2.4 'Enterprise Scale-Up' Pre-Launch Checklist
+- [x] **Strategic Positioning**: Define the shift from Productivity to Governance (`marketing/v2.4-strategic-positioning.md`).
+- [x] **GTM Strategy**: Define ICP, messaging framework, and transition path (`marketing/v2.4-gtm-strategy.md`).
+- [x] **Enterprise Landing Page**: Create high-conversion copy for Enterprise buyers (`marketing/v2.4-enterprise-landing-page.md`).
+- [ ] **Governance Whitepaper**: Draft *"The Case for Reasoning Governance: Why Prompt Engineering is not a Scalable Enterprise Strategy."*
+- [ ] **Reasoning Diff Teaser**: Produce a video demo showing the "Aha!" moment of comparing reasoning chains.
+- [ ] **Enterprise Pricing Page**: Coordinate with Finance to finalize and publish the Enterprise tier pricing.
+- [ ] **Press Release**: Draft the official announcement for the Enterprise Scale-Up launch.
+- [ ] **Social Campaign**: Develop a thread sequence focused on "The Prompt Engineering Ceiling."
