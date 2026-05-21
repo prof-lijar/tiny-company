@@ -26,26 +26,29 @@ export default function WritingPage() {
     setIsAnalyzing(true);
     setFeedback(null);
     
-    // Simulate AI analysis delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    const simulatedFeedback: Feedback = {
-      score: Math.floor(Math.random() * 20) + 60,
-      strengths: [
-        'Good use of formal written style (-ㄴ/는다)',
-        'Logical flow of arguments',
-        'Appropriately used vocabulary for the level',
-      ],
-      improvements: [
-        'Check for natural phrasing in the second paragraph',
-        'Ensure the subject-verb agreement is consistent',
-        'Consider using more sophisticated connectors (e.g., 그리고 → 하지만, 따라서)',
-      ],
-      correctedText: `[Corrected Version]\n${answer}\n\n(AI would provide a more natural version here)`,
-    };
-    
-    setFeedback(simulatedFeedback);
-    setIsAnalyzing(false);
+    try {
+      const response = await fetch('/api/writing-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          answer, 
+          prompt: currentPrompt.prompt,
+          context: currentPrompt.context 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI feedback');
+      }
+
+      const data: Feedback = await response.json();
+      setFeedback(data);
+    } catch (error) {
+      console.error('Error submitting writing:', error);
+      alert('An error occurred while analyzing your writing. Please try again.');
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   return (
@@ -137,7 +140,7 @@ export default function WritingPage() {
                 <h4 className="font-bold text-slate-800">Improvements</h4>
                 <ul className="space-y-2">
                   {feedback.improvements.map((imp, i) => (
-                    <li key={i} className="flex items-start gap-2 text-slate-600 the-slate-600 text-sm">
+                    <li key={i} className="flex items-start gap-2 text-slate-600 text-sm">
                       <span className="text-amber-500">⚠</span>
                       {imp}
                     </li>
