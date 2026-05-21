@@ -34,3 +34,22 @@ export interface GrammarLesson {
   examples: { korean: string; english: string }[];
   usageNotes: string;
 }
+
+export interface MockTestSection {
+  id: string;
+  name: string;
+  durationMinutes: number;
+  questions: any[]; // Will specify further based on section type
+}
+
+export interface MockTest {
+  id: string;
+  title: string;
+  sections: MockTestSection[];
+}
+
+export interface MockTestResult {
+  sectionScores: { [sectionId: string]: number };
+  totalScore: number;
+  timeTakenSeconds: number;
+}
