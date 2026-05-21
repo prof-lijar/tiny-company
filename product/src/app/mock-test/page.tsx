@@ -67,8 +67,9 @@ export default function MockTestSimulator() {
 
   const startTest = () => {
     setIsTestActive(true);
-    // Start with the first section's time
-    setTimeLeft(test.sections[0].durationMinutes * 60);
+    // Calculate total duration for all sections
+    const totalDurationMinutes = test.sections.reduce((acc, sec) => acc + sec.durationMinutes, 0);
+    setTimeLeft(totalDurationMinutes * 60);
     setCurrentSectionIndex(0);
   };
 
