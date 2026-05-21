@@ -1,0 +1,48 @@
+import { WritingPrompt } from '@/lib/types';
+
+export const writingPrompts: WritingPrompt[] = [
+  {
+    id: 'w1',
+    taskNumber: 51,
+    level: 3,
+    title: 'Short Answer Completion - Daily Life',
+    instruction: 'Fill in the blanks (ㄱ) and (ㄴ) to complete the text.',
+    context: '저는 어제 친구와 함께 영화관에 갔습니다. 영화가 매우 (  ㄱ  ) 그래서 우리는 시간 가는 줄 모르고 영화를 봤습니다. 영화가 끝난 후 우리는 (  ㄴ  ) 대해 이야기를 나누었습니다.',
+    prompt: 'Fill in (ㄱ) and (ㄴ)',
+    sampleAnswer: '(ㄱ) 재미있었습니다 / (ㄴ) 영화의 내용',
+    scoringCriteria: 'Correct grammar, appropriate vocabulary for the context, and natural flow.',
+  },
+  {
+    id: 'w2',
+    taskNumber: 52,
+    level: 4,
+    title: 'Short Answer Completion - Formal/Academic',
+    instruction: 'Fill in the blanks (ㄱ) and (ㄴ) to complete the text.',
+    context: '현대 사회에서 인공지능 기술의 발전은 매우 빠르다. 인공지능은 이제 인간의 업무를 (  ㄱ  ) 수준에 이르렀다. 하지만 이에 따른 윤리적 문제에 대해 (  ㄴ  ) 필요가 있다.',
+    prompt: 'Fill in (ㄱ) and (ㄴ)',
+    sampleAnswer: '(ㄱ) 대체하는 / (ㄴ) 깊이 고민해 볼',
+    scoringCriteria: 'Use of formal written style (-ㄴ/는다), academic vocabulary, and logical coherence.',
+  },
+  {
+    id: 'w3',
+    taskNumber: 53,
+    level: 5,
+    title: 'Graph Description - Environmental Trends',
+    instruction: 'Write a description of the provided data (approx. 200-300 characters).',
+    context: 'Data: [Topic: Plastic Waste Production in Korea] \n- 2010: 10 million tons\n- 2015: 15 million tons\n- 2020: 22 million tons\n- Reason: Increase in delivery services and disposable packaging.',
+    prompt: 'Describe the trend and the reason for the increase.',
+    sampleAnswer: '한국의 플라스틱 쓰레기 배출량은 2010년 1,000만 톤에서 2015년 1,500만 톤으로 증가하였으며, 2020년에는 2,200만 톤에 이르렀다. 이러한 증가의 주요 원인은 배달 서비스의 확대와 일회용 포장재 사용의 증가인 것으로 나타났다.',
+    scoringCriteria: 'Accurate data representation, use of descriptive graph language (증가하다, 나타나다), and appropriate length.',
+  },
+  {
+    id: 'w4',
+    taskNumber: 54,
+    level: 6,
+    title: 'Argumentative Essay - Education',
+    instruction: 'Write an essay of 600-700 characters on the following topic.',
+    context: 'Topic: The necessity of lifelong learning in the modern era.\n1. Why is lifelong learning necessary today?\n2. What are the challenges of lifelong learning?\n3. How can we overcome these challenges?',
+    prompt: 'Write a structured essay addressing all three points.',
+    sampleAnswer: '(A full 600-700 character essay discussing the rapid change of technology, the barrier of time/cost for working adults, and the need for government-supported online education platforms...)',
+    scoringCriteria: 'Structure (Intro-Body-Conclusion), logical argumentation, sophisticated vocabulary, and adherence to length requirements.',
+  },
+];
