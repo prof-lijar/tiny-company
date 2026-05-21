@@ -34,3 +34,15 @@ export interface GrammarLesson {
   examples: { korean: string; english: string }[];
   usageNotes: string;
 }
+
+export interface WritingPrompt {
+  id: string;
+  taskNumber: 51 | 52 | 53 | 54;
+  level: TopikLevel;
+  title: string;
+  instruction: string;
+  context: string; // The passage or data description
+  prompt: string; // The specific question or gap
+  sampleAnswer: string;
+  scoringCriteria: string;
+}
