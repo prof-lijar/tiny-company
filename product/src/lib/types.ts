@@ -47,11 +47,24 @@ export interface WritingPrompt {
   scoringCriteria: string;
 }
 
+export interface MockTestQuestion {
+  id: string;
+  question?: string;
+  passage?: string;
+  audioUrl?: string;
+  options?: string[];
+  correctAnswer?: number;
+  prompt?: string; // For writing questions
+  taskNumber?: 51 | 52 | 53 | 54;
+  context?: string;
+  sampleAnswer?: string;
+}
+
 export interface MockTestSection {
   id: string;
   name: string;
   durationMinutes: number;
-  questions: any[]; // Will specify further based on section type
+  questions: MockTestQuestion[];
 }
 
 export interface MockTest {
