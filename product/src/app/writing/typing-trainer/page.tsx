@@ -1,0 +1,105 @@
+'use client';
+
+import React, { useState } from 'react';
+import { typingPracticeTexts } from '@/lib/data/typing-practice';
+import TypingTrainer from '@/components/writing/TypingTrainer';
+import { Button } from '@/components/ui/Button';
+import { Keyboard, Trophy, Target } from 'lucide-react';
+
+export default function WritingSpeedPage() {
+  const [selectedText, setSelectedText] = useState(typingPracticeTexts[0]);
+  const [stats, setStats] = useState<{ wpm: number; accuracy: number; time: number } | null>(null);
+
+  const handleComplete = (newStats: { wpm: number; accuracy: number; time: number }) => {
+    setStats(newStats);
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto py-12 px-4">
+      <header className="mb-12 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="p-3 bg-indigo-100 text-indigo-600 rounded-2xl">
+            <Keyboard size={32} />
+          </div>
+        </div>
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-4">Writing Speed Trainer</h1>
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          Improve your Korean typing speed and accuracy for the IBT TOPIK exam. 
+          Practice with real TOPIK-style phrases and essays.
+        </p>
+      </header>
+
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <aside className="lg:col-span-1 space-y-4">
+          <div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Target size={16} /> Select Practice
+            </h2>
+            <div className="space-y-2">
+              {typingPracticeTexts.map((text) => (
+                <button
+                  key={text.id}
+                  onClick={() => {
+                    setSelectedText(text);
+                    setStats(null);
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    selectedText.id === text.id 
+                      ? 'bg-indigo-600 text-white shadow-md' 
+                      : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <span>{text.category === 'essay' ? 'Essay' : 'Sentence'}</span>
+                    <span className={`text-xs ${selectedText.id === text.id ? 'text-indigo-200' : 'text-slate-400'}`}>
+                      L{text.level}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {stats && (
+            <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 shadow-sm text-emerald-800">
+              <h2 className="text-sm font-bold text-emerald-600 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Trophy size={16} /> Last Result
+              </h2>
+              <div className="space-y-1">
+                <div className="text-2xl font-bold">{stats.wpm} WPM</div>
+                <div className="text-sm opacity-80">Accuracy: {stats.accuracy}%</div>
+                <div className="text-sm opacity-80">Time: {stats.time.toFixed(1)}s</div>
+              </div>
+            </div>
+          )}
+        </aside>
+
+        <main className="lg:col-span-3">
+          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-800">
+                  {selectedText.category === 'essay' ? 'Essay Practice' : 'Sentence Practice'}
+                </h2>
+                <p className="text-slate-500">Level {selectedText.level} • Type the text below as fast as you can</p>
+              </div>
+              <div className="px-3 py-1 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase">
+                IBT Mode
+              </div>
+            </div>
+
+            <TypingTrainer 
+              text={selectedText} 
+              onComplete={handleComplete} 
+            />
+
+            <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100 text-blue-700 text-sm">
+              <strong>Pro Tip:</strong> In the IBT exam, typing speed is critical for the 54-essay. 
+              Aim for at least 20-30 WPM in Korean to ensure you have enough time for planning.
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
