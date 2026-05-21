@@ -6,7 +6,7 @@ export interface ReadingQuestion {
   options: string[];
   correctAnswer: number; // Index (0-3)
   explanation: string;
-  tags: string[]; // Added for weakness analysis (e.g., ['Grammar: -기 때문에', 'Vocab: Environment'])
+  tags: string[]; // Added for weakness analysis (e.g., ['Grammar: -\uac00 \ub2c8\ub2c8', 'Vocab: Environment'])
 }
 
 export interface ReadingPassage {
@@ -14,6 +14,7 @@ export interface ReadingPassage {
   level: TopikLevel;
   title: string;
   content: string;
+  timeLimitMinutes: number; // Added for 2026 Reading Speed Training
   questions: ReadingQuestion[];
 }
 
