@@ -45,6 +45,8 @@ export interface WritingPrompt {
   prompt: string; // The specific question or gap
   sampleAnswer: string;
   scoringCriteria: string;
+}
+
 export interface MockTestSection {
   id: string;
   name: string;
@@ -62,4 +64,21 @@ export interface MockTestResult {
   sectionScores: { [sectionId: string]: number };
   totalScore: number;
   timeTakenSeconds: number;
+}
+
+export interface ListeningQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  audioUrl: string; // Path to audio file or mock URL
+}
+
+export interface ListeningPassage {
+  id: string;
+  level: TopikLevel;
+  title: string;
+  transcript: string; // For admin/study purposes, not shown to user initially
+  questions: ListeningQuestion[];
 }
