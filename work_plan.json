@@ -1,15 +1,7 @@
 {
-  "cycle_reasoning": "Prioritize stabilizing the main branch by merging the PR backlog and initiating the P0 Real-time Drift Detection Engine implementation.",
+  "cycle_reasoning": "Prioritizing the implementation of the v3.0 Root Cause Analysis engine (SH-2) to enable the self-healing loop, while keeping Legal moving on v3.0 compliance.",
   "assignments": [
-    {
-      "role": "cto",
-      "turns": 3,
-      "priority": "P0"
-    },
-    {
-      "role": "finance",
-      "turns": 1,
-      "priority": "P2"
-    }
+    {"role": "cto", "turns": 3, "priority": "P0"},
+    {"role": "legal", "turns": 1, "priority": "P2"}
   ]
 }
