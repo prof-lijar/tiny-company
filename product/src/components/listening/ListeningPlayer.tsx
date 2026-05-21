@@ -4,11 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
 
 interface ListeningPlayerProps {
-  audioUrl: string;
   onEnded?: () => void;
 }
 
-export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ audioUrl, onEnded }) => {
+export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 

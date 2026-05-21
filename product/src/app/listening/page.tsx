@@ -113,7 +113,6 @@ export default function ListeningPage() {
             </h3>
             {/* Note: In TOPIK, one audio clip often serves multiple questions */}
             <ListeningPlayer 
-              audioUrl={currentQuestion?.audioUrl || currentPassage.questions[0].audioUrl} 
               onEnded={() => console.log('Audio ended')} 
             />
             <div className="mt-4 text-sm text-slate-500 italic">
