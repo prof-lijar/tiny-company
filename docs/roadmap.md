@@ -86,3 +86,39 @@ This roadmap outlines the evolution of TraceWhisper from a basic narrative parse
 - **v2.2.1:** Deterministic Correction (Completed)
 - **v2.2.2:** Verified Correction (Current Focus)
 - **v2.3:** Proactive Intelligence (Next Major Version)
+
+---
+
+## v2.4: The Enterprise Scale-Up
+**Goal:** Transition from individual developer productivity to organizational reasoning standards and governance.
+
+### Milestone 1: Collaborative Intelligence
+- **Team-Shared Vaults:** Shared Pattern Vaults with access control, versioning, and "Approved Pattern" tags.
+- **Reasoning Peer Review:** Integration of reasoning traces into the PR process (Reviewers can see the "Reasoning Change" alongside the "Code Change").
+
+### Milestone 2: Reasoning Governance
+- **Organizational Golden Paths:** Ability to define and enforce "Standard Reasoning Patterns" for specific company domains (e.g., "The Company Standard for SQL Generation").
+- **Policy-Based Guardrails:** Define constraints on reasoning paths (e.g., "Must always perform a safety check before executing X").
+
+### Milestone 3: Autonomous Prompt Optimization (APO)
+- **Closed-Loop Tuning:** The system automatically proposes and tests prompt variations against CRI test suites to find the most efficient/accurate version.
+- **A/B Reasoning Testing:** Side-by-side comparison of different reasoning architectures at scale.
+
+---
+
+## v3.0: The Autonomous Reasoning Orchestrator
+**Goal:** Move from "Human-in-the-loop" to "Human-on-the-loop" for reasoning stability and design.
+
+### Milestone 1: Self-Healing Reasoning
+- **Production Drift Detection:** Real-time monitoring of production traces to detect "Reasoning Drift" (when the agent starts deviating from the Golden Path).
+- **Autonomous Correction:** The system identifies a drift, searches the Vault for a fix, applies it in a staging environment, verifies it via CRI, and alerts the human for deployment.
+
+### Milestone 2: Cognitive Architecture Modularity
+- **Reasoning Modules:** Transition from monolithic prompts to composable "Reasoning Blocks" (e.g., a "Verification Block" that can be plugged into any workflow).
+- **Visual Architecture Designer:** A drag-and-drop interface to design the flow of reasoning steps.
+
+### Milestone 3: Dynamic Model Routing
+- **Cognitive Load Balancing:** Real-time routing of reasoning steps to different models based on complexity (e.g., routing "Simple Extraction" to a small model and "Complex Synthesis" to a frontier model) to optimize cost/latency.
+
+### Milestone 4: Reasoning-as-a-Service (RaaS)
+- **The Reasoning API:** Exposing the Intelligence Layer as an API, allowing other agents to "validate" their reasoning against the Pattern Vault before executing.

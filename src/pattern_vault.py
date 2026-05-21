@@ -5,23 +5,23 @@ from src.telemetry import telemetry
 import time
 
 class PatternVault:
-    """
+    \"\"\"
     The Pattern Vault implements the 'write-once, fix-everywhere' philosophy.
     It stores proven reasoning corrections and recommends them based on trace similarity.
-    """
+    \"\"\"
     def __init__(self, storage: TraceStorage):
         self.storage = storage
         # In a real implementation, we would use a vector DB. 
         # Here we use SQLite for storage and a simple mock for embedding similarity.
         
     def extract_pattern(self, trace: ProcessedTrace, fix: Any) -> ReasoningPattern:
-        """
+        \"\"\"
         Extracts a failure-correction pair from a verified fix.
-        """
+        \"\"\"
         start = time.time()
         
         # Logic to summarize the failure and the fix
-        failure_desc = f"Failure in trace {trace.trace_id}: {fix.analysis}"
+        failure_desc = f\"Failure in trace {trace.trace_id}: {fix.analysis}\"
         
         # Mock embedding: in production, this would be a call to an embedding model
         mock_embedding = b'embedding_vector_for_this_failure' 
@@ -30,17 +30,17 @@ class PatternVault:
             failure_description=failure_desc,
             failure_embedding=mock_embedding,
             correction_prompt=fix.suggested_modification,
-            project_id="default_project",
+            project_id=\"default_project\",
             success_rate=1.0
         )
         
-        telemetry.track_duration("pattern_extraction", start, {"trace_id": trace.trace_id})
+        telemetry.track_duration(\"pattern_extraction\", start, {\"trace_id\": trace.trace_id})
         return pattern
 
     def save_pattern(self, pattern: ReasoningPattern):
-        """
+        \"\"\"
         Persists a reasoning pattern to the vault.
-        """
+        \"\"\"
         start = time.time()
         
         self.storage.save_pattern(
@@ -51,12 +51,12 @@ class PatternVault:
             success_rate=pattern.success_rate
         )
         
-        telemetry.track_duration("pattern_save", start, {"project_id": pattern.project_id})
+        telemetry.track_duration(\"pattern_save\", start, {\"project_id\": pattern.project_id})
 
     def recommend_fix(self, trace: ProcessedTrace) -> List[ReasoningPattern]:
-        """
+        \"\"\"
         Queries the vault for similar historical failures and suggests proven fixes.
-        """
+        \"\"\"
         start = time.time()
         
         # Mock similarity search: retrieve recent patterns
@@ -75,5 +75,5 @@ class PatternVault:
                 created_at=p['created_at']
             ))
         
-        telemetry.track_duration("pattern_recommendation", start, {"trace_id": trace.trace_id, "patterns_found": len(patterns)})
+        telemetry.track_duration(\"pattern_recommendation\", start, {\"trace_id\": trace.trace_id, \"patterns_found\": len(patterns)})
         return patterns

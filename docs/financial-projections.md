@@ -3,32 +3,32 @@
 ## 1. Executive Summary
 TraceWhisper has evolved from a **Reasoning IDE (v2.2)** to an **Intelligence Layer (v2.3)**. This transition introduces a Hybrid Architecture (Local-First + Centralized Pattern Vault) and Continuous Reasoning Integration (CRI). 
 
-While v2.3 increases the variable cost per user due to CI/CD integration and the Pattern Vault, it significantly increases the product's value proposition, allowing for a pricing expansion in the Enterprise tier and creating a higher LTV through institutional knowledge lock-in.
+The v2.3 transition is a strategic investment in product defensibility. By shifting the value proposition from "productivity" to "reasoning stability and institutional knowledge," we have increased the ARPU for both Pro and Enterprise tiers, significantly enhancing the long-term LTV of our customers.
 
-This projection (May 20, 2026) incorporates the findings from the **v2.3 ROI Analysis**.
+This projection (May 21, 2026) incorporates the finalized **v2.3 Pricing Model**.
 
 ---
 
 ## 2. Financial Assumptions
 
 ### 2.1 Revenue & Tier Distribution (Expected Scenario)
-We assume a weighted ARPU based on an updated pricing strategy for v2.3:
+We assume a weighted ARPU based on the updated v2.3 pricing strategy:
 - **Free (70%):** $0 / month (BYOK)
-- **Pro (20%):** $39 / month
-- **Enterprise (10%):** $199 / month (Increased from $149 due to Intelligence Layer value)
-- **Weighted ARPU:** $(0.20 \times 39) + (0.10 \times 199) = \mathbf{\$27.70}$
+- **Pro (20%):** $59 / month
+- **Enterprise (10%):** $199 / month
+- **Weighted ARPU:** $(0.20 \times 59) + (0.10 \times 199) = \mathbf{\$31.70}$
 
 ### 2.2 Variable Costs (COGS)
-v2.3 introduces higher API consumption (CRI/Adversarial Synthesis) and database costs (Pattern Vault).
-- **Pro User API Cost:** ~$6.00 / month (Includes Fix-It + basic CRI)
-- **Enterprise User API Cost:** ~$15.00 / month (Includes full CRI integration + Vault access)
+v2.3 introduces higher API consumption for CRI and Adversarial Synthesis, and managed storage for the Pattern Vault.
+- **Pro User API Cost:** ~$8.00 / month (Includes Fix-It + basic CRI)
+- **Enterprise User API Cost:** ~$20.00 / month (Includes full CRI integration + Vault access)
 - **Free User API Cost:** $0.00 (BYOK)
-- **Blended Variable Cost per MAU:** $(0.20 \times 6.00) + (0.10 \times 15.00) = \mathbf{\$2.70 / \text{MAU}}$
+- **Blended Variable Cost per MAU:** $(0.20 \times 8.00) + (0.10 \times 20.00) = \mathbf{\$3.60 / \text{MAU}}$
 
 ### 2.3 Fixed Operating Expenses (OpEx)
-Fixed costs increase to support the Pattern Vault infrastructure and scaling needs.
+Fixed costs are scaled to support the Pattern Vault infrastructure and growth.
 - **Month 1:** $3,000
-- **Month 6:** $6,000
+- **Month 6:** $7,000
 - **Month 12:** $10,000
 
 ---
@@ -37,19 +37,19 @@ Fixed costs increase to support the Pattern Vault infrastructure and scaling nee
 
 | Month | MAU | Gross Revenue | Variable Costs (COGS) | Fixed OpEx | Net Monthly Flow |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 2,000 | $55,400 | $5,400 | $3,000 | **+$47,000** |
-| 2 | 5,000 | $138,500 | $13,500 | $3,500 | **+$121,500** |
-| 3 | 10,000 | $277,000 | $27,000 | $4,000 | **+$246,000** |
-| 4 | 15,000 | $415,500 | $40,500 | $4,500 | **+$370,500** |
-| 5 | 18,000 | $498,600 | $48,600 | $5,000 | **+$445,000** |
-| 6 | 20,000 | $554,000 | $54,000 | $6,000 | **+$494,000** |
-| 7 | 25,000 | $692,500 | $67,500 | $6,000 | **+$619,000** |
-| 8 | 30,000 | $831,000 | $81,000 | $7,000 | **+$743,000** |
-| 9 | 35,000 | $969,500 | $94,500 | $7,500 | **+$867,500** |
-| 10 | 40,000 | $1,108,000 | $108,000 | $8,000 | **+$992,000** |
-| 11 | 45,000 | $1,246,500 | $121,500 | $9,000 | **+$1,116,000** |
-| 12 | 50,000 | $1,385,000 | $135,000 | $10,000 | **+$1,240,000** |
-| **Total** | - | **$7,172,000** | **$695,000** | **$73,500** | **+$6,403,500** |
+| 1 | 2,000 | $63,400 | $7,200 | $3,000 | **+$53,200** |
+| 2 | 5,000 | $158,500 | $18,000 | $3,500 | **+$137,000** |
+| 3 | 10,000 | $317,000 | $36,000 | $4,000 | **+$277,000** |
+| 4 | 15,000 | $475,500 | $54,000 | $4,500 | **+$417,000** |
+| 5 | 18,000 | $570,600 | $64,800 | $5,000 | **+$500,800** |
+| 6 | 20,000 | $634,000 | $72,000 | $7,000 | **+$555,000** |
+| 7 | 25,000 | $792,500 | $90,000 | $7,000 | **+$695,500** |
+| 8 | 30,000 | $951,000 | $108,000 | $8,000 | **+$835,000** |
+| 9 | 35,000 | $1,109,500 | $126,000 | $8,000 | **+$975,500** |
+| 10 | 40,000 | $1,268,000 | $144,000 | $9,000 | **+$1,115,000** |
+| 11 | 45,000 | $1,426,500 | $162,000 | $9,000 | **+$1,255,500** |
+| 12 | 50,000 | $1,585,000 | $180,000 | $10,000 | **+$1,395,000** |
+| **Total** | - | **$8,851,500** | **$1,062,000** | **$73,500** | **+$7,716,000** |
 
 ---
 
@@ -57,12 +57,12 @@ Fixed costs increase to support the Pattern Vault infrastructure and scaling nee
 
 ### 4.1 Gross Margin
 $$\text{Gross Margin} = \frac{\text{Revenue} - \text{Variable Costs}}{\text{Revenue}}$$
-$$\text{Gross Margin} = \frac{\$7,172,000 - \$695,000}{\$7,172,000} \approx \mathbf{90.3\%}$$
-While the gross margin has dipped slightly from v2.2 (96.4%) due to the higher cost of CRI and the Pattern Vault, it remains extremely high for a SaaS product.
+$$\text{Gross Margin} = \frac{\$8,851,500 - \$1,062,000}{\$8,851,500} \approx \mathbf{88.0\%}$$
+While marginally lower than v2.2 due to the managed nature of the Pattern Vault and CRI, the gross margin remains elite.
 
 ### 4.2 LTV/CAC Impact
-- **LTV Increase:** The Pattern Vault creates significant switching costs, potentially increasing the average customer lifespan by 30-50%.
-- **CAC Efficiency:** Positioning as an "Intelligence Layer" targets higher-level decision-makers (CTOs), which we expect will improve the lead-to-customer conversion rate.
+- **LTV Increase:** The transition to an "Intelligence Layer" creates a high-stickiness environment. The Pattern Vault acts as a "data gravity" well; the more a company stores its reasoning patterns, the higher the cost of switching.
+- **CAC Efficiency:** By targeting CTOs and VPs of Engineering with a "Stability and Insurance" narrative, we expect higher contract values and shorter sales cycles for Enterprise clients.
 
 ---
 
@@ -70,8 +70,9 @@ While the gross margin has dipped slightly from v2.2 (96.4%) due to the higher c
 
 | Risk | Impact | Mitigation |
 | :--- | :--- | :--- |
-| **CRI API Explosion** | Significant margin erosion | Implement strict per-project quotas for `tw verify-all` usage. |
-| **Vault Storage Costs** | OpEx increase | Use embedding-based clustering to prune redundant patterns; optimize vector DB indexing. |
-| **Enterprise Churn** | Revenue volatility | Focus on deep integration into the client's CI/CD pipeline to make the tool indispensable. |
+| **CRI API Explosion** | Margin erosion | Implement strict per-project quotas for `tw verify-all` usage. |
+| **Vault Storage Costs** | OpEx increase | Use embedding-based clustering to prune redundant patterns. |
+| **Price Hike Churn** | Revenue volatility | Offer "Early Adopter" lock-in pricing for existing Pro users. |
+| **Enterprise Conversion** | Lower than 10% | Focus marketing on "Reasoning Stability" as a business risk mitigation. |
 
-**Verdict:** The transition to v2.3 is financially accretive. The increase in ARPU and LTV far outweighs the increase in COGS and OpEx.
+**Verdict:** The v2.3 financial model is highly robust. The increase in ARPU more than offsets the increased COGS, resulting in a significantly more profitable and defensible business.

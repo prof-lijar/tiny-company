@@ -58,8 +58,8 @@
 - [x] **Strategic Positioning**: Define the shift from Reactive Correction to Proactive Intelligence (`marketing/v2.3-strategic-positioning.md`).
 - [x] **Teaser Campaign**: Draft tactical teaser content and calendar (`marketing/v2.3-teaser-campaign.md`).
 - [x] **Landing Page**: Draft v2.3 specific value props and CTA copy (`marketing/v2.3-landing-page-copy.md`).
-- [ ] **Institutional Memory**: Draft content for the \"Pattern Vault\" (The GitHub for Reasoning).
-- [ ] **CI/CD Narrative**: Create the \"Cognitive CI/CD\" guide for Continuous Reasoning Integration (CRI).
-- [ ] **Efficiency Play**: Draft \"Token ROI\" case study for Cognitive Pruning.
-- [ ] **IDE Integration**: Coordinate VS Code extension demo and \"Unified Workspace\" messaging.
+- [x] **Institutional Memory**: Draft content for the \"Pattern Vault\" (The GitHub for Reasoning) (`marketing/v2.3-pattern-vault-deepdive.md`).
+- [x] **CI/CD Narrative**: Create the \"Cognitive CI/CD\" guide for Continuous Reasoning Integration (CRI) (`marketing/v2.3-cri-guide.md`).
+- [x] **Efficiency Play**: Draft \"Token ROI\" case study for Cognitive Pruning (`marketing/v2.3-token-roi-case-study.md`).
+- [x] **IDE Integration**: Coordinate VS Code extension demo and \"Unified Workspace\" messaging (`marketing/v2.3-unified-workspace-messaging.md`).
 - [ ] **Resilience Strategy**: Develop content for Adversarial Synthesis (AI Red Teaming).
