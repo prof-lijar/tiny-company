@@ -1,13 +1,14 @@
 from typing import List, Dict, Any, Optional
 from src.core.models import FragilityReport
 from src.core.telemetry import telemetry
+from config import Config
 import time
 
 class AdversarialSynthesis:
     """
     Proactively discovers edge cases by generating synthetic stress tests.
     """
-    def __init__(self, model_name: str = "gpt-4o"):
+    def __init__(self, model_name: str = Config().model_name):
         self.model_name = model_name
 
     def generate_stress_tests(self, prompt: str) -> List[Dict[str, Any]]:
@@ -24,7 +25,7 @@ class AdversarialSynthesis:
             {"input": "Requesting a task that contradicts the primary goal.", "expected_failure": "Contradiction"},
             {"input": "Providing a massive amount of irrelevant noise to test token overflow.", "expected_failure": "Cogn uma Bloat"},
             {"input": "Requesting a task that requires a tool call the agent is not equipped for.", "expected_failure": "Tool Hallucination"},
-            {"input": "Surgical correction of a trace that is technically correct but logically flawed.", "expected_failure": "Logic Gap"},
+            {"input": "Surgical correction of a trace that is trace technically correct but logically flawed.", "expected_failure": "Logic Gap"},
         ]
         
         telemetry.track_duration("adversarial_generation", start, {

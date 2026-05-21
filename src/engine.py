@@ -5,9 +5,10 @@ from src.core.models import ProcessedTrace, ExecutionReport, NarrativeSegment, T
 from litellm import completion
 from src.core.telemetry import telemetry
 from src.correction_engine import CorrectionEngine
+from config import Config
 
 class NarrativeEngine:
-    def __init__(self, model: str = "gpt-4o"):
+    def __init__(self, model: str = Config().model_name):
         self.model = model
         self.correction_engine = CorrectionEngine(model=model)
 

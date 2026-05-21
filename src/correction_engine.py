@@ -4,6 +4,7 @@ from src.core.models import PromptFix, ProcessedTrace
 from litellm import completion
 from src.core.telemetry import telemetry
 from src.template_library import TemplateLibrary
+from config import Config
 import time
 
 # The Meta-Prompt is the core logic. It instructs a high-intelligence LLM 
@@ -15,7 +16,7 @@ and suggest a precise modification to the System Prompt to prevent this failure.
 """
 
 class CorrectionEngine:
-    def __init__(self, model: str = "gpt-4o", template_library: Optional[TemplateLibrary] = None):
+    def __init__(self, model: str = Config().model_name, template_library: Optional[TemplateLibrary] = None):
         self.model = model
         self.template_library = template_library or TemplateLibrary()
 
