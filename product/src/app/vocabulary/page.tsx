@@ -1,19 +1,17 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { VOCABULARY_DATA } from '@/lib/data/vocabulary';
 import { calculateNextReview, SRSResult } from '@/lib/srs';
 import { FlashCard } from '@/components/vocabulary/FlashCard';
 import { Button } from '@/components/ui/Button';
 
-interface SRSState {
-  interval: number;
-  easeFactor: number;
-  nextReview: number;
-}
-
 interface UserProgress {
-  [key: string]: SRSState;
+  [key: string]: {
+    interval: number;
+    easeFactor: number;
+    nextReview: number;
+  };
 }
 
 export default function VocabularyPage() {
@@ -21,6 +19,22 @@ export default function VocabularyPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [progress, setProgress] = useState<UserProgress>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProgress() {
+      try {
+        const res = await fetch('/api/vocabulary');
+        const data = await res.json();
+        setProgress(data);
+      } catch (err) {
+        console.error('Error loading vocabulary progress:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProgress();
+  }, []);
 
   const filteredWords = useMemo(() => {
     return VOCABULARY_DATA.filter(word => word.level === selectedLevel);
@@ -32,7 +46,7 @@ export default function VocabularyPage() {
     setIsFlipped(!isFlipped);
   };
 
-  const handleRate = (quality: number) => {
+  const handleRate = async (quality: number) => {
     setIsFlipped(false);
     
     const wordId = currentWord.id;
@@ -40,14 +54,28 @@ export default function VocabularyPage() {
     
     const result: SRSResult = calculateNextReview(quality, currentSRS.easeFactor, currentSRS.interval);
     
+    const newState = {
+      interval: result.newInterval,
+      easeFactor: result.newEaseFactor,
+      nextReview: Date.now() + result.newInterval * 24 * 60 * 60 * 1000,
+    };
+
+    // Update local state
     setProgress(prev => ({
       ...prev,
-      [wordId]: {
-        interval: result.newInterval,
-        easeFactor: result.newEaseFactor,
-        nextReview: Date.now() + result.newInterval * 24 * 60 * 60 * 1000,
-      },
+      [wordId]: newState,
     }));
+
+    // Persist to backend
+    try {
+      await fetch('/api/vocabulary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ wordId, state: newState }),
+      });
+    } catch (err) {
+      console.error('Error saving vocabulary progress:', err);
+    }
 
     if (currentIndex < filteredWords.length - 1) {
       setCurrentIndex(prev => prev + 1);
@@ -55,6 +83,14 @@ export default function VocabularyPage() {
       setCurrentIndex(0); // Loop back to start
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-slate-500">
+        Loading your vocabulary progress...
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-12 flex flex-col items-center">
@@ -79,14 +115,15 @@ export default function VocabularyPage() {
           >
             TOPIK Level {level}
           </Button>
-        ))}\\n      </div>
+        ))}
+      </div>
 
       {currentWord && (
         <div className="flex flex-col items-center gap-8 w-full max-w-md">
           <div className="mb-4 w-full bg-slate-200 h-2 rounded-full overflow-hidden">
             <div 
-              className="bg-blue-600 h-full transition-all duration-300 w-[var(--progress-width)]" 
-              style={{ '--progress-width': `${((currentIndex + 1) / filteredWords.length) * 100}%` } as React.CSSProperties}
+              className="bg-blue-600 h-full transition-all duration-300" 
+              style={{ width: `${((currentIndex + 1) / filteredWords.length) * 100}%` }}
             ></div>
           </div>
 
