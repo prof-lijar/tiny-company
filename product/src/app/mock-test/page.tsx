@@ -45,16 +45,23 @@ export default function MockTestSimulator() {
   }, [calculateResults]);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isTestActive && timeLeft > 0) {
-      timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    } else if (isTestActive && timeLeft === 0) {
-      finishTest();
-    }
+    if (!isTestActive) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          // Use setTimeout to avoid synchronous state updates within the effect/interval
+          setTimeout(() => {
+            finishTest();
+          }, 0);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
     return () => clearInterval(timer);
-  }, [isTestActive, timeLeft, finishTest]);
+  }, [isTestActive, finishTest]);
 
   const startTest = () => {
     setIsTestActive(true);
