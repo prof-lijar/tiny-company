@@ -168,3 +168,24 @@ class DriftMetric(BaseModel):
     is_drifted: bool
     drift_type: Optional[str] = None  # e.g., "Silent Failure", "Catastrophic Divergence"
     timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+# --- v3.0 Shadow Verification Models ---
+
+class TestCaseResult(BaseModel):
+    test_id: str
+    test_name: str
+    baseline_passed: bool
+    healed_passed: bool
+    baseline_path_adherence: float
+    healed_path_adherence: float
+    status: str  # 'FIXED', 'REGRESSION', 'NO_CHANGE', 'STILL_FAILING'
+
+class ShadowVerificationReport(BaseModel):
+    fix_id: str
+    total_tests: int
+    passed_baseline: int
+    passed_healed: int
+    fixed_count: int
+    regression_count: int
+    stability_gain: float  # (Healed PAR - Baseline PAR) / Total Tests
+    detailed_results: List[TestCaseResult]

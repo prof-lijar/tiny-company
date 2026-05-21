@@ -246,3 +246,44 @@ class TraceStorage:
                 hierarchy.append(current_id)
                 current_id = row[0]
         return hierarchy[::-1]
+
+    def _init_regression_tests_table(self):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS regression_tests (
+                    id TEXT PRIMARY KEY,
+                    agent_id TEXT,
+                    name TEXT,
+                    input_text TEXT,
+                    expected_output TEXT,
+                    golden_path_keywords TEXT,
+                    priority TEXT,
+                    created_at TIMESTAMP
+                )
+            ''')
+            conn.commit()
+
+    def save_regression_test(self, test_id: str, agent_id: str, name: str, input_text: str, 
+                             expected_output: str, golden_path_keywords: List[str], priority: str = 'medium'):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO regression_tests (id, agent_id, name, input_text, expected_output, golden_path_keywords, priority, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (test_id, agent_id, name, input_text, expected_output, json.dumps(golden_path_keywords), priority, datetime.utcnow().isoformat()))
+            conn.commit()
+
+    def get_regression_tests_for_agent(self, agent_id: str) -> List[Dict[str, Any]]:
+        with self._get_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM regression_tests WHERE agent_id = ?', (agent_id,))
+            rows = cursor.fetchall()
+            tests = []
+            for row in rows:
+                test = dict(row)
+                if test['golden_path_keywords']:
+                    test['golden_path_keywords'] = json.loads(test['golden_path_keywords'])
+                tests.append(test)
+            return tests
