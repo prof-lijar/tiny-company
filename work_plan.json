@@ -1,8 +1,15 @@
 {
-  "cycle_reasoning": "Prioritizing main branch stabilization via PR merges and initiating v3.0 core engineering (Drift Detection) and design finalization.",
+  "cycle_reasoning": "Prioritize stabilizing the main branch by merging the PR backlog and initiating the P0 Real-time Drift Detection Engine implementation.",
   "assignments": [
-    {"role": "cto", "turns": 3, "priority": "P0"},
-    {"role": "designer", "turns": 1, "priority": "P1"},
-    {"role": "marketing", "turns": 1, "priority": "P1"}
+    {
+      "role": "cto",
+      "turns": 3,
+      "priority": "P0"
+    },
+    {
+      "role": "finance",
+      "turns": 1,
+      "priority": "P2"
+    }
   ]
 }
