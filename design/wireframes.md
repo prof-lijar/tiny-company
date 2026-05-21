@@ -170,3 +170,66 @@ Comparison and validation of reasoning IP translation between models.
 | [ Re-Optimize Prompt ]                        [ DEPLOY TO PRODUCTION ]|
 +-----------------------------------------------------------------------+
 ```
+
+## 6. v3.0 Self-Healing Orchestrator Wireframes
+
+### 6.1 Healing Proposal Notification (The Trigger)
+This is a compact alert card that appears in the Strategic Health Map or as a system notification.
+
+```text
++-----------------------------------------------------------------------+
+| [!] HEALING PROPOSAL PENDING                                          |
++-----------------------------------------------------------------------+
+| Agent: Research-Bot-04                                                |
+| Issue: Logic Drift: Milestone 3 (Compliance Check)                    |
+| Confidence: [####################--] 94% Verified                     |
+|                                                                       |
+| [ REVIEW PROPOSAL ] <--- (Cyber Teal Pulsing)                         |
++-----------------------------------------------------------------------+
+```
+
+### 6.2 Healing Proposal Detail View (The Workspace)
+The main interface for the Strategic Overseer to review and deploy a fix.
+
+```text
++-----------------------------------------------------------------------+
+| HP-1024: Healing Proposal for [Research-Bot-04]      [ STATUS: PENDING ] |
++-----------------------------------------------------------------------+
+| TIMELINE: Detected (12m ago) -> Synthesized (8m ago) -> Verified (5m ago) |
++-----------------------------------------------------------------------+
+| SECTION 1: THE DRIFT (Reasoning Path Divergence)                       |
+|                                                                       |
+| [ GOLDEN PATH ]                      [ DRIFTED PATH ]                  |
+| 1. Init Request                      1. Init Request                   |
+| 2. Parse Intent                      2. Parse Intent                   |
+| 3. Compliance Check  <-- [SKEWED] --> 3. [ SKIP ]                      |
+| 4. Execute Search                    4. Execute Search                 |
+| 5. Synthesize Result                 5. Synthesize Result (FAIL)       |
+|                                                                       |
+| DIAGNOSIS: Agent bypassed the 'Compliance Check' milestone, leading to |
+| a constraint violation in the final synthesis.                        |
++-----------------------------------------------------------------------+
+| SECTION 2: THE FIX (Prompt Diff)                                      |
+|                                                                       |
+| [ CURRENT PROMPT SEGMENT ]           [ PROPOSED HEALED SEGMENT ]       |
+| "After parsing intent, proceed       "After parsing intent, FIRST      |
+| to search and synthesize the         verify the compliance token.      |
+| result based on the query."          IF invalid, STOP and alert.       |
+|                                      THEN proceed to search..." <--- [NEW] |
+|                                                                       |
+| RATIONALE: Added explicit verification gate to prevent milestone skip. |
++-----------------------------------------------------------------------+
+| SECTION 3: THE PROOF (Shadow Verification)                             |
+|                                                                       |
+| TEST CASE       | BASELINE | HEALED | STATUS                          |
+|-----------------|----------|--------|----------------------------------|
+| TC-01: Standard | PASS     | PASS   | [OK]                            |
+| TC-02: Edge Case| FAIL     | PASS   | [FIXED] <--- (+12% PAR Gain)     |
+| TC-03: Constraint| PASS    | PASS   | [OK]                            |
+|                                                                       |
+| OVERALL STABILITY: [####################--] 94% Success Rate           |
++-----------------------------------------------------------------------+
+|                                                                       |
+| [ REJECT ]       [ MODIFY PROMPT ]       [ APPROVE & DEPLOY ] <--- (!!) |
++-----------------------------------------------------------------------+
+```
