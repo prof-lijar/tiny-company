@@ -1,6 +1,6 @@
 import pytest
 from src.parser import LogParser
-from src.models import RawLogEntry
+from src.core.models import RawLogEntry
 from pathlib import Path
 import json
 from datetime import datetime

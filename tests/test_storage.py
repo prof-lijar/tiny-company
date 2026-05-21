@@ -1,6 +1,6 @@
 import unittest
 import os
-from src.storage import TraceStorage
+from src.core.storage import TraceStorage
 
 class TestTraceStorage(unittest.TestCase):
     def setUp(self):

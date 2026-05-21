@@ -1,9 +1,9 @@
 from typing import List, Dict, Any, Optional
 import time
 import re
-from src.models import ProcessedTrace, ExecutionReport, NarrativeSegment, ToolSummary, LogicAuditReport, ReasoningEvent
+from src.core.models import ProcessedTrace, ExecutionReport, NarrativeSegment, ToolSummary, LogicAuditReport, ReasoningEvent
 from litellm import completion
-from src.telemetry import telemetry
+from src.core.telemetry import telemetry
 from src.correction_engine import CorrectionEngine
 
 class NarrativeEngine:
@@ -17,7 +17,7 @@ class NarrativeEngine:
             for e in trace.entries
         ])
         
-        prompt = f\"\"\"
+        prompt = f"""
         You are a Forensic AI Analyst. Your goal is to perform a 'Logic Audit' on the following AI agent logs.
         Instead of summarizing what the agent did, you must diagnose HOW the agent reasoned and identify logical failures.
 
@@ -41,14 +41,14 @@ class NarrativeEngine:
         
         Please provide a structured response. 
         For the narrative, use the markers like [Reasoning Loop] directly in the text.
-        \"\"\"
+        """
         return prompt, log_text
 
     def synthesize(self, trace: ProcessedTrace) -> ExecutionReport:
-        \"\"\"
+        """
         Synthesizes a forensic narrative report from a ProcessedTrace.
         Now implementing real v2.2 logic: detecting failures and suggesting fixes.
-        \"\"\"
+        """
         start_time = time.time()
         prompt, log_text = self._build_prompt(trace)
         
@@ -73,15 +73,15 @@ class NarrativeEngine:
         return self._parse_and_enrich(content, trace, log_text)
 
     def _parse_and_enrich(self, text: str, trace: ProcessedTrace, log_text: str) -> ExecutionReport:
-        \"\"\"
+        """
         Parses the LLM output, identifies ReasoningEvents, and calls CorrectionEngine for fixes.
-        \"\"\"
+        """
         system_prompt = trace.system_prompt or "Standard Agent Prompt"
         
         # 1. Extract Narrative Segments
         # We look for paragraphs or sentences containing our taxonomy markers
         segments = []
-        lines = text.split('\\n')
+        lines = text.split('\n')
         
         # Simple heuristic: split by double newline or markers
         # In a production system, we would use a more robust Pydantic-based structured output

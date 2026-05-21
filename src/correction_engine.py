@@ -1,8 +1,8 @@
 import json
 from typing import List, Dict, Any, Optional
-from src.models import PromptFix, ProcessedTrace
+from src.core.models import PromptFix, ProcessedTrace
 from litellm import completion
-from src.telemetry import telemetry
+from src.core.telemetry import telemetry
 from src.template_library import TemplateLibrary
 import time
 

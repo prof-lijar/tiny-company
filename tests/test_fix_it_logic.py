@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from src.correction_engine import CorrectionEngine
-from src.models import PromptFix
+from src.core.models import PromptFix
 
 def mock_completion_response(content):
     mock_res = MagicMock()

@@ -1,9 +1,9 @@
 import pytest
 import os
 from src.live import LogTailer, LiveWhisper, LiveDashboard
-from src.storage import TraceStorage
+from src.core.storage import TraceStorage
 from src.engine import NarrativeEngine
-from src.models import RawLogEntry, LogComponent
+from src.core.models import RawLogEntry, LogComponent
 import datetime
 
 @pytest.fixture

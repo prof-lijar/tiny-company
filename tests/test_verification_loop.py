@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from src.models import (
+from src.core.models import (
     RawLogEntry, ProcessedTrace, LogComponent, 
     PromptFix, GoldStandard, VerificationSet, 
     VerificationStatus, VerificationResult
