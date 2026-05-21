@@ -2,7 +2,7 @@
 
 This document defines the user stories for v3.0, focusing on the transition from human-led governance to autonomous reasoning maintenance.
 
-## 1. Autonomous Remediation (The Self-Healing Loop)
+## 1. Autonomous Remediation (The Resilient Loop)
 
 ### US3.1: Real-time Drift Notification
 **As a Strategic Overseer**, 
@@ -12,6 +12,15 @@ This document defines the user stories for v3.0, focusing on the transition from
     - System monitors live traces and calculates Path Adherence Rate (PAR).
     - An alert is triggered when PAR drops below a configurable threshold.
     - The notification identifies the specific agent and the failing "Cognitive Milestone."
+
+### US3.1b: Predictive Drift Warning
+**As a Strategic Overseer**, 
+**I want** to be warned when model provider updates or telemetry suggest a high probability of reasoning drift, 
+**so that** I can proactively assess the impact before it affects production users.
+- **Acceptance Criteria:**
+    - System monitors model provider versioning and telemetry.
+    - Warning is issued when a "High Risk" update is detected for a model used in a critical reasoning block.
+    - System identifies which agents are most vulnerable to the update.
 
 ### US3.2: Automated Root Cause Diagnosis
 **As a Strategic Overseer**, 
@@ -27,9 +36,27 @@ This document defines the user stories for v3.0, focusing on the transition from
 **I want** the system to propose a verified fix for a detected drift, 
 **so that** I can resolve production issues in seconds rather than hours of prompt tuning.
 - **Acceptance Criteria:**
-    - System synthesizes a corrective prompt using the APO engine and Pattern Vault.
+    - System synthesizes a corrective prompt using a "Council of Agents" (Diagnoser $\rightarrow$ Fixer $\rightarrow$ Verifier) and the Pattern Vault.
     - The fix is automatically validated against a regression test set in a shadow environment.
     - The "Healing Proposal" shows: (a) The drift, (b) The proposed fix, (c) The verification results (Pass/Fail rate), and (d) A "Deploy" button.
+
+### US3.6: Autonomous Circuit Breaking
+**As a Strategic Overseer**, 
+**I want** the system to automatically rollback a deployed fix if production telemetry shows a regression in success rates, 
+**so that** the system remains stable even if a "verified" fix fails in the wild.
+- **Acceptance Criteria:**
+    - System monitors success rates immediately post-deployment.
+    - If performance drops below the pre-fix baseline, the system automatically reverts to the previous stable version.
+    - Overseer is notified of the autonomous rollback and the reason for the failure.
+
+### US3.7: Adaptive Healing Sensitivity
+**As a Strategic Overseer**, 
+**I want** to define different "Criticality Levels" for my agents, 
+**so that** mission-critical agents have stricter drift thresholds and more rigorous verification than experimental agents.
+- **AcceptanceCriteria:**
+    - Ability to assign a criticality level (e.g., Low, Medium, High) to an agent.
+    - High-criticality agents trigger alerts at a higher PAR threshold.
+    - High-criticality agents require a 100% pass rate in shadow verification before a proposal is generated.
 
 ## 2. Cognitive Modularity (The Reasoning Lego Set)
 
