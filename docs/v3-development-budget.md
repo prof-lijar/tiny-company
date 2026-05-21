@@ -14,9 +14,10 @@ The "Self-Healing" capabilities require a "trial-and-error" approach to synthesi
 | :--- | :--- | :--- | :--- | :--- |
 | **Synthesis API** | Frontier Models (Claude 3.5/4.6, GPT-4o) | $2,500 - $4,500 | High-token usage for APO engine and fix synthesis. | ~$3/M input, ~$15/M output |
 | **Verification API** | Mid-Tier Models (GPT-4o-mini, Llama 3.1/3.2) | $1,200 - $2,500 | Massive regression testing of synthesized fixes against Golden Paths. | ~$0.15/M input, ~$0.60/M output |
-| **Shadow Env** | Serverless Containers (GCP Cloud Run / AWS Fargate) | $600 - $1,200 | Dedicated isolated environments for SH-4 (Shadow Verification) to prevent prod interference. | Pay-as-you-go CPU/RAM |
+| **Shadow Compute** | Serverless Containers (GCP Cloud Run / AWS Fargate) | $600 - $1,200 | Dedicated isolated environments for SH-4 (Shadow Verification) to prevent prod interference. | Pay-as-you-go CPU/RAM |
+| **Traffic Mirroring**| VPC Mirroring (AWS Traffic Mirroring / GCP Packet Mirroring) | $150 - $400 | Cost of duplicating production traffic to the Shadow Environment for real-world validation. | Per-hour/Per-GB processed |
 | **Telemetry** | Vector DB & Trace Storage (Pinecone/Weaviate) | $400 - $800 | Scaling the "Pattern Vault" and storing high-resolution "Before vs. After" traces. | Per-GB / Per-Pod pricing |
-| **Total** | | **$4,700 - $9,000 / mo** | | |
+| **Total** | | **$4,850 - $9,400 / mo** | | |
 
 ### 2.2 Tooling & Licensing
 - **Monitoring/Observability:** Utilizing existing free/low-cost tiers, allocating $200/mo for increased telemetry throughput.
@@ -29,7 +30,7 @@ The financial profile shifts significantly as we move from the "Building" phase 
 
 | Phase | Primary Cost Driver | Est. Monthly Burn | Financial Characteristic |
 | :--- | :--- | :--- | :--- |
-| **Building** | Synthesis & Regression Testing | $5,000 - $9,500 | **Fixed R&D Cost:** High burn, zero revenue from v3.0 features. |
+| **Building** | Synthesis & Regression Testing | $5,000 - $9,600 | **Fixed R&D Cost:** High burn, zero revenue from v3.0 features. |
 | **Shipping** | Production Inference & Routing | $2,000 - $15,000+ | **Variable COGS:** Scales with user base; offset by revenue and routing optimization. |
 
 ## 4. Cost-Benefit Analysis: Intelligent Model Routing (IR-1, IR-2)
@@ -54,3 +55,5 @@ To prevent "API Runaway," the following guards are implemented:
 - **Mitigation:** Implement an "Efficiency Metric" for the APO engine; if the "Cost-per-Fix" exceeds $20, the synthesis strategy is reviewed.
 - **Risk:** Vector DB costs scale non-linearly with the Pattern Vault size.
 - **Mitigation:** Implement aggressive pruning of redundant or low-utility reasoning patterns.
+- **Risk:** Traffic Mirroring costs spike during high-traffic production events.
+- **Mitigation:** Implement sampling filters at the mirroring layer to only mirror a percentage of traffic for verification.
