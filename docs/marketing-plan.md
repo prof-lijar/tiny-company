@@ -106,3 +106,9 @@ We are no longer just bridging the \"Semantic Gap\"; we are closing the \"Optimi
     - **Enterprise Pipeline:** Number of demo requests and Enterprise access requests.
     - **Governance Adoption:** % of Enterprise users implementing at least one \"Golden Path.\"
     - **Fleet-wide ROI:** Average token cost reduction across an enterprise agent fleet.
+
+### v2.5: The \\\"Autonomous Bridge\\\" Rollout
+1. **Conceptual Seeding:** Launch a series of content pieces on \\\"Logic Drift\\\" vs. \\\"Output Error\\\\\". Position TraceWhisper as the only tool capable of predictive logic telemetry.
+2. **Cognitive Portability Campaign:** Target the \\\"Model Lock-in\\\" fear. Create a guide on \\\"Cognitive Portability\\\" showing how reasoning IP can move from GPT to Claude/Llama without loss of intelligence.
+3. **Zero-Touch Governance Demo:** Produce a video showing an agent fleet scaling from 10 to 100 agents where Golden Paths are *discovered* from data rather than written by hand.
+4. **The \\\"Autonomous Bridge\\\" Event:** A major launch announcement focusing on the transition from Passive Governance (v2.4) to Active Optimization (v2.5).
