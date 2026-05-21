@@ -20,19 +20,6 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-    // Reset state when text changes
-    setUserInput('');
-    setStartTime(null);
-    setEndTime(null);
-    setIsFinished(false);
-    setElapsedTime(0);
-    setErrors(0);
-  }, [text]);
-
-  useEffect(() => {
     let interval: NodeJS.Timeout;
     if (startTime && !endTime && !isFinished) {
       interval = setInterval(() => {
