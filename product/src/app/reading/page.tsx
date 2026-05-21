@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { READING_PASSAGES } from '@/lib/data/reading';
-import { ReadingPassage, ReadingQuestion } from '@/lib/types';
 
 export default function ReadingPage() {
   const [currentPassageIndex, setCurrentPassageIndex] = useState<number | null>(null);
