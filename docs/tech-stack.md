@@ -1,7 +1,9 @@
 # Tech Stack: TraceWhisper
 
 ## Overview
-TraceWhisper is designed as a lightweight, high-performance CLI tool. The primary goal is to provide a seamless "pipe" from raw logs to human-readable narratives.
+TraceWhisper is designed as a lightweight, high-performance CLI tool. The primary goal is to provide a seamless "pipe" from raw logs to human-readable narratives. 
+
+As of v2.3, TraceWhisper has evolved from a simple narrative generator into an **Intelligence Layer** that proactively optimizes reasoning traces and identifies systemic failure patterns.
 
 ## Technology Choices
 
@@ -20,8 +22,14 @@ TraceWhisper is designed as a lightweight, high-performance CLI tool. The primar
 ### 5. Template Engine: Jinja2
 - **Rationale:** Decouples the narrative content from the presentation. Jinja2 makes it easy to support multiple export formats (Markdown, HTML) without rewriting the logic.
 
-### 6. Log Parsing: Standard Library `json` & `re`
-- **Rationale:** For the initial version, standard libraries are sufficient and keep dependencies minimal.
+### 6. Intelligence Layer Components (v2.3)
+- **Pattern Vault:** Uses a "write-once, fix-everywhere" approach. It stores successful reasoning corrections and uses similarity search (embeddings) to recommend fixes for similar future failures.
+- **Cognitive Pruning Engine:** Reduces latency and token cost by identifying "Cognitive Bloat" (circular reasoning, redundant tool calls) and suggesting prompt optimizations.
+- **Adversarial Synthesis:** Proactively stress-tests prompts by generating synthetic edge cases and "fragility reports" to identify weak points before they hit production.
+- **Telemetry System:** Integrated tracking of duration, efficiency scores, and failure rates across all intelligence components to provide data-driven stability metrics.
+
+### 7. Storage: SQLite
+- **Rationale:** Provides a lightweight, file-based relational store for the Pattern Vault and trace history without requiring a separate database server.
 
 ## Summary Table
 | Component | Technology | Rationale |
@@ -31,3 +39,5 @@ TraceWhisper is designed as a lightweight, high-performance CLI tool. The primar
 | LLM Interface | LiteLLM | Provider agnostic (GPT-4, Claude, etc.) |
 | Schema | Pydantic | Robust data validation |
 | Reporting | Jinja2 | Flexible output templating |
+| Pattern Storage | SQLite | Lightweight, zero-config persistence |
+| Intelligence | Custom Engines | Specialized logic for pruning & synthesis |
