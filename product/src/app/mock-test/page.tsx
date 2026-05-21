@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { mockTests } from '@/lib/data/mock-tests';
 import { MockTestResult, MockTestQuestion } from '@/lib/types';
 import { ChevronRight, ChevronLeft, Timer, AlertCircle, Lock, ShieldCheck, LayoutDashboard } from 'lucide-react';
+import { Modal } from '@/components/ui/Modal';
 
 interface QuestionPaletteItemProps {
   index: number;
@@ -40,6 +41,7 @@ export default function MockTestSimulator() {
   const [results, setResults] = useState<MockTestResult | null>(null);
   const [isExamMode, setIsExamMode] = useState(false);
   const [showExamWarning, setShowExamWarning] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const test = mockTests[currentTest];
   const section = test.sections[currentSectionIndex];
@@ -234,7 +236,13 @@ export default function MockTestSimulator() {
                 </button>
               ))}
               <button 
-                onClick={finishTest}
+                onClick={() => {
+                  if (isExamMode) {
+                    setShowConfirmModal(true);
+                  } else {
+                    finishTest();
+                  }
+                }}
                 className="px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-bold"
               >
                 Finish
@@ -266,7 +274,7 @@ export default function MockTestSimulator() {
                     )}
                     {currentQuestion.audioUrl && (
                       <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-center gap-4 mb-6">
-                        <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer hover:bg-indigo-700 transition-colors">
+                      <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer hover:bg-indigo-700 transition-colors">
                           <span className="sr-only">Play Audio</span>
                           <span className="text-xl">▶</span>
                         </div>
@@ -346,7 +354,13 @@ export default function MockTestSimulator() {
                   </button>
                 ) : (
                   <button 
-                    onClick={finishTest}
+                    onClick={() => {
+                      if (isExamMode) {
+                        setShowConfirmModal(true);
+                      } else {
+                        finishTest();
+                      }
+                    }}
                     className="px-6 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-bold shadow-md"
                   >
                     Submit Final Test
@@ -366,24 +380,27 @@ export default function MockTestSimulator() {
                 </div>
                 
                 <div className="space-y-6">
-                  {test.sections.map((sec, sIdx) => (
-                    <div key={sec.id} className="space-y-3">
-                      <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{sec.name}</div>
-                      <div className="flex flex-wrap gap-2">
-                        {sec.questions.map((q, qIdx) => (
-                          <QuestionPaletteItem 
-                            key={q.id}
-                            index={qIdx}
-                            isActive={currentSectionIndex === sIdx && currentQuestionIndex === qIdx}
-                            isAnswered={answers[q.id] !== undefined}
-                            onClick={() => {
-                              handleSectionChange(sIdx);
-                              handleQuestionChange(qIdx);
-                            }}
-                          />
-                        ))}\n                      </div>
-                    </div>
-                  ))}
+                  {test.sections.map((sec, sIdx) => {
+                    return (
+                      <div key={sec.id} className="space-y-3">
+                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{sec.name}</div>
+                        <div className="flex flex-wrap gap-2">
+                          {sec.questions.map((q, qIdx) => (
+                            <QuestionPaletteItem 
+                              key={q.id}
+                              index={qIdx}
+                              isActive={currentSectionIndex === sIdx && currentQuestionIndex === qIdx}
+                              isAnswered={answers[q.id] !== undefined}
+                              onClick={() => {
+                               handleSectionChange(sIdx);
+                               handleQuestionChange(qIdx);
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <div className="mt-8 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-xs text-slate-500 leading-relaxed">
@@ -392,7 +409,8 @@ export default function MockTestSimulator() {
                   </div>
                   • No external aids permitted.<br/>
                   • Use the palette to jump between questions.<br/>
-                  • The test auto-submits when the timer reaches 0:00.
+                  • The timer auto-submits when the timer reaches 0:00.<br/>
+                  • Submit the test only when you are completely sure.
                 </div>
               </div>
             </div>
@@ -444,6 +462,15 @@ export default function MockTestSimulator() {
           </button>
         </div>
       )}
+
+      <Modal 
+        isOpen={showConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
+        onConfirm={finishTest}
+        title="Submit Final Test?"
+        message="Are you sure you want to submit your test? You will not be able to change your answers after this."
+      />
+      
     </div>
   );
 }
