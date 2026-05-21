@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { TypingPracticeText } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
-import { Timer, RotateCcw, CheckCircle2 } from 'lucide-react';
+import { Timer, RotateCcw, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface TypingTrainerProps {
   text: TypingPracticeText;
@@ -16,20 +16,27 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
   const [endTime, setEndTime] = useState<number | null>(null);
   const [isFinished, setIsFinished] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [errors, setErrors] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Focus input on mount
     if (inputRef.current) {
       inputRef.current.focus();
     }
+    // Reset state when text changes
+    setUserInput('');
+    setStartTime(null);
+    setEndTime(null);
+    setIsFinished(false);
+    setElapsedTime(0);
+    setErrors(0);
   }, [text]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (startTime && !endTime && !isFinished) {
       interval = setInterval(() => {
-        setElapsedTime(Date.now() - (startTime || 0));
+        setElapsedTime(Date.now() - startTime);
       }, 100);
     }
     return () => clearInterval(interval);
@@ -38,20 +45,36 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     
-    if (!startTime) {
+    // Start timer on first character
+    if (!startTime && value.length > 0) {
       setStartTime(Date.now());
     }
 
+    // Track errors: compare current input with target text
+    if (value.length > userInput.length) {
+      const charIndex = value.length - 1;
+      if (charIndex < text.text.length && value[charIndex] !== text.text[charIndex]) {
+        setErrors(prev => prev + 1);
+      }
+    }
+
+    // Check for completion
     if (value === text.text) {
       const finishTime = Date.now();
       setEndTime(finishTime);
       setIsFinished(true);
       
-      const timeTaken = (finishTime - (startTime || finishTime)) / 1000;
-      const wpm = Math.round((text.text.length / 5) / (timeTaken / 60));
-      const accuracy = 100; // Since we only finish on exact match in this simple version
+      const start = startTime || finishTime;
+      const timeTaken = (finishTime - start) / 1000;
+      const minutes = timeTaken / 60;
+      const wpm = minutes > 0 ? Math.round((text.text.length / 5) / minutes) : 0;
+      const accuracy = Math.round(((text.text.length - errors) / text.text.length) * 100);
       
-      onComplete({ wpm, accuracy, time: timeTaken });
+      onComplete({ 
+        wpm: Math.max(0, wpm), 
+        accuracy: Math.max(0, accuracy), 
+        time: timeTaken 
+      });
     }
 
     setUserInput(value);
@@ -63,17 +86,39 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
     setEndTime(null);
     setIsFinished(false);
     setElapsedTime(0);
+    setErrors(0);
     if (inputRef.current) inputRef.current.focus();
+  };
+
+  const calculateWPM = () => {
+    if (!startTime || !endTime) return 0;
+    const timeTakenSeconds = (endTime - startTime) / 1000;
+    if (timeTakenSeconds <= 0) return 0;
+    const minutes = timeTakenSeconds / 60;
+    return Math.round((text.text.length / 5) / minutes);
+  };
+
+  const calculateAccuracy = () => {
+    if (text.text.length === 0) return 0;
+    return Math.round(((text.text.length - errors) / text.text.length) * 100);
   };
 
   const renderText = () => {
     return text.text.split('').map((char, index) => {
-      let colorClass = 'text-slate-400';
+      let colorClass = 'text-slate-400'; // Not yet typed
+      
       if (index < userInput.length) {
-        colorClass = userInput[index] === char ? 'text-emerald-600' : 'text-red-500 bg-red-100';
+        if (userInput[index] === char) {
+          colorClass = 'text-emerald-600'; // Correct
+        } else {
+          colorClass = 'text-red-500 bg-red-100'; // Wrong
+        }
+      } else if (index === userInput.length) {
+        colorClass = 'text-indigo-600 ring-2 ring-indigo-400 rounded-sm animate-pulse'; // Current cursor
       }
+
       return (
-        <span key={index} className={`${colorClass} transition-colors duration-100`}>
+        <span key={index} className={`${colorClass} transition-all duration-75`}>
           {char}
         </span>
       );
@@ -82,14 +127,21 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
 
   return (
     <div className="space-y-6">
-      <div className="relative p-6 bg-slate-50 rounded-2xl border border-slate-200 font-serif text-2xl leading-relaxed min-h-[120px]">
-        <div className="absolute top-4 right-4 flex items-center gap-2 text-slate-400 text-sm font-mono">
-          <Timer size={16} />
-          {startTime && !endTime && (
-            <span>{(elapsedTime / 1000).toFixed(1)}s</span>
-          )}
+      <div className="relative p-6 bg-slate-50 rounded-2xl border border-slate-200 font-serif text-2xl leading-relaxed min-h-[160px] shadow-inner">
+        <div className="absolute top-4 right-4 flex items-center gap-4 text-slate-400 text-sm font-mono">
+          <div className="flex items-center gap-1">
+            <Timer size={16} />
+            {startTime && !endTime && (
+              <span>{(elapsedTime / 1000).toFixed(1)}s</span>
+            )}
+          </div>
+          <div className="flex items-center gap-1">
+            <AlertCircle size={16} />
+            <span>Errors: {errors}</span>
+          </div>
         </div>
-        <div className="relative z-0 whitespace-pre-wrap">
+        
+        <div className="relative z-0 whitespace-pre-wrap selection:bg-transparent">
           {renderText()}
         </div>
         
@@ -105,21 +157,28 @@ export default function TypingTrainer({ text, onComplete }: TypingTrainerProps) 
       </div>
 
       {isFinished && (
-        <div className="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800">
+        <div className="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 animate-in fade-in slide-in-from-bottom-2">
           <div className="flex items-center gap-3">
             <CheckCircle2 className="text-emerald-600" />
-            <span className="font-bold">Practice Complete!</span>
+            <span className="font-bold text-lg">Practice Complete!</span>
           </div>
           <div className="flex gap-6 text-sm font-medium">
-            <span>WPM: {Math.round((text.text.length / 5) / (((endTime! - startTime!) / 1000) / 60))}</span>
-            <span>Accuracy: 100%</span>
+            <div className="text-center">
+              <div className="text-xs uppercase text-emerald-600 font-bold">WPM</div>
+              <div className="text-xl font-black">{calculateWPM()}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xs uppercase text-emerald-600 font-bold">Accuracy</div>
+              <div className="text-xl font-black">{calculateAccuracy()}%</div>
+            </div>
           </div>
         </div>
       )}
 
       <div className="flex justify-end">
-        <Button variant="outline" onClick={reset} className="flex items-center gap-2">
-          <RotateCcw size={16} /> Reset
+        <Button variant="outline" onClick={reset} className="flex items-center gap-2 group">
+          <RotateCcw size={16} className="group-hover:rotate-[-45deg] transition-transform" /> 
+          Reset Practice
         </Button>
       </div>
     </div>
