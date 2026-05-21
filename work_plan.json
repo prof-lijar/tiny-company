@@ -1,20 +1,8 @@
 {
-  "cycle_reasoning": "Priority is to implement the real backend API for AI Writing Feedback (P1) and fix the DailyPlan date bug (P2) to ensure core product functionality is fully operational.",
+  "cycle_reasoning": "Prioritizing the critical 2026 TOPIK Reform alignment (P0). The CTO is working on issue #414 to update the mock test engine, listening module, writing feedback, and reading timers to match new standards.",
   "assignments": [
-    {
-      "role": "cto",
-      "turns": 5,
-      "priority": "P0"
-    },
-    {
-      "role": "qa",
-      "turns": 1,
-      "priority": "P1"
-    },
-    {
-      "role": "product",
-      "turns": 1,
-      "priority": "P1"
-    }
+    {"role": "cto", "turns": 5, "priority": "P0"},
+    {"role": "qa", "turns": 1, "priority": "P1"},
+    {"role": "product", "turns": 1, "priority": "P1"}
   ]
 }
