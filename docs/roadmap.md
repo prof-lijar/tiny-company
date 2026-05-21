@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant \u2014 Product Roadmap
+# TOPIK Learning Assistant — Product Roadmap
 
 This roadmap outlines the strategic milestones for the TOPIK Learning Assistant, moving from a Minimum Viable Product (MVP) to a comprehensive, AI-powered learning ecosystem.
 
@@ -15,7 +15,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 ---
 
 ## Phase 2: The Differentiators (Fast Follow) - [COMPLETED]
-**Goal**: Implement the \"killer features\" that separate the platform from mobile-only competitors.
+**Goal**: Implement the "killer features" that separate the platform from mobile-only competitors.
 
 - [x] **AI Writing Lab**: Implementation of Tasks 51-54 with LLM-powered feedback.
 - [x] **IBT Simulation**: Timed mock test engine mirroring the official IBT layout.
@@ -36,25 +36,28 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 - [x] **Pro Paywall**: Locking premium features (AI feedback, unlimited tests).
 
 ### Milestone 3.3: Quality Assurance & Polish - [CURRENT FOCUS]
-- [ ] **Bug Squashing**: Resolving P0-P2 issues identified by QA (e.g., [Issue #391] Vocabulary progress bar styles).
+- [ ] **Bug Squashing**: Resolving P0-P2 issues identified by QA (e.g., [Issue #408] Writing API, [Issue #407] Study Plan Date).
 - [ ] **UX Refinement**: Improving the flow between study modules and the dashboard.
 
 ---
 
 ## Phase 4: AI-Driven Intelligence (Future)
-**Goal**: Move from a \"tool\" to a \"mentor\" using data-driven insights.
+**Goal**: Move from a "tool" to a "mentor" using data-driven insights.
 
 ### Milestone 4.1: Adaptive Learning Path
 - [x] **Weakness Analysis**: AI analyzes mock test errors to suggest specific grammar/vocab lessons.
-- [ ] **Dynamic Study Plan**: Personalized daily goals based on the user's target exam date.
+- [x] **Dynamic Study Plan**: Personalized daily goals based on the user's target exam date.
 
 ### Milestone 4.2: Advanced Writing Support
-- [ ] **Essay Outliner**: AI helps users structure their Task 54 essay before they write it.
-- [ ] **Comparative Analysis**: Allow users to compare their writing with \"Level 6\" sample answers.
+- [x] **Essay Outliner**: AI helps users structure their Task 54 essay before they write it.
+- [ ] **Comparative Analysis**: Allow users to compare their writing with "Level 6" sample answers.
+- [ ] **Writing Sample Library**: A curated collection of high-scoring essays with expert annotations.
 
 ### Milestone 4.3: Community & Content Expansion
 - [ ] **User-Generated Content**: Ability for advanced users to share study notes.
 - [ ] **Expanded Content Library**: Increasing the number of original mock tests from 1 to 10+.
+- [ ] **Interactive Vocabulary Quizzes**: Gamified testing modes (e.g., timed challenges) to complement SRS.
+- [ ] **Audio-Text Sync**: Highlighting transcripts in real-time during listening practice.
 
 ## Timeline Summary
 
