@@ -1,8 +1,18 @@
 import pytest
+import os
 from src.core.storage import TraceStorage
 from src.v3.shadow_verification import ShadowVerificationEnvironment, ShadowRunner
 from src.core.models import PromptFix
 from unittest.mock import MagicMock
+
+@pytest.fixture(autouse=True)
+def cleanup_shadow_db():
+    db_path = "test_shadow.db"
+    if os.path.exists(db_path):
+        os.remove(db_path)
+    yield
+    if os.path.exists(db_path):
+        os.remove(db_path)
 
 def test_shadow_verification_flow():
     # Setup
