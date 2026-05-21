@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Initiating the first batch of Content Library Expansion (P3-19) and addressing remaining lint errors in the Writing Speed Trainer.",
+  "cycle_reasoning": "Focusing on scaling the content library (Vocabulary, Listening, Reading) as per the new Content Generation Framework to move from MVP to a production-ready state.",
   "assignments": [
     {"role": "cto", "turns": 5, "priority": "P0"},
     {"role": "qa", "turns": 1, "priority": "P1"},
