@@ -13,17 +13,26 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(is2026Mode ? 1.1 : 1.0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialize Audio object
     const audio = new Audio(audioUrl || 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     audioRef.current = audio;
 
     const handleTimeUpdate = () => {
-      const currentProgress = (audio.currentTime / audio.duration) * 100;
+      const current = audio.currentTime;
+      const dur = audio.duration;
+      const currentProgress = (current / dur) * 100;
       setProgress(currentProgress || 0);
+      setCurrentTime(current);
+      setDuration(dur);
+    };
+
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
     };
 
     const handleEnded = () => {
@@ -32,10 +41,12 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('ended', handleEnded);
       audio.pause();
     };
@@ -48,12 +59,11 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
   }, [playbackSpeed]);
 
   useEffect(() => {
-    if (is2026Mode && playbackSpeed !== 1.1) {
-      setPlaybackSpeed(1.1);
-    } else if (!is2026Mode && playbackSpeed === 1.1) {
-      setPlaybackSpeed(1.0);
+    const targetSpeed = is2026Mode ? 1.1 : 1.0;
+    if (playbackSpeed !== targetSpeed) {
+      setPlaybackSpeed(targetSpeed);
     }
-  }, [is2026Mode]);
+  }, [is2026Mode, playbackSpeed]);
 
   const togglePlay = () => {
     if (!audioRef.current) return;
@@ -72,6 +82,7 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
     audioRef.current.currentTime = 0;
     setIsPlaying(false);
     setProgress(0);
+    setCurrentTime(0);
   };
 
   return (
@@ -90,7 +101,7 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is202
               {isPlaying ? 'Playing audio...' : 'Ready to play'}
               {playbackSpeed !== 1 && <span className="text-indigo-600 font-bold">({playbackSpeed}x)</span>}
             </span>
-            <span>{Math.floor((audioRef.current?.currentTime || 0))}s / {Math.floor(audioRef.current?.duration || 0)}s</span>
+            <span>{Math.floor(currentTime)}s / {Math.floor(duration)}s</span>
           </div>
           <div className="w-full bg-slate-300 h-2 rounded-full overflow-hidden">
             <div 

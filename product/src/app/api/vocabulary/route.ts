@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { vocabularyDb } from '@/lib/vocabulary-db';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const userId = '1'; // Mocked user ID
     const progress = await vocabularyDb.getProgress(userId);
