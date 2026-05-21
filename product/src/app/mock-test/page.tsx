@@ -2,13 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { mockTests } from '@/lib/data/mock-tests';
-import { MockTestResult } from '@/lib/types';
+import { MockTestResult, MockTestQuestion } from '@/lib/types';
 
 export default function MockTestSimulator() {
   const [currentTest, setCurrentTest] = useState(0);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [answers, setAnswers] = useState<Record<string, string | number>>({});
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTestActive, setIsTestActive] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -46,7 +45,7 @@ export default function MockTestSimulator() {
     
     test.sections.forEach((sec) => {
       let secScore = 0;
-      sec.questions.forEach((q: any) => {
+      sec.questions.forEach((q: MockTestQuestion) => {
         if (q.correctAnswer !== undefined && answers[q.id] === q.correctAnswer) {
           secScore += 1;
         }
@@ -62,7 +61,7 @@ export default function MockTestSimulator() {
     });
   };
 
-  const handleAnswerChange = (questionId: string, value: any) => {
+  const handleAnswerChange = (questionId: string, value: string | number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
 
@@ -113,7 +112,7 @@ export default function MockTestSimulator() {
           </div>
 
           <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-8">
-            {section.questions.map((q: any, idx) => (
+            {section.questions.map((q: MockTestQuestion, idx) => (
               <div key={q.id} className="p-6 border-b border-slate-100 last:border-0 space-y-4">
                 <div className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Question {idx + 1}</div>
                 
