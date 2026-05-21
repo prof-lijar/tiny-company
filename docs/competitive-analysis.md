@@ -1,39 +1,39 @@
 # Competitive Analysis: TOPIK Preparation Market
 
 ## Market Overview
-The TOPIK (Test of Proficiency in Korean) market is evolving rapidly. With the 2026 reforms, there is a clear shift toward the Internet-Based Test (IBT) format and a growing emphasis on the separate TOPIK Speaking exam. Most existing tools are either too basic (Duolingo) or mobile-only (Migii), leaving a significant gap for a professional, web-based IBT simulation platform that integrates multiple skills.
+The TOPIK (Test of Proficiency in Korean) market is undergoing a seismic shift due to the **2026 Reforms**. The transition to the Internet-Based Test (IBT) is accelerating, and the exam structure has been overhauled. There is now a critical demand for tools that align with the 2026 standards, as students using 2024/2025 materials are seeing high failure rates.
 
 ## Competitor Breakdown
 
 ### 1. Migii TOPIK
 - **Model**: Subscription ($26/6mo)
-- **Strengths**: Large volume of mock exams (40+), smart flashcards, wide reach (iOS/Android).
-- **Weaknesses**: Mobile-only (no web version), lacks qualitative AI feedback for writing, fragmented UX for long-form study.
-- **Recent Trends**: Adapting to 2026 IBT reforms; expanding into EPS TOPIK.
+- **Strengths**: Large volume of mock exams, smart flashcards, wide reach.
+- **Weaknesses**: Mobile-only, lacks qualitative AI feedback.
+- **Recent Trends**: **Aggressively adapting to 2026 IBT reforms.** They are winning the current market window by being the first to offer "2026-ready" materials.
 
 ### 2. thinkbig TOPIK
 - **Model**: B2B / Institutional targeting
 - **Strengths**: High-end AI capabilities, structured curriculum.
-- **Weaknesses**: Expensive, high barrier to entry for individual self-studiers.
+- **Weaknesses**: Expensive for individuals.
 
 ### 3. TOPIK Guide
 - **Model**: Ad-supported / Free resources
-- **Strengths**: Excellent information hub, comprehensive guides, high SEO.
-- **Weaknesses**: Passive learning (reading vs doing), no interactive practice tools or progress tracking.
+- **Strengths**: Excellent information hub, high SEO.
+- **Weaknesses**: Passive learning, no interactive practice tools.
 
 ### 4. Generic Apps (Duolingo, LingoDeer)
 - **Model**: Freemium
-- **Strengths**: Gamification, low barrier to entry.
-- **Weaknesses**: Not designed for TOPIK; too basic for Levels 3-6; poor ratings for advanced learners.
+- **Strengths**: Gamification.
+- **Weaknesses**: Totally outdated for the 2026 reform.
 
 ## Our Strategic Advantage (The "Moat")
-- **Web-First IBT Simulation**: As TOPIK moves toward IBT, providing a desktop experience that mimics the actual exam environment is a critical differentiator. This is the primary environment for the 2026 digital shift.
-- **Qualitative AI Writing Feedback**: Unlike competitors who provide binary (correct/incorrect) answers, our AI analyzes structure, formality, and nuance—the most difficult part of TOPIK II.
-- **Integrated Study Loop**: Combining SRS Vocabulary $\rightarrow$ Grammar $\rightarrow$ Reading/Listening $\rightarrow$ Mock Test in a single web ecosystem.
-- **AI-Driven Planning**: Dynamic study plans based on real weakness analysis, moving beyond static "roadmaps" provided by competitors.
+- **Web-First IBT Simulation**: We provide the exact desktop environment of the 2026 IBT.
+- **Anti-Template AI Writing Feedback**: While others provide generic feedback, we can implement the new 2026 rubric that specifically penalizes formulaic templates.
+- **High-Speed Listening Training**: Integrating 1.1x speed audio to prepare users for the faster 2026 audio tracks.
+- **Integrated Study Loop**: Combining SRS $\rightarrow$ Grammar $\rightarrow$ Reading/Listening $\rightarrow$ Mock Test.
 
 ## Opportunities & Risks
-- **Opportunity: Speaking Module**: With the TOPIK Speaking test being conducted separately and gaining importance in 2026, adding a Speaking practice module (AI-powered) would be a major market capture.
-- **Opportunity: Writing Sample Library**: Creating a curated library of "Level 6" sample essays for comparative analysis.
-- **Risk: Official IBT Simulator**: NIIED could release an official simulator, which would force us to shift focus toward "Learning/Mentoring" rather than just "Simulation".
-- **Risk: AI Commoditization**: As LLMs improve, "AI feedback" becomes a feature, not a product. We must double down on *TOPIK-specific* scoring criteria and real-world data.
+- **Opportunity: 2026 Alignment**: Being the first high-quality *web-based* tool to fully implement the 2026 format changes.
+- **Opportunity: Speaking Module**: The separate Speaking exam is now a critical requirement for many.
+- **Risk: Outdated Content**: If our mock tests and practice sets remain in the 2025 format, the product becomes obsolete.
+- **Risk: AI Commoditization**: We must ensure our AI feedback is grounded in the *actual* 2026 grading rubric.
