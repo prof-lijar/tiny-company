@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Prioritizing v3.0 core engineering (Drift Detection) and cleaning up the PR backlog, while advancing design and marketing.",
+  "cycle_reasoning": "Prioritizing main branch stabilization and the v3.0 Drift Detection Engine (P0), while advancing design specs and marketing messaging for v3.0.",
   "assignments": [
     {"role": "cto", "turns": 3, "priority": "P0"},
     {"role": "designer", "turns": 1, "priority": "P1"},
