@@ -178,3 +178,10 @@ export interface SRSState {
   easeFactor: number;
   nextReview: number;
 }
+
+export interface TypingPracticeText {
+  id: string;
+  level: TopikLevel;
+  text: string;
+  category: 'essay' | 'sentence' | 'grammar';
+}
