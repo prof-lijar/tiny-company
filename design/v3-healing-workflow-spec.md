@@ -58,9 +58,9 @@ A high-contrast diff view of the Prompt/Reasoning Block.
 A verification report from the shadow environment.
 - **Regression Suite:** A table showing the fix's performance across a set of test cases.
   - `Test Case ID` | `Baseline` | `Healed` | `Status`
-  - `TC-01: Edge Case A` | `Pass` | `Pass` | `✅`
-  - `TC-02: Logic Loop B` | `Fail` | `Pass` | `🚀 Fixed`
-  - `TC-03: Constraint C` | `Pass` | `Pass` | `✅`
+  - `TC-01: Edge Case A` | `Pass` | `Pass` | `\u2705`
+  - `TC-02: Logic Loop B` | `Fail` | `Pass` | `\ud83d\ude80 Fixed`
+  - `TC-03: Constraint C` | `Pass` | `Pass` | `\u2705`
 - **Stability Metric:** A "Stability Gain" percentage (e.g., `+12% PAR improvement`).
 
 #### E. Footer (Action Center)
@@ -70,14 +70,72 @@ A verification report from the shadow environment.
 
 ---
 
-## 4. Interaction Patterns
+## 4. High-Fidelity Wireframe (ASCII)
+
+```text
++---------------------------------------------------------------------------------------+
+| [ < Back ]   HEALING PROPOSAL #HP-1024: Research-Bot-04            STATUS: PENDING    |
+| Timeline: Detected (12m) ---- Synthesized (8m) ---- Verified (5m)       SEVERITY: HIGH |
++---------------------------------------------------------------------------------------+
+|                                                                                       |
+|  1. THE DRIFT (Reasoning Path Divergence)                                              |
+|  +-----------------------------------+   +-------------------------------------------+ |
+|  | GOLDEN PATH (Standard)            |   | DRIFTED PATH (Actual)                     | |
+|  | [ ] Milestone 1: Intent Extraction|   | [ ] Milestone 1: Intent Extraction        | |
+|  | [ ] Milestone 2: Source Retrieval |   | [ ] Milestone 2: Source Retrieval         | |
+|  | [X] Milestone 3: Compliance Check | <--- [!] DIVEREGENCE POINT: MILESTONE 3       | |
+|  | [ ] Milestone 4: Synthesis        |   | [ ] Milestone 4: Synthesis                | |
+|  +-----------------------------------+   +-------------------------------------------+ |
+|  DIAGNOSIS: Agent skipped 'Compliance Check' and jumped directly to 'Synthesis'.       |
+|                                                                                       |
+|  2. THE FIX (Cognitive Block Diff)                                                     |
+|  +-----------------------------------------------------------------------------------+ |
+|  | OLD PROMPT (v1.2)                                                                  | |
+|  | "Retrieve the data and synthesize the response based on the user's query."         | |
+|  |                                                                                   | |
+|  | NEW PROMPT (Proposed v1.3)                                                        | |
+|  | "Retrieve the data, [VERIFY COMPLIANCE TOKEN], and then synthesize the response    | |
+|  |  based on the user's query."                                                      | |
+|  +-----------------------------------------------------------------------------------+ |
+|  RATIONALE: Added explicit verification step to prevent constraint violations.        |
+|                                                                                       |
+|  3. THE PROOF (Shadow Verification Results)                                            |
+|  +-----------------------------------------------------------------------------------+ |
+|  | Test Case ID   | Baseline | Healed | Status                                        | |
+|  |----------------|----------|--------|----------------------------------------------| |
+|  | TC-01: Edge A  | PASS     | PASS   | [ \u2705 ]                                     | |
+|  | TC-02: Loop B  | FAIL     | PASS   | [ \ud83d\ude80 FIXED ]                                | |
+|  | TC-03: Const C | PASS     | PASS   | [ \u2705 ]                                     | |
+|  +-----------------------------------------------------------------------------------+ |
+|  STABILITY GAIN: +12% PAR Improvement                                                 |
+|                                                                                       |
+|  +-----------------------------------------------------------------------------------+ |
+|  | [ REJECT ]                   [ MODIFY ]               [ APPROVE & DEPLOY FIX ]     | |
+|  +-----------------------------------------------------------------------------------+ |
++---------------------------------------------------------------------------------------+
+```
+
+---
+
+## 5. Technical Mapping (UI $\rightarrow$ API)
+
+| UI Element | Data Source (HealingProposal Object) | API Action |
+| :--- | :--- | :--- |
+| **Drift Visualization** | `proposal.drift_analysis.golden_path` vs `proposal.drift_analysis.actual_path` | `GET /v3/healing/proposals/{id}` |
+| **Fix Diff** | `proposal.proposed_fix.old_prompt` vs `proposal.proposed_fix.new_prompt` | `GET /v3/healing/proposals/{id}` |
+| **Verification Table** | `proposal.verification_results.regression_suite` | `GET /v3/healing/proposals/{id}` |
+| **Deploy Button** | N/A | `PUT /v3/orchestrator/deploy` |
+
+---
+
+## 6. Interaction Patterns
 - **Sync-Scroll:** Scrolling the "Golden Path" automatically scrolls the "Drifted Path" to maintain alignment.
 - **Hover-Detail:** Hovering over a failed test case in "The Proof" shows the specific trace of that failure.
 - **One-Click Deployment:** Clicking "Approve & Deploy" triggers the deployment pipeline and immediately switches the view to "Monitoring Mode" to watch for the Autonomous Circuit Breaker.
 
 ---
 
-## 5. Visual Palette Mapping
+## 7. Visual Palette Mapping
 | Element | Color | Hex | Meaning |
 | :--- | :--- | :--- | :--- |
 | Background | Obsidian | `#0F172A` | Technical focus |
