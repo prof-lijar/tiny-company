@@ -119,3 +119,22 @@ export interface WeaknessReport {
   }[];
   overallAnalysis: string;
 }
+
+export interface StudyTask {
+  id: string;
+  type: 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'writing' | 'mock-test';
+  title: string;
+  completed: boolean;
+  dueDate: string; // ISO date string
+  priority: 'high' | 'medium' | 'low';
+  targetUrl?: string;
+}
+
+export interface StudyPlan {
+  userId: string;
+  targetExamDate: string;
+  daysRemaining: number;
+  overallProgress: number; // 0-100
+  dailyTasks: StudyTask[];
+  streak: number;
+}
