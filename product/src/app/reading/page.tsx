@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { READING_PASSAGES } from '@/lib/data/reading';
 import { Timer, AlertCircle } from 'lucide-react';
 
@@ -11,12 +11,22 @@ export default function ReadingPage() {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
 
+  const handleSubmit = useCallback(() => {
+    if (currentPassageIndex === null) return;
+    const passage = READING_PASSAGES[currentPassageIndex];
+    let correctCount = 0;
+    passage.questions.forEach((q) => {
+      if (answers[q.id] === q.correctAnswer) {
+        correctCount++;
+      }
+    });
+    setScore(correctCount);
+    setSubmitted(true);
+  }, [currentPassageIndex, answers]);
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (currentPassageIndex !== null && !submitted) {
-      const passage = READING_PASSAGES[currentPassageIndex];
-      setTimeLeft(passage.timeLimitMinutes * 60);
-
       timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
@@ -31,10 +41,12 @@ export default function ReadingPage() {
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [currentPassageIndex, submitted]);
+  }, [currentPassageIndex, submitted, handleSubmit]);
 
   const handlePassageSelect = (index: number) => {
+    const passage = READING_PASSAGES[index];
     setCurrentPassageIndex(index);
+    setTimeLeft(passage.timeLimitMinutes * 60);
     setAnswers({});
     setSubmitted(false);
     setScore(0);
@@ -43,19 +55,6 @@ export default function ReadingPage() {
   const handleOptionSelect = (questionId: string, optionIndex: number) => {
     if (submitted) return;
     setAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
-  };
-
-  const handleSubmit = () => {
-    if (currentPassageIndex === null) return;
-    const passage = READING_PASSAGES[currentPassageIndex];
-    let correctCount = 0;
-    passage.questions.forEach((q) => {
-      if (answers[q.id] === q.correctAnswer) {
-        correctCount++;
-      }
-    });
-    setScore(correctCount);
-    setSubmitted(true);
   };
 
   const resetPractice = () => {
