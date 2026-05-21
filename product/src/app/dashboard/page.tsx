@@ -56,28 +56,24 @@ export default function DashboardPage() {
       {/* Key Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <StatCard 
-          title="Vocabulary" 
           value={`${USER_STATS.vocabMastered}/${USER_STATS.vocabTotal}`} 
           subtitle="Words Mastered" 
           icon={<BookOpen className="w-6 h-6 text-blue-600" />} 
           progress={(USER_STATS.vocabMastered / USER_STATS.vocabTotal) * 100}
         />
         <StatCard 
-          title="Grammar" 
           value={`${USER_STATS.grammarCompleted}/${USER_STATS.grammarTotal}`} 
           subtitle="Lessons Completed" 
           icon={<CheckCircle className="w-6 h-6 text-green-600" />} 
           progress={(USER_STATS.grammarCompleted / USER_STATS.grammarTotal) * 100}
         />
         <StatCard 
-          title="Avg. Reading Score" 
           value={`${USER_STATS.avgReadingScore}%`} 
           subtitle="Based on last 5 tests" 
           icon={<TrendingUp className="w-6 h-6 text-purple-600" />} 
           progress={USER_STATS.avgReadingScore}
         />
         <StatCard 
-          title="Study Time" 
           value={USER_STATS.totalStudyTime} 
           subtitle="Total time invested" 
           icon={<Clock className="w-6 h-6 text-amber-600" />} 
@@ -153,8 +149,7 @@ export default function DashboardPage() {
   );
 }
 
-function StatCard({ title, value, subtitle, icon, progress }: { 
-  title: string; 
+function StatCard({ value, subtitle, icon, progress }: { 
   value: string; 
   subtitle: string; 
   icon: React.ReactNode; 

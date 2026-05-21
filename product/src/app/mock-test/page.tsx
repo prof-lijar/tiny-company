@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { mockTests } from '@/lib/data/mock-tests';
 import { MockTestResult, MockTestQuestion } from '@/lib/types';
 
@@ -16,30 +16,7 @@ export default function MockTestSimulator() {
   const test = mockTests[currentTest];
   const section = test.sections[currentSectionIndex];
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isTestActive && timeLeft > 0) {
-      timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    } else if (isTestActive && timeLeft === 0) {
-      finishTest();
-    }
-    return () => clearInterval(timer);
-  }, [isTestActive, timeLeft]);
-
-  const startTest = () => {
-    setIsTestActive(true);
-    setTimeLeft(section.durationMinutes * 60);
-  };
-
-  const finishTest = () => {
-    setIsTestActive(false);
-    setIsFinished(true);
-    calculateResults();
-  };
-
-  const calculateResults = () => {
+  const calculateResults = useCallback(() => {
     let totalScore = 0;
     const sectionScores: { [key: string]: number } = {};
     
@@ -59,6 +36,29 @@ export default function MockTestSimulator() {
       totalScore,
       timeTakenSeconds: (section.durationMinutes * 60) - timeLeft,
     });
+  }, [test, answers, section, timeLeft]);
+
+  const finishTest = useCallback(() => {
+    setIsTestActive(false);
+    setIsFinished(true);
+    calculateResults();
+  }, [calculateResults]);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isTestActive && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+    } else if (isTestActive && timeLeft === 0) {
+      finishTest();
+    }
+    return () => clearInterval(timer);
+  }, [isTestActive, timeLeft, finishTest]);
+
+  const startTest = () => {
+    setIsTestActive(true);
+    setTimeLeft(section.durationMinutes * 60);
   };
 
   const handleAnswerChange = (questionId: string, value: string | number) => {
@@ -121,7 +121,6 @@ export default function MockTestSimulator() {
                     {q.passage}
                   </div>
                 )}
-                
                 {q.audioUrl && (
                   <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-100 flex items-center gap-4 mb-4">
                     <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white">▶</div>

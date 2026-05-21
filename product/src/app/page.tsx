@@ -119,7 +119,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {PRICING_PLANS.map((plan, index) => (
+            {PRICING_PLANS.map((plan) => (
               <Card key={plan.name} className={`p-8 relative ${plan.highlighted ? 'border-blue-600 ring-2 ring-blue-600' : 'border-slate-200'}`}>
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
@@ -131,7 +131,7 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, index) => (
+                  {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3 text-slate-600">
                       <span className="text-green-500">✓</span>
                       {feature}
