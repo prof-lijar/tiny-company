@@ -1,41 +1,52 @@
-# TraceWhisper v2.3: The Intelligence Layer
+# TOPIK Learning Assistant
 
-TraceWhisper has evolved from a simple log monitoring tool into a **Reasoning Intelligence Layer**. While v2.1 focused on "Debug-First Observability," v2.3 moves from observing failures to proactively preventing them and optimizing cognitive efficiency.
+A web-based study platform for learners preparing for the TOPIK (Test of Proficiency in Korean) exam.
 
-## Core v2.3 Capabilities
+## What is this?
 
-### 1. The Pattern Vault (Cross-Project Knowledge)
-Enable "write-once, fix-everywhere" for reasoning. 
-- **Pattern Extraction**: Automatically captures failure-correction pairs from verified fixes.
-- **Recommendation Engine**: Suggests proven fixes for new traces based on historical similarity across projects.
+This repository is an autonomous multi-agent experiment where AI agents collaborate to build a real, working product. The agents (CEO, CTO, Product Manager, Designer, Marketing, Legal, Finance) coordinate through GitHub issues and pull requests.
 
-### 2. Continuous Reasoning Integration (CRI)
-Reasoning stability is now a first-class citizen in the CI/CD pipeline.
-- **Reasoning Unit Tests**: Define expected cognitive paths (not just outputs) to prevent "lucky" passes.
-- **Hard Gates**: `tw verify-all` integrated into CI/CD to block regressions in reasoning logic.
+## The Product
 
-### 3. Cognitive Pruning Engine
-Reduce latency and cost by eliminating "Cognitive Bloat."
-- **Bloat Detection**: Identifies circular reasoning and redundant steps.
-- **Efficiency Scoring**: Provides a ratio of actual vs. minimum required steps, suggesting prompt modifications to save tokens.
+**TOPIK Learning Assistant** helps Korean language learners prepare for the TOPIK exam with:
 
-### 4. Adversarial Reasoning Synthesis
-Proactive red-teaming for prompts.
-- **Synthetic Stress Tests**: Generates adversarial inputs designed to trigger known failure modes.
-- **Fragility Reporting**: Pinpoints specific weak points in prompt logic before they hit production.
+- Vocabulary builder with spaced repetition (SRS)
+- Grammar lessons organized by TOPIK level
+- Reading comprehension practice
+- Writing practice with AI-powered feedback
+- Mock test simulator (IBT format)
+- Progress tracking dashboard
 
-## Technical Architecture
-For detailed technical specifications, see `docs/v2.3-spec.md` and `docs/technical-architecture.md`.
+**Tech Stack**: Next.js + TypeScript + Tailwind CSS, deployed on Vercel.
 
-## Quick Start
-```bash
-# Install the SDK
-pip install tracewhisper-sdk
+## Project Structure
 
-# Initialize and start tracing
-tw init
-tw live
-
-# Run reasoning verification (v2.3)
-tw verify-all
 ```
+product/           # Next.js web application (the actual product)
+  src/app/         # Pages and layouts (App Router)
+  src/components/  # React components
+  src/lib/         # Utilities, types, data
+docs/              # Product documentation
+design/            # Design specifications
+marketing/         # Marketing materials
+legal/             # Legal documents
+```
+
+## Running the Product
+
+```bash
+cd product
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Agent Infrastructure
+
+The agent system that builds this product lives in files excluded from the product output (`.gitignore`):
+- `app/` — Agent definitions and tools
+- `run.py` — Orchestration loop
+- `config.py` — Configuration
+
+To run the agents: `python run.py`
