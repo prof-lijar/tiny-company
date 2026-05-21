@@ -7,7 +7,7 @@ Welcome to TraceWhisper. These Terms of Service ("Terms") govern your access to 
 By accessing or using the Service, you agree to be bound by these Terms. If you are using the Service on behalf of an organization, you represent and warrant that you have the authority to bind that organization to these Terms.
 
 ## 1. Description of Service
-TraceWhisper is a Reasoning Governance Platform designed to help developers and organizations observe, debug, and govern the reasoning processes of AI agents. The Service provides tools for forensic narrative generation, reasoning diagnostics, enterprise-grade governance of AI patterns, and autonomous optimization (including Auto-SOP and Drift Detection).
+TraceWhisper is a Reasoning Governance Platform designed to help developers and organizations observe, debug, and govern the reasoning processes of AI agents. The Service provides tools for forensic narrative generation, reasoning diagnostics, enterprise-grade governance of AI patterns, and autonomous optimization (including Auto-SOP, Drift Detection, and Autonomous Remediation).
 
 ## 2. Account Registration
 To access certain features of the Service, you may be required to create an account. You agree to:
@@ -28,29 +28,38 @@ You agree not to use the Service to:
 
 You retain all ownership rights to your User Content and Reasoning IP. By using the Service, you grant us a limited license to host, transmit, and display your User Content solely for the purpose of providing the Service to you. We explicitly disclaim any ownership over the Reasoning IP developed or translated by you using the Service.
 
-### 4.2 Company Intellectual Property
+### 4.2 Synthesized Fixes and Autonomous Output
+Any "Healing Proposals," corrective prompts, or reasoning blocks synthesized by the Service's autonomous engines (including the Self-Healing Orchestrator) are the property of the User upon their generation. Tiny Company retains no ownership over the specific output of these synthesized fixes, although we retain ownership of the underlying synthesis algorithms and the Pattern Vault.
+
+### 4.3 Company Intellectual Property
 The Service, including its software, design, "Reasoning IDE" interfaces, and proprietary algorithms, is the exclusive property of Tiny Company and is protected by copyright and other intellectual property laws.
 
 ## 5. Fees and Payment
 ### 5.1 Platform + Credit Model
 The Service operates on a "Platform + Credit" billing model:
-- **Platform Subscription:** Access to v2.5 "The Autonomous Bridge" and associated governance features requires an active monthly organization-level subscription.
+- **Platform Subscription:** Access to v3.0 "The Autonomous Bridge" and associated governance features requires an active monthly organization-level subscription.
 - **Optimization Credits:** Certain high-compute operations (e.g., Logic Porter translations, Shadow APO runs, Drift Scanning, and Auto-SOP generation) are billed via a consumption-based credit system. Credits must be purchased in advance and are deducted upon the successful completion of the triggering activity.
 
 ### 5.2 Payment Terms
-All fees are non-refundable unless otherwise stated in a separate written agreement. We reserve the right to change our pricing upon reasonable notice. Failure to maintain an active subscription or sufficient credit balance may result in the suspension of access to specific v2.5 features.
+All fees are non-refundable unless otherwise stated in a separate written agreement. We reserve the right to change our pricing upon reasonable notice. Failure to maintain an active subscription or sufficient credit balance may result in the suspension of access to specific v3.0 features.
 
-## 6. Limitation of Liability
-### 6.1 "As-Is" Provision
-THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE". TINY COMPANY DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED.
+## 6. Autonomous Remediation and Liability
+### 6.1 The Suggested-Action Paradigm
+TraceWhisper v3.0 provides "Autonomous Remediation" capabilities. The system may identify reasoning failures and synthesize "Healing Proposals" (corrective prompts, reasoning blocks, or routing changes). You acknowledge and agree that:
+- **Suggestions Only:** All Healing Proposals are suggestions only.
+- **Human-in-the-Loop:** No Healing Proposal is deployed to a production environment by the Service without the explicit approval of your designated human operator (the "Strategic Overseer").
+- **Acceptance of Risk:** The act of approving and deploying a Healing Proposal constitutes a full and final acceptance of the risks associated with that specific correction.
 
 ### 6.2 AI-Specific Disclaimer
 You acknowledge that AI-generated insights, "verified fixes," and autonomously proposed Golden Paths (Auto-SOP) provided by the Service are tools for assistance and suggestions, not guarantees of correctness or compliance. 
 
 The "Production Reasoning Drift Detection" is a monitoring tool; it does not guarantee the absence of logic errors. You are solely responsible for reviewing and approving any autonomously generated governance standards or suggested fixes before deploying them to production. Tiny Company is not responsible for any damages resulting from the deployment of AI agents based on insights derived from the Service.
 
-### 6.3 Cap on Liability
-To the maximum extent permitted by law, Tiny Company's total liability for any claim arising out of these Terms shall not exceed the amount paid by you to us in the twelve (12) months preceding the event giving rise to the claim.
+### 6.3 Performance Metrics
+Any quantitative metrics provided by the Self-Healing Orchestrator (e.g., "adherence restored" percentages) are diagnostic indicators based on historical regression sets and shadow environments. These metrics are not warranties of production performance and may not perfectly predict production outcomes.
+
+### 6.4 Limitation of Liability
+To the maximum extent permitted by law, Tiny Company's total liability for any claim arising out of these Terms shall not exceed the amount paid by you to us in the twelve (12) months preceding the event giving rise to the claim. IN NO EVENT SHALL TINY COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO SYSTEM DOWNTIME, DATA LOSS, OR FINANCIAL LOSS RESULTING FROM THE DEPLOYMENT OF AI-GENERATED PROMPT CORRECTIONS.
 
 ## 7. Termination
 We may suspend or terminate your account if you violate these Terms. You may stop using the Service at any time by deleting your account.
@@ -63,68 +72,3 @@ We may update these Terms from time to time. We will notify users of significant
 
 ## 10. Contact
 For any questions regarding these Terms, please contact legal@tinycompany.ai.
-=======
-**Last Updated: May 21, 2026**
-
-Welcome to TraceWhisper. These Terms of Service ("Terms") govern your use of the TraceWhisper software, including the Reasoning IDE, the "Fix-It" Correction Engine, and the v2.3 Intelligence Layer.
-
-## 1. Acceptance of Terms
-By installing or using TraceWhisper, you agree to be bound by these Terms. If you do not agree to these Terms, do not use the software.
-
-## 2. License Grant
-Tiny Company grants you a non-exclusive, non-transferable, limited license to use TraceWhisper for its intended and approved purpose—the debugging, auditing, and optimization of AI agent reasoning—in accordance with these Terms and the applicable open-source license (MIT).
-
-## 3. AI-Generated Suggestions & Intelligence Layer
-TraceWhisper provides automated reasoning analysis, prompt correction suggestions ("Fix-It"), and cross-project reasoning patterns ("The Pattern Vault").
-- **Suggestions Only:** You acknowledge that all prompt modifications and corrections proposed by TraceWhisper are *suggestions only*.
-- **User Responsibility:** You are solely responsible for reviewing, testing, and validating any AI-generated suggestion before deploying it to a production environment.
-- **The Pattern Vault:** By using the Intelligence Layer, you agree that TraceWhisper may extract "Failure Pattern $\\\\rightarrow$ Correction" pairs from your traces to improve the system's reasoning capabilities.
-- **Ownership of Patterns:** Extracted patterns are stored in the Pattern Vault. While the original prompts and traces remain your property, the aggregated and anonymized reasoning patterns derived from them are owned by Tiny Company to ensure the continuous improvement of the Intelligence Layer.
-- **No Guarantee of Outcome:** Tiny Company does not guarantee that a "Fix-It" suggestion or a Pattern Vault recommendation will resolve the underlying reasoning failure or that it will not introduce new regressions.
-
-## 4. Fees and Payment
-TraceWhisper is offered under different pricing tiers (Free, Pro, and Enterprise).
-- **Subscription Tiers:** The specific features and costs associated with each tier are detailed in our Pricing Model and Billing Terms.
-- **Payment:** By subscribing to a paid tier (Pro or Enterprise), you agree to pay the recurring fees associated with that tier. All payments are processed through our third-party payment processor.
-- **Billing Cycle:** Subscriptions are billed on a monthly basis unless otherwise specified in an Enterprise agreement.
-- **Changes to Pricing:** Tiny Company reserves the right to adjust pricing for any tier. We will provide at least 30 days' notice for any price increases to existing subscribers.
-- **Refunds:** Unless required by law, all subscription fees are non-refundable.
-
-## 5. User Obligations
-You agree not to:
-- Use the software for any illegal purpose.
-- Attempt to reverse engineer the proprietary components of the "Correction Engine" or narrative synthesis logic.
-- Bypass any security security measures or usage limits.
-- Use the software to generate content that violates the same laws or policies as those governing the LLM providers used by the software.
-
-## 6. Intellectual Property
-All rights, title, and interest in and the software, excluding any content (such as prompts or traces) you provide, are and will remain the exclusive property of Tiny Company.
-
-## 7. Disclaimer of Warranties
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. TINY COMPANY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND THE ACCURACY OR RELIABILITY OF AI-GENERATED SUGGESTIONS.
-
-## 8. Limitation of Liability
-IN NO EVENT SHALL TINY COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO SYSTEM DOWNTIME, DATA LOSS, OR FINANCIAL LOSS RESULTING FROM THE DEPLOYMENT OF AI-GENERATED PROMPT CORRECTIONS.
-
-## 9. Governing Law
-These Terms shall be governed by and construed in accordance with the laws of the jurisdiction where Tiny Company is registered.
-
-## 10. Contact
-For any questions regarding these Terms, please contact `legal@tinycompany.ai`.
-=======
-## 5. Intellectual Property
-All rights, title, and interest in and the software, excluding any content (such as prompts or traces) you provide, are and will remain the exclusive property of Tiny Company.
-
-## 6. Disclaimer of Warranties
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. TINY COMPANY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND THE ACCURACY OR RELIABILITY OF AI-GENERATED SUGGESTIONS.
-
-## 7. Limitation of Liability
-IN NO EVENT SHALL TINY COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO SYSTEM DOWNTIME, DATA LOSS, OR FINANCIAL LOSS RESULTING FROM THE DEPLOYMENT OF AI-GENERATED PROMPT CORRECTIONS.
-
-## 8. Governing Law
-These Terms shall be governed by and construed in accordance with the laws of the jurisdiction where Tiny Company is registered.
-
-## 9. Contact
-For any questions regarding these Terms, please contact `legal@tinycompany.ai`.
->>>>>>> efd9a58 ([Legal] Update Terms of Service, Privacy Policy, and Compliance Review for v2.3 Intelligence Layer (#224))
->>>>>>> designer/v3-healing-wireframes
