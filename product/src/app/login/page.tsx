@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -86,14 +87,9 @@ export default function LoginPage() {
         </form>
         
         <div className="mt-8 text-center text-sm text-slate-600">
-          Don&apos;t have an account? <Link href="/signup" className="text-blue-600 font-medium hover:underline">Sign up for free</Link>
+          Don't have an account? <Link href="/signup" className="text-blue-600 font-medium hover:underline">Sign up for free</Link>
         </div>
       </Card>
     </div>
   );
-}
-
-// Mock signIn function since next-auth/react is not available in this environment
-async function signIn(provider: string, credentials: any) {
-  return { error: null };
 }
