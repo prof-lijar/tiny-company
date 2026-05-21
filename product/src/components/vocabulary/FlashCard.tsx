@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { VocabularyWord } from '@/lib/data/vocabulary';
 
 interface FlashCardProps {

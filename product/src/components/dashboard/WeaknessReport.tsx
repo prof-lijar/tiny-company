@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { AlertTriangle, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
@@ -93,8 +93,7 @@ export default function WeaknessReport() {
                   Go to Lesson <ArrowRight className="w-3 h-3" />
                 </Button>
               </div>
-            ))}
-          </div>
+            ))}\\n        </div>
 
           <Button 
             variant="outline" 

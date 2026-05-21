@@ -11,7 +11,6 @@ interface ListeningPlayerProps {
 export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ audioUrl, onEnded }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
 
   // Mock audio behavior since we don't have real files
   useEffect(() => {

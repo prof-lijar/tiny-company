@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { studyPlanDb } from '@/lib/study-plan-db';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const userId = '1'; // Mocked user ID for now
   
   try {
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       }, { status: 404 });
     }
     return NextResponse.json(plan);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const updatedPlan = await studyPlanDb.getPlan(userId);
     
     return NextResponse.json(updatedPlan);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -53,7 +53,7 @@ export async function PATCH(request: NextRequest) {
     const updatedPlan = await studyPlanDb.getPlan(userId);
     
     return NextResponse.json(updatedPlan);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

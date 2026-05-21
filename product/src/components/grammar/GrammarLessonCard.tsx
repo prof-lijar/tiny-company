@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { grammarData, TOPIKLevel } from '@/lib/data/grammar';
 
 interface GrammarLessonCardProps {
   pattern: {
