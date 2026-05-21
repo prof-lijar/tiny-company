@@ -172,3 +172,9 @@ export interface WritingFeedback {
     structuralVarietyScore: number; // 1-5
   };
 }
+
+export interface SRSState {
+  interval: number;
+  easeFactor: number;
+  nextReview: number;
+}
