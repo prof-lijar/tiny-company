@@ -68,3 +68,39 @@ The app must support the four specific tasks of the TOPIK II writing section:
 2. **Task 52 (Short Answer/Fill-in)**: Complete a sentence in a descriptive/expository text. Focuses on logical flow and vocabulary.
 3. **Task 53 (Short Essay)**: Describe a graph or chart (200-300 characters). Focuses on objective data description without personal opinion.
 4. **Task 54 (Long Essay)**: Write a logical essay on a given social topic (600-700 characters). Focuses on structure, argumentation, and advanced vocabulary.
+
+## 6. Real Content Data (Seed Data)
+
+This section provides specific examples of vocabulary and grammar patterns to be used in the app, categorized by level.
+
+### 6.1 Vocabulary by Level & Theme
+
+| Level | Theme | Key Vocabulary (Korean - English) |
+|---|---|---|
+| **Level 3** | Workplace & Education | 직장 (workplace), 경험 (experience), 문화 (culture), 발표 (presentation), 준비 (preparation), 면접 (interview), 합격 (passing), 지원서 (application) |
+| **Level 4** | Society & Environment | 사회 (society), 경제 (economy), 환경 (environment), 기술 (technology), 발전 (development), 오염 (pollution), 보호 (protection), 정책 (policy) |
+| **Level 5** | Professional & Abstract | 분석 (analysis), 적용 (application), 협력 (cooperation), 전략 (strategy), 연구 (research), 효율성 (efficiency), 관점 (perspective), 논리 (logic) |
+| **Level 6** | Academic & Literary | 제안 (proposal), 통계 (statistics), 논의 (discussion), 비판 (criticism), 철학 (philosophy), 추상적 (abstract), 메커니즘 (mechanism), 함의 (implication) |
+
+### 6.2 Grammar Patterns by Level
+
+#### Level 3-4 (Intermediate)
+- **Cause/Reason**: `-기 때문에` (because), `-느라고` (because of - often negative result), `-길래` (since/because - spoken)
+- **Contrast**: `-는 반면에` (on the other hand), `-지만` (but), `-는데/ㄴ데` (but/and/background)
+- **Condition/Hypothesis**: `-다면` (if - hypothetical), `-기만 하면` (if only)
+- **Speculation**: `-ㄴ/은/는 것 같다` (seems like), `-ㄹ/을 것 같다` (likely to), `-나 보다` (looks like)
+- **Inevitability/Necessity**: `-ㄹ/을 수밖에 없다` (have no choice but to), `-기 마련이다` (bound to)
+
+#### Level 5-6 (Advanced)
+- **Formal Contrast**: `-거니와` (not only... but also), `-는 법이다` (it is the rule that)
+- **Advanced Cause/Effect**: `-ㄴ/은/는 바람에` (due to - unexpected), `-거늘` (given that/since)
+- **Nuance/Emphasis**: `-기나 하다` (at least do...), `-기나 하겠어?` (would they even...?)
+- **Formal Writing Endings**: `-ㄴ/는다` (plain form), `-ㄴ/는다고 한다` (indirect quote)
+
+### 6.3 Writing Task 54 (Long Essay) Scoring Criteria
+The AI feedback engine should evaluate based on:
+1. **Task Completion**: Did the user address all parts of the prompt? (600-700 characters).
+2. **Logical Structure**: Introduction $\rightarrow$ Body (Argument 1, Argument 2) $\rightarrow$ Conclusion.
+3. **Vocabulary Sophistication**: Use of Level 5-6 words instead of basic Level 3 words.
+4. **Grammatical Accuracy**: Correct use of formal written style (plain form) and complex connectors.
+5. **Coherence**: Effective use of transition words (e.g., 따라서, 반면에, 더욱이).
