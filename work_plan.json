@@ -1,9 +1,7 @@
 {
-  "cycle_reasoning": "Moving into full building phase. CTO starts on P0 landing page and vocabulary builder, while Product refines the spec and Designer sets the visual direction.",
+  "cycle_reasoning": "Focusing on building the Grammar Lessons P0 feature while finalizing the detailed product specification.",
   "assignments": [
-    {"role": "cto", "turns": 4, "priority": "P0"},
-    {"role": "product", "turns": 1, "priority": "P1"},
-    {"role": "designer", "turns": 1, "priority": "P1"},
-    {"role": "finance", "turns": 1, "priority": "P2"}
+    {"role": "cto", "turns": 5, "priority": "P0"},
+    {"role": "product", "turns": 1, "priority": "P1"}
   ]
 }
