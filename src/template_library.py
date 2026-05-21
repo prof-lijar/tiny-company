@@ -15,13 +15,13 @@ class TemplateLibrary:
             ReasoningTemplate(
                 name="The Infinite Loop",
                 category=TemplateCategory.LOOP,
-                symptom_signature=r"(tool_call_.*){3,}", # Simplified regex for 3+ identical calls
+                symptom_signature=r"(.+?)\s+\1\s+\1", # Matches any pattern that repeats 3 times
                 root_cause="Lack of termination condition or failure to process tool output",
-                proven_fix="If you have called the same tool with the same arguments more than twice without receiving new information, stop and analyze why the result is not changing. Do not repeat the same call a third time; instead, pivot your strategy or report the limitation.",
+                proven_fix="If you have called the same tool with the same arguments more than twice without receiving new information, stop and re-evaluate your strategy. Do not repeat the same call a third time; instead, pivot your strategy or report the limitation.",
                 confidence_weight=0.95
             ),
             ReasoningTemplate(
-                name="The Direct Contradiction",
+                name="The Contradiction Gap",
                 category=TemplateCategory.CONTRADICTION,
                 symptom_signature=r"I previously stated .*?\n?.*?(but now I see|however, now I see|but I now see)", 
                 root_cause="Lack of a working memory verification step",
@@ -29,10 +29,10 @@ class TemplateLibrary:
                 confidence_weight=0.90
             ),
             ReasoningTemplate(
-                name="The Tool-Output Blindness",
+                name="The Tool-Blindness",
                 category=TemplateCategory.TOOL_BLINDNESS,
-                symptom_signature=r"(?s)Tool returns .*?Agent Thought: (?:the tool successfully retrieved|it seems the tool worked)",
-                root_cause="Ignoring actual observation from the environment / Hallucinating output",
+                symptom_signature=r"(?s)Tool returns .*?Agent Thought: (?:the tool successfully retrieved|it seems the tool worked)|I don't have a tool to calculate",
+                root_cause="Ignoring actual observation from the environment / Hallucinating output or missing tool awareness",
                 proven_fix="When a tool returns a result, you must explicitly summarize the key finding from that output in your next 'Thought' block before deciding on the next action. Do not assume the outcome of a tool call before it has returned.",
                 confidence_weight=0.85
             ),
@@ -73,7 +73,7 @@ class TemplateLibrary:
         
         # Also consider tool usage patterns (for the 'Infinite Loop' etc)
         tool_calls_string = " ".join([
-            f"tool_call_{entry.metadata.get('tool_name', 'unknown')}_{entry.metadata.get('args', '')}"
+            f"tool_call_{entry.metadata.get('tool_name', 'unknown')} {entry.metadata.get('args', '')}"
             for entry in trace.entries if entry.component == "Action"
         ])
 
