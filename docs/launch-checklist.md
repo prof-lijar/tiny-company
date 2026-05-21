@@ -80,3 +80,12 @@
 - [x] **Enterprise Pricing Page**: Copy finalized in `marketing/v2.4-enterprise-pricing-copy.md`.
 - [x] **Press Release**: Verified `marketing/press-release-v2.4.md`.
 - [x] **Social Campaign**: Developed "The Prompt Engineering Ceiling" series in `marketing/v2.4-social-campaign.md`.
+
+## v2.5 'The Autonomous Bridge' Pre-Launch Checklist
+- [ ] **Strategic Positioning**: Refine the shift from Passive Governance to Active Optimization (`marketing/v2.5-strategic-positioning.md`).
+- [ ] **Logic Drift Education**: Publish "Logic Drift vs. Output Error" blog post (`marketing/blog-logic-drift-vs-output-error.md`).
+- [ ] **Cognitive Portability Narrative**: Draft content explaining the "Logic Porter" and model-agnostic reasoning.
+- [ ] **Auto-SOP Demo**: Create a visual walkthrough of Dynamic Golden Path Discovery.
+- [ ] **Production Telemetry Teaser**: Develop a "Logic Drift Alert" notification mock-up for social media.
+- [ ] **v2.5 Landing Page**: Draft "The Autonomous Bridge" value props and high-conversion copy.
+- [ ] **Enterprise Transition Path**: Create a guide for v2.4 users to upgrade to v2.5 Active Optimization.
