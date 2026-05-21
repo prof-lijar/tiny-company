@@ -23,7 +23,7 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
         } else {
           setPlan(data);
         }
-      } catch (err) {
+      } catch {
         setError('Failed to fetch study plan');
       } finally {
         setLoading(false);
@@ -169,8 +169,7 @@ export default function DailyPlan({ initialPlan }: DailyPlanProps) {
                 Start Now &rarr;
               </a>
             </div>
-          ))}
-        </div>
+          ))}\\n        </div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ export default function PricingPage() {
       } else if (data.error) {
         alert(`Error: ${data.error}`);
       }
-    } catch (error) {
+    } catch {
       alert('An error occurred during checkout');
     }
   };
@@ -68,7 +68,7 @@ export default function PricingPage() {
             Most Popular
           </div>
           <div className="mb-8">
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">Pro</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2"> Prose Pro </h3>
             <div className="text-4xl font-bold text-slate-900 mb-4">$12<span className="text-lg font-medium text-slate-500">/mo</span></div>
             <p className="text-slate-600">Everything you need to ace the TOPIK II exam.</p>
           </div>

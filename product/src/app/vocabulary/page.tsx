@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { VOCABULARY_DATA, VocabularyWord } from '@/lib/data/vocabulary';
+import { VOCABULARY_DATA } from '@/lib/data/vocabulary';
 import { calculateNextReview, SRSResult } from '@/lib/srs';
 import { FlashCard } from '@/components/vocabulary/FlashCard';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 
 interface SRSState {
   interval: number;
@@ -80,8 +79,7 @@ export default function VocabularyPage() {
           >
             TOPIK Level {level}
           </Button>
-        ))}
-      </div>
+        ))}\\n      </div>
 
       {currentWord && (
         <div className="flex flex-col items-center gap-8 w-full max-w-md">

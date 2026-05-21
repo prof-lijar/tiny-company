@@ -6,7 +6,7 @@ import { MockTestResult, MockTestQuestion } from '@/lib/types';
 
 export default function MockTestSimulator() {
   const [currentTest, setCurrentTest] = useState(0);
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const [currentSectionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | number>>({});
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTestActive, setIsTestActive] = useState(false);

@@ -1,4 +1,3 @@
-import { User, authDb } from './auth-db';
 import { StudyPlan, StudyTask } from './types';
 
 // Mock storage for study plans and tasks
@@ -31,7 +30,7 @@ export const studyPlanDb = {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     // We generate a fresh plan whenever the date is set
-    const plan = await this.generateDailyPlan(userId, ['Grammar: -\uac00 \ub54c\ubb38\uc5d0', 'Vocab: Environment']); 
+    const plan = await this.generateDailyPlan(userId, ['Grammar: -가 르문에', 'Vocab: Environment']); 
     await this.updatePlan(userId, { 
       ...plan,
       targetExamDate: date, 
