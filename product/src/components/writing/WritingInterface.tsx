@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { WritingPrompt, WritingSample } from '@/lib/types';
+import { WritingPrompt, WritingSample, EssayOutline } from '@/lib/types';
 import { writingSamples } from '@/lib/data/writing-samples';
 import SampleCard from './SampleCard';
 
@@ -9,12 +9,6 @@ interface WritingInterfaceProps {
   prompt: WritingPrompt;
   onSubmit: (answer: string) => void;
   outline?: EssayOutline;
-}
-
-interface EssayOutline {
-  structure: { title: string; points: string[] }[];
-  vocabularySuggestions: { word: string; meaning: string; level: number }[];
-  grammarConnectors: { connector: string; usage: string }[];
 }
 
 export default function WritingInterface({ prompt, onSubmit, outline }: WritingInterfaceProps) {
