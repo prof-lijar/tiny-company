@@ -7,6 +7,7 @@ export interface VocabularyWord {
   exampleTranslation: string;
   level: 3 | 4 | 5 | 6;
   partOfSpeech: 'noun' | 'verb' | 'adjective' | 'adverb' | 'particle';
+  tags: string[];
 }
 
 export const VOCABULARY_DATA: VocabularyWord[] = [
@@ -15,10 +16,11 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     korean: '결과',
     english: 'result',
     romanization: 'gyeol-gwa',
-    example: '노력한 결과 좋은 성적을 받았습니다.',
+    example: '노력한 결과 좋은 성적을 받을 수 있었습니다.',
     exampleTranslation: 'As a result of my efforts, I received a good grade.',
     level: 3,
     partOfSpeech: 'noun',
+    tags: ['General', 'Academic'],
   },
   {
     id: 'v2',
@@ -29,6 +31,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'I decided to study a foreign language.',
     level: 3,
     partOfSpeech: 'verb',
+    tags: ['General', 'Daily Life'],
   },
   {
     id: 'v3',
@@ -39,6 +42,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'I think this method is the most effective.',
     level: 3,
     partOfSpeech: 'adjective',
+    tags: ['Academic', 'Methodology'],
   },
   {
     id: 'v4',
@@ -49,6 +53,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'We must reduce plastic use to protect the environment.',
     level: 3,
     partOfSpeech: 'noun',
+    tags: ['Environment', 'Social Issues'],
   },
   {
     id: 'v5',
@@ -59,6 +64,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'You must sleep sufficiently to maintain your health.',
     level: 3,
     partOfSpeech: 'adverb',
+    tags: ['General', 'Health'],
   },
   {
     id: 'v6',
@@ -69,6 +75,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'There are many diverse cultural experience activities in Korea.',
     level: 4,
     partOfSpeech: 'adjective',
+    tags: ['Culture', 'Society'],
   },
   {
     id: 'v7',
@@ -79,6 +86,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'Parents have a great influence on a child\'s personality.',
     level: 4,
     partOfSpeech: 'noun',
+    tags: ['Psychology', 'Society'],
   },
   {
     id: 'v8',
@@ -89,6 +97,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'Tax is included in this price.',
     level: 4,
     partOfSpeech: 'verb',
+    tags: ['General', 'Business'],
   },
   {
     id: 'v9',
@@ -99,26 +108,29 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'This exam was considerably difficult.',
     level: 4,
     partOfSpeech: 'adverb',
+    tags: ['Academic', 'Intensity'],
   },
   {
     id: 'v10',
     korean: '관점',
     english: 'perspective',
     romanization: 'gwan-jeom',
-    example: '다른 관점에서 문제를 생각해 보세요.',
+    example: '다른 관점에서 문제를 생각해보세요.',
     exampleTranslation: 'Try thinking about the problem from a different perspective.',
     level: 4,
     partOfSpeech: 'noun',
+    tags: ['Academic', 'Abstract'],
   },
   {
     id: 'v11',
     korean: '분석하다',
     english: 'to analyze',
     romanization: 'bun-seok-ha-da',
-    example: '데이터를 분석하여 원인을 찾았습니다.',
+    example: '데이터를 분석해서 원인을 찾았습니다.',
     exampleTranslation: 'I found the cause by analyzing the data.',
     level: 5,
     partOfSpeech: 'verb',
+    tags: ['Academic', 'Science'],
   },
   {
     id: 'v12',
@@ -129,6 +141,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'The internal structure of the watch is very sophisticated.',
     level: 5,
     partOfSpeech: 'adjective',
+    tags: ['Technology', 'Description'],
   },
   {
     id: 'v13',
@@ -139,6 +152,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'His thoughts coincide with my values.',
     level: 5,
     partOfSpeech: 'verb',
+    tags: ['Abstract', 'Values'],
   },
   {
     id: 'v14',
@@ -149,6 +163,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'Technological advancement inevitably brings social change.',
     level: 5,
     partOfSpeech: 'adverb',
+    tags: ['Technology', 'Society'],
   },
   {
     id: 'v15',
@@ -159,6 +174,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'His words and actions contradict each other.',
     level: 5,
     partOfSpeech: 'noun',
+    tags: ['Logic', 'Abstract'],
   },
   {
     id: 'v16',
@@ -169,6 +185,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'This short sentence implies a deep meaning.',
     level: 6,
     partOfSpeech: 'verb',
+    tags: ['Literature', 'Abstract'],
   },
   {
     id: 'v17',
@@ -179,16 +196,18 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'The plan was set very meticulously.',
     level: 6,
     partOfSpeech: 'adjective',
+    tags: ['Planning', 'Description'],
   },
   {
     id: 'v18',
     korean: '전제하다',
     english: 'to presuppose / assume',
     romanization: 'jeon-je-ha-da',
-    example: '이 이론은 모든 사람이 합리적이라고 전제합니다.',
+    example: '이 이론은 모든 사람이 합리적이라는 것을 전제합니다.',
     exampleTranslation: 'This theory presupposes that everyone is rational.',
     level: 6,
     partOfSpeech: 'verb',
+    tags: ['Philosophy', 'Academic'],
   },
   {
     id: 'v19',
@@ -199,6 +218,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'Individual interests can conflict with the public interest.',
     level: 6,
     partOfSpeech: 'verb',
+    tags: ['Politics', 'Society'],
   },
   {
     id: 'v20',
@@ -209,5 +229,6 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     exampleTranslation: 'Basic education should not be disregarded.',
     level: 6,
     partOfSpeech: 'verb',
+    tags: ['Education', 'Values'],
   },
 ];
