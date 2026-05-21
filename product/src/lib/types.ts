@@ -115,6 +115,7 @@ export interface WeaknessReport {
     errorCount: number;
     impact: 'high' | 'medium' | 'low';
     recommendation: string;
+    targetUrl: string;
   }[];
   overallAnalysis: string;
 }
