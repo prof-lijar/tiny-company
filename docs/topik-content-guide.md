@@ -132,3 +132,55 @@ The 2026 reform has fundamentally changed the exam structure. All content and si
 - Full transition to computer-based interface.
 - No annotations allowed on digital text.
 - Typing speed in Korean is now a critical factor for the Writing section.
+
+## 7. Detailed Content Expansion Plan (2026 Alignment)
+
+To reach the goal of 50+ sets, the following themes and topics must be covered. Content should be distributed across levels 3-6.
+
+### 7.1 Writing Task 54: High-Probability Essay Topics
+These topics are categorized by the "Abstract/Social" nature of TOPIK II advanced essays.
+
+**Social Issues & Technology**
+- The impact of AI on the future of labor and employment.
+- The pros and cons of a cashless society.
+- Digital divide: The gap between generations in technology usage.
+- The role of social media in modern communication (connection vs. isolation).
+- Ethical considerations of genetic engineering or biotechnology.
+
+**Education & Youth**
+- The necessity of lifelong learning in a rapidly changing world.
+- The balance between academic achievement and emotional intelligence (EQ).
+- The effectiveness of online education vs. traditional classrooms.
+- The role of youth in solving environmental crises.
+- The importance of critical thinking over rote memorization.
+
+**Culture & Society**
+- The preservation of traditional culture in a globalized world.
+- The cause and solution for the declining birth rate in modern society.
+- The concept of 'work-life balance' and its impact on productivity.
+- The ethics of animal testing for medical advancement.
+- The influence of pop culture (Hallyu) on national image and diplomacy.
+
+**Psychology & Philosophy**
+- The definition of true happiness in a materialistic society.
+- The importance of failure in the process of achieving success.
+- Individualism vs. Collectivism: Finding a balance in modern Korea.
+- The relationship between freedom and responsibility.
+- The impact of urban living on mental health.
+
+### 7.2 Reading Passage Themes by Level
+Passages should follow these themes to ensure a realistic difficulty curve.
+
+| Level | Theme/Topic | Passage Type | Key Focus |
+|---|---|---|---|
+| **Level 3** | Daily Life / Public Services | Ads, Notices, Blogs | Practical info, schedules, simple requests. |
+| **Level 4** | General Social Issues | News, Opinion Pieces | Trends, social phenomena, basic arguments. |
+| **Level 5** | Professional / Academic | Editorial, Research Summary | Specialized vocab, complex logic, formal tone. |
+| **Level 6** | Abstract / Literary | Columns, Philosophical Essays | Nuance, implicit meaning, high-level academic discourse. |
+
+**Sample Academic Topics for Level 5-6:**
+- **Economics**: Behavioral economics, the gig economy, inflation and consumer behavior.
+- **Science**: Quantum computing basics, climate change feedback loops, neuroscience.
+- **Sociology**: Urbanization and social alienation, the evolution of family structures.
+- **Philosophy**: Utilitarianism vs. Deontology in modern ethics, the nature of consciousness.
+- **Arts**: The role of art in political protest, the evolution of minimalist architecture.

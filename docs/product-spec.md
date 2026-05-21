@@ -1,11 +1,11 @@
-# TOPIK Learning Assistant \u2014 MVP Product Specification
+# TOPIK Learning Assistant — MVP Product Specification
 
 ## Overview
 A web-based TOPIK (Test of Proficiency in Korean) preparation platform built with Next.js, TypeScript, and Tailwind CSS. All product code lives in the `product/` directory.
 
 ## Feature Priorities
 
-### P0 \u2014 CRITICAL: 2026 Format Alignment [BUILT]
+### P0 — CRITICAL: 2026 Format Alignment [BUILT]
 **Goal**: Update all simulators and content to match the 2026 TOPIK overhaul to prevent user failure.
 
 #### 1. 2026 Mock Test Engine Update [BUILT]
@@ -23,9 +23,9 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Technical Implementation**: Use the `playbackRate` property of the HTML5 Audio API.
     - **Logic**: Set `audio.playbackRate = 1.1` upon loading the audio object.
     - **User Interface**: 
-        - Add a \"2026 Mode\" toggle in the listening interface.
+        - Add a "2026 Mode" toggle in the listening interface.
         - When enabled, audio plays at 1.1x.
-        - Display a badge: \"2026 Speed (1.1x)\".
+        - Display a badge: "2026 Speed (1.1x)".
     - **Content**: 
         - Update `product/src/lib/data/listening.ts` to include 60-question sets instead of 50.
         - Ensure audio files are mapped correctly to these new question sets.
@@ -40,12 +40,12 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Detailed Requirements**:
     - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
     - **Detection Logic**: 
-        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"\uac1c\ub4dc\uac1c\uac1c... \uc740 \ubc14\ub77c\uc5d0...\").
-        - Penalize \"memorized\" structures that don't specifically address the prompt's nuances.
+        - Instruct AI to look for "overused TOPIK templates" (e.g., overly rigid introductory phrases like "개명개명... 은 바라으로...").
+        - Penalize "memorized" structures that don't specifically address the prompt's nuances.
     - **Feedback Output**:
-        - Explicitly label \"Template Usage\" in the feedback report.
-        - Suggest \"Natural Alternatives\" to replace formulaic phrases.
-        - Rate \"Structural Variety\" on a scale of 1-5.
+        - Explicitly label "Template Usage" in the feedback report.
+        - Suggest "Natural Alternatives" to replace formulaic phrases.
+        - Rate "Structural Variety" on a scale of 1-5.
 - **Acceptance Criteria**:
     - AI identifies and flags common TOPIK templates.
     - Feedback provides specific suggestions for more natural phrasing.
@@ -59,7 +59,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ---
 
-### P0 \u2014 MVP (Build First)
+### P0 — MVP (Build First)
 
 #### 5. Landing Page [BUILT]
 - **File**: `product/src/app/page.tsx`
@@ -78,7 +78,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
 - **Resolved**: [Issue #420] Lint errors and runtime issues fixed.
 
-### P1 \u2014 Fast Follow
+### P1 — Fast Follow
 
 #### 9. Writing Practice with AI Feedback [BUILT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
@@ -87,14 +87,14 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 #### 10. Mock Test Simulator [BUILT]
 - **Files**: `product/src/app/mock-test/page.tsx`, `product/src/app/mock-test/[section]/page.tsx`
-- **Note**: Now superseded by P0 \"2026 Format Alignment\".
+- **Note**: Now superseded by P0 "2026 Format Alignment".
 
 #### 11. Listening Practice [BUILT]
 - **Files**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`
 - **Improvements needed** (from QA):
     - [Issue #431] Fix lint errors in ListeningPlayer.
 
-### P2 \u2014 Growth Features
+### P2 — Growth Features
 
 #### 12. User Authentication [BUILT]
 - **Files**: `product/src/app/api/auth/[...nextauth]/route.ts`, `product/src/app/login/page.tsx`, `product/src/app/signup/page.tsx`
@@ -105,23 +105,24 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 14. Subscription Billing [BUILT]
 - **Files**: `product/src/app/api/stripe/checkout/route.ts`, `product/src/app/api/stripe/webhook/route.ts`
 
-### P3 \u2014 AI Intelligence (Future)
+### P3 — AI Intelligence (Future)
 
 #### 15. AI-Powered Weakness Analysis [BUILT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
 
 #### 16. Dynamic Study Plan [BUILT]
 - **Files**: `product/src/app/api/study-plan/route.ts`, `product/src/components/dashboard/DailyPlan.tsx`
-- **Resolved**: [Issue #407] \"Update Date\" button logic fixed.
+- **Resolved**: [Issue #407] "Update Date" button logic fixed.
 
 #### 17. Writing Speed Trainer [NEEDS IMPROVEMENT]
 - **Goal**: Help users improve Korean typing speed for the IBT exam.
 - **Files**: `product/src/app/writing/typing-trainer/page.tsx`
 - **Improvements needed** (from QA):
     - [Issue #440] Fix lint errors in Writing Speed Trainer.
+    - [Issue #450] Fix setState in effect in TypingTrainer.tsx.
 
-#### 18. Strict IBT Simulation Mode [PENDING]
-- **Goal**: Provide a high-fidelity \"Exam Mode\" that eliminates all study aids and mimics the official IBT interface.
+#### 18. Strict IBT Simulation Mode [BUILT]
+- **Goal**: Provide a high-fidelity "Exam Mode" that eliminates all study aids and mimics the official IBT interface.
 - **Detailed Requirements**:
     - **UI Constraints**: 
         - Disable all tooltips, hints, and translations.
@@ -130,30 +131,32 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - Layout: a split-screen or fixed-pane view mirroring the official IBT (Question pane vs. Answer pane).
     - **Functional Constraints**:
         - Prevent navigation back to the dashboard during the test.
-        - Results are hidden until the final \"Submit\" is clicked for the entire test.
-        - Implement a \"Submit\" confirmation modal to prevent accidental early submission.
+        - Results are hidden until the final "Submit" is clicked for the entire test.
+        - Implement a "Submit" confirmation modal to prevent accidental early submission.
     - **Technical Implementation**:
-        - Create a new route `product/src/app/mock-test/strict/page.tsx` or a high-level state toggle in the existing mock-test engine.
-        - Use a Context Provider to disable \"Study Mode\" components globally when in Strict Mode.
+        - Implemented as a high-level state toggle in `product/src/app/mock-test/page.tsx`.
+        - Includes a Question Palette for quick navigation.
 - **Acceptance Criteria**:
     - User cannot access any helpful UI elements during the session.
     - Timer continues to run regardless of user activity.
     - Interface visually aligns with IBT standards (no annotations, plain text editor).
-- **Files affected**: `product/src/app/mock-test/page.tsx`, `product/src/components/mock-test/StrictModeWrapper.tsx`.
+- **Files affected**: `product/src/app/mock-test/page.tsx`.
 
 #### 19. Content Library Expansion [PENDING]
 - **Goal**: Expand practice materials to provide enough variety for full preparation (50+ sets).
-- **Requirements**:
-    - **Listening**: Create 20+ new 60-question sets aligned with 2026 speed.
-    - **Reading**: Create 20+ new 40-question sets focusing on the 5 passage types (Ads, Essays, News, Academic, Literature).
-    - **Writing**: Create 30+ new prompts for Tasks 51-54, including a variety of social and academic topics.
-    - **Vocabulary**: Expand the SRS database to include the full range of Level 3-6 words as defined in `docs/topik-content-guide.md`.
+- **Detailed Requirements**:
+    - **Listening**: Create 20+ new 60-question sets aligned with 2026 speed (1.1x).
+    - **Reading**: Create 20+ new 40-question sets. Each set must distribute questions across the 5 passage types defined in `docs/topik-content-guide.md` (Ads, Essays, News, Academic, Literature).
+    - **Writing**: Create 30+ new prompts for Task 54, based on the high-probability themes in `docs/topik-content-guide.md` (AI, Cashless Society, Lifelong Learning, etc.).
+    - **Vocabulary**: Expand the SRS database to include the full range of Level 3-6 words as defined in the content guide (~12,000 words).
 - **Implementation**:
-    - Update `product/src/lib/data/` files with new JSON content.
-    - Implement a dynamic loading system if JSON files become too large (e.g., separate files per test set).
+    - Update `product/src/lib/data/` files.
+    - If JSON files exceed 5MB, split them into separate files (e.g., `reading-set-1.ts`, `reading-set-2.ts`) and implement a dynamic loader.
 - **Acceptance Criteria**:
-    - Users can select from at least 20 different mock tests.
+    - Users can select from at least 20 different mock tests in the simulator.
     - Every passage type in the Content Guide is represented multiple times.
+    - Writing prompts cover a diverse range of the researched social/academic topics.
+- **Files affected**: `product/src/lib/data/mock-tests.ts`, `product/src/lib/data/listening.ts`, `product/src/lib/data/reading.ts`, `product/src/lib/data/vocabulary.ts`.
 
 ## User Flows
 (Unchanged)
@@ -163,10 +166,10 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ## UI/UX Requirements
 - **Typography**: Noto Sans KR.
-- **Layout**: Clean, distraction-free \"Study Mode\".
+- **Layout**: Clean, distraction-free "Study Mode".
 - **Responsiveness**: Desktop-first (IBT focus).
 
 ## Content Guidelines
 - All TOPIK practice content must be ORIGINAL.
-- Label content as \"TOPIK-style practice\".
+- Label content as "TOPIK-style practice".
 - Align with 2026 Reform specs in `docs/topik-content-guide.md`.
