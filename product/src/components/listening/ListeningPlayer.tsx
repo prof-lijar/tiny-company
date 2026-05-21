@@ -1,46 +1,78 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, RotateCcw, Volume2, Gauge } from 'lucide-react';
 
 interface ListeningPlayerProps {
   onEnded?: () => void;
+  is2026Mode?: boolean;
+  audioUrl?: string;
 }
 
-export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded }) => {
+export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded, is2026Mode = false, audioUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1.0);
+  const [playbackSpeed, setPlaybackSpeed] = useState(is2026Mode ? 1.1 : 1.0);
+  
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Mock audio behavior since we don't have real files
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isPlaying) {
-      // Adjust interval based on playback speed
-      // Base speed: 100ms per 1% progress
-      const intervalMs = 100 / playbackSpeed;
-      
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            setIsPlaying(false);
-            if (onEnded) onEnded();
-            return 100;
-          }
-          return prev + 1;
-        });
-      }, intervalMs);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying, onEnded, playbackSpeed]);
+    // Initialize Audio object
+    const audio = new Audio(audioUrl || 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    audioRef.current = audio;
 
-  const togglePlay = () => setIsPlaying(!isPlaying);
+    const handleTimeUpdate = () => {
+      const currentProgress = (audio.currentTime / audio.duration) * 100;
+      setProgress(currentProgress || 0);
+    };
+
+    const handleEnded = () => {
+      setIsPlaying(false);
+      if (onEnded) onEnded();
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+    };
+  }, [audioUrl, onEnded]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = playbackSpeed;
+    }
+  }, [playbackSpeed]);
+
+  useEffect(() => {
+    if (is2026Mode && playbackSpeed !== 1.1) {
+      setPlaybackSpeed(1.1);
+    } else if (!is2026Mode && playbackSpeed === 1.1) {
+      setPlaybackSpeed(1.0);
+    }
+  }, [is2026Mode]);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(err => console.error("Audio playback failed:", err));
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   const reset = () => {
+    if (!audioRef.current) return;
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     setIsPlaying(false);
     setProgress(0);
   };
-
-  const speeds = [1.0, 1.1, 1.2];
 
   return (
     <div className="bg-slate-100 p-6 rounded-2xl border border-slate-200 shadow-sm">
@@ -58,7 +90,7 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded }) => 
               {isPlaying ? 'Playing audio...' : 'Ready to play'}
               {playbackSpeed !== 1 && <span className="text-indigo-600 font-bold">({playbackSpeed}x)</span>}
             </span>
-            <span>{Math.floor(progress / 10)}s / 10s</span>
+            <span>{Math.floor((audioRef.current?.currentTime || 0))}s / {Math.floor(audioRef.current?.duration || 0)}s</span>
           </div>
           <div className="w-full bg-slate-300 h-2 rounded-full overflow-hidden">
             <div 
@@ -70,7 +102,7 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded }) => 
 
         <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
           <Gauge size={14} className="text-slate-400 ml-1" />
-          {speeds.map(speed => (
+          {[1.0, 1.1, 1.2].map(speed => (
             <button
               key={speed}
               onClick={() => setPlaybackSpeed(speed)}
@@ -98,7 +130,7 @@ export const ListeningPlayer: React.FC<ListeningPlayerProps> = ({ onEnded }) => 
         </div>
       </div>
       <p className="text-center text-xs text-slate-400 mt-3">
-        (Audio simulation: 10 seconds. 2026 Reform speed adjustment enabled)
+        {is2026Mode ? '2026 Reform Mode: High-speed playback enabled' : 'Standard playback speed'}
       </p>
     </div>
   );

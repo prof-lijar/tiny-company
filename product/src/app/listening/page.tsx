@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { listeningData } from '@/lib/data/listening';
 import { ListeningPlayer } from '@/components/listening/ListeningPlayer';
-import { Volume2 } from 'lucide-react';
+import { Volume2, Zap } from 'lucide-react';
 import { TopikLevel } from '@/lib/types';
 
 export default function ListeningPage() {
@@ -14,6 +14,7 @@ export default function ListeningPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [totalAnswered, setTotalAnswered] = useState(0);
+  const [is2026Mode, setIs2026Mode] = useState(false);
 
   const filteredPassages = listeningData.filter(p => p.level === selectedLevel);
   const currentPassage = filteredPassages[currentPassageIdx];
@@ -66,7 +67,6 @@ export default function ListeningPage() {
       if (currentPassageIdx < filteredPassages.length - 1) {
         setCurrentPassageIdx(prev => prev + 1);
       } else {
-        // End of all passages for this level
         alert('You have completed all listening exercises for this level!');
         setCurrentPassageIdx(0);
         setCurrentQuestionIdx(0);
@@ -79,28 +79,47 @@ export default function ListeningPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <div>
+        <div className="flex-start">
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Listening Practice</h1>
           <p className="text-slate-600">Improve your Korean listening skills with TOPIK-style exercises.</p>
         </div>
-        <div className="flex gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200">
-          {[3, 4, 5, 6].map(level => (
-            <button
-              key={level}
-              onClick={() => {
-                setSelectedLevel(level as TopikLevel);
-                setCurrentPassageIdx(0);
-                setCurrentQuestionIdx(0);
-                setIsSubmitted(false);
-                setSelectedOption(null);
-              }}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                selectedLevel === level ? 'bg-white text-indigo-600 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-700'
-              }`}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200">
+            {[3, 4, 5, 6].map(level => (
+              <button
+                key={level}
+                onClick={() => {
+                  setSelectedLevel(level as TopikLevel);
+                  setCurrentPassageIdx(0);
+                  setCurrentQuestionIdx(0);
+                  setIsSubmitted(false);
+                  setSelectedOption(null);
+                }}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                  selectedLevel === level ? 'bg-white text-indigo-600 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                Level {level}
+              </button>
+            ))}
+          </div>
+          
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <input 
+              type="checkbox" 
+              id="mode-2026" 
+              checked={is2026Mode}
+              onChange={(e) => setIs2026Mode(e.target.checked)}
+              className="w-4 h-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-500"
+            />
+            <label 
+              htmlFor="mode-2026" 
+              className="text-sm font-bold text-slate-700 flex items-center gap-1 cursor-pointer"
             >
-              Level {level}
-            </button>
-          ))}
+              <Zap size={14} className="text-amber-500" />
+              2026 Mode (1.1x)
+            </label>
+          </div>
         </div>
       </div>
 
@@ -111,8 +130,9 @@ export default function ListeningPage() {
               <Volume2 className="text-indigo-500" size={20} />
               Audio Passage
             </h3>
-            {/* Note: In TOPIK, one audio clip often serves multiple questions */}
             <ListeningPlayer 
+              audioUrl={currentQuestion?.audioUrl}
+              is2026Mode={is2026Mode}
               onEnded={() => console.log('Audio ended')} 
             />
             <div className="mt-4 text-sm text-slate-500 italic">
