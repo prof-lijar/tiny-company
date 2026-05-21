@@ -1,77 +1,80 @@
-# Revenue and Growth Model: TraceWhisper (v2.3 Intelligence Layer)
+# Revenue and Growth Model: TraceWhisper (v2.4 Enterprise Governance Platform)
 
 ## 1. Executive Summary
-TraceWhisper has evolved from a Reasoning IDE (v2.2) to an **Intelligence Layer (v2.3)**. This transition shifts our value proposition from "improving prompt engineering productivity" to "guaranteeing reasoning stability and preserving institutional knowledge."
+TraceWhisper has evolved from an **Intelligence Layer (v2.3)** to an **Enterprise Reasoning Governance Platform (v2.4)**. This transition shifts our value proposition from "guaranteeing reasoning stability" to "institutionalizing reasoning governance."
 
-While we maintain a **Local-First architecture** for traces to minimize infrastructure overhead, v2.3 introduces a **Hybrid Model** with a centralized **Pattern Vault**. This allows us to capture higher Enterprise value by offering a "corporate memory" of reasoning fixes, creating significant switching costs and increasing LTV.
+The core financial driver in v2.4 is the **Centralized Knowledge Graph of Agent Intelligence**. By moving from a per-seat productivity tool to a value-based governance platform, we capture the organizational utility of "Institutional Knowledge" and "Compliance," which justifies a significant price premium and creates high switching costs.
 
 ---
 
 ## 2. Tiered Pricing Strategy
-We utilize a three-tier model designed to maximize acquisition (Free) while capturing high value from professional and corporate users who require stability and knowledge persistence.
+We have shifted to a hybrid pricing model that combines per-seat accessibility with organizational value-capture.
 
 ### A. Free Tier (Community/Individual)
 - **Pricing:** $0 / month
 - **Access:** Local-first Reasoning IDE, basic corrections, local storage.
-- **Mechanism:** **BYOK (Bring Your Own Key)**. Users provide their own LLM API keys.
-- **Goal:** Low-friction acquisition and viral growth (PLG).
+- **Mechanism:** **BYOK (Bring Your Own Key)**.
+- **Goal:** Low-friction acquisition and viral growth.
 
 ### B. Pro Tier (Professional AI Engineer)
 - **Pricing:** **$59 / month**
 - **Value Prop:** 
-    - Managed API access (No need for own keys).
-    - Full "Correction Suite" (Fix-It button, iterative reasoning).
-    - Personal Pattern Vault: Store and reuse your own reasoning patterns.
-    - Basic Continuous Reasoning Integration (CRI) for local projects.
-    - Cognitive Pruning: Tools to reduce token bloat and costs.
-- **Gross Margin:** High, leveraging tiered routing to minimize API spend.
+    - Managed API access.
+    - Full "Correction Suite" and Personal Pattern Vault.
+    - Basic Continuous Reasoning Integration (CRI).
+- **Gross Margin:** High, utilizing tiered routing.
 
-### C. Enterprise Tier (Corporate/Teams)
-- **Pricing:** **$199 / month / user**
-- **Value Prop:**
-    - Everything in Pro.
-    - **Managed Pattern Vault:** Shared institutional knowledge across the organization.
-    - **Full CRI Integration:** "Hard gates" for reasoning stability in CI/CD pipelines.
-    - **Adversarial Synthesis:** Proactive red-teaming to find edge-case failures.
-    - Enterprise-grade security, compliance, and SLA.
-- **Gross Margin:** Very High, as the value is tied to stability and risk reduction rather than just token usage.
+### C. Enterprise Tiers (Corporate/Teams)
+Enterprise pricing is now split into three levels to match organizational scale:
+
+#### 1. Enterprise Team (Collaborative)
+- **Pricing:** **$249 / user / month**
+- **Focus:** Team-Shared Vaults and Reasoning Peer Review.
+- **Value:** "Collaborative Intelligence" — preventing redundant effort within teams.
+
+#### 2. Enterprise Organization (Governance)
+- **Pricing:** **$2,500 / month base** + Usage Fees.
+- **Usage Fees:** $10 per Golden Path; $50 per 1,000 APO runs.
+- **Focus:** Organizational Golden Paths, Compliance Scanning, and Governance Dashboards.
+- **Value:** "Reasoning Governance" — ensuring consistency and safety across all corporate agents.
+
+#### 3. Enterprise Custom (Sovereign)
+- **Pricing:** **Custom Annual Contract** ($50k - $250k+)
+- **Focus:** Data Residency, On-Prem options, Dedicated Support, and Custom IdP.
+- **Value:** "Compliance and Sovereignty" — full control over intelligence assets.
 
 ---
 
 ## 3. Growth & Revenue Projections
-Revenue is driven by the conversion rate from Free $\rightarrow$ Pro/Enterprise, incentivized by the "Intelligence Layer" features.
+Revenue is now driven by a hybrid PLG/Sales-led engine. While Pro users provide stable cash flow, the Enterprise Org and Custom tiers drive exponential LTV growth.
 
-### 3.1 Weighted ARPU Assumptions
-Based on the v2.3 Pricing Model, we use the following distribution for the "Expected" scenario:
+### 3.1 Weighted ARPU Assumptions (v2.4)
+Based on the v2.4 strategy, the distribution for the "Expected" scenario is:
 
-| Scenario | Free % | Pro % ($59) | Enterprise % ($199) | Weighted ARPU |
-| :--- | :--- | :--- | :--- | :--- |
-| **Conservative** | 90% | 7% | 3% | **$10.11** |
-| **Expected** | 70% | 20% | 10% | **$31.70** |
-| **Aggressive** | 50% | 30% | 20% | **$57.50** |
+| Tier | Distribution | ARPU (Est.) | Contribution |
+| :--- | :--- | :--- | :--- |
+| **Free** | 70% | $0 | $0 |
+| **Pro** | 20% | $59 | $11.80 |
+| **Enterprise (Blended)** | 10% | $334.30 | $33.43 |
+| **Weighted ARPU** | - | - | **$45.23** |
 
-### 3.2 User Growth Targets (MAU)
-We target a scaling path aligned with the v2.3 rollout:
-- **Month 1:** 2,000 MAU
-- **Month 6:** 20,000 MAU
-- **Month 12:** 50,000 MAU
+### 3.2 Revenue Trajectory
+Detailed 12-month projections are maintained in `docs/v2.4-revenue-projection.md`. The transition to v2.4 is expected to increase the weighted ARPU significantly compared to v2.3 (~$31.70 $\rightarrow$ ~$45.23).
 
 ---
 
 ## 4. Scaling Infrastructure & Cost Profile
-The Hybrid Architecture (Local + Vault) ensures that costs scale efficiently.
+The v2.4 model introduces new cost centers that are directly offset by usage-based pricing.
 
 ### 4.1 Variable Costs (COGS)
-The primary variable cost is LLM API consumption for managed tiers, specifically for CRI and Adversarial Synthesis.
-- **Pro User Cost:** Estimated ~$6.00 - $10.00 / month.
-- **Enterprise User Cost:** Estimated ~$15.00 - $25.00 / month.
-- **Free User Cost:** $0.00 (BYOK).
+- **Pro User:** ~$8.00 / month.
+- **Enterprise User:** ~$30.00 / month (Includes APO compute and multi-tenant DB overhead).
+- **APO (Autonomous Prompt Optimization):** High burst compute cost, mitigated by the $50/1k run fee in the Org tier.
 
 ### 4.2 Fixed Costs (OpEx)
-Fixed costs are lean, focusing on the Pattern Vault infrastructure:
-- Domain maintenance (~$12/year).
-- Landing page hosting (Vercel/GitHub Pages free tiers).
-- Managed Vector Database for the Pattern Vault (scaling from Free $\rightarrow$ Paid tiers).
+- **Infrastructure:** Shift to schema-per-tenant/DB-per-tenant for Enterprise isolation.
+- **Compliance:** Budget allocated for SOC2 readiness and immutable audit logging.
+- **Identity:** SAML/OIDC managed services for Custom tier.
 
 ---
 
@@ -79,8 +82,8 @@ Fixed costs are lean, focusing on the Pattern Vault infrastructure:
 
 | Risk | Impact | Mitigation |
 | :--- | :--- | :--- |
-| **CRI API Explosion** | Margin erosion in paid tiers. | Implement strict per-project token quotas for `tw verify-all` usage. |
-| **Vault Storage Costs** | OpEx increase as patterns grow. | Use embedding-based clustering to prune redundant patterns. |
-| **Price Hike Churn** | Resistance to $39 \rightarrow $59 shift. | Offer "Early Adopter" lock-in pricing for existing users. |
-| **Enterprise Adoption** | Low conversion to $199 tier. | Position the tool as "Reasoning Insurance" for CTOs; focus on stability. |
-| **The "BYOK" Trap** | Users stay on Free tier. | Tie the Pattern Vault (cross-project memory) exclusively to paid tiers. |
+| **APO Margin Erosion** | Lowered Gross Margin | Implement hard token quotas and credit-based systems. |
+| **Enterprise Sales Lag** | Revenue gap | Maintain Pro tier as the primary cash-flow engine. |
+| **Custom Tier Drain** | Engineering bottlenecks | Limit custom feature requests to 2 per quarter per client. |
+| **Data Isolation Cost** | OpEx spike | Use logical isolation (schemas) before moving to physical isolation (DBs). |
+| **Migration Churn** | Loss of v2.3 users | Offer 3-month grace period and discounted transition rates. |

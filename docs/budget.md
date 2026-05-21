@@ -75,3 +75,14 @@ Unlike previous versions, v2.4 includes **Usage Fees** for APO and **Base Fees**
 - **Vault Scalability:** Exponential growth in patterns increasing embedding costs.
 - **Compliance Overhead:** SOC2 certification costs exceeding initial estimates.
 - **Mitigation:** Implement strict per-user/project quotas and a "Credit" system for APO.
+
+## 4. Non-Infrastructure Operating Expenses (OpEx)
+While technical infrastructure is kept lean, v2.4 introduces non-technical fixed costs to support the Enterprise transition. These are tracked separately from the technical budget.
+
+| Category | Purpose | Estimated Monthly Cost | Notes |
+| :--- | :--- | :--- | :--- |
+| **Compliance & Legal** | SOC2 Readiness, Enterprise Contracts | $1,000 - $5,000 | Spikes during audit windows |
+| **Enterprise Sales/Mktg** | Lead Gen, LinkedIn Sales Nav, Events | $500 - $3,000 | Scales with acquisition targets |
+| **Administrative** | Tooling, Bookkeeping | $200 - $500 | Fixed |
+
+**Total Non-Infra OpEx:** Estimated **$1,700 - $8,500 / month**, scaling as the Enterprise pipeline matures. This explains the variance between the Technical Infrastructure budget and the overall Company Financial Projections.
