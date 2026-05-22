@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { studyPlanDb } from '@/lib/study-plan-db';
 import { auth } from '@/auth';
-<<<<<<< HEAD
-import { logger } from '@/lib/logger';
 =======
->>>>>>> 87e96b0 ([CTO] auto-push updates)
+import { logger } from '@/lib/logger';
+>>>>>>> cto/structured-error-logging
 
 export async function GET() {
   const session = await auth();
