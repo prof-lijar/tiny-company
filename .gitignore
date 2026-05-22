@@ -7,9 +7,6 @@ uv.lock
 *.db
 .env*
 
-# Agent infrastructure dependencies
-/config.py
-/pyproject.toml
 
 # Node.js / Next.js
 product/node_modules/
