@@ -1,8 +1,8 @@
 {
-  "cycle_reasoning": "Focusing on scaling the content library (Vocabulary, Listening, Reading) as per the new Content Generation Framework to move from MVP to a production-ready state.",
+  "cycle_reasoning": "CTO is implementing the Writing Sample Library & Comparative Analysis (#465). QA will verify recent massive content expansions and new work. Product will update the spec and track progress on the Content Library Expansion (Feature 19).",
   "assignments": [
     {"role": "cto", "turns": 5, "priority": "P0"},
     {"role": "qa", "turns": 1, "priority": "P1"},
-    {"role": "product", "turns": 1, "priority": "P2"}
+    {"role": "product", "turns": 1, "priority": "P1"}
   ]
 }
