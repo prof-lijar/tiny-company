@@ -127,13 +127,6 @@ export const studyPlanDb = {
 
     if (!planId) throw new Error('Could not find or create study plan');
 
-    // Clear today's tasks to avoid duplicates
-    await supabase
-      .from('study_tasks')
-      .delete()
-      .eq('plan_id', planId)
-      .eq('due_date', todayStr);
-
     // Define tasks
     const dailyTasks: StudyTask[] = [
       {
@@ -189,9 +182,8 @@ export const studyPlanDb = {
       });
     }
 
-    // Batch insert
+    // Convert to database format
     const dbTasks = dailyTasks.map(t => ({
-      plan_id: planId,
       type: t.type,
       title: t.title,
       completed: t.completed,
@@ -200,7 +192,16 @@ export const studyPlanDb = {
       target_url: t.targetUrl,
     }));
 
-    await supabase.from('study_tasks').insert(dbTasks);
+    // Use RPC to ensure atomic delete and insert in a single transaction
+    const { error: rpcError } = await supabase.rpc('generate_daily_tasks', {
+      p_plan_id: planId,
+      p_tasks: dbTasks,
+    });
+
+    if (rpcError) {
+      console.error('Error generating daily tasks via RPC:', rpcError);
+      throw rpcError;
+    }
 
     const fullPlan = await this.getPlan(userId);
     return fullPlan || { userId, targetExamDate: '', daysRemaining: 0, overallProgress: 0, dailyTasks: [], streak: 0 };
