@@ -18,7 +18,7 @@ interface ComparativeViewProps {
   };
 }
 
-export const ComparativeView: React.FC<ComparativeView umaViewProps> = ({
+export const ComparativeView: React.FC<ComparativeViewProps> = ({
   userEssay,
   modelEssay,
   insights,
@@ -29,7 +29,7 @@ export const ComparativeView: React.FC<ComparativeView umaViewProps> = ({
         {/* User Essay Pane */}
         <div className="flex flex-col border rounded-lg bg-white shadow-sm overflow-hidden">
           <div className="bg-slate-100 px-4 py-2 border-b font-semibold text-slate-700 flex justify-between items-center">
-            <span>내 에세이 (User Essay)</span>
+            <span>나의 에세이 (User Essay)</span>
             <span className="text-xs font-normal text-slate-500">Draft</span>
           </div>
           <div className="p-4 overflow-y-auto text-lg leading-relaxed whitespace-pre-wrap text-slate-800 h-full">
@@ -95,7 +95,7 @@ export const ComparativeView: React.FC<ComparativeView umaViewProps> = ({
                   </div>
                 ))
               ) : (
-                <p className="text-sm text-slate-400 italic">추가할 만한 핵심 포인트가 없습니다.</p>
+                <p className="text-sm text-slate-400 italic">특별한 놓친 포인트가 없습니다.</p>
               )}
             </div>
           </div>

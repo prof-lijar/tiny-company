@@ -20,11 +20,12 @@ export async function POST(req: NextRequest) {
         const userId = session.metadata?.userId || session.client_reference_id;
         
         if (userId) {
-          // Update user to PRO tier in our mock DB
-          const user = await authDb.getUserById(userId);
-          if (user) {
-            user.subscriptionTier = 'pro';
+          try {
+            await authDb.updateUserSubscription(userId, 'pro');
             console.log(`User ${userId} upgraded to PRO tier`);
+          } catch (dbErr) {
+            console.error(`Database error upgrading user ${userId}:`, dbErr);
+            return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
           }
         }
         break;
@@ -36,10 +37,12 @@ export async function POST(req: NextRequest) {
           (typeof subscription.customer === 'string' ? subscription.customer : undefined);
         
         if (subUserId) {
-          const user = await authDb.getUserById(subUserId);
-          if (user) {
-            user.subscriptionTier = 'free';
+          try {
+            await authDb.updateUserSubscription(subUserId, 'free');
             console.log(`User ${subUserId} downgraded to FREE tier`);
+          } catch (dbErr) {
+            console.error(`Database error downgrading user ${subUserId}:`, dbErr);
+            return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
           }
         }
         break;

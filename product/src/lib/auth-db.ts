@@ -78,4 +78,16 @@ export const authDb = {
       subscriptionTier: data.subscription_tier,
     };
   },
+
+  async updateUserSubscription(userId: string, tier: 'free' | 'pro'): Promise<void> {
+    const supabase = await createClient();
+    const { error } = await supabase
+      .from('users')
+      .update({ subscription_tier: tier })
+      .eq('id', userId);
+
+    if (error) {
+      throw new Error(`Failed to update subscription tier: ${error.message}`);
+    }
+  },
 };

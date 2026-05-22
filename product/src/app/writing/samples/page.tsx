@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { modelEssays } from '@/lib/data/model-essays';
 import { writingPrompts } from '@/lib/data/writing-prompts';
@@ -30,36 +32,33 @@ export default function WritingSamplesPage() {
     
     setIsComparing(true);
     
-    // Simulate AI Comparison Logic
-    // In a real app, this would call an API route /api/writing-compare
-    setTimeout(() => {
-      const modelEssay = modelEssays.find(m => m.promptId === selectedPromptId);
-      
-      if (!modelEssay) {
-        setIsComparing(false);
-        alert('모범 답안이 준비되지 않은 주제입니다.');
-        return;
+    try {
+      const response = await fetch('/api/writing-compare', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          userEssay, 
+          promptId: selectedPromptId 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get comparative analysis');
       }
 
+      const data = await response.json();
+      
       setComparisonData({
         userEssay,
-        modelEssay: modelEssay.text,
-        insights: {
-          vocabularyUpgrades: [
-            { from: '좋은 점', to: '긍정적인 측면', reason: '학술적 에세이에서는 구체적이고 전문적인 어휘를 사용하는 것이 좋습니다.' },
-            { from: '생각한다', to: '주장한다/역설한다', reason: '단순한 생각보다는 논리적 주장을 펼치는 표현을 사용하세요.' },
-          ],
-          missedOpportunities: [
-            { 
-              suggestion: '거시적 관점의 분석 추가', 
-              reason: '모범 답안에서는 개인의 문제를 넘어 사회 구조적 원인을 분석하고 있습니다.', 
-              replacement: '단순히 개인의 노력이 부족한 것이 아니라, 시스템적 지원 체계의 부재가 근본적인 원인이다.' 
-            },
-          ],
-        },
+        modelEssay: data.modelEssay,
+        insights: data.insights,
       });
+    } catch (error) {
+      console.error('Error comparing essays:', error);
+      alert('An error occurred during the comparative analysis. Please try again.');
+    } finally {
       setIsComparing(false);
-    }, 1500);
+    }
   };
 
   const prompt = writingPrompts.find(p => p.id === selectedPromptId);
@@ -78,12 +77,15 @@ export default function WritingSamplesPage() {
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
             <h2 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-              🎯 주제 선택
+              📝 주제 선택
             </h2>
             <select 
               className="w-full p-2 rounded border border-slate-300 bg-slate-50 text-slate-700"
               value={selectedPromptId || ''}
-              onChange={(e) => setSelectedPromptId(e.target.value)}
+              onChange={(e) => {
+                setSelectedPromptId(e.target.value);
+                setComparisonData(null);
+              }}
             >
               {writingPrompts
               .filter(p => p.taskNumber === 54)
@@ -102,7 +104,7 @@ export default function WritingSamplesPage() {
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-            <h2 className="text-lg font-semibold text-slate-800">✍️ 나의 에세이 쓰기</h2>
+            <h2 className="text-lg font-semibold text-slate-800">✍️ 나의 에세이 작성</h2>
             <textarea 
               className="w-full h-64 p-3 rounded border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none text-slate-800"
               placeholder="여기에 에세이를 작성하세요..."
@@ -125,9 +127,15 @@ export default function WritingSamplesPage() {
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-slate-900">🌟 Level 6 Model Essays</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {modelEssays.map(essay => (
-                  <SampleCard key={essay.id} essay={essay} />
-                ))}
+                {modelEssays
+                  .filter(essay => essay.promptId === selectedPromptId)
+                  .map(essay => (
+                    <SampleCard key={essay.id} essay={essay} />
+                  ))
+                }
+                {modelEssays.filter(essay => essay.promptId === selectedPromptId).length === 0 && (
+                  <p className="text-slate-500 italic">이 주제에 대한 모범 답안이 아직 없습니다.</p>
+                )}
               </div>
             </div>
           ) : (

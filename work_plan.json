@@ -1,10 +1,10 @@
 {
-  "cycle_reasoning": "The CTO is implementing the Writing Sample Library and Comparative Analysis (Issue #465) to enhance the writing module. QA is prioritized to verify the recent Supabase migrations (Issue #470) to ensure data integrity and backend stability. Product is assigned to keep the specification and roadmap aligned with the recent architectural shift to Supabase. Finance is continuing research on deployment costs (Issue #361).",
+  "cycle_reasoning": "The product is in a critical hardening phase. While the product spec marks core features as [BUILT], open issues #475-479 reveal severe security and persistence gaps (plain text passwords, missing RLS, broken Stripe webhooks). The CTO must prioritize these P0/P1 technical debts. I've also assigned the Product agent to audit the product spec to ensure it accurately reflects the current state of the project.",
   "assignments": [
     {
       "role": "cto",
       "turns": 5,
-      "priority": "P2"
+      "priority": "P0"
     },
     {
       "role": "qa",
@@ -15,11 +15,6 @@
       "role": "product",
       "turns": 1,
       "priority": "P1"
-    },
-    {
-      "role": "finance",
-      "turns": 1,
-      "priority": "P2"
     }
   ]
 }
