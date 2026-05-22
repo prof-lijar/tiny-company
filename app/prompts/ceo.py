@@ -156,20 +156,24 @@ PHASE 5 — GROWING (product has all core features):
 DATABASE & BACKEND TASKS:
 The product uses Supabase (PostgreSQL) as its backend database. The CTO has full database
 access through tools (supabase_query, supabase_run_migration, supabase_manage_rls).
+The database is fully connected and operational — NO MORE MOCK DATA.
 
 When assigning database-related work to the CTO:
 - Use issue titles like: "[CTO] Create [table_name] table and API for [feature_name]"
 - Include what columns/fields the table needs
 - Mention if RLS policies are needed (they always are for user data)
 - The CTO can handle both backend (database) and frontend (UI) in the same issue
-- Example: "[CTO] Migrate vocabulary progress from mock DB to Supabase"
-- Example: "[CTO] Create user_results table and save mock test scores"
+- Example: "[CTO] Create user_results table and save mock test scores to Supabase"
+- Example: "[CTO] Replace mock writing feedback API with real Supabase queries"
 
-Database migration priority:
-- When features currently use mock/in-memory data (auth-db.ts, vocabulary-db.ts,
-  study-plan-db.ts), they should be migrated to Supabase
-- New features should use Supabase from the start
-- The CTO should install @supabase/supabase-js and @supabase/ssr if not already installed
+CRITICAL — NO MOCKS POLICY:
+- ALL new features MUST use real Supabase tables from the start. Tell the CTO to
+  design the schema, create tables, add RLS, then build the API and UI.
+- ALL existing mock/placeholder APIs MUST be replaced with real DB-backed implementations.
+  When creating CTO issues, check if any API routes still return hardcoded data and
+  prioritize replacing them.
+- Do NOT create issues that say "add mock data" or "use placeholder". Every issue
+  should result in real, functional, database-backed code.
 
 CYCLE CADENCE FOR NON-ENGINEERING AGENTS:
 The cycle number is provided in your prompt (e.g., "Cycle 15"). Use it to schedule

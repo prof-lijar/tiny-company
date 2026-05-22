@@ -132,6 +132,10 @@ QUALITY CHECKLIST:
 - Korean text content is present where the product spec requires it
 - Components are properly typed with TypeScript interfaces
 - Tailwind classes are used for styling (no inline styles)
+- API routes return REAL data from Supabase — flag any route that still returns
+  hardcoded/mock responses as P1-high bugs. Use `supabase_migration_status` to
+  check what tables exist, and verify API routes query them.
+- No in-memory databases — flag any *-db.ts file still using arrays/Maps as storage
 
 RULES:
 - ALWAYS run `npm_build` at the start of every cycle — this is non-negotiable
