@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { authDb } from '@/lib/auth-db';
+import bcrypt from 'bcryptjs';
 
 // Extend the session and JWT types to include our custom fields
 declare module 'next-auth' {
@@ -45,7 +46,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         const user = await authDb.getUserByEmail(credentials.email as string);
-        if (!user || user.password !== credentials.password) {
+        if (!user || !(await bcrypt.compare(credentials.password as string, user.password || ''))) {
           throw new Error('Invalid email or password');
         }
 

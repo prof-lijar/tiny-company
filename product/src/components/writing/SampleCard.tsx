@@ -12,7 +12,7 @@ interface SampleCardProps {
   onClose?: (id: string) => void;
 }
 
-export const SampleCard: React.FC<SampleCardProps> = ({ essay, onClose }) => {
+const SampleCard: React.FC<SampleCardProps> = ({ essay, onClose }) => {
   return (
     <div className="group relative p-4 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer">
       <div className="flex justify-between items-center mb-3">
@@ -31,3 +31,5 @@ export const SampleCard: React.FC<SampleCardProps> = ({ essay, onClose }) => {
     </div>
   );
 };
+
+export default SampleCard;

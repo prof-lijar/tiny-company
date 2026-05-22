@@ -1,5 +1,6 @@
 import { TopikLevel } from './types';
 import { createClient } from './supabase/server';
+import bcrypt from 'bcryptjs';
 
 export interface User {
   id: string;
@@ -33,12 +34,19 @@ export const authDb = {
 
   async createUser(userData: Partial<User>): Promise<User> {
     const supabase = await createClient();
+    
+    let hashedPassword = userData.password;
+    if (userData.password) {
+      const salt = await bcrypt.genSalt(10);
+      hashedPassword = await bcrypt.hash(userData.password, salt);
+    }
+
     const { data, error } = await supabase
       .from('users')
       .insert({
         name: userData.name || 'Unknown',
         email: userData.email || '',
-        password: userData.password,
+        password: hashedPassword,
         target_level: userData.targetLevel || 3,
         subscription_tier: userData.subscriptionTier || 'free',
       })
