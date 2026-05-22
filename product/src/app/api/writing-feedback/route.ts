@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { WritingFeedback } from '@/lib/types';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: Request) {
   try {
@@ -20,24 +21,24 @@ export async function POST(req: Request) {
     // --- 2026 REFORM: Detailed Template Detection ---
     const commonTemplates = [
       { 
-        pattern: '현대 사회에서', 
-        alternative: '최근 우리 사회의 모습을 살펴보면' 
+        pattern: '\ud604\ub300 \uc0ac\ud68c\uc5d0\uc11c', 
+        alternative: '\uc75c\uadfc \uc6b0\ub9ac \uc0ac\ud68c\uc758 \ubaa8\uc2b5\uc744 \uc0b4\ud3b4\ubcf4\uba74' 
       },
       { 
-        pattern: '많은 사람들이', 
-        alternative: '다수의 현대인이' 
+        pattern: '\ub9ce\uc740 \uc0ac\ub78c\ub4e4\uc774', 
+        alternative: '\ub2e4\uc218\uc758 \ud604\ub300\uc778\uc774' 
       },
       { 
-        pattern: '가장 중요한 것은', 
-        alternative: '무엇보다 핵심적인 지점은' 
+        pattern: '\uac00\uc7a5 \uc911\uc694\ud55c \uac83\uc740', 
+        alternative: '\ubb34\uc5c7\ubcf4\ub2e4 \ud575\uc2ec\uc801\uc778 \uc9c0\uc810\uc740' 
       },
       { 
-        pattern: '결론적으로 말하자면', 
-        alternative: '이러한 관점에서 볼 때' 
+        pattern: '\uacb0\ub860\uc801\uc73c\ub85c \ub9d0\ud558\uc790\uba74', 
+        alternative: '\uc774\ub7ec\ud55c \uad00\uc810\uc5d0\uc11c \ubcfc \ub54c' 
       },
       { 
-        pattern: '앞서 언급한 바와 같이', 
-        alternative: '앞서 살펴본 내용을 바탕으로' 
+        pattern: '\uc55e\uc11c \uc5b8\uae09\ud55c \ubc14\uc640 \uac19\uc774', 
+        alternative: '\uc55e\uc11c \uc0b4\ud3b4\ubcf8 \ub0b4\uc6a9\uc744 \ubc14\ud0d5\uc73c\ub85c' 
       }
     ];
     
@@ -77,15 +78,15 @@ export async function POST(req: Request) {
     }
 
     // Check for formal style (essential for TOPIK II)
-    if (answer.includes('습니다') || answer.includes('ㄴ다')) {
+    if (answer.includes('\uc2b5\ub2c8\ub2e4') || answer.includes('\u3134\ub2e4')) {
       score += 30;
       strengths.push('Consistent use of formal written style');
     } else {
-      improvements.push('Use formal written style (-습니다/-ㄴ다) instead of colloquial language');
+      improvements.push('Use formal written style (-\uc2b5\ub2c8\ub2e4/-\u3134\ub2e4) instead of colloquial language');
     }
 
     // Check for structural variety & logical connectors
-    const advancedConnectors = ['그럼에도 불구하고', '반면에', '공과적으로', '더불어', '결과적으로', '따라서'];
+    const advancedConnectors = ['\uadf8\ub7fc\uc5d0\ub3c4 \ubd88\uad6c\ud558\uace0', '\ubc18\uba74\uc5d0', '\uacf5\uacfc\uc801\uc73c\ub85c', '\ub354\ubd88\uc5b4', '\uacb0\uacfc\uc801\uc73c\ub85c', '\ub530\ub77c\uc11c'];
     const foundConnectors = advancedConnectors.filter(conn => answer.includes(conn));
     
     if (foundConnectors.length >= 3) {
@@ -95,7 +96,7 @@ export async function POST(req: Request) {
       score += 10;
       strengths.push('Good use of some logical connectors');
     } else {
-      improvements.push('Try to incorporate a wider variety of connectors (e.g., 그럼에도 불구하고, 반면에) to improve flow');
+      improvements.push('Try to incorporate a wider variety of connectors (e.g., \uadf8\ub7fc\uc5d0\ub3c4 \ubd88\uad6c\ud558\uace0, \ubc18\uba74\uc5d0) to improve flow');
     }
 
     // Cap score between 0 and 100
@@ -105,7 +106,7 @@ export async function POST(req: Request) {
       score: finalScore,
       strengths: strengths.length > 0 ? strengths : ['Basic attempt at the prompt'],
       improvements: improvements.length > 0 ? improvements : ['Continue practicing advanced vocabulary'],
-      correctedText: `[AI Corrected Version - 2026 Focus: Natural Expression]\\n\\n${answer}\\n\\n(The AI has replaced formulaic cliches with high-level academic Korean phrasing to avoid template penalties).`,
+      correctedText: `[AI Corrected Version - 2026 Focus: Natural Expression]\\\\\\\\n\\\$\\n${answer}\\\\\\\\n\\\\\\\\n(The AI has replaced formulaic cliches with high-level academic Korean phrasing to avoid template penalties).`,
       templateUsage: {
         detectedTemplates,
         naturalAlternatives,
@@ -115,7 +116,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(feedback);
   } catch (error) {
-    console.error('Error generating writing feedback:', error);
+    logger.error('Error generating writing feedback', error, { route: 'POST /api/writing-feedback' });
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

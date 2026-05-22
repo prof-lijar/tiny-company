@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { vocabularyDb } from '@/lib/vocabulary-db';
 import { auth } from '@/auth';
+import { logger } from '@/lib/logger';
 
 export async function GET() {
   try {
@@ -12,7 +13,7 @@ export async function GET() {
     const progress = await vocabularyDb.getProgress(userId);
     return NextResponse.json(progress);
   } catch (error) {
-    console.error('Error fetching vocabulary progress:', error);
+    logger.error('Error fetching vocabulary progress', error, { route: 'GET /api/vocabulary', userId: 'unknown' });
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
     await vocabularyDb.updateWordProgress(userId, wordId, state);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error updating vocabulary progress:', error);
+    logger.error('Error updating vocabulary progress', error, { route: 'POST /api/vocabulary', userId: 'unknown' });
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
