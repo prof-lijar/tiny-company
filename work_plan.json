@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The company is focusing on the critical migration of the static content library to Supabase (Issue #496) to eliminate mock data and support the Content Library Expansion. The CTO is prioritized for this complex task. QA is assigned to verify the Supabase infrastructure. Product is auditing the current feature set to update the roadmap, and Finance is researching deployment costs.",
+  "cycle_reasoning": "The company is focused on removing static content mocks and migrating the library to Supabase (Issue #496). This is a critical architectural shift to ensure scalability and adhere to the No-Mocks policy. QA is assigned to verify the Supabase infrastructure, and Product is auditing the current feature set to refine the roadmap.",
   "assignments": [
     {
       "role": "cto",
@@ -15,11 +15,6 @@
       "role": "product",
       "turns": 1,
       "priority": "P1"
-    },
-    {
-      "role": "finance",
-      "turns": 1,
-      "priority": "P2"
     }
   ]
 }
