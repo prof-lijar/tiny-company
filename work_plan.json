@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a significant backlog of 8 issues, including critical P1-high tasks related to authentication and Stripe. I will assign the CTO maximum turns to clear these and the P2 optimizations. QA is assigned to verify the recent Supabase migrations. Product will work on auditing the feature status, and Finance will address their pending research issue.",
+  "cycle_reasoning": "Cycle 1: The company is in Phase 5 (Intelligence & Scale). The CTO is focused on implementing the Writing Sample Library & Comparative Analysis (#465), which is a key part of Milestone 5.2. QA is verifying the Supabase infrastructure (#470) to ensure the backend is stable for upcoming features. Product is auditing the feature status to keep the roadmap and spec accurate (#485). Finance is assigned to complete the research on deployment costs (#361).",
   "assignments": [
     {
       "role": "cto",
