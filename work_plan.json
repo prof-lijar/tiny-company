@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The company is focused on removing static content mocks and migrating the library to Supabase (Issue #496). This is a critical architectural shift to ensure scalability and adhere to the No-Mocks policy. QA is assigned to verify the Supabase infrastructure, and Product is auditing the current feature set to refine the roadmap.",
+  "cycle_reasoning": "The CTO has a critical backlog including P0 build failures (#497) and syntax errors (#498) that are blocking stability. Additionally, the migration of static content to Supabase (#496) is a P0 priority to adhere to the No Mocks Policy. The CTO is currently over the issue cap (4 open issues), so no new tasks are being created. QA is assigned to verify the fixes, and Product is assigned to track progress against the spec.",
   "assignments": [
     {
       "role": "cto",
@@ -9,12 +9,12 @@
     {
       "role": "qa",
       "turns": 1,
-      "priority": "P0"
+      "priority": "P1"
     },
     {
       "role": "product",
       "turns": 1,
-      "priority": "P1"
+      "priority": "P2"
     }
   ]
 }
