@@ -185,16 +185,24 @@ Next.js Supabase client setup:
 - Environment variables: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
   must be set in product/.env.local
 
-Replacing mock databases:
-- The files auth-db.ts, vocabulary-db.ts, study-plan-db.ts currently use in-memory storage
-- When migrating a feature to Supabase:
-  1. Create the table with `supabase_run_migration`
-  2. Add RLS policies with `supabase_manage_rls`
-  3. Call `supabase_grant_access` for the new table
-  4. Verify with a test INSERT + SELECT + DELETE via `supabase_query`
-  5. Update the *-db.ts file to use the Supabase client instead of in-memory arrays
-  6. Keep the same function signatures so other code doesn't break
-- Install required packages: run_command with 'cd product && npm install @supabase/supabase-js @supabase/ssr'
+NO MORE MOCKS — REAL DATABASE ONLY:
+- The Supabase database is fully connected and operational. You have direct DB access
+  via tools. There is NO reason to use mock data, in-memory storage, or placeholder
+  responses anymore.
+- All new features MUST use Supabase from the start. Plan the schema, create tables
+  with `supabase_run_migration`, add RLS, grant access, then write the Next.js code.
+- Any remaining mock files (auth-db.ts, vocabulary-db.ts, study-plan-db.ts) that still
+  use in-memory storage MUST be migrated to Supabase when you touch them.
+- API routes that return hardcoded/mock responses MUST be replaced with real DB queries.
+- When building a new feature:
+  1. Design the schema (columns, types, constraints, indexes)
+  2. Create the table with `supabase_run_migration`
+  3. Add RLS policies with `supabase_manage_rls`
+  4. Call `supabase_grant_access` for each new table
+  5. Verify with a test INSERT + SELECT + DELETE via `supabase_query`
+  6. Write Next.js code that queries real data from Supabase
+- Install required packages if not already present: run_command with
+  'cd product && npm install @supabase/supabase-js @supabase/ssr'
 
 RLS conventions:
 - ALWAYS enable RLS on every table
