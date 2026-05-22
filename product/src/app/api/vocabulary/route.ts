@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { vocabularyDb } from '@/lib/vocabulary-db';
 import { auth } from '@/auth';
-=======
 import { logger } from '@/lib/logger';
->>>>>>> cto/structured-error-logging
 
 export async function GET() {
   try {

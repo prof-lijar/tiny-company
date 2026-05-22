@@ -1,104 +1,69 @@
 import React from 'react';
+import { ModelEssay } from '@/lib/types/model-essays';
 
 interface ComparativeViewProps {
   userEssay: string;
-  modelEssay: string;
+  modelEssay: ModelEssay;
   insights: {
     missedOpportunities: {
+      userText: string;
       suggestion: string;
-      reason: string;
-      original: string;
-      replacement: string;
-    }[];
-    vocabularyUpgrades: {
-      from: string;
-      to: string;
       reason: string;
     }[];
   };
 }
 
-export const ComparativeView: React.FC<ComparativeViewProps> = ({
-  userEssay,
-  modelEssay,
-  insights,
-}) => {
+export const ComparativeView: React.FC<ComparativeViewProps> = ({ userEssay, modelEssay, insights }) => {
   return (
-    <div className="flex flex-col gap-6 w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[600px]">
-        {/* User Essay Pane */}
-        <div className="flex flex-col border rounded-lg bg-white shadow-sm overflow-hidden">
-          <div className="bg-slate-100 px-4 py-2 border-b font-semibold text-slate-700 flex justify-between items-center">
-            <span>나의 에세이 (User Essay)</span>
-            <span className="text-xs font-normal text-slate-500">Draft</span>
-          </div>
-          <div className="p-4 overflow-y-auto text-lg leading-relaxed whitespace-pre-wrap text-slate-800 h-full">
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* User Essay Panel */}
+        <div className="flex flex-col gap-2">
+          <h3 className="text-lg font-semibold text-slate-700 flex items-center gap-2">
+            <span className="w-2 h-6 bg-blue-500 rounded-full"></span>
+            Your Draft
+          </h3>
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 whitespace-pre-wrap leading-relaxed min-h-[400px] font-serif">
             {userEssay}
           </div>
         </div>
 
-        {/* Model Essay Pane */}
-        <div className="flex flex-col border rounded-lg bg-blue-50 shadow-sm overflow-hidden border-blue-200">
-          <div className="bg-blue-100 px-4 py-2 border-b border-blue-200 font-semibold text-blue-800 flex justify-between items-center">
-            <span>모범 답안 (Model Essay)</span>
-            <span className="text-xs font-normal text-blue-600">Level 6 Standard</span>
-          </div>
-          <div className="p-4 overflow-y-auto text-lg leading-relaxed whitespace-pre-wrap text-slate-800 h-full">
-            {modelEssay}
+        {/* Model Essay Panel */}
+        <div className="flex flex-col gap-2">
+          <h3 className="text-lg font-semibold text-slate-700 flex items-center gap-2">
+            <span className="w-2 h-6 bg-green-500 rounded-full"></span>
+            Model Essay (Level 6)
+          </h3>
+          <div className="p-4 bg-green-50 border border-green-200 rounded-xl text-slate-800 whitespace-pre-wrap leading-relaxed min-h-[400px] font-serif">
+            {modelEssay.content}
           </div>
         </div>
       </div>
 
-      {/* AI Insights Section */}
-      <div className="border rounded-lg bg-white shadow-sm p-6">
-        <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-          ✨ AI 분석 및 개선 제안
+      {/* AI Insights Panel */}
+      <div className="mt-8 p-6 bg-indigo-50 border border-indigo-100 rounded-2xl">
+        <h3 className="text-xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
+          ✨ AI Comparative Analysis
         </h3>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Vocabulary Upgrades */}
-          <div>
-            <h4 className="text-md font-semibold text-blue-700 mb-3 border-b pb-1">
-              🚀 어휘 업그레이드 (Vocabulary Upgrades)
-            </h4>
-            <div className="space-y-3">
-              {insights.vocabularyUpgrades.length > 0 ? (
-                insights.vocabularyUpgrades.map((item, idx) => (
-                  <div key={idx} className="flex flex-col p-3 bg-slate-50 rounded border border-slate-200">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-slate-500 line-through text-sm">{item.from}</span>
-                      <span className="text-blue-600 font-bold">→ {item.to}</span>
-                    </div>
-                    <p className="text-sm text-slate-600">{item.reason}</p>
+        <div className="space-y-4">
+          {insights.missedOpportunities.length > 0 ? (
+            insights.missedOpportunities.map((op, idx) => (
+              <div key={idx} className="p-4 bg-white rounded-lg border border-indigo-200 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <div className="text-red-500 font-bold text-lg">✕</div>
+                  <div>
+                    <p className="text-sm text-slate-500 mb-1">Instead of:</p>
+                    <p className="text-slate-700 font-medium mb-2 italic">"{op.userText}"</p>
+                    <p className="text-sm text-slate-500 mb-1">Try this academic expression from the model essay:</p>
+                    <p className="text-indigo-700 font-bold text-lg">"{op.suggestion}"</p>
+                    <p className="text-sm text-slate-600 mt-2">{op.reason}</p>
                   </div>
-                ))
-              ) : (
-                <p className="text-sm text-slate-400 italic">추천할 어휘 업그레이드가 없습니다.</p>
-              )}
-            </div>
-          </div>
-
-          {/* Missed Opportunities */}
-          <div>
-            <h4 className="text-md font-semibold text-green-700 mb-3 border-b pb-1">
-              💡 놓친 포인트 (Missed Opportunities)
-            </h4>
-            <div className="space-y-3">
-              {insights.missedOpportunities.length > 0 ? (
-                insights.missedOpportunities.map((item, idx) => (
-                  <div key={idx} className="flex flex-col p-3 bg-slate-50 rounded border border-slate-200">
-                    <p className="text-sm font-medium text-slate-800 mb-1">{item.suggestion}</p>
-                    <p className="text-xs text-slate-500 mb-2">{item.reason}</p>
-                    <div className="text-xs bg-white p-2 rounded border border-slate-100 italic text-slate-600">
-                      "{item.replacement}"
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-sm text-slate-400 italic">특별한 놓친 포인트가 없습니다.</p>
-              )}
-            </div>
-          </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-slate-600 italic">No specific missed opportunities found. Great job!</p>
+          )}
         </div>
       </div>
     </div>
