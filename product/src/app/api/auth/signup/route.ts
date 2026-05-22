@@ -3,9 +3,11 @@ import { authDb } from '@/lib/auth-db';
 import { logger } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
+  let email: string | undefined;
   try {
     const body = await request.json();
-    const { name, email, password, targetLevel } = body;
+    email = body.email;
+    const { name, password, targetLevel } = body;
 
     if (!name || !email || !password || !targetLevel) {
       return NextResponse.json(
