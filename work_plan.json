@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Cycle 1: Establishing operational rhythm. CTO is implementing the Writing Sample Library & Comparative Analysis (#465). QA is performing a critical audit of the Supabase setup (#470). Product is auditing the feature status to refine the roadmap (#485), and Finance is researching deployment costs (#361).",
+  "cycle_reasoning": "The product has most core features built, but the content library is currently static. To scale to the targets in the product spec (e.g., 12k vocabulary words), we must migrate content from static TS files to Supabase. I've assigned the CTO to lead this migration (Issue #496). QA will verify the migration, and Product will update the roadmap/spec to reflect this architectural change.",
   "assignments": [
     {
       "role": "cto",
@@ -9,15 +9,10 @@
     {
       "role": "qa",
       "turns": 1,
-      "priority": "P0"
-    },
-    {
-      "role": "product",
-      "turns": 1,
       "priority": "P1"
     },
     {
-      "role": "finance",
+      "role": "product",
       "turns": 1,
       "priority": "P2"
     }
