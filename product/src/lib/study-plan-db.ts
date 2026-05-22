@@ -79,7 +79,7 @@ export const studyPlanDb = {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     // Generate daily tasks first to ensure they exist
-    await this.generateDailyPlan(userId, ['Grammar: -가 됨에', 'Vocab: Environment']); 
+    await this.generateDailyPlan(userId, ['Grammar: -가 런에', 'Vocab: Environment']); 
     
     await this.updatePlan(userId, { 
       targetExamDate: date, 
@@ -100,28 +100,7 @@ export const studyPlanDb = {
       throw taskError;
     }
 
-    // Recalculate overall progress
-    const { data: plan } = await supabase
-      .from('study_plans')
-      .select('id')
-      .eq('user_id', userId)
-      .single();
-
-    if (!plan) return;
-
-    const { data: tasks } = await supabase
-      .from('study_tasks')
-      .select('completed')
-      .eq('plan_id', plan.id);
-
-    const totalTasks = tasks?.length || 0;
-    const completedTasks = tasks?.filter(t => t.completed).length || 0;
-    const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
-
-    await supabase
-      .from('study_plans')
-      .update({ overall_progress: progress })
-      .eq('id', plan.id);
+    // Note: overall_progress is now automatically updated via PostgreSQL trigger tr_update_study_plan_progress
   },
 
   async generateDailyPlan(userId: string, weaknesses: string[] = []): Promise<StudyPlan> {
