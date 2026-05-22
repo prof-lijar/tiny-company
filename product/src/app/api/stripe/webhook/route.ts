@@ -4,6 +4,12 @@ import { authDb } from '@/lib/auth-db';
 import { Stripe } from 'stripe';
 
 export async function POST(req: NextRequest) {
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!webhookSecret) {
+    console.error('STRIPE_WEBHOOK_SECRET is not configured');
+    return NextResponse.json({ error: 'Internal Server Error: Stripe configuration missing' }, { status: 500 });
+  }
+
   const body = await req.text();
   const sig = req.headers.get('stripe-signature') || '';
 
@@ -11,7 +17,7 @@ export async function POST(req: NextRequest) {
     const event = stripe.webhooks.constructEvent(
       body,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET || 'whsec_mock'
+      webhookSecret
     );
 
     switch (event.type) {
