@@ -22,9 +22,28 @@ export async function POST(req: NextRequest) {
         if (userId) {
           try {
             await authDb.updateUserSubscription(userId, 'pro');
-            console.log(`User ${userId} upgraded to PRO tier`);
+            console.log(`User ${userId} upgraded to PRO tier via checkout session`);
           } catch (dbErr) {
             console.error(`Database error upgrading user ${userId}:`, dbErr);
+            return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
+          }
+        }
+        break;
+      }
+
+      case 'customer.subscription.updated': {
+        const subscription = event.data.object as Stripe.Subscription;
+        const userId = subscription.metadata?.userId || 
+          (typeof subscription.customer === 'string' ? subscription.customer : undefined);
+        
+        if (userId) {
+          try {
+            // If the subscription is active or trialing, they are 'pro'
+            const tier = (subscription.status === 'active' || subscription.status === 'trialing') ? 'pro' : 'free';
+            await authDb.updateUserSubscription(userId, tier);
+            console.log(`User ${userId} subscription updated to ${tier} tier`);
+          } catch (dbErr) {
+            console.error(`Database error updating user ${userId}:`, dbErr);
             return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
           }
         }
@@ -39,7 +58,7 @@ export async function POST(req: NextRequest) {
         if (subUserId) {
           try {
             await authDb.updateUserSubscription(subUserId, 'free');
-            console.log(`User ${subUserId} downgraded to FREE tier`);
+            console.log(`User ${subUserId} downgraded to FREE tier via subscription deletion`);
           } catch (dbErr) {
             console.error(`Database error downgrading user ${subUserId}:`, dbErr);
             return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
