@@ -7,7 +7,7 @@ export const studyPlanDb = {
     
     const { data: plan, error: planError } = await supabase
       .from('study_plans')
-      .select('*')
+      .select('*, study_tasks(*)')
       .eq('user_id', userId)
       .single();
 
@@ -18,15 +18,7 @@ export const studyPlanDb = {
 
     if (!plan) return null;
 
-    const { data: tasks, error: tasksError } = await supabase
-      .from('study_tasks')
-      .select('*')
-      .eq('plan_id', plan.id);
-
-    if (tasksError) {
-      console.error('Error fetching study tasks:', tasksError);
-      throw tasksError;
-    }
+    const tasks = (plan.study_tasks as any[]) || [];
 
     return {
       userId: plan.user_id,
@@ -34,7 +26,7 @@ export const studyPlanDb = {
       daysRemaining: plan.days_remaining,
       overallProgress: plan.overall_progress,
       streak: plan.streak,
-      dailyTasks: (tasks || []).map(t => ({
+      dailyTasks: tasks.map(t => ({
         id: t.id,
         type: t.type as any,
         title: t.title,
@@ -79,7 +71,7 @@ export const studyPlanDb = {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     // Generate daily tasks first to ensure they exist
-    await this.generateDailyPlan(userId, ['Grammar: -가 런에', 'Vocab: Environment']); 
+    await this.generateDailyPlan(userId, ['Grammar: -가 런에']); 
     
     await this.updatePlan(userId, { 
       targetExamDate: date, 
