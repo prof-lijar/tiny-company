@@ -1,26 +1,75 @@
+import { createClient } from '@/lib/supabase/server';
 import { StudyPlan, StudyTask } from './types';
-
-// Mock storage for study plans and tasks
-const plans: Record<string, StudyPlan> = {};
 
 export const studyPlanDb = {
   async getPlan(userId: string): Promise<StudyPlan | null> {
-    return plans[userId] || null;
+    const supabase = await createClient();
+    
+    const { data: plan, error: planError } = await supabase
+      .from('study_plans')
+      .select('*')
+      .eq('user_id', userId)
+      .single();
+
+    if (planError && planError.code !== 'PGRST116') {
+      console.error('Error fetching study plan:', planError);
+      throw planError;
+    }
+
+    if (!plan) return null;
+
+    const { data: tasks, error: tasksError } = await supabase
+      .from('study_tasks')
+      .select('*')
+      .eq('plan_id', plan.id);
+
+    if (tasksError) {
+      console.error('Error fetching study tasks:', tasksError);
+      throw tasksError;
+    }
+
+    return {
+      userId: plan.user_id,
+      targetExamDate: plan.target_exam_date || '',
+      daysRemaining: plan.days_remaining,
+      overallProgress: plan.overall_progress,
+      streak: plan.streak,
+      dailyTasks: (tasks || []).map(t => ({
+        id: t.id,
+        type: t.type as any,
+        title: t.title,
+        completed: t.completed,
+        dueDate: t.due_date || '',
+        priority: t.priority as any,
+        targetUrl: t.target_url,
+      })),
+    };
   },
 
   async updatePlan(userId: string, updates: Partial<StudyPlan>): Promise<StudyPlan> {
-    const currentPlan = plans[userId] || {
-      userId,
-      targetExamDate: '',
-      daysRemaining: 0,
-      overallProgress: 0,
-      dailyTasks: [],
-      streak: 0,
-    };
+    const supabase = await createClient();
     
-    const updatedPlan = { ...currentPlan, ...updates };
-    plans[userId] = updatedPlan;
-    return updatedPlan;
+    const payload: any = {
+      user_id: userId,
+      updated_at: new Date().toISOString(),
+    };
+
+    if (updates.targetExamDate !== undefined) payload.target_exam_date = updates.targetExamDate;
+    if (updates.daysRemaining !== undefined) payload.days_remaining = updates.daysRemaining;
+    if (updates.overallProgress !== undefined) payload.overall_progress = updates.overallProgress;
+    if (updates.streak !== undefined) payload.streak = updates.streak;
+
+    const { error } = await supabase
+      .from('study_plans')
+      .upsert(payload, { onConflict: 'user_id' });
+
+    if (error) {
+      console.error('Error updating study plan:', error);
+      throw error;
+    }
+
+    const fullPlan = await this.getPlan(userId);
+    return fullPlan || { userId, targetExamDate: '', daysRemaining: 0, overallProgress: 0, dailyTasks: [], streak: 0 };
   },
 
   async setTargetExamDate(userId: string, date: string): Promise<void> {
@@ -29,53 +78,91 @@ export const studyPlanDb = {
     const diffTime = examDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
-    // We generate a fresh plan whenever the date is set
-    const plan = await this.generateDailyPlan(userId, ['Grammar: -가 르문에', 'Vocab: Environment']); 
+    // Generate daily tasks first to ensure they exist
+    await this.generateDailyPlan(userId, ['Grammar: -가 됨에', 'Vocab: Environment']); 
+    
     await this.updatePlan(userId, { 
-      ...plan,
       targetExamDate: date, 
       daysRemaining: diffDays,
     });
   },
 
   async toggleTask(userId: string, taskId: string, completed: boolean): Promise<void> {
-    const plan = plans[userId];
+    const supabase = await createClient();
+    
+    const { error: taskError } = await supabase
+      .from('study_tasks')
+      .update({ completed })
+      .eq('id', taskId);
+
+    if (taskError) {
+      console.error('Error toggling task:', taskError);
+      throw taskError;
+    }
+
+    // Recalculate overall progress
+    const { data: plan } = await supabase
+      .from('study_plans')
+      .select('id')
+      .eq('user_id', userId)
+      .single();
+
     if (!plan) return;
 
-    const task = plan.dailyTasks.find(t => t.id === taskId);
-    if (task) {
-      task.completed = completed;
-    }
-    
-    // Update overall progress
-    const totalTasks = plan.dailyTasks.length;
-    const completedTasks = plan.dailyTasks.filter(t => t.completed).length;
-    plan.overallProgress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+    const { data: tasks } = await supabase
+      .from('study_tasks')
+      .select('completed')
+      .eq('plan_id', plan.id);
+
+    const totalTasks = tasks?.length || 0;
+    const completedTasks = tasks?.filter(t => t.completed).length || 0;
+    const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+    await supabase
+      .from('study_plans')
+      .update({ overall_progress: progress })
+      .eq('id', plan.id);
   },
 
   async generateDailyPlan(userId: string, weaknesses: string[] = []): Promise<StudyPlan> {
+    const supabase = await createClient();
     const today = new Date();
-    const targetDate = plans[userId]?.targetExamDate || '';
-    
-    if (!targetDate) {
-      return {
-        userId,
-        targetExamDate: '',
-        daysRemaining: 0,
-        overallProgress: 0,
-        dailyTasks: [],
-        streak: 0,
-      };
+    const todayStr = today.toISOString().split('T')[0];
+
+    // Ensure plan exists
+    const { data: planData } = await supabase
+      .from('study_plans')
+      .select('id')
+      .eq('user_id', userId)
+      .single();
+
+    let planId = planData?.id;
+    if (!planId) {
+      const { data: newPlan } = await supabase
+        .from('study_plans')
+        .insert({ user_id: userId })
+        .select('id')
+        .single();
+      planId = newPlan?.id;
     }
 
-    // More realistic task generation
+    if (!planId) throw new Error('Could not find or create study plan');
+
+    // Clear today's tasks to avoid duplicates
+    await supabase
+      .from('study_tasks')
+      .delete()
+      .eq('plan_id', planId)
+      .eq('due_date', todayStr);
+
+    // Define tasks
     const dailyTasks: StudyTask[] = [
       {
         id: `vocab-${today.getDate()}`,
         type: 'vocabulary',
         title: 'Review 20 SRS vocabulary words',
         completed: false,
-        dueDate: today.toISOString(),
+        dueDate: todayStr,
         priority: 'medium',
         targetUrl: '/vocabulary',
       },
@@ -84,7 +171,7 @@ export const studyPlanDb = {
         type: 'grammar',
         title: 'Study 2 new grammar patterns',
         completed: false,
-        dueDate: today.toISOString(),
+        dueDate: todayStr,
         priority: 'medium',
         targetUrl: '/grammar',
       },
@@ -93,42 +180,50 @@ export const studyPlanDb = {
         type: 'reading',
         title: 'Complete 1 Reading comprehension passage',
         completed: false,
-        dueDate: today.toISOString(),
+        dueDate: todayStr,
         priority: 'low',
         targetUrl: '/reading',
       },
     ];
 
-    // Add weakness-based tasks
     if (weaknesses.length > 0) {
       dailyTasks.push({
         id: `weakness-${weaknesses[0]}-${today.getDate()}`,
         type: 'reading',
         title: `Focused practice: ${weaknesses[0]}`,
         completed: false,
-        dueDate: today.toISOString(),
+        dueDate: todayStr,
         priority: 'high',
         targetUrl: `/reading`,
       });
     }
 
-    // Schedule mock tests on Sundays
     if (today.getDay() === 0) {
       dailyTasks.push({
         id: `mock-test-${today.getDate()}`,
         type: 'mock-test',
         title: 'Full Mock Test Simulator',
         completed: false,
-        dueDate: today.toISOString(),
+        dueDate: todayStr,
         priority: 'high',
         targetUrl: '/mock-test',
       });
     }
 
-    const currentPlan = plans[userId] || { userId, targetExamDate: '', daysRemaining: 0, overallProgress: 0, dailyTasks: [], streak: 0 };
-    return {
-      ...currentPlan,
-      dailyTasks,
-    };
+    // Batch insert
+    const dbTasks = dailyTasks.map(t => ({
+      plan_id: planId,
+      type: t.type,
+      title: t.title,
+      completed: t.completed,
+      due_date: t.dueDate,
+      priority: t.priority,
+      target_url: t.targetUrl,
+    }));
+
+    await supabase.from('study_tasks').insert(dbTasks);
+
+    const fullPlan = await this.getPlan(userId);
+    return fullPlan || { userId, targetExamDate: '', daysRemaining: 0, overallProgress: 0, dailyTasks: [], streak: 0 };
   }
 };
