@@ -232,3 +232,30 @@ To provide high-quality comparative samples, the system must distinguish between
 2. **Body 1**: First supporting argument with a concrete example or logical reasoning.
 3. **Body 2**: Second supporting argument or a counter-argument followed by a rebuttal.
 4. **Conclusion**: Summarize main points and provide a final thought or future outlook.
+
+## 10. High-Probability 2026 Writing Themes (Task 54)
+Based on current trends in Korean society and academic discourse, the following themes are highly likely to appear in the 2026 TOPIK II exams. The CTO should use these to generate new writing prompts.
+
+### 10.1 Technology & Ethics
+- **AI and Job Displacement**: The balance between efficiency and human employment.
+- **Digital Divide**: The gap in digital literacy among different generations (the elderly vs. Gen Z).
+- **Algorithm Bias**: The objectivity of AI-driven decision making.
+- **Privacy vs. Security**: The ethics of surveillance for public safety.
+
+### 10.2 Environment & Sustainability
+- **Circular Economy**: Moving beyond recycling to a zero-waste society.
+- **Climate Justice**: The responsibility of developed vs. developing nations in fighting climate change.
+- **Urban Greenery**: The psychological and ecological impact of urban forests.
+- **Sustainable Consumption**: The shift from "fast fashion" to "slow consumption."
+
+### 10.3 Society & Culture
+- **Low Birth Rate & Aging Population**: Social structures needed to support a super-aged society.
+- **Multiculturalism**: Integration strategies for a diverse Korean society.
+- **Work-Life Balance (Worabel)**: The shift in values regarding professional success vs. personal happiness.
+- **Mental Health**: The social stigma of mental illness and the need for systemic support.
+
+### 10.4 Education & Learning
+- **Personalized Learning**: The role of AI in replacing or augmenting traditional classrooms.
+- **Lifelong Education**: The necessity of continuous learning in a rapidly changing job market.
+- **Critical Thinking**: The importance of media literacy in the age of misinformation.
+- **Holistic Education**: Balancing academic achievement with emotional intelligence (EQ).
