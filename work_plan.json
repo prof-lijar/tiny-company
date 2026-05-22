@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The company is currently executing a critical migration from mock data to a Supabase backend. The CTO has several P0 issues (#466-#469) to set up the client and migrate user, vocabulary, and study plan data. QA is assigned to verify these migrations immediately. Product will track progress to ensure the roadmap remains aligned.",
+  "cycle_reasoning": "The company is currently in a critical infrastructure phase, migrating from mock data to Supabase. CTO has several P0 issues (#467, #468, #469) to implement the database schema and migration logic. QA is assigned to verify the setup (#470). Product is assigned to ensure the product spec and roadmap are aligned with these architectural changes.",
   "assignments": [
     {
       "role": "cto",
