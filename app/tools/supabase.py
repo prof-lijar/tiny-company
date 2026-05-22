@@ -6,6 +6,7 @@ and query data — full backend developer access.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from datetime import datetime, timezone
@@ -18,6 +19,7 @@ from config import Config
 
 _config = Config.from_env()
 _MIGRATIONS_DIR = _config.repo_dir / "product" / "supabase" / "migrations"
+_migrations_table_ready = False
 
 
 def _get_connection():
@@ -34,6 +36,39 @@ def _truncate(text: str, limit: int = 8000) -> str:
     if len(text) > limit:
         return text[:limit] + "\n... (truncated)"
     return text
+
+
+def _ensure_migrations_table():
+    global _migrations_table_ready
+    if _migrations_table_ready:
+        return
+    conn = _get_connection()
+    conn.autocommit = True
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS public.schema_migrations (
+                    id SERIAL PRIMARY KEY,
+                    name TEXT NOT NULL UNIQUE,
+                    applied_at TIMESTAMPTZ DEFAULT now(),
+                    checksum TEXT
+                );
+            """)
+            if _MIGRATIONS_DIR.exists():
+                for f in sorted(_MIGRATIONS_DIR.glob("*.sql")):
+                    parts = f.stem.split("_", 1)
+                    if len(parts) == 2:
+                        migration_name = parts[1]
+                    else:
+                        migration_name = f.stem
+                    cur.execute(
+                        "INSERT INTO public.schema_migrations (name, checksum) "
+                        "VALUES (%s, %s) ON CONFLICT (name) DO NOTHING",
+                        (migration_name, hashlib.md5(f.read_bytes()).hexdigest()),
+                    )
+        _migrations_table_ready = True
+    finally:
+        conn.close()
 
 
 def supabase_query(sql: str) -> str:
@@ -179,6 +214,9 @@ def supabase_run_migration(name: str, sql: str) -> str:
     The SQL is executed against the database AND saved to
     product/supabase/migrations/{timestamp}_{name}.sql for version control.
 
+    Migrations are tracked in a schema_migrations table. If a migration with the
+    same name was already applied, it will be skipped automatically.
+
     Args:
         name: Short descriptive name for the migration (e.g., 'create_users_table',
               'add_score_column_to_results'). Use snake_case, no spaces.
@@ -192,6 +230,33 @@ def supabase_run_migration(name: str, sql: str) -> str:
     if not name:
         return json.dumps({"success": False, "error": "Migration name is required"})
 
+    try:
+        _ensure_migrations_table()
+    except Exception as e:
+        return json.dumps({"success": False, "error": f"Failed to init migration tracking: {e}"})
+
+    try:
+        conn = _get_connection()
+        conn.autocommit = True
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT id FROM public.schema_migrations WHERE name = %s",
+                    (name,),
+                )
+                if cur.fetchone():
+                    return json.dumps({
+                        "success": True,
+                        "skipped": True,
+                        "reason": f"Migration '{name}' already applied — skipping",
+                    })
+        finally:
+            conn.close()
+    except Exception:
+        pass
+
+    checksum = hashlib.md5(sql.encode()).hexdigest()
+
     query_result = json.loads(supabase_query(sql))
     if not query_result.get("success"):
         return json.dumps({
@@ -199,6 +264,21 @@ def supabase_run_migration(name: str, sql: str) -> str:
             "error": f"Migration SQL failed: {query_result.get('error', 'unknown')}",
             "hint": query_result.get("hint", ""),
         })
+
+    try:
+        conn = _get_connection()
+        conn.autocommit = True
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "INSERT INTO public.schema_migrations (name, checksum) "
+                    "VALUES (%s, %s) ON CONFLICT (name) DO NOTHING",
+                    (name, checksum),
+                )
+        finally:
+            conn.close()
+    except Exception:
+        pass
 
     _MIGRATIONS_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
@@ -305,6 +385,62 @@ def supabase_grant_access(table: str) -> str:
         "error": f"GRANT failed: {result.get('error', 'unknown')}",
         "hint": result.get("hint", ""),
         "table": table,
+    })
+
+
+def supabase_migration_status() -> str:
+    """Show which migrations have been applied and which .sql files exist on disk.
+
+    Returns a list of all tracked migrations (from the schema_migrations table)
+    and flags any .sql files on disk that are not yet tracked.
+
+    Returns:
+        JSON string with applied migrations and any untracked files.
+    """
+    try:
+        _ensure_migrations_table()
+    except Exception as e:
+        return json.dumps({"success": False, "error": f"Failed to init migration tracking: {e}"})
+
+    applied: list[dict] = []
+    try:
+        conn = _get_connection()
+        conn.autocommit = True
+        try:
+            with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+                cur.execute(
+                    "SELECT name, applied_at, checksum FROM public.schema_migrations "
+                    "ORDER BY applied_at"
+                )
+                for row in cur.fetchall():
+                    applied.append({
+                        "name": row["name"],
+                        "applied_at": str(row["applied_at"]),
+                        "checksum": row["checksum"],
+                    })
+        finally:
+            conn.close()
+    except Exception as e:
+        return json.dumps({"success": False, "error": str(e)})
+
+    applied_names = {m["name"] for m in applied}
+
+    on_disk: list[str] = []
+    untracked: list[str] = []
+    if _MIGRATIONS_DIR.exists():
+        for f in sorted(_MIGRATIONS_DIR.glob("*.sql")):
+            parts = f.stem.split("_", 1)
+            migration_name = parts[1] if len(parts) == 2 else f.stem
+            on_disk.append(f.name)
+            if migration_name not in applied_names:
+                untracked.append(f.name)
+
+    return json.dumps({
+        "success": True,
+        "applied": applied,
+        "applied_count": len(applied),
+        "files_on_disk": on_disk,
+        "untracked_files": untracked,
     })
 
 

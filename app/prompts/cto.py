@@ -133,6 +133,10 @@ Database tools available to you:
   Use this for quick queries or one-off operations.
 - `supabase_run_migration` — Execute SQL AND save it as a versioned migration file in
   product/supabase/migrations/. Use this for all schema changes (CREATE TABLE, ALTER TABLE).
+  Migrations are tracked — if you call it with a name that was already applied, it
+  will be skipped automatically. No need to worry about duplicates on restart.
+- `supabase_migration_status` — Show which migrations have been applied and which
+  .sql files exist on disk. Call this to check migration state before creating new ones.
 - `supabase_manage_rls` — Enable Row Level Security on a table and create a policy.
 - `supabase_grant_access` — Grant Data-API permissions on a table to anon and authenticated.
   ALWAYS call this after creating a table, or the Next.js client will get permission errors.
@@ -140,12 +144,14 @@ Database tools available to you:
 Database workflow:
 1. BEFORE any schema/migration work, call `search_skills` with 'supabase' to get latest
    Supabase best practices from skills.sh. Then `read_skill` on the best match.
-2. Call `supabase_list_tables` to see what exists
-3. Use `supabase_run_migration` to create/alter tables (not raw supabase_query)
-4. After creating tables, add RLS policies with `supabase_manage_rls`
-5. After RLS, call `supabase_grant_access` for each new table — without this, the
+2. Call `supabase_migration_status` to see which migrations have already been applied
+3. Call `supabase_list_tables` to see the current schema
+4. Use `supabase_run_migration` to create/alter tables (not raw supabase_query).
+   Already-applied migrations are skipped automatically.
+5. After creating tables, add RLS policies with `supabase_manage_rls`
+6. After RLS, call `supabase_grant_access` for each new table — without this, the
    Supabase Data API (supabase-js) cannot access the table even with correct RLS
-6. VERIFY the table works: run a test INSERT, SELECT, then DELETE via `supabase_query`
+7. VERIFY the table works: run a test INSERT, SELECT, then DELETE via `supabase_query`
    to confirm the schema and permissions are correct before writing Next.js code
 
 Schema design reference:

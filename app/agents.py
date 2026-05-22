@@ -103,6 +103,7 @@ from app.tools.supabase import (  # noqa: E402
     supabase_run_migration,
     supabase_manage_rls,
     supabase_grant_access,
+    supabase_migration_status,
 )
 
 # --- Prompt imports ---
@@ -168,7 +169,7 @@ cto_agent = Agent(
         create_pull_request, review_pull_request, merge_pull_request,
         run_command,
         npm_build, npm_test, type_check, lint_code,
-        supabase_query, supabase_list_tables, supabase_run_migration, supabase_manage_rls, supabase_grant_access,
+        supabase_query, supabase_list_tables, supabase_run_migration, supabase_manage_rls, supabase_grant_access, supabase_migration_status,
     ],
 )
 
@@ -241,7 +242,7 @@ qa_agent = Agent(
         git_diff, git_show_commit, check_page_exists, list_routes,
         start_dev_server, stop_dev_server, fetch_page, review_component,
         run_command,
-        supabase_query, supabase_list_tables,
+        supabase_query, supabase_list_tables, supabase_migration_status,
     ],
 )
 
