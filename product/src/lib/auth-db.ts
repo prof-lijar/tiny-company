@@ -1,4 +1,5 @@
 import { TopikLevel } from './types';
+import { createClient } from './supabase/server';
 
 export interface User {
   id: string;
@@ -9,37 +10,72 @@ export interface User {
   subscriptionTier: 'free' | 'pro';
 }
 
-// Mock database in-memory storage
-const users: User[] = [
-  {
-    id: '1',
-    name: 'Test User',
-    email: 'test@example.com',
-    password: 'password123',
-    targetLevel: 4,
-    subscriptionTier: 'pro',
-  },
-];
-
 export const authDb = {
   async getUserByEmail(email: string): Promise<User | null> {
-    return users.find((u) => u.email === email) || null;
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (error || !data) return null;
+
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      targetLevel: data.target_level,
+      subscriptionTier: data.subscription_tier,
+    };
   },
 
   async createUser(userData: Partial<User>): Promise<User> {
-    const newUser: User = {
-      id: Math.random().toString(36).substring(7),
-      name: userData.name || 'Unknown',
-      email: userData.email || '',
-      password: userData.password,
-      targetLevel: userData.targetLevel || 3,
-      subscriptionTier: userData.subscriptionTier || 'free',
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('users')
+      .insert({
+        name: userData.name || 'Unknown',
+        email: userData.email || '',
+        password: userData.password,
+        target_level: userData.targetLevel || 3,
+        subscription_tier: userData.subscriptionTier || 'free',
+      })
+      .select()
+      .single();
+
+    if (error || !data) {
+      throw new Error(`Failed to create user: ${error?.message}`);
+    }
+
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      targetLevel: data.target_level,
+      subscriptionTier: data.subscription_tier,
     };
-    users.push(newUser);
-    return newUser;
   },
 
   async getUserById(id: string): Promise<User | null> {
-    return users.find((u) => u.id === id) || null;
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error || !data) return null;
+
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      targetLevel: data.target_level,
+      subscriptionTier: data.subscription_tier,
+    };
   },
 };
