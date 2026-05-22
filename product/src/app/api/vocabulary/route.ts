@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { vocabularyDb } from '@/lib/vocabulary-db';
+import { auth } from '@/auth';
 
 export async function GET() {
   try {
-    const userId = '1'; // Mocked user ID
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const userId = session.user.id;
     const progress = await vocabularyDb.getProgress(userId);
     return NextResponse.json(progress);
   } catch (error) {
@@ -14,7 +19,11 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const userId = '1'; // Mocked user ID
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const userId = session.user.id;
     const { wordId, state } = await req.json();
     
     if (!wordId || !state) {
