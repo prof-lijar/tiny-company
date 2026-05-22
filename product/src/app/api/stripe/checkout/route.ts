@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { auth } from '@/auth';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   try {
@@ -30,8 +31,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url: checkoutSession.url });
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    console.error('Stripe Checkout Error:', errorMessage);
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+    logger.error('Stripe Checkout Error', error, { route: 'POST /api/stripe/checkout', userId: session?.user?.id });
+    return NextResponse.json({ error: 'An internal server error occurred' }, { status: 500 });
   }
 }

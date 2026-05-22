@@ -1,21 +1,22 @@
 import { NextResponse } from 'next/server';
 import { WeaknessReport, UserMistake } from '@/lib/types';
 import { grammarData } from '@/lib/data/grammar';
+import { logger } from '@/lib/logger';
 
 /**
  * Mock data for user mistakes.
  * In a real application, this would be fetched from a database.
  */
 const MOCK_USER_MISTAKES: UserMistake[] = [
-  { questionId: 'r1', category: 'reading', tags: ['Grammar: -기 때문에'], timestamp: Date.now() - 86400000 },
-  { questionId: 'r2', category: 'reading', tags: ['Grammar: -기 때문에'], timestamp: Date.now() - 86400000 * 2 },
+  { questionId: 'r1', category: 'reading', tags: ['Grammar: -\uae30 \ub54c\ubb38\uc5d0'], timestamp: Date.now() - 86400000 },
+  { questionId: 'r2', category: 'reading', tags: ['Grammar: -\uae30 \ub54c\ubb38\uc5d0'], timestamp: Date.now() - 86400000 * 2 },
   { questionId: 'r3', category: 'reading', tags: ['Vocab: Environment'], timestamp: Date.now() - 86400000 * 3 },
-  { questionId: 'l1', category: 'listening', tags: ['Grammar: -기 때문에'], timestamp: Date.now() - 86400000 * 4 },
+  { questionId: 'l1', category: 'listening', tags: ['Grammar: -\uae30 \ub54c\ubb38\uc5d0'], timestamp: Date.now() - 86400000 * 4 },
   { questionId: 'v1', category: 'vocabulary', tags: ['Academic'], timestamp: Date.now() - 86400000 * 5 },
   { questionId: 'v2', category: 'vocabulary', tags: ['Academic'], timestamp: Date.now() - 86400000 * 6 },
   { questionId: 'v3', category: 'vocabulary', tags: ['Academic'], timestamp: Date.now() - 86400000 * 7 },
   { questionId: 'r4', category: 'reading', tags: ['Vocab: Environment'], timestamp: Date.now() - 86400000 * 8 },
-  { questionId: 'r5', category: 'reading', tags: ['Grammar: -ㄴ/은/는 반면'], timestamp: Date.now() - 86400000 * 9 },
+  { questionId: 'r5', category: 'reading', tags: ['Grammar: -\u3134/\uc740/\ub294 \ubc18\uba74'], timestamp: Date.now() - 86400000 * 9 },
 ];
 
 export async function GET() {
@@ -67,12 +68,12 @@ export async function GET() {
 
     const report: WeaknessReport = {
       topWeaknesses,
-      overallAnalysis: "Your errors are primarily concentrated in advanced grammar patterns (specifically '-기 때문에') and academic vocabulary. While your reading speed is good, these structural gaps are affecting your accuracy in TOPIK II Level 5-6 questions. Focusing on these specific areas will likely yield the biggest score increase.",
+      overallAnalysis: "Your errors are primarily concentrated in advanced grammar patterns (specifically '-\uae30 \ub54c\ubb38\uc5d0') and academic vocabulary. While your reading speed is good, these structural gaps are affecting your accuracy in TOPIK II Level 5-6 questions. Focusing on these specific areas will likely yield the biggest score increase.",
     };
 
     return NextResponse.json(report);
   } catch (error) {
-    console.error('Error analyzing weaknesses:', error);
+    logger.error('Error analyzing weaknesses', error, { route: 'GET /api/analyze-weaknesses' });
     return NextResponse.json({ error: 'Failed to analyze weaknesses' }, { status: 500 });
   }
 }

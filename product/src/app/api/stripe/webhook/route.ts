@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { authDb } from '@/lib/auth-db';
 import { Stripe } from 'stripe';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!webhookSecret) {
-    console.error('STRIPE_WEBHOOK_SECRET is not configured');
+    logger.error('STRIPE_WEBHOOK_SECRET is not configured', new Error('Configuration missing'), { route: 'POST /api/stripe/webhook' });
     return NextResponse.json({ error: 'Internal Server Error: Stripe configuration missing' }, { status: 500 });
   }
 
@@ -28,9 +29,9 @@ export async function POST(req: NextRequest) {
         if (userId) {
           try {
             await authDb.updateUserSubscription(userId, 'pro');
-            console.log(`User ${userId} upgraded to PRO tier via checkout session`);
+            logger.info(`User ${userId} upgraded to PRO tier via checkout session`, { userId, event: event.type });
           } catch (dbErr) {
-            console.error(`Database error upgrading user ${userId}:`, dbErr);
+            logger.error(`Database error upgrading user ${userId}`, dbErr, { route: 'POST /api/stripe/webhook', userId, event: event.type });
             return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
           }
         }
@@ -44,12 +45,11 @@ export async function POST(req: NextRequest) {
         
         if (userId) {
           try {
-            // If the subscription is active or trialing, they are 'pro'
             const tier = (subscription.status === 'active' || subscription.status === 'trialing') ? 'pro' : 'free';
             await authDb.updateUserSubscription(userId, tier);
-            console.log(`User ${userId} subscription updated to ${tier} tier`);
+            logger.info(`User ${userId} subscription updated to ${tier} tier`, { userId, event: event.type });
           } catch (dbErr) {
-            console.error(`Database error updating user ${userId}:`, dbErr);
+            logger.error(`Database error updating user ${userId}`, dbErr, { route: 'POST /api/stripe/webhook', userId, event: event.type });
             return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
           }
         }
@@ -64,9 +64,9 @@ export async function POST(req: NextRequest) {
         if (subUserId) {
           try {
             await authDb.updateUserSubscription(subUserId, 'free');
-            console.log(`User ${subUserId} downgraded to FREE tier via subscription deletion`);
+            logger.info(`User ${subUserId} downgraded to FREE tier via subscription deletion`, { userId: subUserId, event: event.type });
           } catch (dbErr) {
-            console.error(`Database error downgrading user ${subUserId}:`, dbErr);
+            logger.error(`Database error downgrading user ${subUserId}`, dbErr, { route: 'POST /api/stripe/webhook', userId: subUserId, event: event.type });
             return NextResponse.json({ error: 'Database write failed' }, { status: 500 });
           }
         }
@@ -76,8 +76,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ received: true });
   } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : 'Webhook Error';
-    console.error('Webhook Error:', errorMessage);
-    return NextResponse.json({ error: 'Webhook Error', message: errorMessage }, { status: 400 });
+    logger.error('Webhook Error', err, { route: 'POST /api/stripe/webhook' });
+    return NextResponse.json({ error: 'Webhook Error', message: err instanceof Error ? err.message : 'Webhook Error' }, { status: 400 });
   }
 }

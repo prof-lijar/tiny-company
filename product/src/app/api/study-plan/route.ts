@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { studyPlanDb } from '@/lib/study-plan-db';
 import { auth } from '@/auth';
+import { logger } from '@/lib/logger';
 
 export async function GET() {
   const session = await auth();
@@ -18,7 +19,8 @@ export async function GET() {
       }, { status: 404 });
     }
     return NextResponse.json(plan);
-  } catch {
+  } catch (error) {
+    logger.error('Error fetching study plan', error, { route: 'GET /api/study-plan', userId });
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -42,7 +44,8 @@ export async function POST(request: NextRequest) {
     const updatedPlan = await studyPlanDb.getPlan(userId);
     
     return NextResponse.json(updatedPlan);
-  } catch {
+  } catch (error) {
+    logger.error('Error creating study plan', error, { route: 'POST /api/study-plan', userId });
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -66,7 +69,8 @@ export async function PATCH(request: NextRequest) {
     const updatedPlan = await studyPlanDb.getPlan(userId);
     
     return NextResponse.json(updatedPlan);
-  } catch {
+  } catch (error) {
+    logger.error('Error updating study plan task', error, { route: 'PATCH /api/study-plan', userId });
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

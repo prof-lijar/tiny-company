@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { authDb } from '@/lib/auth-db';
+import { logger } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,7 +33,8 @@ export async function POST(request: NextRequest) {
       { message: 'User created successfully', userId: user.id },
       { status: 201 }
     );
-  } catch {
+  } catch (error) {
+    logger.error('Error during user signup', error, { route: 'POST /api/auth/signup', email });
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
