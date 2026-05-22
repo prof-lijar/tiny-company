@@ -186,24 +186,61 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 23. Audio-Text Sync [PENDING]
 - **Goal**: Highlight the transcript in real-time as the audio plays in Listening modules.
 - **Priority**: P2
-- **Requirements**: 
-    - Implement timestamped transcripts.
-    - Synchronize CSS highlighting with `audio.currentTime`.
-- **Acceptance Criteria**: Text highlights move in sync with the speaker's voice.
+- **Detailed Requirements**:
+    - **Data Structure**:
+        - The `ListeningPassage` type must be updated to include a `transcript` array:
+          ```typescript
+          type TranscriptLine = {
+            startTime: number; // seconds
+            endTime: number; // seconds
+            text: string;
+          };
+          ```
+    - **UI/UX Implementation**:
+        - Create a new component `product/src/components/listening/Transcript.tsx` to render the transcript.
+        - Integrate `Transcript.tsx` into `product/src/app/listening/page.tsx`.
+        - Use a `requestAnimationFrame` loop or the `onTimeUpdate` event of the HTML5 Audio element to track `currentTime`.
+        - Apply a highlight class (e.g., `bg-yellow-100 text-indigo-900 font-semibold`) to the line where `currentTime >= startTime && currentTime < endTime`.
+    - **Interactivity**:
+        - Clicking on any line in the transcript should seek the audio player to that line's `startTime`.
+    - **Compatibility**:
+        - Must function correctly when "2026 Mode" (1.1x speed) is enabled.
+- **Acceptance Criteria**:
+    - Text highlighting is visually synchronized with the audio (tolerance: ±0.5s).
+    - Clicking a transcript line jumps the audio to the correct timestamp.
+    - Highlighting persists across the entire length of the audio file.
+- **Files affected**: `product/src/app/listening/page.tsx`, `product/src/components/listening/Transcript.tsx`, `product/src/lib/data/listening.ts`.
 
 #### 24. Unified Design System [PENDING]
 - **Goal**: Implement a consistent UI framework across all pages to eliminate visual discrepancies.
 - **Priority**: P2
-- **Requirements**:
-    - Standardize spacing, color palette, and component library (buttons, inputs, cards).
-    - Audit all pages for consistency with `design/component-spec.md`.
+- **Detailed Requirements**:
+    - **Audit Phase**:
+        - Review all main pages: `dashboard`, `grammar`, `listening`, `mock-test`, `reading`, `vocabulary`, `writing`.
+        - Identify all custom Tailwind implementations that deviate from `design/component-spec.md`.
+    - **Implementation Phase**:
+        - Standardize all Buttons using the variants: Primary, Secondary, Outline, Danger, Ghost.
+        - Standardize all Cards using the types: Feature, Study, Flashcard, Quiz.
+        - Standardize all Form Inputs (Text, Select, Textarea) to match the specified focus and error states.
+        - Ensure the `Noto Sans KR` font is consistently applied to all Korean text.
+    - **Consistency Check**:
+        - Verify that spacing (padding/margins) and color palettes are uniform across the entire application.
+- **Acceptance Criteria**:
+    - 100% of UI components align with the specifications in `design/component-spec.md`.
+    - No "one-off" custom styles for core components (buttons, inputs, cards).
 
 #### 25. Performance Optimization [PENDING]
 - **Goal**: Reduce load times for large content sets (Vocabulary, Reading).
 - **Priority**: P2
-- **Requirements**:
-    - Implement lazy loading for large JSON datasets.
-    - Optimize Supabase queries for content retrieval.
+- **Detailed Requirements**:
+    - **Lazy Loading**: Implement dynamic imports for large data files in `product/src/lib/data/` to prevent blocking the main thread.
+    - **Pagination/Virtualization**: For the Vocabulary Builder and Reading lists, implement windowing (e.g., using `react-window` or similar) to render only visible items.
+    - **Supabase Optimization**: 
+        - Replace large JSON imports with targeted Supabase queries.
+        - Implement server-side pagination for content retrieval.
+- **Acceptance Criteria**:
+    - Initial page load time for Vocabulary and Reading pages is reduced by at least 40%.
+    - No visible lag when scrolling through 100+ vocabulary items.
 
 ## User Flows
 (Unchanged)
