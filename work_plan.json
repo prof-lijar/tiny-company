@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The product is in a critical hardening phase. While the product spec marks core features as [BUILT], open issues #475-479 reveal severe security and persistence gaps (plain text passwords, missing RLS, broken Stripe webhooks). The CTO must prioritize these P0/P1 technical debts. I've also assigned the Product agent to audit the product spec to ensure it accurately reflects the current state of the project.",
+  "cycle_reasoning": "The product has most core features built and is now in a polishing and security hardening phase. The CTO has a large backlog (11 issues), including critical P0 security and infrastructure tasks (password hashing, Stripe webhooks, RLS), so I will not create any new CTO issues. I am assigning maximum turns to the CTO to clear these critical blockers. QA is assigned to verify the ongoing migrations and fixes. Product and Finance are assigned to complete their remaining audit and budget tasks respectively.",
   "assignments": [
     {
       "role": "cto",
@@ -9,12 +9,17 @@
     {
       "role": "qa",
       "turns": 1,
-      "priority": "P0"
+      "priority": "P1"
     },
     {
       "role": "product",
       "turns": 1,
       "priority": "P1"
+    },
+    {
+      "role": "finance",
+      "turns": 1,
+      "priority": "P2"
     }
   ]
 }
