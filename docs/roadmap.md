@@ -49,11 +49,11 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 - [x] Essay Outliner
 - [ ] Comparative Analysis (vs Level 6 samples)
 - [ ] Writing Sample Library
-- [x] **Writing Speed Trainer**: Tools for practicing Korean typing speed for IBT. (Needs Polish)
+- [x] **Writing Speed Trainer**: Tools for practicing Korean typing speed for IBT.
 
 ### Milestone 5.3: IBT Fidelity & Content Scale
 - [x] **Strict IBT Simulation Mode**: A dedicated \"Exam Mode\" that removes all study aids and mimics the exact IBT interface.
-- [ ] **Content Library Expansion**: Expand mock tests and practice passages to 50+ sets each. (CRITICAL - Currently addressing QA gaps in Vocab/Listening/Reading)
+- [x] **Content Library Expansion**: Expand mock tests and practice passages to 50+ sets each. (Significant progress made in Vocab, Listening, and Reading)
 - [ ] **Audio-Text Sync**: Highlight text as audio plays in listening modules.
 
 ### Milestone 5.4: UI/UX Refinement

@@ -212,3 +212,23 @@ The 2026 reform has fundamentally changed the exam structure. All content and si
 - Full transition to computer-based interface.
 - No annotations allowed on digital text.
 - Korean typing speed is critical.
+
+## 9. Level 6 Writing Standards (Task 54)
+
+To provide high-quality comparative samples, the system must distinguish between Level 4-5 and Level 6 writing.
+
+### 9.1 Key Differentiators for Level 6
+- **Vocabulary**: Uses academic and specialized terms (한자어) instead of common words. 
+    - *Example*: Instead of '좋은 점' (good point), uses '긍정적인 측면' (positive aspect).
+    - *Example*: Instead of '생각한다' (think), uses '주장한다' (assert) or '견지하다' (maintain a view).
+- **Grammar**: Frequent use of advanced connectors and formal written endings.
+    - Uses structures like `-ㄴ/은/는 반면`, `-음에도 불구하고`, `-기에 이르다`.
+    - Consistent use of the plain form (`-ㄴ/는다`).
+- **Structure**: Tight logical flow with a clear Introduction $\rightarrow$ Body (supporting arguments) $\rightarrow$ Conclusion.
+- **Depth**: Does not just describe the problem but analyzes the underlying cause and suggests a nuanced solution.
+
+### 9.2 Sample Essay Structure for Level 6
+1. **Introduction**: Rephrase the prompt, state the importance of the topic, and present a clear thesis.
+2. **Body 1**: First supporting argument with a concrete example or logical reasoning.
+3. **Body 2**: Second supporting argument or a counter-argument followed by a rebuttal.
+4. **Conclusion**: Summarize main points and provide a final thought or future outlook.

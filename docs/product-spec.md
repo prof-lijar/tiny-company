@@ -40,7 +40,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Detailed Requirements**:
     - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
     - **Detection Logic**: 
-        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"\uac1c\uba85\uac1c\uba85... \uc740 \ubc14\ub77c\uc73c\ub85c...\").
+        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"\uac1c\uba85\uac1c\uba85... \u2014 \uc740 \ubc14\ub77c\uc73c\ub85c...\").
         - Penalize \"memorized\" structures that don't specifically address the prompt's nuances.
     - **Feedback Output**:
         - Explicitly label \"Template Usage\" in the feedback report.
@@ -67,32 +67,24 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 #### 6. Vocabulary Builder with SRS [BUILT]
 - **Files**: `product/src/app/vocabulary/page.tsx`, `product/src/lib/srs.ts`, `product/src/lib/data/vocabulary.ts`
-- **Improvements needed** (from QA):
-    - [Issue #391] Fix inline styles in Vocabulary progress bar.
-    - [Issue #431] Fix lint errors in Vocabulary API.
 
 #### 7. Grammar Lessons [BUILT]
 - **Files**: `product/src/app/grammar/page.tsx`, `product/src/app/grammar/[level]/page.tsx`, `product/src/lib/data/grammar.ts`
 
 #### 8. Reading Comprehension Practice [BUILT]
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
-- **Resolved**: [Issue #420] Lint errors and runtime issues fixed.
 
 ### P1 \u2014 Fast Follow
 
 #### 9. Writing Practice with AI Feedback [BUILT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
-- **Resolved**: [Issue #421] Removed unused variables.
 - **Note**: Now includes 2026 Anti-Template logic.
 
 #### 10. Mock Test Simulator [BUILT]
 - **Files**: `product/src/app/mock-test/page.tsx`, `product/src/app/mock-test/[section]/page.tsx`
-- **Note**: Now superseded by P0 \"2026 Format Alignment\".
 
 #### 11. Listening Practice [BUILT]
 - **Files**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`
-- **Improvements needed** (from QA):
-    - [Issue #431] Fix lint errors in ListeningPlayer.
 
 ### P2 \u2014 Growth Features
 
@@ -112,14 +104,11 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 #### 16. Dynamic Study Plan [BUILT]
 - **Files**: `product/src/app/api/study-plan/route.ts`, `product/src/components/dashboard/DailyPlan.tsx`
-- **Resolved**: [Issue #407] \"Update Date\" button logic fixed.
 
-#### 17. Writing Speed Trainer [NEEDS IMPROVEMENT]
+#### 17. Writing Speed Trainer [BUILT]
 - **Goal**: Help users improve Korean typing speed for the IBT exam.
 - **Files**: `product/src/app/writing/typing-trainer/page.tsx`
-- **Improvements needed** (from QA):
-    - [Issue #440] Fix lint errors in Writing Speed Trainer.
-    - [Issue #450] Fix setState in effect in TypingTrainer.tsx.
+- **Resolved**: [Issue #450] Fixed setState in effect in TypingTrainer.tsx.
 
 #### 18. Strict IBT Simulation Mode [BUILT]
 - **Goal**: Provide a high-fidelity \"Exam Mode\" that eliminates all study aids and mimics the official IBT interface.
@@ -142,7 +131,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - Interface visually aligns with IBT standards (no annotations, plain text editor).
 - **Files affected**: `product/src/app/mock-test/page.tsx`.
 
-#### 19. Content Library Expansion [PENDING]
+#### 19. Content Library Expansion [IN PROGRESS]
 - **Goal**: Expand practice materials to provide enough variety for full preparation (50+ sets).
 - **Detailed Requirements**:
     - **Listening**: 
@@ -163,7 +152,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - Focus: High-probability 2026 themes (AI, Ethics, Environment, Education).
     - **Vocabulary**: 
         - Target: ~12,000 words (Levels 3-6).
-        - Structure: Categorized by Level $\\rightarrow$ Theme $\\rightarrow$ Word/Meaning/Example.
+        - Structure: Categorized by Level -> Theme -> Word/Meaning/Example.
 - **Implementation**:
     - Update `product/src/lib/data/` files.
     - Split JSON files if they exceed 5MB (e.g., `reading-set-1.ts`, `reading-set-2.ts`).
@@ -172,10 +161,11 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - Every passage type in the Content Guide is represented.
     - Writing prompts cover a diverse range of researched social/academic topics.
 - **Files affected**: `product/src/lib/data/mock-tests.ts`, `product/src/lib/data/listening.ts`, `product/src/lib/data/reading.ts`, `product/src/lib/data/vocabulary.ts`.
-- **Improvements needed** (from QA):
-    - [Issue #459] Vocabulary database insufficient: only 20 words present.
-    - [Issue #458] Listening content library insufficient: missing passages and questions.
-    - [Issue #457] Reading content library insufficient: missing questions and Literature type.
+- **Current Progress**:
+    - Vocabulary expanded to 222+ words.
+    - Listening expanded to 20 passages.
+    - Reading expanded to 25 passages including Literature type.
+    - Writing samples expanded to cover more prompts and levels.
 
 ## User Flows
 (Unchanged)
