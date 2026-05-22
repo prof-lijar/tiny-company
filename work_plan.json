@@ -1,8 +1,25 @@
 {
-  "cycle_reasoning": "CTO is implementing the Writing Sample Library & Comparative Analysis (#465). QA will verify recent massive content expansions and new work. Product will update the spec and track progress on the Content Library Expansion (Feature 19).",
+  "cycle_reasoning": "The product has most of its core features built, but is currently relying on mock databases. The CTO has a critical sequence of P0 issues (#466, #467, #468, #469) to set up Supabase and migrate user, vocabulary, and study plan data. This infrastructure work is the top priority. QA is assigned to verify the migrations, and Product is assigned to maintain the spec. Finance is assigned to address the pending budget research issue (#361).",
   "assignments": [
-    {"role": "cto", "turns": 5, "priority": "P0"},
-    {"role": "qa", "turns": 1, "priority": "P1"},
-    {"role": "product", "turns": 1, "priority": "P1"}
+    {
+      "role": "cto",
+      "turns": 5,
+      "priority": "P0"
+    },
+    {
+      "role": "qa",
+      "turns": 1,
+      "priority": "P1"
+    },
+    {
+      "role": "product",
+      "turns": 1,
+      "priority": "P1"
+    },
+    {
+      "role": "finance",
+      "turns": 1,
+      "priority": "P2"
+    }
   ]
 }
