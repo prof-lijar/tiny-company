@@ -4,8 +4,9 @@ import { auth } from '@/auth';
 import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
+  let session: any = null;
   try {
-    const session = await auth();
+    session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
