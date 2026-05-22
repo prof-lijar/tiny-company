@@ -5,6 +5,7 @@ uv.lock
 .ruff_cache/
 .pytest_cache/
 *.db
+.env*
 
 # Agent infrastructure (not part of the company output)
 /app/
