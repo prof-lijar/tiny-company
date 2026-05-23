@@ -3,9 +3,9 @@ import { createClient } from '@/lib/supabase/server';
 import { GrammarLessonCard } from '@/components/grammar/GrammarLessonCard';
 
 export default async function GrammarPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   
-  // Fetch all grammar lessons
+  // Fetch all grammar grammar lessons
   const { data: grammarData, error } = await supabase
     .from('grammar_lessons')
     .select('*')

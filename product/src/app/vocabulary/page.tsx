@@ -5,6 +5,7 @@ import { calculateNextReview, SRSResult } from '@/lib/srs';
 import { FlashCard } from '@/components/vocabulary/FlashCard';
 import { Button } from '@/components/ui/Button';
 import { createClient } from '@/lib/supabase/client';
+import { VocabularyWord } from '@/lib/data/vocabulary';
 
 interface UserProgress {
   [key: string]: {
@@ -12,18 +13,6 @@ interface UserProgress {
     easeFactor: number;
     nextReview: number;
   };
-}
-
-interface VocabularyWord {
-  id: string;
-  korean: string;
-  english: string;
-  romanization: string;
-  example: string;
-  exampleTranslation: string;
-  level: number;
-  partOfSpeech: string;
-  tags: string[];
 }
 
 export default function VocabularyPage() {
@@ -46,7 +35,7 @@ export default function VocabularyPage() {
           .eq('level', selectedLevel);
 
         if (vocabError) throw vocabError;
-        setWords(vocabData || []);
+        setWords((vocabData as VocabularyWord[]) || []);
 
         // 2. Fetch vocabulary progress from API
         const res = await fetch('/api/vocabulary');
