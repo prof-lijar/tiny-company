@@ -6,7 +6,7 @@ export interface ReadingQuestion {
   options: string[];
   correctAnswer: number; // Index (0-3)
   explanation: string;
-  tags: string[]; // Added for weakness analysis (e.g., ['Grammar: -가 넵넵', 'Vocab: Environment'])
+  tags: string[];
 }
 
 export interface ReadingPassage {
@@ -14,7 +14,7 @@ export interface ReadingPassage {
   level: TopikLevel;
   title: string;
   content: string;
-  timeLimitMinutes: number; // Added for 2026 Reading Speed Training
+  time_limit_minutes: number;
   questions: ReadingQuestion[];
 }
 
@@ -22,10 +22,12 @@ export interface VocabularyWord {
   id: string;
   korean: string;
   english: string;
-  exampleSentence: string;
+  romanization: string;
+  example: string;
+  example_translation: string;
   level: TopikLevel;
-  partOfSpeech: string;
-  tags: string[]; // Added for weakness analysis (e.g., ['Academic', 'Abstract'])
+  part_of_speech: string;
+  tags: string[];
 }
 
 export interface GrammarLesson {
@@ -35,8 +37,8 @@ export interface GrammarLesson {
   pattern: string;
   explanation: string;
   examples: { korean: string; english: string }[];
-  usageNotes: string;
-  tags: string[]; // Added for weakness analysis
+  usage_notes: string;
+  tags: string[];
 }
 
 export interface WritingPrompt {
@@ -45,11 +47,11 @@ export interface WritingPrompt {
   level: TopikLevel;
   title: string;
   instruction: string;
-  context: string; // The passage or data description
-  prompt: string; // The specific question or gap
+  context: string;
+  prompt: string;
   sampleAnswer: string;
   scoringCriteria: string;
-  tags: string[]; // Added for weakness analysis
+  tags: string[];
 }
 
 export interface MockTestQuestion {
@@ -59,11 +61,11 @@ export interface MockTestQuestion {
   audioUrl?: string;
   options?: string[];
   correctAnswer?: number;
-  prompt?: string; // For writing questions
+  prompt?: string;
   taskNumber?: 51 | 52 | 53 | 54;
   context?: string;
   sampleAnswer?: string;
-  tags?: string[]; // Added for weakness analysis
+  tags?: string[];
 }
 
 export interface MockTestSection {
@@ -91,15 +93,16 @@ export interface ListeningQuestion {
   options: string[];
   correctAnswer: number;
   explanation: string;
-  audioUrl: string; // Path to audio file or mock URL
-  tags: string[]; // Added for weakness analysis
+  audioUrl: string;
+  tags: string[];
 }
 
 export interface ListeningPassage {
   id: string;
   level: TopikLevel;
   title: string;
-  transcript: string; // For admin/study purposes, not shown to user initially
+  audio_url: string;
+  transcript: string;
   questions: ListeningQuestion[];
 }
 
@@ -126,7 +129,7 @@ export interface StudyTask {
   type: 'vocabulary' | 'grammar' | 'reading' | 'listening' | 'writing' | 'mock-test';
   title: string;
   completed: boolean;
-  dueDate: string; // ISO date string
+  dueDate: string;
   priority: 'high' | 'medium' | 'low';
   targetUrl?: string;
 }
@@ -135,7 +138,7 @@ export interface StudyPlan {
   userId: string;
   targetExamDate: string;
   daysRemaining: number;
-  overallProgress: number; // 0-100
+  overallProgress: number;
   dailyTasks: StudyTask[];
   streak: number;
 }
@@ -169,7 +172,7 @@ export interface WritingFeedback {
   templateUsage: {
     detectedTemplates: string[];
     naturalAlternatives: { template: string; alternative: string }[];
-    structuralVarietyScore: number; // 1-5
+    structuralVarietyScore: number;
   };
 }
 
