@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a critical backlog of 5 open issues, including P0 security breaches and build failures (#496, #497, #500), which must be prioritized and cleared before any new feature development begins. I have assigned the Designer to perform a UI audit (#503) to prepare for the Unified Design System implementation. QA and Product are scheduled to ensure quality and roadmap alignment.",
+  "cycle_reasoning": "The CTO has a significant backlog (5 issues), including two P0-critical tasks: fixing a broken API route (#504) and migrating content to Supabase (#496). I am allocating maximum turns (5) to the CTO to clear these blockers. QA is assigned to verify these critical fixes. Product is assigned to maintain the roadmap. Since it is Cycle 4, I have initiated the Marketing GTM strategy (#507). Designer and Finance are also assigned to progress their existing open issues.",
   "assignments": [
     {
       "role": "cto",
@@ -17,7 +17,17 @@
       "priority": "P2"
     },
     {
+      "role": "marketing",
+      "turns": 1,
+      "priority": "P2"
+    },
+    {
       "role": "designer",
+      "turns": 1,
+      "priority": "P2"
+    },
+    {
+      "role": "finance",
       "turns": 1,
       "priority": "P2"
     }
