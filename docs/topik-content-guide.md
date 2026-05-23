@@ -259,3 +259,22 @@ Based on current trends in Korean society and academic discourse, the following 
 - **Lifelong Education**: The necessity of continuous learning in a rapidly changing job market.
 - **Critical Thinking**: The importance of media literacy in the age of misinformation.
 - **Holistic Education**: Balancing academic achievement with emotional intelligence (EQ).
+
+## 11. Advanced Academic Expressions for Level 6 (Writing)
+
+To achieve a Level 6 score, students must replace basic verbs and adjectives with academic equivalents.
+
+### 11.1 Verb replacements
+- Instead of **생각하다** (to think) $\rightarrow$ **주장하다** (to assert), **견지하다** (to maintain a view), **분석하다** (to analyze).
+- Instead of **좋다/나쁘다** (good/bad) $\rightarrow$ **긍정적인 영향을 미치다** (have a positive effect), **부정적인 결과를 초래하다** (bring about negative results).
+- Instead of **중요하다** (important) $\rightarrow$ **핵심적인 역할을 하다** (play a key role), **필수불가결하다** (indispensable).
+
+### 11.2 Advanced Connectors & Transitions
+- **Sequence/Order**: 우선 (First), 다음으로 (Next), 마지막으로 (Finally).
+- **Contrast**: 반면 (On the other hand), 이와 달리 (Unlike this), 그럼에도 불구하고 (Nevertheless).
+- **Conclusion**: 결과적으로 (As a result), 종합해 볼 때 (When looking at it comprehensively), 따라서 (Therefore).
+
+### 11.3 Formal Writing Phrases
+- **Introducing a topic**: "...에 대한 논의가 활발히 이루어지고 있다" (Discussions about ... are actively taking place).
+- **Stating a thesis**: "본 글에서는 ...에 대해 분석하고자 한다" (In this text, I intend to analyze ...).
+- **Concluding**: "...하는 노력이 절실히 요구된다" (Efforts to ... are urgently required).

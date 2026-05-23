@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant — Product Roadmap
+# TOPIK Learning Assistant \u2014 Product Roadmap
 
 This roadmap outlines the strategic milestones for the TOPIK Learning Assistant, moving from a Minimum Viable Product (MVP) to a comprehensive, AI-powered learning ecosystem.
 
@@ -54,11 +54,11 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 ### Milestone 5.3: IBT Fidelity & Content Scale
 - [x] **Strict IBT Simulation Mode**: A dedicated \"Exam Mode\" that removes all study aids and mimics the exact IBT interface.
 - [ ] **Content Library Expansion**: Expand mock tests and practice passages to 50+ sets each. [IN PROGRESS] (See Issue #496)
-- [ ] **Audio-Text Sync**: Highlight text as audio plays in listening modules. [READY FOR DEV]
+- [ ] **Audio-Text Sync**: Highlight text as audio plays in listening modules. [READY FOR DEV] (See Issue #505)
 
 ### Milestone 5.4: UI/UX Refinement
 - [ ] **Unified Design System**: Full implementation of the updated design system for consistent spacing, colors, and components. [IN PROGRESS] (See Issue #503)
-- [ ] **Performance Optimization**: Optimize loading times for large content sets. [PENDING]
+- [ ] **Performance Optimization**: Optimize loading times for large content sets. [READY FOR DEV] (See Issue #506)
 
 ## Timeline Summary
 
