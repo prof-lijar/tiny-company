@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a significant backlog (5 issues), including two P0-critical tasks: fixing a broken API route (#504) and migrating content to Supabase (#496). I am allocating maximum turns (5) to the CTO to clear these blockers. QA is assigned to verify these critical fixes. Product is assigned to maintain the roadmap. Since it is Cycle 4, I have initiated the Marketing GTM strategy (#507). Designer and Finance are also assigned to progress their existing open issues.",
+  "cycle_reasoning": "The company is currently facing critical build failures (#509) and significant TypeScript errors (#510) in the Grammar and Vocabulary modules. The CTO has a backlog of 6 issues, which exceeds the cap of 3, so no new issues will be created this cycle. The immediate priority is to restore the build to a working state and resolve the P0/P1 type errors. QA is assigned to verify these critical fixes, and Product is assigned to ensure the roadmap remains aligned as we move toward the Supabase migration (#496).",
   "assignments": [
     {
       "role": "cto",
@@ -13,21 +13,6 @@
     },
     {
       "role": "product",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "marketing",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "designer",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "finance",
       "turns": 1,
       "priority": "P2"
     }
