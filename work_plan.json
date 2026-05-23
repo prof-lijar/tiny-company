@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Cycle 7. CTO has a significant backlog including a critical security hole (#514) and Supabase migration (#496), so they get maximum turns. Legal is assigned this cycle (Cycle 7 cadence) to draft Privacy Policy and ToS since User Auth and Billing are now implemented. Product and QA continue their regular cadence.",
+  "cycle_reasoning": "Cycle 8: CTO is heavily backlogged (5 issues), including a critical P0 Supabase migration (#496). I will not add more to their plate. Marketing is assigned to create promotional content for the 2026 reform features to align the public face of the product with the technical updates. QA and Product continue their standard oversight.",
   "assignments": [
     {
       "role": "cto",
@@ -14,10 +14,10 @@
     {
       "role": "product",
       "turns": 1,
-      "priority": "P1"
+      "priority": "P2"
     },
     {
-      "role": "legal",
+      "role": "marketing",
       "turns": 1,
       "priority": "P2"
     }
