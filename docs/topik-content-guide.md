@@ -310,3 +310,25 @@ AI evaluation should be grounded in these four dimensions:
     - LLM analysis against the rubric for Language Use and Content.
     - Audio analysis (if possible) for Pronunciation and Fluency.
 - **Prompt Delivery**: Visual prompts (images for Task 2) and Audio prompts (for Task 3, 4).
+
+## 13. TOPIK Speaking IBT Detailed Timing & Scoring (Updated 2026)
+
+Based on official IBT guidelines, the Speaking test is a separate module with the following strict timing:
+
+| Task | Type | Prep Time | Response Time | Focus |
+|---|---|---|---|---|
+| **1** | Answering a simple question | 20s | 30s | Pronunciation, Intonation |
+| **2** | Playing a role based on images | 30s | 40s | Descriptive vocabulary |
+| **3** | Creating a story based on images | 40s | 60s | Narrative flow, Coherence |
+| **4** | Completing a story/dialog | 40s | 60s | Contextual appropriateness |
+| **5** | Analyzing given material | 70s | 80s | Synthesis, Logic |
+| **6** | Presenting opinions on a topic | 70s | 80s | Argumentation, Nuance |
+
+**Scoring Scale (0-200):**
+- **Level 6**: 160 - 200
+- **Level 5**: 130 - 159
+- **Level 4**: 110 - 129
+- **Level 3**: 90 - 109
+- **Level 2**: 50 - 89
+- **Level 1**: 20 - 49
+- **Fail**: 0 - 19

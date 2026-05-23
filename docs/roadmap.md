@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant — Product Roadmap
+# TOPIK Learning Assistant \u2014 Product Roadmap
 
 This roadmap outlines the strategic milestones for the TOPIK Learning Assistant, moving from a Minimum Viable Product (MVP) to a comprehensive, AI-powered learning ecosystem.
 
@@ -61,7 +61,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 - [ ] **Performance Optimization**: Optimize loading times for large content sets. [READY FOR DEV] (See Issue #506)
 
 ### Milestone 5.5: New Modalities (Upcoming)
-- [ ] **TOPIK Speaking Module**: Integration of speaking practice and AI-powered pronunciation/fluency feedback. [PLANNING]
+- [ ] **TOPIK Speaking Module**: Integration of speaking practice and AI-powered pronunciation/fluency feedback. [PLANNING] (Detailed specs now available in product-spec.md)
 
 ## Timeline Summary
 
