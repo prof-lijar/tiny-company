@@ -1,11 +1,11 @@
-# TOPIK Learning Assistant \u2014 MVP Product Specification
+# TOPIK Learning Assistant — MVP Product Specification
 
 ## Overview
 A web-based TOPIK (Test of Proficiency in Korean) preparation platform built with Next.js, TypeScript, and Tailwind CSS. All product code lives in the `product/` directory.
 
 ## Feature Priorities
 
-### P0 \u2014 CRITICAL: 2026 Format Alignment [BUILT]
+### P0 — CRITICAL: 2026 Format Alignment [BUILT]
 **Goal**: Update all simulators and content to match the 2026 TOPIK overhaul to prevent user failure.
 
 #### 1. 2026 Mock Test Engine Update [BUILT]
@@ -40,7 +40,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Detailed Requirements**:
     - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
     - **Detection Logic**: 
-        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"\uac1c\uba85\uac1c\uba85... \u2014 \uc740 \ubc14\ub77c\uba70...\").
+        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"개명개명... — 은 바라며...\").
         - Penalize \"memorized\" structures that don't specifically address the prompt's nuances.
     - **Feedback Output**:
         - Explicitly label \"Template Usage\" in the feedback report.
@@ -59,7 +59,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ---
 
-### P0 \u2014 MVP (Build First)
+### P0 — MVP (Build First)
 
 #### 5. Landing Page [BUILT]
 - **File**: `product/src/app/page.tsx`
@@ -74,7 +74,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 8. Reading Comprehension Practice [BUILT]
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
 
-### P1 \u2014 Fast Follow
+### P1 — Fast Follow
 
 #### 9. Writing Practice with AI Feedback [BUILT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
@@ -86,7 +86,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 11. Listening Practice [BUILT]
 - **Files**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`
 
-### P2 \u2014 Growth Features
+### P2 — Growth Features
 
 #### 12. User Authentication [BUILT]
 - **Files**: `product/src/app/api/auth/[...nextauth]/route.ts`, `product/src/app/login/page.tsx`, `product/src/app/signup/page.tsx`
@@ -97,7 +97,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 14. Subscription Billing [BUILT]
 - **Files**: `product/src/app/api/stripe/checkout/route.ts`, `product/src/app/api/stripe/webhook/route.ts`
 
-### P3 \u2014 AI Intelligence (Future)
+### P3 — AI Intelligence (Future)
 
 #### 15. AI-Powered Weakness Analysis [BUILT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
@@ -174,6 +174,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Improvements needed** (from QA):
     - [Issue #497] Fix type errors in `WritingInterface.tsx / SampleCard` (affecting the comparison view).
     - [Issue #498] Fix syntax errors in `model-essays.ts` (the data source for comparisons).
+    - [Issue #504] Fix broken API route filename: `route.ts` in writing-compare.
 
 #### 21. Writing Sample Library [BUILT]
 - **Goal**: Provide a searchable repository of model essays for different levels and topics.
@@ -206,12 +207,12 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Compatibility**:
         - Must function correctly when \"2026 Mode\" (1.1x speed) is enabled.
 - **Acceptance Criteria**:
-    - Text highlighting is visually synchronized with the audio (tolerance: \u00b10.5s).
+    - Text highlighting is visually synchronized with the audio (tolerance: ±0.5s).
     - Clicking a transcript line jumps the audio to the correct timestamp.
     - Highlighting persists across the entire length of the audio file.
 - **Files affected**: `product/src/app/listening/page.tsx`, `product/src/components/listening/Transcript.tsx`, `product/src/lib/data/listening.ts`.
 
-#### 24. Unified Design System [READY FOR DEV]
+#### 24. Unified Design System [IN PROGRESS]
 - **Goal**: Implement a consistent UI framework across all pages to eliminate visual discrepancies.
 - **Priority**: P2
 - **Detailed Requirements**:
@@ -232,18 +233,24 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - No \"one-off\" custom styles for core components (buttons, inputs, cards).
 - **Files affected**: `product/src/components/ui/`, all main page files in `product/src/app/`.
 
-#### 25. Performance Optimization [PENDING]
-- **Goal**: Reduce load times for large content sets (Vocabulary, Reading).
+#### 25. Performance Optimization [READY FOR DEV]
+- **Goal**: Reduce load times and improve scrolling performance for large content sets (Vocabulary, Reading).
 - **Priority**: P2
 - **Detailed Requirements**:
-    - **Lazy Loading**: Implement dynamic imports for large data files in `product/src/lib/data/` to prevent blocking the main thread.
-    - **Pagination/Virtualization**: For the Vocabulary Builder and Reading lists, implement windowing (e.g., using `react-window` or similar) to render only visible items.
-    - **Supabase Optimization**: 
-        - Replace large JSON imports with targeted Supabase queries.
-        - Implement server-side pagination for content retrieval.
+    - **Lazy Loading**:
+        - Use `next/dynamic` or dynamic `import()` for importing large data files in `product/src/lib/data/` to prevent blocking the main thread on initial page load.
+    - **List Virtualization**:
+        - Implement `react-virtuoso` for the Vocabulary Builder and Reading lists.
+        - This ensures only the visible items in the viewport are rendered, preventing DOM overload.
+        - Must support dynamic item heights (since vocabulary examples and reading passages vary in length).
+    - **Supabase Integration (Post-Migration)**:
+        - Once Issue #496 (Supabase Migration) is complete, replace large JSON imports with targeted Supabase queries.
+        - Implement server-side pagination (limit/offset) to fetch data in chunks.
 - **Acceptance Criteria**:
-    - Initial page load time for Vocabulary and Reading pages is reduced by at least 40%.
-    - No visible lag when scrolling through 100+ vocabulary items.
+    - Initial page load time for Vocabulary and Reading pages is reduced.
+    - Scrolling is smooth (60fps) regardless of the number of items in the list.
+    - Memory usage remains stable during navigation.
+- **Files affected**: `product/src/app/vocabulary/page.tsx`, `product/src/app/reading/page.tsx`, `product/src/lib/data/`.
 
 ## User Flows
 (Unchanged)
