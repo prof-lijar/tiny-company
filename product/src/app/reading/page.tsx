@@ -1,32 +1,79 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { READING_PASSAGES } from '@/lib/data/reading';
 import { Timer, AlertCircle } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+
+interface Question {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  tags: string[];
+}
+
+interface ReadingPassage {
+  id: string;
+  level: number;
+  title: string;
+  content: string;
+  time_limit_minutes: number;
+  questions: Question[];
+}
 
 export default function ReadingPage() {
+  const [passages, setPassages] = useState<ReadingPassage[]>([]);
   const [currentPassageIndex, setCurrentPassageIndex] = useState<number | null>(null);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function fetchPassages() {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('reading_passages')
+          .select('*');
+        
+        if (error) throw error;
+        setPassages(data || []);
+      } catch (err) {
+        console.error('Error loading reading passages:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPassages();
+  }, [supabase]);
 
   const handleSubmit = useCallback(() => {
     if (currentPassageIndex === null) return;
-    const passage = READING_PASSAGES[currentPassageIndex];
+    const passage = passages[currentPassageIndex];
+    if (!passage) return;
+    
     let correctCount = 0;
-    passage.questions.forEach((q) => {
+    const questions = passage.questions as Question[];
+    questions.forEach((q) => {
       if (answers[q.id] === q.correctAnswer) {
         correctCount++;
       }
     });
     setScore(correctCount);
     setSubmitted(true);
-  }, [currentPassageIndex, answers]);
+  }, [currentPassageIndex, answers, passages]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (currentPassageIndex !== null && !submitted) {
+      const passage = passages[currentPassageIndex];
+      if (!passage) return;
+      
       timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
@@ -41,12 +88,13 @@ export default function ReadingPage() {
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [currentPassageIndex, submitted, handleSubmit]);
+  }, [currentPassageIndex, submitted, handleSubmit, passages]);
 
   const handlePassageSelect = (index: number) => {
-    const passage = READING_PASSAGES[index];
+    const passage = passages[index];
+    if (!passage) return;
     setCurrentPassageIndex(index);
-    setTimeLeft(passage.timeLimitMinutes * 60);
+    setTimeLeft((passage.time_limit_minutes || 5) * 60);
     setAnswers({});
     setSubmitted(false);
     setScore(0);
@@ -70,6 +118,14 @@ export default function ReadingPage() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-slate-500">
+        Loading reading passages...
+      </div>
+    );
+  }
+
   if (currentPassageIndex === null) {
     return (
       <div className="max-w-4xl mx-auto p-6">
@@ -79,7 +135,7 @@ export default function ReadingPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {READING_PASSAGES.map((passage, index) => (
+          {passages.map((passage, index) => (
             <div 
               key={passage.id} 
               className="border rounded-xl p-6 hover:border-blue-500 hover:shadow-md transition-all cursor-pointer bg-white group"
@@ -90,7 +146,7 @@ export default function ReadingPage() {
                   Level {passage.level}
                 </span>
                 <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded flex items-center gap-1">
-                  <Timer size={12} /> {passage.timeLimitMinutes}m
+                  <Timer size={12} /> {passage.time_limit_minutes || 5}m
                 </span>
               </div>
               <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
@@ -109,7 +165,10 @@ export default function ReadingPage() {
     );
   }
 
-  const passage = READING_PASSAGES[currentPassageIndex];
+  const passage = passages[currentPassageIndex];
+  if (!passage) return null;
+
+  const questions = passage.questions as Question[];
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -145,13 +204,13 @@ export default function ReadingPage() {
           </div>
           <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100 flex items-start gap-3 text-sm text-blue-800">
             <AlertCircle size={18} className="shrink-0 mt-0.5" />
-            <p>This is a timed exercise. You have {passage.timeLimitMinutes} minutes to complete the questions. The system will auto-submit once time expires.</p>
+            <p>This is a timed exercise. You have {passage.time_limit_minutes || 5} minutes to complete the questions. The system will auto-submit once time expires.</p>
           </div>
         </div>
 
         {/* Questions Section */}
         <div className="space-y-8">
-          {passage.questions.map((q, qIndex) => (
+          {questions.map((q, qIndex) => (
             <div key={q.id} className="space-y-4">
               <div className="flex items-start gap-3">
                 <span className="bg-slate-200 text-slate-700 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-1">
@@ -203,7 +262,7 @@ export default function ReadingPage() {
           {!submitted ? (
             <button
               onClick={handleSubmit}
-              disabled={Object.keys(answers).length < passage.questions.length}
+              disabled={Object.keys(answers).length < questions.length}
               className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors shadow-lg shadow-blue-200"
             >
               Submit Answers
@@ -212,7 +271,7 @@ export default function ReadingPage() {
             <div className="p-6 bg-white border-2 border-blue-500 rounded-2xl text-center space-y-4 shadow-xl">
               <div className="text-sm text-slate-600 uppercase font-bold tracking-wider">Your Result</div>
               <div className="text-5xl font-black text-blue-600">
-                {score} / {passage.questions.length}
+                {score} / {questions.length}
               </div>
               <button
                 onClick={() => {

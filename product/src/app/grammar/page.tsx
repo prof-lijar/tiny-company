@@ -1,9 +1,26 @@
 import React from 'react';
-import { grammarData, TOPIKLevel } from '@/lib/data/grammar';
+import { createClient } from '@/lib/supabase/server';
 import { GrammarLessonCard } from '@/components/grammar/GrammarLessonCard';
 
-export default function GrammarPage() {
-  const levels: TOPIKLevel[] = [3, 4, 5, 6];
+export default async function GrammarPage() {
+  const supabase = createClient();
+  
+  // Fetch all grammar lessons
+  const { data: grammarData, error } = await supabase
+    .from('grammar_lessons')
+    .select('*')
+    .order('level', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching grammar lessons:', error);
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-12 text-center">
+        <p className="text-red-500">Error loading grammar lessons. Please try again later.</p>
+      </div>
+    );
+  }
+
+  const levels = [3, 4, 5, 6];
   
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -18,7 +35,7 @@ export default function GrammarPage() {
 
       <div className="space-y-16">
         {levels.map((level) => {
-          const levelPatterns = grammarData.filter(p => p.level === level);
+          const levelPatterns = grammarData?.filter(p => p.level === level) || [];
           if (levelPatterns.length === 0) return null;
 
           return (

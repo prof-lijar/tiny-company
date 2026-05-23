@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { VOCABULARY_DATA } from '@/lib/data/vocabulary';
 import { calculateNextReview, SRSResult } from '@/lib/srs';
 import { FlashCard } from '@/components/vocabulary/FlashCard';
 import { Button } from '@/components/ui/Button';
+import { createClient } from '@/lib/supabase/client';
 
 interface UserProgress {
   [key: string]: {
@@ -14,31 +14,56 @@ interface UserProgress {
   };
 }
 
+interface VocabularyWord {
+  id: string;
+  korean: string;
+  english: string;
+  romanization: string;
+  example: string;
+  exampleTranslation: string;
+  level: number;
+  partOfSpeech: string;
+  tags: string[];
+}
+
 export default function VocabularyPage() {
-  const [selectedLevel, setSelectedLevel] = useState<3 | 4 | 5 | 6>(3);
+  const [selectedLevel, setSelectedLevel] = useState<number>(3);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [progress, setProgress] = useState<UserProgress>({});
+  const [words, setWords] = useState<VocabularyWord[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const supabase = createClient();
 
   useEffect(() => {
-    async function fetchProgress() {
+    async function loadInitialData() {
       try {
+        // 1. Fetch vocabulary for the selected level
+        const { data: vocabData, error: vocabError } = await supabase
+          .from('vocabulary')
+          .select('*')
+          .eq('level', selectedLevel);
+
+        if (vocabError) throw vocabError;
+        setWords(vocabData || []);
+
+        // 2. Fetch vocabulary progress from API
         const res = await fetch('/api/vocabulary');
-        const data = await res.json();
-        setProgress(data);
+        const progressData = await res.json();
+        setProgress(progressData);
       } catch (err) {
-        console.error('Error loading vocabulary progress:', err);
+        console.error('Error loading vocabulary data:', err);
       } finally {
         setLoading(false);
       }
     }
-    fetchProgress();
-  }, []);
+    loadInitialData();
+  }, [selectedLevel, supabase]);
 
   const filteredWords = useMemo(() => {
-    return VOCABULARY_DATA.filter(word => word.level === selectedLevel);
-  }, [selectedLevel]);
+    return words;
+  }, [words]);
 
   const currentWord = filteredWords[currentIndex];
 
@@ -49,6 +74,7 @@ export default function VocabularyPage() {
   const handleRate = async (quality: number) => {
     setIsFlipped(false);
     
+    if (!currentWord) return;
     const wordId = currentWord.id;
     const currentSRS = progress[wordId] || { interval: 0, easeFactor: 2.5, nextReview: 0 };
     
@@ -108,7 +134,7 @@ export default function VocabularyPage() {
             key={level} 
             variant={selectedLevel === level ? 'primary' : 'outline'}
             onClick={() => {
-              setSelectedLevel(level as 3 | 4 | 5 | 6);
+              setSelectedLevel(level);
               setCurrentIndex(0);
               setIsFlipped(false);
             }}

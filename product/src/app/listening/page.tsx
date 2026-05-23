@@ -1,13 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
-import { listeningData } from '@/lib/data/listening';
+import React, { useState, useEffect } from 'react';
 import { ListeningPlayer } from '@/components/listening/ListeningPlayer';
 import { Volume2, Zap } from 'lucide-react';
-import { TopikLevel } from '@/lib/types';
+import { createClient } from '@/lib/supabase/client';
+
+interface ListeningPassage {
+  id: string;
+  level: number;
+  title: string;
+  audio_url: string;
+  transcript: string;
+  questions: {
+    id: string;
+    question: string;
+    options: string[];
+    correctAnswer: number;
+    explanation: string;
+  }[];
+}
 
 export default function ListeningPage() {
-  const [selectedLevel, setSelectedLevel] = useState<TopikLevel>(3);
+  const [selectedLevel, setSelectedLevel] = useState<number>(3);
   const [currentPassageIdx, setCurrentPassageIdx] = useState(0);
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -15,10 +29,42 @@ export default function ListeningPage() {
   const [score, setScore] = useState(0);
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [is2026Mode, setIs2026Mode] = useState(false);
+  const [passages, setPassages] = useState<ListeningPassage[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredPassages = listeningData.filter(p => p.level === selectedLevel);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function fetchPassages() {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('listening_passages')
+          .select('*')
+          .eq('level', selectedLevel);
+        
+        if (error) throw error;
+        setPassages(data || []);
+      } catch (err) {
+        console.error('Error loading listening passages:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPassages();
+  }, [selectedLevel, supabase]);
+
+  const filteredPassages = passages;
   const currentPassage = filteredPassages[currentPassageIdx];
-  const currentQuestion = currentPassage?.questions[currentQuestionIdx];
+  const currentQuestion = currentPassage?.questions ? (currentPassage.questions as any)[currentQuestionIdx] : null;
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-slate-500">
+        Loading listening exercises...
+      </div>
+    );
+  }
 
   if (!currentPassage) {
     return (
@@ -29,7 +75,7 @@ export default function ListeningPage() {
           {[3, 4, 5, 6].map(level => (
             <button
               key={level}
-              onClick={() => setSelectedLevel(level as TopikLevel)}
+              onClick={() => setSelectedLevel(level)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 selectedLevel === level ? 'bg-indigo-600 text-white' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
               }`}
@@ -60,7 +106,7 @@ export default function ListeningPage() {
     setIsSubmitted(false);
     setSelectedOption(null);
     
-    if (currentQuestionIdx < currentPassage.questions.length - 1) {
+    if (currentQuestionIdx < (currentPassage.questions as any).length - 1) {
       setCurrentQuestionIdx(prev => prev + 1);
     } else {
       setCurrentQuestionIdx(0);
@@ -89,7 +135,7 @@ export default function ListeningPage() {
               <button
                 key={level}
                 onClick={() => {
-                  setSelectedLevel(level as TopikLevel);
+                  setSelectedLevel(level);
                   setCurrentPassageIdx(0);
                   setCurrentQuestionIdx(0);
                   setIsSubmitted(false);
@@ -131,7 +177,7 @@ export default function ListeningPage() {
               Audio Passage
             </h3>
             <ListeningPlayer 
-              audioUrl={currentQuestion?.audioUrl}
+              audioUrl={currentQuestion?.audioUrl || currentPassage.audio_url}
               is2026Mode={is2026Mode}
               onEnded={() => console.log('Audio ended')} 
             />
@@ -144,7 +190,7 @@ export default function ListeningPage() {
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold text-slate-800">Question</h3>
               <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">
-                Passage {currentPassageIdx + 1} - Q{currentQuestionIdx + 1} of {currentPassage.questions.length}
+                Passage {currentPassageIdx + 1} - Q{currentQuestionIdx + 1} of {(currentPassage.questions as any).length}
               </span>
             </div>
             
@@ -154,7 +200,7 @@ export default function ListeningPage() {
                   {currentQuestion.question}
                 </p>
                 <div className="space-y-3">
-                  {currentQuestion.options.map((option, idx) => (
+                  {currentQuestion.options.map((option: string, idx: number) => (
                     <label 
                       key={idx} 
                       className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
@@ -200,7 +246,7 @@ export default function ListeningPage() {
                       onClick={handleNext}
                       className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
                     >
-                      {currentQuestionIdx < currentPassage.questions.length - 1 || currentPassageIdx < filteredPassages.length - 1 
+                      {currentQuestionIdx < (currentPassage.questions as any).length - 1 || currentPassageIdx < filteredPassages.length - 1 
                       ? 'Next Question' 
                       : 'Finish Session'}
                     </button>
