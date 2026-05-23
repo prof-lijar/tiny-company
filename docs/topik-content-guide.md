@@ -278,3 +278,35 @@ To achieve a Level 6 score, students must replace basic verbs and adjectives wit
 - **Introducing a topic**: "...에 대한 논의가 활발히 이루어지고 있다" (Discussions about ... are actively taking place).
 - **Stating a thesis**: "본 글에서는 ...에 대해 분석하고자 한다" (In this text, I intend to analyze ...).
 - **Concluding**: "...하는 노력이 절실히 요구된다" (Efforts to ... are urgently required).
+
+## 12. TOPIK Speaking Test Specifications (IBT)
+
+The TOPIK Speaking test is a standalone, IBT-only exam. The platform should implement a simulator that mimics this environment.
+
+### 12.1 Test Structure & Timing
+The test consists of 6 tasks completed in approximately 20-30 minutes.
+
+| Task | Type | Difficulty | Prep Time | Response Time | Focus |
+|---|---|---|---|---|---|
+| **1** | Read sentences aloud | Beginner | 20s | 30s | Pronunciation, Intonation, Rhythm |
+| **2** | Describe a picture/situation | Beginner | 30s | 40s | Descriptive vocabulary, Present tense |
+| **3** | Role-play a conversation | Intermediate | 30s | 60s | Politeness levels, Contextual appropriateness |
+| **4** | Explain with reasoning | Intermediate | 40s | 60s | Logical structure (Point $\rightarrow$ Reason $\rightarrow$ Example) |
+| **5** | Summarize provided info | Advanced | 50s | 80s | Synthesis, Paraphrasing, Key point extraction |
+| **6** | State and defend an opinion | Advanced | 70s | 80s | Argumentation, Counter-arguments, Nuance |
+
+### 12.2 Grading Criteria (Rubric)
+AI evaluation should be grounded in these four dimensions:
+1. **Pronunciation**: Accuracy of sounds, natural stress, and rhythm.
+2. **Fluency**: Smooth delivery, minimal excessive pauses or filler words.
+3. **Language Use**: Grammar accuracy, vocabulary range, and appropriate formality (Register).
+4. **Content**: Task completion, relevance, and logical organization.
+
+### 12.3 Technical Requirements for Simulator
+- **Audio Recording**: High-quality capture of user speech.
+- **Timer System**: Strict enforcement of "Preparation Time" (read-only) and "Response Time" (recording active).
+- **AI Feedback Loop**: 
+    - Speech-to-Text (STT) to transcribe the response.
+    - LLM analysis against the rubric for Language Use and Content.
+    - Audio analysis (if possible) for Pronunciation and Fluency.
+- **Prompt Delivery**: Visual prompts (images for Task 2) and Audio prompts (for Task 3, 4).

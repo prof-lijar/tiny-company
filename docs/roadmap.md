@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant \u2014 Product Roadmap
+# TOPIK Learning Assistant — Product Roadmap
 
 This roadmap outlines the strategic milestones for the TOPIK Learning Assistant, moving from a Minimum Viable Product (MVP) to a comprehensive, AI-powered learning ecosystem.
 
@@ -47,7 +47,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 
 ### Milestone 5.2: Advanced Writing & Typing
 - [x] Essay Outliner
-- [ ] Comparative Analysis (vs Level 6 samples) - [NEEDS IMPROVEMENT] (See Issues #497, #498, #504)
+- [x] Comparative Analysis (vs Level 6 samples)
 - [x] Writing Sample Library
 - [x] **Writing Speed Trainer**: Tools for practicing Korean typing speed for IBT.
 
@@ -59,6 +59,9 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 ### Milestone 5.4: UI/UX Refinement
 - [ ] **Unified Design System**: Full implementation of the updated design system for consistent spacing, colors, and components. [IN PROGRESS] (See Issue #503)
 - [ ] **Performance Optimization**: Optimize loading times for large content sets. [READY FOR DEV] (See Issue #506)
+
+### Milestone 5.5: New Modalities (Upcoming)
+- [ ] **TOPIK Speaking Module**: Integration of speaking practice and AI-powered pronunciation/fluency feedback. [PLANNING]
 
 ## Timeline Summary
 
