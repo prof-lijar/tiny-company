@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "CTO is focusing on the critical P0 Supabase migration (#496) and other performance/linting tasks. QA is assigned to verify these changes. Product is tracking the roadmap. Designer is assigned to create the UI/UX spec for the new Speaking Simulator (#513) as this is Cycle 6 and a new feature is being initiated.",
+  "cycle_reasoning": "Cycle 7. CTO has a significant backlog including a critical security hole (#514) and Supabase migration (#496), so they get maximum turns. Legal is assigned this cycle (Cycle 7 cadence) to draft Privacy Policy and ToS since User Auth and Billing are now implemented. Product and QA continue their regular cadence.",
   "assignments": [
     {
       "role": "cto",
@@ -17,7 +17,7 @@
       "priority": "P1"
     },
     {
-      "role": "designer",
+      "role": "legal",
       "turns": 1,
       "priority": "P2"
     }
