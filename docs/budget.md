@@ -1,77 +1,71 @@
-# Project Budget: TOPIK Learning Assistant
+# Budget & Infrastructure Costs
 
-This document outlines the estimated infrastructure and operating costs for the TOPIK Learning Assistant web app. All figures are based on real market data as of May 2026.
+This document outlines the estimated costs for hosting, database, and AI services for the TOPIK Learning Assistant.
 
-## 1. Infrastructure Cost Breakdown
+## 1. Cost Tiers
 
-### Hosting & Frontend
-- **Provider**: Vercel
-- **Plan**: Pro Plan
-- **Fixed Cost**: $20/month (includes 1 seat and $20 usage credit)
-- **Variable Costs**: 
-    - Bandwidth: 1 TB included, then $0.15 per GB
-    - Edge Requests: 10M included
-- **Estimated Monthly**: $20.00
+### Tier 1: MVP / Hobby (Free)
+Ideal for initial development and alpha testing with < 100 users.
 
-### Database & Backend
-- **Provider**: Supabase
-- **Plan**: Pro Plan
-- **Fixed Cost**: $25/month (includes $10 compute credit)
-- **Included**: 8 GB database size, 100k MAUs, 250 GB egress
-- **Variable Costs**: $0.125 per GB over 8 GB
-- **Estimated Monthly**: $25.00
-
-### Authentication
-- **Provider**: Clerk (or Supabase Auth)
-- **Plan**: Hobby / Pro
-- **Cost**: Free up to 50,000 Monthly Retained Users (MRUs)
-- **Overage**: ~$0.02 per user per month after 50k
-- **Estimated Monthly**: $0.00 (until 50k users)
-
-### AI API (Writing Feedback)
-- **Provider**: OpenAI
-- **Model**: GPT-5.4 mini (or equivalent efficiency model)
-- **Estimated Cost per Evaluation**: 
-    - Input: ~2,000 tokens
-    - Output: ~500 tokens
-    - Estimated cost: ~$0.01 - $0.03 per evaluation
-- **Estimated Monthly**: Variable based on usage (see projections)
-
-### Other Operating Costs
-- **Domain**: ~$12.00 / year ($\approx$ $1.00 / month)
-- **Email (Transactional)**: Resend
-    - Free tier: Included (up to limits)
-    - Pro tier: $20/month (for higher volumes)
-- **Analytics**: Vercel Analytics (Free tier)
-
----
-
-## 2. Cost Projections by User Scale
-
-| Component | 100 Users | 1,000 Users | 10,000 Users |
+| Service | Provider | Monthly Cost | Notes |
 | :--- | :--- | :--- | :--- |
-| **Hosting (Vercel)** | $0.00 (Hobby) | $20.00 (Pro) | $20.00 |
-| **Database (Supabase)** | $0.00 (Free) | $25.00 (Pro) | $25.00 |
-| **Auth (Clerk)** | $0.00 | $0.00 | $0.00 |
-| **Email (Resend)** | $0.00 | $0.00 | $20.00 |
-| **AI API (1 eval/user/mo)** | $3.00 | $30.00 | $300.00 |
-| **Domain** | $1.00 | $1.00 | $1.00 |
-| **Total Monthly** | **$4.00** | **$76.00** | **$366.00** |
+| **Hosting** | Vercel (Hobby) | $0 | Free for non-commercial use |
+| **Database** | Supabase (Free) | $0 | 500MB DB, 5GB Bandwidth |
+| **Auth** | NextAuth.js / Clerk | $0 | Free tier |
+| **Email** | Resend (Free) | $0 | Limited transactional emails |
+| **Domain** | Namecheap/etc. | ~$1 | ~$12/year amortized |
+| **AI API** | OpenAI (Mini) | Variable | Pay-as-you-go (est. $1-5/mo) |
+| **Total** | | **~$1 - $6 / mo** | |
 
-*Note: 100 users assume Hobby tier for Vercel. 1k+ users assume Pro tier for professional reliability and commercial use.*
+### Tier 2: Production / Scaled (Pro)
+Required for commercialization and growth (100 - 10K users).
+
+| Service | Provider | Monthly Cost | Notes |
+| :--- | :--- | :--- | :--- |
+| **Hosting** | Vercel (Pro) | $20 | Per member seat |
+| **Database** | Supabase (Pro) | $25 | Base fee, includes 8GB DB |
+| **Auth** | Clerk (Pro) | $25 | For > 10K MAU (otherwise $0) |
+| **Email** | Resend (Pro) | $20 | For higher volume |
+| **Domain** | Namecheap/etc. | ~$1 | ~$12/year amortized |
+| **AI API** | OpenAI (Mini) | Variable | Based on user activity |
+| **Total Base** | | **~$91 / mo** | Excluding AI variable costs |
 
 ---
 
-## 3. AI API Cost Analysis
+## 2. Infrastructure Projections
 
-The "AI Writing Feedback" feature is the primary cost driver at scale.
+### Cost per User Scale
+Estimates assume a mix of free and paid users.
 
-- **Conservative Estimate**: $0.03 per evaluation.
-- **Usage Assumption**: Each Pro user performs 10 evaluations per month.
-- **Cost per Pro User**: $0.30 / month.
-- **Margin Impact**: With a subscription price of $12/month, the AI cost represents only ~2.5% of the revenue per paid user, making the model highly scalable.
+| User Count | Hosting/DB Base | AI API Cost (Est) | Total Monthly | Cost per User |
+| :--- | :--- | :--- | :--- | :--- |
+| **100** | $20 - $50 | $5 - $10 | **$25 - $60** | $0.25 - $0.60 |
+| **1,000** | $60 - $90 | $30 - $60 | **$90 - $150** | $0.09 - $0.15 |
+| **10,000** | $100 - $200 | $300 - $600 | **$400 - $800** | $0.04 - $0.08 |
 
-## 4. Financial Risks
-- **Token Inflation**: If prompt engineering requires significantly larger contexts, AI costs could triple.
-- **Bandwidth Spikes**: High-resolution assets or high traffic could lead to Vercel bandwidth overages.
-- **Database Growth**: If user-generated content (writing samples) grows rapidly, Supabase storage costs will increase beyond the 8GB limit.
+---
+
+## 3. AI API Cost Analysis (OpenAI GPT-4o-mini/equivalent)
+
+AI costs are primarily driven by the **AI Writing Feedback** feature.
+
+**Assumptions per Evaluation:**
+- Input: 1,000 tokens (User text + prompt + rubric)
+- Output: 500 tokens (Detailed feedback + corrections)
+- Model: `gpt-4o-mini` (approx. $0.15/1M input, $0.60/1M output)
+
+**Cost per Evaluation:**
+- Input: $0.00015
+- Output: $0.00030
+- **Total: ~$0.00045 per evaluation**
+
+**Monthly Cost per Pro User:**
+- If user performs 20 evaluations/month: **$0.009 / user**
+- Even at 100 evaluations/month: **$0.045 / user**
+
+*Conclusion: AI costs are negligible compared to fixed infrastructure costs, allowing for aggressive AI feature offering in the Pro tier.*
+
+## 4. Risk Factors
+- **Database Egress**: Supabase charges $0.09/GB after 250GB. High asset usage could increase this.
+- **Vercel Functions**: High compute usage for complex AI orchestrations may trigger Vercel overages.
+- **MAU Spikes**: Rapid growth in free users could push Auth (Clerk) into paid tiers before revenue catches up.
