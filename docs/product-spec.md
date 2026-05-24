@@ -23,9 +23,9 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Technical Implementation**: Use the `playbackRate` property of the HTML5 Audio API.
     - **Logic**: Set `audio.playbackRate = 1.1` upon loading the audio object.
     - **User Interface**: 
-        - Add a "2026 Mode" toggle in the listening interface.
+        - Add a \"2026 Mode\" toggle in the listening interface.
         - When enabled, audio plays at 1.1x.
-        - Display a badge: "2026 Speed (1.1x)".
+        - Display a badge: \"2026 Speed (1.1x)\".
     - **Content**: 
         - Update `product/src/lib/data/listening.ts` to include 60-question sets instead of 50.
         - Ensure audio files are mapped correctly to these new question sets.
@@ -40,12 +40,12 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Detailed Requirements**:
     - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
     - **Detection Logic**: 
-        - Instruct AI to look for "overused TOPIK templates" (e.g., overly rigid introductory phrases like "개명개명... — 은 바라며...").
-        - Penalize "memorized" structures that don't specifically address the prompt's nuances.
+        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"개명개명... — 은 바라며...\").
+        - Penalize \"memorized\" structures that don't specifically address the prompt's nuances.
     - **Feedback Output**:
-        - Explicitly label "Template Usage" in the feedback report.
-        - Suggest "Natural Alternatives" to replace formulaic phrases.
-        - Rate "Structural Variety" on a scale of 1-5.
+        - Explicitly label \"Template Usage\" in the feedback report.
+        - Suggest \"Natural Alternatives\" to replace formulaic phrases.
+        - Rate \"Structural Variety\" on a scale of 1-5.
 - **Acceptance Criteria**:
     - AI identifies and flags common TOPIK templates.
     - Feedback provides specific suggestions for more natural phrasing.
@@ -68,13 +68,12 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 6. Vocabulary Builder with SRS [BUILT]
 - **Files**: `product/src/app/vocabulary/page.tsx`, `product/src/lib/srs.ts`, `product/src/lib/data/vocabulary.ts`
 - **Improvements needed** (from QA):
-    - [Issue #510] Fix TypeScript type errors.
+    - [Issue #529] General linting and 'any' type removal.
 
 #### 7. Grammar Lessons [BUILT]
 - **Files**: `product/src/app/grammar/page.tsx`, `product/src/app/grammar/[level]/page.tsx`, `product/src/lib/data/grammar.ts`
 - **Improvements needed** (from QA):
-    - [Issue #509] Fix critical build failure due to type error in `/grammar/page.tsx`.
-    - [Issue #510] Fix TypeScript type errors.
+    - [Issue #529] General linting and 'any' type removal.
 
 #### 8. Reading Comprehension Practice [BUILT]
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
@@ -84,6 +83,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 9. Writing Practice with AI Feedback [BUILT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
 - **Note**: Now includes 2026 Anti-Template logic.
+- **Pending**: [Issue #524] Replace mock implementation in /api/writing-feedback.
 
 #### 10. Mock Test Simulator [BUILT]
 - **Files**: `product/src/app/mock-test/page.tsx`, `product/src/app/mock-test/[section]/page.tsx`
@@ -106,6 +106,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 #### 15. AI-Powered Weakness Analysis [BUILT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
+- **Pending**: [Issue #527] Replace mock implementation in /api/analyze-weaknesses.
 
 #### 16. Dynamic Study Plan [BUILT]
 - **Files**: `product/src/app/api/study-plan/route.ts`, `product/src/components/dashboard/DailyPlan.tsx`
@@ -116,7 +117,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Resolved**: [Issue #450] Fixed setState in effect in TypingTrainer.tsx.
 
 #### 18. Strict IBT Simulation Mode [BUILT]
-- **Goal**: Provide a high-fidelity "Exam Mode" that eliminates all study aids and mimics the official IBT interface.
+- **Goal**: Provide a high-fidelity \"Exam Mode\" that eliminates all study aids and mimics the official IBT interface.
 - **Detailed Requirements**:
     - **UI Constraints**: 
         - Disable all tooltips, hints, and translations.
@@ -125,8 +126,8 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - Layout: a split-screen or fixed-pane view mirroring the official IBT (Question pane vs. Answer pane).
     - **Functional Constraints**:
         - Prevent navigation back to the dashboard during the test.
-        - Results are hidden until the final "Submit" is clicked for the entire test.
-        - Implement a "Submit" confirmation modal to prevent accidental early submission.
+        - Results are hidden until the final \"Submit\" is clicked for the entire test.
+        - Implement a \"Submit\" confirmation modal to prevent accidental early submission.
     - **Technical Implementation**:
         - Implemented as a high-level state toggle in `product/src/app/mock-test/page.tsx`.
         - Includes a Question Palette for quick navigation.
@@ -161,22 +162,19 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Implementation**:
     - Update `product/src/lib/data/` files.
     - Split JSON files if they exceed 5MB (e.g., `reading-set-1.ts`, `reading-set-2.ts`).
-    - **Migration**: Migrate static content to Supabase for scalability (Issue #496).
+    - **Migration**: Migrate static content to Supabase for scalability ([Issue #496]).
 - **Acceptance Criteria**:
     - Users can select from at least 20 different mock tests.
     - Every passage type in the Content Guide is represented.
     - Writing prompts cover a diverse range of researched social/academic topics.
 - **Files affected**: `product/src/lib/data/mock-tests.ts`, `product/src/lib/data/listening.ts`, `product/src/lib/data/reading.ts`, `product/src/lib/data/vocabulary.ts`.
-- **Current Progress**:
-    - Vocabulary expanded to 222+ words.
-    - Listening expanded to 20 passages.
-    - Reading expanded to 25 passages including Literature type.
-    - Writing samples expanded to cover more prompts and levels.
+- **Current Progress**: [Issue #496] Migration to Supabase in progress.
 
 #### 20. Writing Comparative Analysis [BUILT]
 - **Goal**: Allow users to compare their essays against high-scoring (Level 6) model answers.
 - **Files**: `product/src/app/writing/compare/page.tsx`, `product/src/app/api/writing-compare/route.ts`
 - **Resolved**: [Issue #497, #498, #504] Build failures and syntax errors resolved.
+- **Pending**: [Issue #525] Replace mock implementation in /api/writing-compare.
 
 #### 21. Writing Sample Library [BUILT]
 - **Goal**: Provide a searchable repository of model essays for different levels and topics.
@@ -185,6 +183,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 22. Essay Outliner [BUILT]
 - **Goal**: AI-powered tool to help users structure their thoughts before writing the full essay.
 - **Files**: `product/src/app/api/writing-outliner/route.ts` (Frontend integrated into Writing page).
+- **Pending**: [Issue #526] Replace mock implementation in /api/writing-outliner.
 
 #### 23. Audio-Text Sync [IN PROGRESS]
 - **Goal**: Highlight the transcript in real-time as the audio plays in Listening modules.
@@ -207,15 +206,15 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Interactivity**:
         - Clicking on any line in the transcript should seek the audio player to that line's `startTime`.
     - **Compatibility**:
-        - Must function correctly when "2026 Mode" (1.1x speed) is enabled.
+        - Must function correctly when \"2026 Mode\" (1.1x speed) is enabled.
 - **Acceptance Criteria**:
     - Text highlighting is visually synchronized with the audio (tolerance: ±0.5s).
     - Clicking a transcript line jumps the audio to the correct timestamp.
     - Highlighting persists across the entire length of the audio file.
 - **Files affected**: `product/src/app/listening/page.tsx`, `product/src/components/listening/Transcript.tsx`, `product/src/lib/data/listening.ts`.
-- **Current Progress**: Assigned to CTO (Issue #505).
+- **Current Progress**: [Issue #505] Assigned to CTO.
 
-#### 24. Unified Design System [IN PROGRESS]
+#### 24. Unified Design System [PENDING]
 - **Goal**: Implement a consistent UI framework across all pages to eliminate visual discrepancies.
 - **Priority**: P2
 - **Detailed Requirements**:
@@ -233,9 +232,8 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - Verify that spacing (padding/margins) and color palettes are uniform across the entire application.
 - **Acceptance Criteria**:
     - 100% of UI components align with the specifications in `design/component-spec.md`.
-    - No "one-off" custom styles for core components (buttons, inputs, cards).
+    - No \"one-off\" custom styles for core components (buttons, inputs, cards).
 - **Files affected**: `product/src/components/ui/`, all main page files in `product/src/app/`.
-- **Current Progress**: Core UI components (`Button`, `Card`, `Modal`) created. Refactor of pages pending.
 
 #### 25. Performance Optimization [IN PROGRESS]
 - **Goal**: Reduce load times and improve scrolling performance for large content sets (Vocabulary, Reading).
@@ -255,7 +253,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - Scrolling is smooth (60fps) regardless of the number of items in the list.
     - Memory usage remains stable during navigation.
 - **Files affected**: `product/src/app/vocabulary/page.tsx`, `product/src/app/reading/page.tsx`, `product/src/lib/data/`.
-- **Current Progress**: Assigned to CTO (Issue #506).
+- **Current Progress**: [Issue #506] Assigned to CTO.
 
 #### 26. TOPIK Speaking Simulator [IN PROGRESS]
 - **Goal**: Implement a high-fidelity simulator for the standalone TOPIK Speaking IBT exam.
@@ -318,9 +316,9 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - AI feedback provides a breakdown across the four rubric dimensions.
         - Audio is recorded and sent to the API correctly.
 - **Files affected**: `product/src/app/speaking/page.tsx`, `product/src/app/api/speaking-evaluate/route.ts`, `product/src/components/speaking/Recorder.tsx`, `product/src/components/speaking/SpeakingTask.tsx`, `product/src/components/speaking/FeedbackReport.tsx`, `product/src/lib/data/speaking-prompts.ts`.
-- **Current Progress**: Assigned to CTO (Issue #517).
+- **Current Progress**: [Issue #517] Assigned to CTO.
 
-#### 27. TOPIK Placement Test [READY FOR DEV]
+#### 27. TOPIK Placement Test [IN PROGRESS]
 - **Goal**: Provide an initial assessment to determine the user's current TOPIK level and generate a tailored study path.
 - **Priority**: P2
 - **Detailed Requirements**:
@@ -334,7 +332,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - Example: 80% correct on Level 4 questions $\rightarrow$ Predicted Level 4.
     - **Integration**:
         - Result feeds directly into the `Dynamic Study Plan` logic.
-        - User is redirected to the Dashboard with their predicted level and a "Start Learning" button.
+        - User is redirected to the Dashboard with their predicted level and a \"Start Learning\" button.
         - User profile in Supabase is updated with `predicted_level`.
     - **Technical Implementation**:
         - Page: `product/src/app/placement-test/page.tsx`
@@ -345,3 +343,4 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - The predicted level aligns with the user's actual ability (within 1 level).
         - The study plan is automatically updated based on the result.
 - **Files affected**: `product/src/app/placement-test/page.tsx`, `product/src/app/api/placement-test/route.ts`.
+- **Current Progress**: [Issue #528] Assigned to CTO.
