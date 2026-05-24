@@ -9,7 +9,7 @@ The TOPIK (Test of Proficiency in Korean) market is undergoing a seismic shift d
 - **Model**: Subscription ($26/6mo)
 - **Strengths**: Large volume of mock exams, smart flashcards, wide reach.
 - **Weaknesses**: Mobile-only, lacks qualitative AI feedback.
-- **Recent Trends**: 
+- **Recent Trends (2026 Update)**: 
     - **Aggressively adapting to 2026 IBT reforms.** 
     - **New Feature: Entrance Test.** Users can evaluate their current level and identify weaknesses before starting.
     - **New Feature: Personalized Roadmap.** Generates a tailored study path based on the entrance test and time goals.
