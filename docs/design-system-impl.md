@@ -5,9 +5,11 @@ To eliminate visual inconsistency across the TOPIK Learning Assistant, we are im
 
 ## 1. The Source of Truth
 All components must adhere to the specifications in `design/component-spec.md`. 
-- **Primary Color**: Indigo-600 / Indigo-900
-- **Secondary Color**: Slate-600 / Slate-900
-- **Accent Color**: Rose-500 (for errors/critical timers)
+- **Primary Color**: `indigo-600` (Main actions, branding)
+- **Secondary Color**: `slate-100` (Section backgrounds, subtle dividers)
+- **Accent Color**: `amber-400` (Achievements, streaks, highlights)
+- **Success Color**: `emerald-500` (Correct answers, progress bars)
+- **Error Color**: `rose-500` (Incorrect answers, critical timers)
 - **Typography**: `Noto Sans KR` for all Korean text, `Inter` for English/UI.
 
 ## 2. Audit & Mapping
@@ -31,6 +33,7 @@ The CTO should ensure the following components are fully implemented and used ex
 - **Variants**: `primary`, `secondary`, `outline`, `danger`, `ghost`
 - **Sizes**: `sm`, `md`, `lg`
 - **States**: `loading`, `disabled`
+- **Spec**: See `design/component-spec.md` Section 1.
 
 ### B. `Card.tsx`
 - **Types**: 
@@ -38,10 +41,12 @@ The CTO should ensure the following components are fully implemented and used ex
     - `Study`: For lesson/vocabulary items.
     - `Flashcard`: Specialized for the Vocabulary builder.
     - `Quiz`: For question/answer pairs.
+- **Spec**: See `design/component-spec.md` Section 2.
 
 ### C. `Input.tsx`
 - **Types**: `Text`, `Select`, `Textarea`
 - **Requirements**: Consistent focus ring (`ring-indigo-500`), error state (`border-rose-500`).
+- **Spec**: See `design/component-spec.md` Section 3.
 
 ### D. `Modal.tsx`
 - **Requirements**: Backdrop blur, centered positioning, consistent transition animations.
@@ -50,8 +55,8 @@ The CTO should ensure the following components are fully implemented and used ex
 1. **Component Hardening**: Update `product/src/components/ui/` to match `design/component-spec.md` exactly.
 2. **Page-by-Page Refactor**:
     - Start with the `dashboard` and `vocabulary` pages.
-    - Search for `className=\"...\"` that duplicates styles of the shared components.
-    - Replace with `<Button variant=\"...\" />`, etc.
+    - Search for `className="..."` that duplicates styles of the shared components.
+    - Replace with `<Button variant="..." />`, etc.
 3. **Global CSS Cleanup**: Remove redundant utility classes from `product/src/app/globals.css` that are now handled by the design system.
 4. **Typography Audit**: Ensure `font-family: 'Noto Sans KR'` is applied to all Korean text elements.
 
