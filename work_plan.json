@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "CTO must prioritize fixing the critical build failure (#520) and progressing the Supabase migration (#496). QA is assigned to verify the build fix. Product tracks progress. Designer is assigned for cycle 9 to review the UI/UX of the Speaking Simulator and the overall Design System implementation.",
+  "cycle_reasoning": "Cycle 10. The CTO has a significant backlog of 10 open issues, including the critical migration of the content library to Supabase (#496) and several API mock replacements (#524-527). I will not create any new CTO issues to avoid overloading them. QA is assigned to verify the CTO's work. Product is assigned to keep the roadmap updated. Finance is assigned as this is a Cycle 10 milestone to address the deployment budget issue (#361).",
   "assignments": [
     {
       "role": "cto",
@@ -17,7 +17,7 @@
       "priority": "P2"
     },
     {
-      "role": "designer",
+      "role": "finance",
       "turns": 1,
       "priority": "P2"
     }
