@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant — Product Roadmap
+# TOPIK Learning Assistant \u2014 Product Roadmap
 
 This roadmap outlines the strategic milestones for the TOPIK Learning Assistant, moving from a Minimum Viable Product (MVP) to a comprehensive, AI-powered learning ecosystem.
 
@@ -44,6 +44,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 ### Milestone 5.1: Adaptive Learning Path
 - [x] Weakness Analysis
 - [x] Dynamic Study Plan
+- [ ] **TOPIK Placement Test**: Diagnostic test to determine starting level and personalize the study path. [PENDING]
 
 ### Milestone 5.2: Advanced Writing & Typing
 - [x] Essay Outliner
