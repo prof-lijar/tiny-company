@@ -12,6 +12,8 @@ The test is a condensed version of the TOPIK II exam, designed to be completed i
     - Questions 1-3: Level 3 (Basic-Intermediate)
     - Questions 4-6: Level 4 (Intermediate)
     - Questions 7-10: Level 5-6 (Advanced)
+- **Content Selection**: 
+    - Use a mix of "Short Ads/Notices" (L3), "News Articles" (L4), and "Academic/Opinion" (L5-6) from `product/src/lib/data/listening.ts`.
 - **Technical**: Uses the same audio player component as the Listening Practice module.
 
 ### B. Reading Section (10 Questions)
@@ -20,10 +22,13 @@ The test is a condensed version of the TOPIK II exam, designed to be completed i
     - Questions 1-3: Level 3
     - Questions 4-6: Level 4
     - Questions 7-10: Level 5-6
+- **Content Selection**:
+    - Select 10 passages from `product/src/lib/data/reading.ts` that map to these levels.
+    - Ensure a variety of types: 3x Short Ads/Blogs, 3x News, 4x Academic/Literature.
 - **Technical**: Uses the same passage-and-question layout as the Reading Practice module.
 
 ### C. Writing Section (Optional/Single Prompt)
-- **Format**: Short essay (Task 53 style).
+- **Format**: Short essay (Task 53 style - Graph description).
 - **Evaluation**: AI-powered evaluation via `product/src/app/api/writing-feedback/route.ts`.
 - **Weight**: Used as a tie-breaker or to confirm the level predicted by Listening/Reading.
 
@@ -69,3 +74,7 @@ Upon completion:
     - Progress bar showing completion percentage.
     - "Review" step before final submission.
     - Immediate "Result" screen showing the predicted level and a "Start Learning" CTA.
+    - **Result Screen UI**:
+        - Large Level Badge (e.g., "Your Predicted Level: 4").
+        - Brief explanation of what Level 4 means (from `docs/topik-content-guide.md`).
+        -- Button: "View My Personalized Study Path" $\rightarrow$ redirects to Dashboard.
