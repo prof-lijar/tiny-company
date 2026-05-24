@@ -1,11 +1,11 @@
-# TOPIK Learning Assistant \u2014 MVP Product Specification
+# TOPIK Learning Assistant — MVP Product Specification
 
 ## Overview
 A web-based TOPIK (Test of Proficiency in Korean) preparation platform built with Next.js, TypeScript, and Tailwind CSS. All product code lives in the `product/` directory.
 
 ## Feature Priorities
 
-### P0 \u2014 CRITICAL: 2026 Format Alignment [BUILT]
+### P0 — CRITICAL: 2026 Format Alignment [BUILT]
 **Goal**: Update all simulators and content to match the 2026 TOPIK overhaul to prevent user failure.
 
 #### 1. 2026 Mock Test Engine Update [BUILT]
@@ -40,7 +40,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Detailed Requirements**:
     - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
     - **Detection Logic**: 
-        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"\uac1c\uba85\uac1c\uba85... \u2014 \uc740 \ubc14\ub77c\uba70...\").
+        - Instruct AI to look for \"overused TOPIK templates\" (e.g., overly rigid introductory phrases like \"개명개명... — 은 바라보며...\").
         - Penalize \"memorized\" structures that don't specifically address the prompt's nuances.
     - **Feedback Output**:
         - Explicitly label \"Template Usage\" in the feedback report.
@@ -59,7 +59,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ---
 
-### P0 \u2014 MVP (Build First)
+### P0 — MVP (Build First)
 
 #### 5. Landing Page [BUILT]
 - **File**: `product/src/app/page.tsx`
@@ -78,7 +78,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 8. Reading Comprehension Practice [BUILT]
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
 
-### P1 \u2014 Fast Follow
+### P1 — Fast Follow
 
 #### 9. Writing Practice with AI Feedback [BUILT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
@@ -91,7 +91,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 11. Listening Practice [BUILT]
 - **Files**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`
 
-### P2 \u2014 Growth Features
+### P2 — Growth Features
 
 #### 12. User Authentication [BUILT]
 - **Files**: `product/src/app/api/auth/[...nextauth]/route.ts`, `product/src/app/login/page.tsx`, `product/src/app/signup/page.tsx`
@@ -102,7 +102,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 14. Subscription Billing [BUILT]
 - **Files**: `product/src/app/api/stripe/checkout/route.ts`, `product/src/app/api/stripe/webhook/route.ts`
 
-### P3 \u2014 AI Intelligence (Future)
+### P3 — AI Intelligence (Future)
 
 #### 15. AI-Powered Weakness Analysis [BUILT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
@@ -208,13 +208,13 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Compatibility**:
         - Must function correctly when \"2026 Mode\" (1.1x speed) is enabled.
 - **Acceptance Criteria**:
-    - Text highlighting is visually synchronized with the audio (tolerance: \u00b10.5s).
+    - Text highlighting is visually synchronized with the audio (tolerance: ±0.5s).
     - Clicking a transcript line jumps the audio to the correct timestamp.
     - Highlighting persists across the entire length of the audio file.
 - **Files affected**: `product/src/app/listening/page.tsx`, `product/src/components/listening/Transcript.tsx`, `product/src/lib/data/listening.ts`.
 - **Current Progress**: [Issue #505] Assigned to CTO.
 
-#### 24. Unified Design System [PENDING]
+#### 24. Unified Design System [IN PROGRESS]
 - **Goal**: Implement a consistent UI framework across all pages to eliminate visual discrepancies.
 - **Priority**: P2
 - **Detailed Requirements**:
@@ -235,6 +235,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - No \"one-off\" custom styles for core components (buttons, inputs, cards).
 - **Files affected**: `product/src/components/ui/`, all main page files in `product/src/app/`.
 - **Guide**: See `docs/design-system-impl.md` for detailed refactoring steps.
+- **Current Progress**: [Issue #530] Assigned to CTO, [Issue #531] Assigned to Designer.
 
 #### 25. Performance Optimization [IN PROGRESS]
 - **Goal**: Reduce load times and improve scrolling performance for large content sets (Vocabulary, Reading).
@@ -268,7 +269,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
             - Task 4: Completing a story/dialog (Prep: 40s, Response: 60s)
             - Task 5: Analyzing material (Prep: 70s, Response: 80s)
             - Task 6: Opinion on a topic (Prep: 70s, Response: 80s)
-        - Implement a two-phase timer for each task: `Preparation Phase` (read-only) \u2192 `Recording Phase` (recording active).
+        - Implement a two-phase timer for each task: `Preparation Phase` (read-only) → `Recording Phase` (recording active).
     - **Technical Implementation**:
         - **Frontend Architecture**:
             - Main Page: `product/src/app/speaking/page.tsx`
@@ -279,7 +280,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - **Audio Capture**: Use MediaRecorder API to capture user responses.
         - **AI Evaluation Pipeline**:
             - Route: `product/src/app/api/speaking-evaluate/route.ts`
-            - Logic: Send audio file to STT (Whisper) \u2192 Send transcription to LLM with TOPIK Speaking Rubric \u2192 Return structured evaluation.
+            - Logic: Send audio file to STT (Whisper) → Send transcription to LLM with TOPIK Speaking Rubric → Return structured evaluation.
         - **Data Structures**:
           ```typescript
           type SpeakingTask = {
@@ -330,7 +331,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
         - **Writing**: One short prompt (AI-evaluated) to gauge structural ability.
     - **Scoring Logic**:
         - Map total score and highest successfully completed level to a predicted TOPIK level.
-        - Example: 80% correct on Level 4 questions \u2192 Predicted Level 4.
+        - Example: 80% correct on Level 4 questions → Predicted Level 4.
     - **Integration**:
         - Result feeds directly into the `Dynamic Study Plan` logic.
         - User is redirected to the Dashboard with their predicted level and a \"Start Learning\" button.

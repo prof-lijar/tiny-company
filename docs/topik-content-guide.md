@@ -332,3 +332,57 @@ Based on official IBT guidelines, the Speaking test is a separate module with th
 - **Level 2**: 50 - 89
 - **Level 1**: 20 - 49
 - **Fail**: 0 - 19
+
+## 14. Supplemental Vocabulary Data (Research 2026)
+
+### Level 3-4 (Intermediate) - High Frequency
+| Korean | English | Note |
+|---|---|---|
+| 가계부 | household account book | Common in Task 51/52 |
+| 가구점 | furniture store | Daily life |
+| 가능성 | possibility | Abstract |
+| 가뭄 | drought | Environment / News |
+| 가사 | housework | Daily life |
+| 가상 | virtual | Technology |
+| 가습기 | humidifier | Daily life |
+| 개입 | intervention | Social / Formal |
+| 객관적 | objective | Academic / Writing |
+| 격차 | gap / difference | Social Issues (Digital Divide) |
+| 결론 | conclusion | Writing Structure |
+| 경력 | career | Professional |
+| 계약 | contract | Professional |
+| 계층 | layer / stratum | Social Issues |
+| 고충 | hardship / grievance | Social / Professional |
+| 공공장소 | public place | Social |
+| 공통점 | common point | Comparison |
+| 과잉 | excess | Health / Environment |
+| 관점 | perspective | Academic |
+| 교류 | exchange | Culture |
+
+### Level 5-6 (Advanced) - Academic & Professional
+| Korean | English | Note |
+|---|---|---|
+| 분석 | analysis | Academic |
+| 구현 | implementation | Technology |
+| 기여 | contribution | Professional |
+| 논리 | logic | Academic |
+| 매커니즘 | mechanism | Science / Tech |
+| 변수 | variable | Academic |
+| 시사점 | implication | Academic / News |
+| 정교함 | sophistication / precision | Professional |
+| 효율성 | efficiency | Economics |
+| 함의 | connotation / implication | Academic |
+
+## 15. Supplemental Grammar Patterns (Research 2026)
+
+### Intermediate (Level 3-4)
+- **Contrast**: `-기는 하지만` (It is true that... but), `-는 반면에` (on the other hand)
+- **Cause/Reason**: `-느라고` (because of - usually for negative result/excuse), `-길래` (since/because - spoken)
+- **Speculation**: `-을 리가 없다` (it cannot be that...), `-ㄴ/은/는 모양이다` (it seems that...)
+- **Necessity**: `-을 수밖에 없다` (have no choice but to), `-기 마련이다` (it is bound to...)
+
+### Advanced (Level 5-6)
+- **Formal Contrast**: `-는 것과 달리` (unlike the fact that...), `-음에도 불구하고` (despite the fact that...)
+- **Advanced Cause**: `-는 바람에` (due to - unexpected result), `-거늘` (since/given that - archaic/formal)
+- **Emphasis/Nuance**: `-기나 하다` (at least do...), `-다니` (I can't believe that... / expresses surprise)
+- **Writing Endings**: `-다` (Plain form), `-ㄴ/는다` (Present plain), `-었다` (Past plain)
