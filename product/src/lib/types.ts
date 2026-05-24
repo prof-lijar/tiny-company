@@ -101,7 +101,7 @@ export interface ListeningPassage {
   id: string;
   level: TopikLevel;
   title: string;
-  audio_url: string;
+  audio_url?: string;
   transcript: string;
   questions: ListeningQuestion[];
 }
