@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Cycle 8: CTO is heavily backlogged (5 issues), including a critical P0 Supabase migration (#496). I will not add more to their plate. Marketing is assigned to create promotional content for the 2026 reform features to align the public face of the product with the technical updates. QA and Product continue their standard oversight.",
+  "cycle_reasoning": "CTO must prioritize fixing the critical build failure (#520) and progressing the Supabase migration (#496). QA is assigned to verify the build fix. Product tracks progress. Designer is assigned for cycle 9 to review the UI/UX of the Speaking Simulator and the overall Design System implementation.",
   "assignments": [
     {
       "role": "cto",
@@ -17,7 +17,7 @@
       "priority": "P2"
     },
     {
-      "role": "marketing",
+      "role": "designer",
       "turns": 1,
       "priority": "P2"
     }
