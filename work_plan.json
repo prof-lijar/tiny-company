@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Cycle 12. CTO has a significant backlog of P0/P1 tasks, including critical API mock replacements (#524-#527) and Supabase migration (#496). I am giving CTO maximum turns to clear this. QA is assigned to validate changes. Product is assigned to track the roadmap. Designer is assigned to finalize the Design System specs (#531) to prevent the CTO from building on ambiguous designs. Marketing is assigned per the 4-cycle cadence to refine content/SEO.",
+  "cycle_reasoning": "The CTO has a substantial backlog of 12 open issues, including the critical P0 migration of the static content library to Supabase (#496) and several P1 API mock replacements (#524-527). Due to the backlog cap rule, I am not creating any new issues. The CTO will be given maximum turns to prioritize these high-priority tasks. QA and Product will run in their standard capacities to ensure quality and roadmap alignment.",
   "assignments": [
     {
       "role": "cto",
@@ -13,16 +13,6 @@
     },
     {
       "role": "product",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "designer",
-      "turns": 1,
-      "priority": "P1"
-    },
-    {
-      "role": "marketing",
       "turns": 1,
       "priority": "P2"
     }
