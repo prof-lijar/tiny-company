@@ -30,16 +30,17 @@ The TOPIK (Test of Proficiency in Korean) market is undergoing a seismic shift d
 - **Strengths**: Gamification.
 - **Weaknesses**: Totally outdated for the 2026 reform.
 
-## Our Strategic Advantage (The \"Moat\")
-- **Web-First IBT Simulation**: We provide the exact desktop environment of the 2026 IBT.
-- **Anti-Template AI Writing Feedback**: While others provide generic feedback, we can implement the new 2026 rubric that specifically penalizes formulaic templates.
+## Our Strategic Advantage (The "Moat")
+- **Web-First IBT Simulation**: We provide the exact desktop environment of the 2026 IBT, which is a critical gap in the market (competitors are mostly mobile).
+- **Anti-Template AI Writing Feedback**: While others provide generic feedback, we implement the new 2026 rubric that specifically penalizes formulaic templates.
 - **High-Speed Listening Training**: Integrating 1.1x speed audio to prepare users for the faster 2026 audio tracks.
-- **Integrated Study Loop**: Combining SRS $\\rightarrow$ Grammar $\\rightarrow$ Reading/Listening $\\rightarrow$ Mock Test.
-- **AI-Powered Speaking Simulator**: (Planned) Providing a full-cycle recording and evaluation loop for the standalone Speaking IBT.
+- **Integrated Study Loop**: Combining SRS $\rightarrow$ Grammar $\rightarrow$ Reading/Listening $\rightarrow$ Mock Test.
+- **AI-Powered Speaking Simulator**: Providing a full-cycle recording and evaluation loop for the standalone Speaking IBT.
+- **Diagnostic-to-Plan Pipeline**: Our Placement Test (Issue #528) is designed to feed directly into the Dynamic Study Plan, mirroring the "Personalized Roadmap" trend but with higher IBT fidelity.
 
 ## Opportunities & Risks
 - **Opportunity: 2026 Alignment**: Being the first high-quality *web-based* tool to fully implement the 2026 format changes.
-- **Opportunity: Diagnostic Entry**: Implementing a \"Placement Test\" that feeds into a \"Dynamic Study Plan\" to match Migii's roadmap feature but with better web-based IBT fidelity.
+- **Opportunity: Diagnostic Entry**: Implementing a "Placement Test" that feeds into a "Dynamic Study Plan" to match Migii's roadmap feature.
 - **Opportunity: Speaking Module**: The separate Speaking exam is now a critical requirement for many.
 - **Risk: Outdated Content**: If our mock tests and practice sets remain in the 2025 format, the product becomes obsolete.
 - **Risk: AI Commoditization**: We must ensure our AI feedback is grounded in the *actual* 2026 grading rubric.

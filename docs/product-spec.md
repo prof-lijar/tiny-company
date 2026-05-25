@@ -1,11 +1,11 @@
-# TOPIK Learning Assistant \u2014 MVP Product Specification
+# TOPIK Learning Assistant — MVP Product Specification
 
 ## Overview
 A web-based TOPIK (Test of Proficiency in Korean) preparation platform built with Next.js, TypeScript, and Tailwind CSS. All product code lives in the `product/` directory.
 
 ## Feature Priorities
 
-### P0 \u2014 CRITICAL: 2026 Format Alignment [BUILT]
+### P0 — CRITICAL: 2026 Format Alignment [BUILT]
 **Goal**: Update all simulators and content to match the 2026 TOPIK overhaul to prevent user failure.
 
 #### 1. 2026 Mock Test Engine Update [BUILT]
@@ -22,9 +22,9 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - **Technical Implementation**: Use the `playbackRate` property of the HTML5 Audio API.
     - **Logic**: Set `audio.playbackRate = 1.1` upon loading the audio object.
     - **User Interface**: 
-        - Add a \"2026 Mode\" toggle in the listening interface.
+        - Add a "2026 Mode" toggle in the listening interface.
         - When enabled, audio plays at 1.1x.
-        - Display a badge: \"2026 Speed (1.1x)\".
+        - Display a badge: "2026 Speed (1.1x)".
     - **Content**: 
         - Update `product/src/lib/data/listening.ts` to include 60-question sets instead of 50.
 - **Files affected**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`.
@@ -33,8 +33,8 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Goal**: Update AI prompt to detect and penalize formulaic/memorized essay templates.
 - **Detailed Requirements**:
     - **Prompt Engineering**: Update the system prompt in `product/src/app/api/writing-feedback/route.ts`.
-    - **Detection Logic**: Instruct AI to look for \"overused TOPIK templates\".
-    - **Feedback Output**: Explicitly label \"Template Usage\" in the feedback report.
+    - **Detection Logic**: Instruct AI to look for "overused TOPIK templates".
+    - **Feedback Output**: Explicitly label "Template Usage" in the feedback report.
 - **Files affected**: `product/src/app/api/writing-feedback/route.ts`.
 
 #### 4. Reading Speed Training [BUILT]
@@ -43,7 +43,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 ---
 
-### P0 \u2014 MVP (Build First)
+### P0 — MVP (Build First)
 
 #### 5. Landing Page [BUILT]
 - **File**: `product/src/app/page.tsx`
@@ -61,7 +61,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 8. Reading Comprehension Practice [BUILT]
 - **Files**: `product/src/app/reading/page.tsx`, `product/src/lib/data/reading.ts`
 
-### P1 \u2014 Fast Follow
+### P1 — Fast Follow
 
 #### 9. Writing Practice with AI Feedback [NEEDS IMPROVEMENT]
 - **Files**: `product/src/app/writing/page.tsx`, `product/src/app/api/writing-feedback/route.ts`
@@ -74,7 +74,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 11. Listening Practice [BUILT]
 - **Files**: `product/src/app/listening/page.tsx`, `product/src/lib/data/listening.ts`
 
-### P2 \u2014 Growth Features
+### P2 — Growth Features
 
 #### 12. User Authentication [BUILT]
 - **Files**: `product/src/app/api/auth/[...nextauth]/route.ts`, `product/src/app/login/page.tsx`, `product/src/app/signup/page.tsx`
@@ -85,7 +85,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 #### 14. Subscription Billing [BUILT]
 - **Files**: `product/src/app/api/stripe/checkout/route.ts`, `product/src/app/api/stripe/webhook/route.ts`
 
-### P3 \u2014 AI Intelligence (Future)
+### P3 — AI Intelligence (Future)
 
 #### 15. AI-Powered Weakness Analysis [NEEDS IMPROVEMENT]
 - **Files**: `product/src/app/api/analyze-weaknesses/route.ts`, `product/src/components/dashboard/WeaknessReport.tsx`
@@ -100,7 +100,7 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 - **Files**: `product/src/app/writing/typing-trainer/page.tsx`
 
 #### 18. Strict IBT Simulation Mode [BUILT]
-- **Goal**: Provide a high-fidelity \"Exam Mode\" that mimics the official IBT interface.
+- **Goal**: Provide a high-fidelity "Exam Mode" that mimics the official IBT interface.
 - **Files affected**: `product/src/app/mock-test/page.tsx`.
 
 #### 19. Content Library Expansion [IN PROGRESS]
@@ -115,7 +115,8 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
 
 #### 21. Writing Sample Library [BUILT]
 - **Files**: `product/src/app/writing/samples/page.tsx`
-- **Note**: Currently experiencing DB permission issues [Issue #534].
+- **Improvements needed** (from QA):
+    - [Issue #534] Fix DB permission issues causing samples not to load.
 
 #### 22. Essay Outliner [NEEDS IMPROVEMENT]
 - **Goal**: AI-powered tool to help users structure their thoughts.
