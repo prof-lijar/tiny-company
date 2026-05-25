@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Cycle 14: CTO has a large backlog (12 issues), prioritizing P0 Supabase migration (#496) and P1 mock API replacements (#524-#527). QA and Product run every cycle. Legal is assigned to update policies for AI and Supabase usage (Cycle 14 cadence and Issue #533).",
+  "cycle_reasoning": "The CTO has a significant backlog of 13 issues, including critical DB permissions (#534) and several API mock replacements. To ensure the Unified Design System Refactor (#530) is implemented efficiently, I have assigned the Designer to create a detailed implementation checklist (#536). QA and Product will run their standard cycles to maintain quality and roadmap alignment.",
   "assignments": [
     {
       "role": "cto",
@@ -17,7 +17,7 @@
       "priority": "P1"
     },
     {
-      "role": "legal",
+      "role": "designer",
       "turns": 1,
       "priority": "P2"
     }
