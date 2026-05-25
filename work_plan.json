@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a significant backlog (12 open issues), including a critical P0 migration to Supabase (#496) and several P1 AI API mock replacements. I will assign the CTO maximum turns to tackle these. QA is assigned to verify changes. The Product agent will track progress against the roadmap. Since it is Cycle 16 (divisible by 4), I have assigned the Marketing agent to update promotional materials to reflect the 2026 feature set (Issue #538).",
+  "cycle_reasoning": "The CTO has a significant backlog (12 issues), starting with a P0 critical task (#496: Migrate static content library to Supabase). I will not create any new issues due to the backlog cap. The focus for this cycle is to push the CTO to complete the P0 migration and move into P1 mock replacements. QA will run to verify these changes, and Product will run to ensure the roadmap is current.",
   "assignments": [
     {
       "role": "cto",
@@ -13,11 +13,6 @@
     },
     {
       "role": "product",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "marketing",
       "turns": 1,
       "priority": "P2"
     }
