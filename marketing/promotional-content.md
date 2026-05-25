@@ -2,7 +2,7 @@
 
 This document contains the marketing assets designed to communicate the 2026 reform-aligned features of the TOPIK Learning Assistant.
 
-## 1. Email Campaign: \"The 2026 Reform Sequence\"
+## 1. Email Campaign: "The 2026 Reform Sequence"
 
 **Goal:** Move users from awareness of the reform (anxiety) to the solution (our platform) to conversion (subscription/upgrade).
 
@@ -19,7 +19,8 @@ The 2026 TOPIK reform isn't just a minor update—it's a shift in how your Korea
 
 The biggest risks?
 - **The Speed Gap:** Listening sections are moving toward more natural, faster conversational speeds.
-- **The Template Trap:** Examiners are now actively penalizing \"canned\" or template-based writing.
+- **The Template Trap:** Examiners are now actively penalizing "canned" or template-based writing.
+- **The Scoring Shift:** New thresholds for Level 4 and 5 mean your old "predicted scores" might be misleading.
 
 If you're preparing for a visa, a degree, or a career, you can't afford to study for an exam that no longer exists.
 
@@ -41,14 +42,17 @@ In our last email, we talked about the risks of the 2026 TOPIK reform. Today, we
 
 We've officially updated TOPIK Flow with features specifically engineered for the 2026 standards:
 
-**1. 1.1x Speed Training** 🎧
-Don't let the new, faster listening pace catch you off guard. Our new speed-adjusted modules train your ear for natural conversational Korean, so the actual exam feels slow by comparison.
+**1. 1.1x Speed Training & 2026 Mode** 🎧
+Don't let the new, faster listening pace catch you off guard. Our "2026 Mode" plays audio at 1.1x speed and expands the set to 60 questions, training your ear for natural conversational Korean.
 
 **2. AI-Powered Anti-Template Writing** ✍️
-Stop relying on memorized phrases. Our AI now detects \"template-style\" writing and provides real-time feedback to help you express yourself naturally—exactly what the 2026 examiners are looking for.
+Stop relying on memorized phrases. Our AI now detects "template-style" writing and provides real-time feedback to help you express yourself naturally—exactly what the 2026 examiners are looking for.
 
-**3. Full IBT Simulation** 💻
-The shift to digital testing can be stressful. Practice in a web-first environment that mirrors the actual IBT experience to eliminate \"tech-panic.\"
+**3. High-Fidelity IBT Simulation** 💻
+The shift to digital testing can be stressful. Practice in a web-first environment that mirrors the actual IBT interface, complete with updated scoring logic (Level 4: 140, Level 5: 170) to give you a real prediction of your score.
+
+**4. Precision Reading Timers** ⏱️
+The 2026 window is tighter. Our updated reading modules force you to maintain the pace required to finish all 40 questions without panic.
 
 Stop guessing if your materials are current. Start training with the new standard.
 
@@ -72,9 +76,10 @@ Studying harder isn't the answer if you're studying the wrong way. With the 2026
 
 **Join thousands of learners who have already upgraded to the 2026 Reform Edition.**
 
-- ✅ 1.1x Listening Speed
-- ✅ AI Writing Feedback
-- ✅ IBT Environment Simulation
+- ✅ 1.1x Listening Speed (2026 Mode)
+- ✅ AI Writing Feedback (Anti-Template)
+- ✅ High-Fidelity IBT Environment Simulation
+- ✅ Updated 2026 Scoring Benchmarks
 
 Get the confidence of knowing you are studying exactly what will be on the test.
 
@@ -90,20 +95,20 @@ The TOPIK Flow Team
 ### Platform: Twitter/X & LinkedIn
 **Tone:** Authoritative, urgent, yet encouraging.
 
-**Post 1: The Warning (The \"Obsolete\" Angle)**
-*   **Copy:** ⚠️ Stop studying for the old TOPIK. The 2026 reform is changing the game. From IBT transitions to stricter writing standards, your old PDFs might be holding you back. It's time to upgrade your prep. #TOPIK #LearnKorean #TOPIK2026 #StudyKorean
-*   **Visual Suggestion:** A graphic showing an \"Old Textbook\" vs. a \"Modern Interface\" with a red 'X' and green checkmark.
+**Post 1: The Warning (The "Obsolete" Angle)**
+*   **Copy:** ⚠️ Stop studying for the old TOPIK. The 2026 reform is changing the game. From IBT transitions to stricter writing standards and new scoring thresholds, your old PDFs might be holding you back. It's time to upgrade your prep. #TOPIK #LearnKorean #TOPIK2026 #StudyKorean
+*   **Visual Suggestion:** A graphic showing an "Old Textbook" vs. a "Modern Interface" with a red 'X' and green checkmark.
 
 **Post 2: The Listening Edge (1.1x Speed)**
-*   **Copy:** Why do so many students freeze during the TOPIK listening section? Because the real exam is faster than the practice tapes. 🎧 Our 1.1x Speed Training prepares your ears for the 2026 reform's natural pace. No surprises. Just results. #TOPIKPrep #KoreanLanguage #ListeningSkills
-*   **Visual Suggestion:** A short clip of a speed slider moving from 1.0x to 1.1x with the text \"Train your ear for the real world.\"
+*   **Copy:** Why do so many students freeze during the TOPIK listening section? Because the real exam is faster than the practice tapes. 🎧 Our 1.1x Speed Training (2026 Mode) prepares your ears for the reform's natural pace. No surprises. Just results. #TOPIKPrep #KoreanLanguage #ListeningSkills
+*   **Visual Suggestion:** A short clip of a speed slider moving from 1.0x to 1.1x with the text "Train your ear for the real world."
 
 **Post 3: The Writing Shift (Anti-Template)**
-*   **Copy:** ✍️ The \"Template Trap\" is real. The 2026 TOPIK reform is moving away from memorized phrases toward genuine expression. Our AI-powered writing feedback detects canned responses and guides you toward high-scoring, natural Korean. #KoreanWriting #TOPIKII #AIlearning
-*   **Visual Suggestion:** A split screen showing a \"Template Answer\" (Red) vs. an \"AI-Optimized Natural Answer\" (Green).
+*   **Copy:** ✍️ The "Template Trap" is real. The 2026 TOPIK reform moves away from memorized phrases toward genuine expression. Our AI-powered writing feedback detects canned responses and guides you toward high-scoring, natural Korean. #KoreanWriting #TOPIKII #AIlearning
+*   **Visual Suggestion:** A split screen showing a "Template Answer" (Red) vs. an "AI-Optimized Natural Answer" (Green).
 
-**Post 4: The Digital Transition (IBT)**
-*   **Copy:** Still practicing on paper for a digital exam? 💻 The shift to IBT (Internet-Based Testing) means you need to be comfortable with the interface as much as the language. Practice in a web-first environment that mirrors the actual test. #IBT #TOPIK #DigitalLearning #KoreanExam
+**Post 4: The Digital Transition (IBT Simulation)**
+*   **Copy:** Still practicing on paper for a digital exam? 💻 The shift to IBT means you need to be comfortable with the interface and the updated 2026 scoring logic (L4: 140 / L5: 170). Practice in a high-fidelity environment that mirrors the actual test. #IBT #TOPIK #DigitalLearning #KoreanExam
 *   **Visual Suggestion:** A clean screenshot of the TOPIK Flow IBT simulation interface.
 
 **Post 5: The Final Call (The Value Prop)**
@@ -117,29 +122,29 @@ The TOPIK Flow Team
 **Title:** Everything You Need to Know About the 2026 TOPIK Reform
 
 **I. Introduction**
-*   **The Hook:** The anxiety of the \"Reform.\"
+*   **The Hook:** The anxiety of the "Reform."
 *   **The Context:** Why the National Institute for International Education (NIIE) is updating the test.
 *   **The Thesis:** The reform isn't a hurdle; it's an evolution toward practical, real-world proficiency.
 
 **II. The Shift to IBT (Internet-Based Testing)**
 *   **What it is:** Moving from PBT (Paper) to IBT.
 *   **Why it matters:** Changes in pacing, typing vs. writing, and technical anxiety.
-*   **Pro Tip:** The importance of simulating the digital environment.
+*   **Pro Tip:** The importance of simulating the digital environment and understanding new scoring thresholds (L4: 140, L5: 170).
 
 **III. Listening: Beyond the Textbook**
-*   **The Change:** A move toward more natural, conversational speeds (The 1.1x factor).
-*   **The Danger:** Why \"textbook listening\" leads to failure on test day.
-*   **Strategy:** How to train your ear using speed-adjusted audio.
+*   **The Change:** A move toward more natural, conversational speeds (The 1.1x factor) and expanded question sets (60 questions).
+*   **The Danger:** Why "textbook listening" leads to failure on test day.
+*   **Strategy:** How to train your ear using speed-adjusted audio and "2026 Mode."
 
 **IV. Writing: The Death of the Template**
-*   **The Change:** Stricter grading on \"canned\" or memorized responses.
+*   **The Change:** Stricter grading on "canned" or memorized responses.
 *   **The Goal:** Genuine expression and logical flow.
-*   **Strategy:** Moving from \"filling in blanks\" to \"constructing arguments\" with AI feedback.
+*   **Strategy:** Moving from "filling in blanks" to "constructing arguments" with AI Anti-Template feedback.
 
 **V. Summary of Key Changes (Quick Reference Table)**
-*   Column A: Feature (Listening, Writing, Format)
-*   Column B: Old Way (PBT, 1.0x, Templates)
-*   Column C: 2026 Way (IBT, 1.1x, Natural Expression)
+*   Column A: Feature (Listening, Writing, Format, Scoring)
+*   Column B: Old Way (PBT, 1.0x, Templates, Old Thresholds)
+*   Column C: 2026 Way (IBT, 1.1x, Natural Expression, L4:140/L5:170)
 
 **VI. How to Prepare in 2026**
 *   Audit your current materials.
