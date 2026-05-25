@@ -149,11 +149,11 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     2. **Reference Audio**: User listens to a native speaker's recording of the phrase.
     3. **Record**: User records their own version of the phrase.
     4. **Visual Analysis**: System overlays the user's pitch contour (F0) against the native reference contour.
-    5. **AI Feedback**: AI analyzes the transcription and pitch data to provide specific tips (e.g., \"Your pitch should rise more at the end of this question\").
+    5. **AI Feedback**: AI analyzes the transcription and pitch data to provide specific tips (e.g., "Your pitch should rise more at the end of this question").
     6. **Retry**: User can re-record until they reach a target accuracy score.
 - **Technical Requirements**:
     - **Frontend**: Web Audio API for recording and basic visualization.
-    - **Pitch Detection**: Implementation of a pitch-tracking algorithm (e.g., using the `Essentia.js` or `Pitchy` library) to extract F0.
+    - **Pitch Detection**: Implementation of a pitch-tracking algorithm using the `pitchfinder` library to extract F0.
     - **Comparison**: Use Dynamic Time Warping (DTW) to align user audio with reference audio for contour comparison.
     - **Feedback API**: Create `/api/speaking-analyze-pitch` to process audio and generate textual feedback via LLM.
 - **Files to be created**:
