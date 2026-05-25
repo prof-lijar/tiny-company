@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a substantial backlog of 12 open issues, including the critical P0 migration of the static content library to Supabase (#496) and several P1 API mock replacements (#524-527). Due to the backlog cap rule, I am not creating any new issues. The CTO will be given maximum turns to prioritize these high-priority tasks. QA and Product will run in their standard capacities to ensure quality and roadmap alignment.",
+  "cycle_reasoning": "Cycle 14: CTO has a large backlog (12 issues), prioritizing P0 Supabase migration (#496) and P1 mock API replacements (#524-#527). QA and Product run every cycle. Legal is assigned to update policies for AI and Supabase usage (Cycle 14 cadence and Issue #533).",
   "assignments": [
     {
       "role": "cto",
@@ -13,6 +13,11 @@
     },
     {
       "role": "product",
+      "turns": 1,
+      "priority": "P1"
+    },
+    {
+      "role": "legal",
       "turns": 1,
       "priority": "P2"
     }
