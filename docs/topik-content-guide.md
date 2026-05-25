@@ -386,3 +386,39 @@ Based on official IBT guidelines, the Speaking test is a separate module with th
 - **Advanced Cause**: `-는 바람에` (due to - unexpected result), `-거늘` (since/given that - archaic/formal)
 - **Emphasis/Nuance**: `-기나 하다` (at least do...), `-다니` (I can't believe that... / expresses surprise)
 - **Writing Endings**: `-다` (Plain form), `-ㄴ/는다` (Present plain), `-었다` (Past plain)
+
+## 16. TOPIK Speaking IBT Sample Prompts (for CTO/AI Generation)
+
+To ensure the Speaking Simulator has high-quality seed data, use these examples as templates for generating more prompts.
+
+### Task 1: Answering a Simple Question (20s Prep / 30s Response)
+- **Prompt**: \\u201c\\uc81c \\uc744 \\ub150\\ud558\\ub294 \\uc815\\ubcf4\\ub294 \\uc138\\ubd80\\uc744 \\uc815\\ub294 \\ubc14\\ub77c\\ubcf4\\uba70 \\uc744 \\ubc14\\ub77c\\ubcf4\\uba70 \\uc744 \\ubc14\\ub77c\\ubcf4\\uba70\\u201d (What is your favorite place to visit in your city? Why do you like it?)
+- **Prompt**: \\u201c\\uc81c\\uc7e5 \\uc815\\ub294 \\ubc14\\ub77c\\ubcf4\\uba70 \\uc744 \\ubc14\\ub77c\\ubcf4\\uba70\\u201d (What is your favorite hobby? How often do you do it?)
+
+### Task 2: Role-Play Based on Images (30s Prep / 40s Response)
+- **Scenario**: At a clothing store. Image shows a shirt with a small stain.
+- **Task**: You are the customer. Complain to the clerk about the stain and ask for an exchange.
+- **Scenario**: At a library. Image shows a "Quiet" sign and someone talking loudly on a phone.
+- **Task**: You are the librarian. Politely ask the person to stop talking on the phone.
+
+### Task 3: Creating a Story Based on Images (40s Prep / 60s Response)
+- **Scenario**: 3-panel comic. 1) Person waking up late. 2) Running to the bus stop but the bus is leaving. 3) Arriving at work/school late and apologizing.
+- **Task**: Describe the sequence of events and the person's feelings.
+- **Scenario**: 3-panel comic. 1) Planning a trip with a map. 2) Arriving at a beautiful beach. 3) Taking a photo of the sunset.
+- **Task**: Narrate the story of the trip.
+
+### Task 4: Completing a Story/Dialog (40s Prep / 60s Response)
+- **Prompt**: A friend says: \\u201c\\ub124 \\ub294 \\ubc14\\ub77c\\ubcf4\\uba70 \\uc744 \\ubc14\\ub77c\\ubcf4\\uba70\\u201d (I'm thinking of starting to learn a new language, but I'm worried it will be too hard.)
+- **Task**: Respond to your friend. Give them encouragement and suggest a method for learning.
+
+### Task 5: Analyzing Given Material (70s Prep / 80s Response)
+- **Material**: A short graph showing the increase in 1-person households in Korea over the last 10 years.
+- **Task**: Summarize the trend shown in the graph and mention one possible reason for this social change.
+- **Material**: A short notice about a new recycling policy in a specific district.
+- **Task**: Explain the key changes in the policy and what residents need to do.
+
+### Task 6: Presenting Opinions on a Topic (70s Prep / 80s Response)
+- **Topic**: \\u201c\\uc548\\uc740 \\uc815\\ub294 \\uc815\\ub294 \\uc815\\ub294 \\uc815\\ub294 \\uc815\\ub294\\u201d (Should AI be used to grade student essays in schools?)
+- **Task**: State your opinion (Agree/Disagree), provide two logical reasons, and address a potential counter-argument.
+- **Topic**: \\u201c\\uc815\\ub294 \\uc815\\ub294 \\uc815\\ub294 \\uc815\\ub294\\u201d (The importance of preserving traditional culture in a globalized world.)
+- **Task**: Explain why traditional culture is important and how it can be preserved.
