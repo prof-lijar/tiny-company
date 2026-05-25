@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a significant backlog of 13 issues, including critical DB permissions (#534) and several API mock replacements. To ensure the Unified Design System Refactor (#530) is implemented efficiently, I have assigned the Designer to create a detailed implementation checklist (#536). QA and Product will run their standard cycles to maintain quality and roadmap alignment.",
+  "cycle_reasoning": "The CTO has a significant backlog (12 open issues), including a critical P0 migration to Supabase (#496) and several P1 AI API mock replacements. I will assign the CTO maximum turns to tackle these. QA is assigned to verify changes. The Product agent will track progress against the roadmap. Since it is Cycle 16 (divisible by 4), I have assigned the Marketing agent to update promotional materials to reflect the 2026 feature set (Issue #538).",
   "assignments": [
     {
       "role": "cto",
@@ -14,10 +14,10 @@
     {
       "role": "product",
       "turns": 1,
-      "priority": "P1"
+      "priority": "P2"
     },
     {
-      "role": "designer",
+      "role": "marketing",
       "turns": 1,
       "priority": "P2"
     }
