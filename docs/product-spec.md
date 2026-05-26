@@ -168,3 +168,12 @@ A web-based TOPIK (Test of Proficiency in Korean) preparation platform built wit
     - The trainer includes at least 20 phrases per level (L3-L6).
 - **Priority**: P3
 - **Current Progress**: [Issue #539] Assigned to CTO.
+
+#### 29. 2026 High-Probability Theme Pack [PENDING]
+- **Goal**: Create a specialized set of reading and writing materials focused on the most likely themes for the 2026 exams (AI Ethics, Circular Economy, etc.).
+- **Requirements**:
+    - **Content**: 10x Reading passages and 10x Writing prompts based on the "High-Probability Themes" in `docs/topik-content-guide.md`.
+    - **Integration**: Add a "2026 Trend" tag to these items in the content library.
+    - **User Flow**: Users can filter practice materials by "2026 Trends".
+- **Priority**: P2
+- **Status**: [PENDING]

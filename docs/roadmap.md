@@ -56,6 +56,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 - [x] **Strict IBT Simulation Mode**: A dedicated "Exam Mode" that removes all study aids and mimics the exact IBT interface.
 - [ ] **Content Library Expansion**: Expand mock tests and practice passages to 50+ sets each. [IN PROGRESS] (See Issue #496)
 - [ ] **Audio-Text Sync**: Highlight text as audio plays in listening modules. [IN PROGRESS] (See Issue #505)
+- [ ] **2026 High-Probability Theme Pack**: Specialized content focused on 2026 trending topics (AI Ethics, Circular Economy, etc.). [PENDING]
 
 ### Milestone 5.4: UI/UX Refinement
 - [ ] **Unified Design System**: Full implementation of the updated design system for consistent spacing, colors, and components. [IN PROGRESS] (See Issue #530)

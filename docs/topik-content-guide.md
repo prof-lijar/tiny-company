@@ -474,3 +474,21 @@ These patterns are increasingly common in academic and formal essays regarding s
 - **Emphasizing a necessary condition**: `...-기 위해서라면 ...-어야만 한다` (if one wants to ..., one must ...).
 - **Comparing current trends with the past**: `...-던 것과 달리, 이제는 ...` (unlike the fact that ... used to ..., now ...).
 - **Suggesting a nuanced solution**: `...-기보다는 ...-는 방향으로 나아가야 한다` (rather than ..., we should move in the direction of ...).
+
+## 20. 2026 Deep-Dive: Theme-Specific Content Sets
+To support the "2026 High-Probability Theme Pack", use the following expanded data for generating content.
+
+### 20.1 Theme: AI Ethics & Digital Transformation
+- **Keywords**: 알고리즘 편향 (Algorithm Bias), 데이터 주권 (Data Sovereignty), 생성형 AI (Generative AI), 디지털 리터러시 (Digital Literacy), 기술적 특이점 (Technological Singularity).
+- **Reading Passage Idea**: An opinion piece on whether AI-generated art should be eligible for copyright protection in Korea.
+- **Writing Task 54 Prompt**: "As AI becomes integrated into the workplace, the boundary between human creativity and machine efficiency is blurring. Discuss the potential risks of over-reliance on AI and suggest ways to maintain human agency."
+
+### 20.2 Theme: Circular Economy & Zero Waste
+- **Keywords**: 순환 경제 (Circular Economy), 제로 웨이스트 (Zero Waste), 업사이클링 (Upcycling), 탄소 발자국 (Carbon Footprint), 지속 가능한 소비 (Sustainable Consumption).
+- **Reading Passage Idea**: A report on Seoul's new "Plastic-Free" initiatives in traditional markets.
+- **Writing Task 54 Prompt**: "Many countries are shifting from a 'recycle' culture to a 'zero-waste' culture. Analyze the challenges of implementing a circular economy in a highly urbanized society and provide solutions."
+
+### 20.3 Theme: Super-Aged Society & Social Care
+- **Keywords**: 초고령 사회 (Super-aged Society), 세대 간 갈등 (Intergenerational Conflict), 돌봄 경제 (Care Economy), 정년 연장 (Extension of Retirement Age), 디지털 소외 (Digital Alienation).
+- **Reading Passage Idea**: A sociological study on the impact of the "digital divide" on elderly access to healthcare in Korea.
+- **Writing Task 54 Prompt**: "The rapid aging of the population is putting pressure on the national pension system and social welfare. Discuss the pros and cons of extending the legal retirement age and propose a balanced approach."
