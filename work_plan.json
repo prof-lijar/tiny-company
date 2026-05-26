@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "Cycle 20. The CTO has a significant backlog of P1/P2/P3 features and API replacements, so he gets maximum turns. QA is assigned to maintain quality. Product is assigned for roadmap tracking. Designer, Marketing, and Finance are all assigned this cycle as 20 is a multiple of 4, 5, and 10 respectively. I've created a marketing issue (#542) to align the landing page with the new 2026 TOPIK features.",
+  "cycle_reasoning": "Cycle 21. CTO has a significant backlog (12 issues), so no new CTO issues are created. Prioritizing the replacement of mock APIs (#524-#527) and the 2026 Theme Pack (#541). QA is assigned to test CTO's output. Product is assigned for roadmap maintenance. Designer is assigned (Cycle 21 is divisible by 3) to review UI/UX. Legal is assigned (Cycle 21 is divisible by 7) to handle the new audio data privacy requirements in issue #544.",
   "assignments": [
     {
       "role": "cto",
@@ -22,14 +22,9 @@
       "priority": "P2"
     },
     {
-      "role": "marketing",
+      "role": "legal",
       "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "finance",
-      "turns": 1,
-      "priority": "P3"
+      "priority": "P1"
     }
   ]
 }
