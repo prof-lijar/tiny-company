@@ -4,7 +4,7 @@ This document defines the monetization strategy, pricing structure, and revenue 
 
 ## 1. Pricing Strategy: Freemium Model
 
-The app follows a "Value-First" freemium model, providing essential study tools for free while locking high-value AI features and unlimited practice behind a subscription.
+The app follows a \"Value-First\" freemium model, providing essential study tools for free while locking high-value AI features and unlimited practice behind a subscription.
 
 ### Free Tier
 - **Target**: Casual learners and beginners.
@@ -12,6 +12,7 @@ The app follows a "Value-First" freemium model, providing essential study tools 
     - Limited daily vocabulary and grammar practice (e.g., 10 items/day).
     - Access to basic study guides.
     - 1 AI writing evaluation per month.
+    - Basic speaking recording (no AI feedback).
 - **Price**: $0
 
 ### Pro Tier
@@ -19,6 +20,7 @@ The app follows a "Value-First" freemium model, providing essential study tools 
 - **Features**:
     - Unlimited daily practice.
     - Unlimited AI-powered writing feedback and corrections.
+    - **AI Speaking & Pronunciation Trainer**: Detailed feedback on intonation, pitch, and fluency.
     - Full-length mock tests with automated scoring.
     - Spaced Repetition System (SRS) for vocabulary.
     - Detailed progress analytics.
@@ -34,7 +36,7 @@ The app follows a "Value-First" freemium model, providing essential study tools 
 | **thinkbig** | $50+ / month | $50+ / mo | Premium, enterprise-grade |
 | **TOPIK Assistant** | **$9.99 / month** | **$9.99 / mo** | Mid-market, AI-driven value |
 
-*Our positioning: We are more expensive than Migii because we offer active AI feedback (not just static tests), but significantly more affordable than thinkbig.*
+*Our positioning: We are more expensive than Migii because we offer active AI feedback for both writing and speaking (not just static tests), but significantly more affordable than thinkbig.*
 
 ---
 
@@ -71,7 +73,7 @@ The app follows a "Value-First" freemium model, providing essential study tools 
 - **Total Base: ~$90 / month**
 
 ### Variable Costs
-- AI API costs: ~$0.05 per active Pro user / month (negligible).
+- AI API costs (Text + Audio): ~$0.07 per active Pro user / month (negligible).
 
 ### Break-Even Point
 To cover basic infrastructure costs:
@@ -86,5 +88,5 @@ To cover basic infrastructure costs:
 | Risk | Impact | Mitigation |
 | :--- | :--- | :--- |
 | **Low Conversion** | Low revenue | Implement a 7-day free trial of Pro features to demonstrate AI value. |
-| **High Churn** | Unstable MRR | Introduce "Exam-Ready" bundles (3-month fixed price) since TOPIK is seasonal. |
-| **API Cost Spike** | Margin erosion | Implement rate limits on AI writing evaluations for Pro users. |
+| **High Churn** | Unstable MRR | Introduce \"Exam-Ready\" bundles (3-month fixed price) since TOPIK is seasonal. |
+| **API Cost Spike** | Margin erosion | Implement rate limits on AI writing and speaking evaluations for Pro users. |
