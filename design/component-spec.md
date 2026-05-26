@@ -67,3 +67,17 @@ For quick application of brand typography:
 - **Body:** `text-base leading-relaxed text-slate-600`
 - **Caption:** `text-sm text-slate-500`
 - **Korean Text:** `font-['Noto_Sans_KR']` (Ensure font is loaded in Next.js)
+
+## 7. AI Pronunciation Trainer Components
+Specific components for high-fidelity audio and pitch visualization.
+
+| Component | Tailwind Classes | Notes |
+| :--- | :--- | :--- |
+| **Visualization Container** | `relative w-full h-64 bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden` | The main canvas for pitch contours |
+| **Pitch Reference Line** | `stroke-indigo-400 stroke-2` | SVG attribute: Native speaker's pitch |
+| **Pitch User Line** | `stroke-emerald-500 stroke-3` | SVG attribute: User's attempted pitch |
+| **Divergence Highlight** | `bg-rose-100/50` | Vertical bands indicating pitch mismatch |
+| **AI Tip Toast** | `flex items-start gap-3 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg shadow-sm` | Coaching feedback card |
+| **Tip Title** | `text-sm font-medium text-amber-900` | Header within the AI Tip Toast |
+| **Tip Body** | `text-sm text-amber-800 leading-relaxed` | Instructional text within the AI Tip Toast |
+| **Phrase Card** | `p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 transition-colors` | Browsing list item |
