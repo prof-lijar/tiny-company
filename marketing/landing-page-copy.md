@@ -1,10 +1,21 @@
-# Landing Page Copy: 2026 TOPIK Reform Edition (Refined)
+# Landing Page Copy: 2026 TOPIK Reform Edition (Refined v2)
 
 ## Hero Section
 **Headline:** Don't Let the 2026 TOPIK Reform Block Your Future.
 **Sub-headline:** The rules have changed. The speed has increased. The grading is stricter. Train with the only AI-powered platform fully aligned with the 2026 standards to secure your visa, degree, or career.
 **Primary CTA:** Start Your 2026 Prep Now
-**Secondary CTA:** See What's Changed
+**Secondary CTA:** Take a Free Placement Test
+
+---
+
+## The "Start Here" Section (The Lead Magnet)
+**Headline:** Not sure where to begin? Find your level in 15 minutes.
+**Copy:** Stop guessing which materials you need. Our AI-powered Placement Test analyzes your current proficiency and maps your gaps against the 2026 requirements.
+**The Value:** 
+- **Instant Diagnosis:** Get a realistic estimate of your current TOPIK level.
+- **Custom Roadmap:** We don't just give you a score; we generate a **Dynamic Study Plan** tailored to your specific weaknesses and your target exam date.
+- **Efficiency:** Stop wasting time on grammar you already know. Focus only on what will move your score.
+**CTA:** Take the Free Placement Test $\rightarrow$
 
 ---
 
