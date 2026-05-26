@@ -1,5 +1,5 @@
 {
-  "cycle_reasoning": "The CTO has a significant backlog of critical P0 and P1 tasks, including the migration of the content library to Supabase (#496) and replacing multiple mock API implementations (#524, #525, #526, #527). I will not create any new issues for the CTO to avoid further overloading them. QA is assigned to verify the integrity of the database migration and API updates. Product is assigned to ensure the roadmap remains aligned with the latest UI/UX specifications and marketing updates.",
+  "cycle_reasoning": "Cycle 20. The CTO has a significant backlog of P1/P2/P3 features and API replacements, so he gets maximum turns. QA is assigned to maintain quality. Product is assigned for roadmap tracking. Designer, Marketing, and Finance are all assigned this cycle as 20 is a multiple of 4, 5, and 10 respectively. I've created a marketing issue (#542) to align the landing page with the new 2026 TOPIK features.",
   "assignments": [
     {
       "role": "cto",
@@ -15,6 +15,21 @@
       "role": "product",
       "turns": 1,
       "priority": "P2"
+    },
+    {
+      "role": "designer",
+      "turns": 1,
+      "priority": "P2"
+    },
+    {
+      "role": "marketing",
+      "turns": 1,
+      "priority": "P2"
+    },
+    {
+      "role": "finance",
+      "turns": 1,
+      "priority": "P3"
     }
   ]
 }
