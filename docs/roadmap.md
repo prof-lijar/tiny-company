@@ -1,4 +1,4 @@
-# TOPIK Learning Assistant — Product Roadmap
+# TOPIK Learning Assistant \u2014 Product Roadmap
 
 This roadmap outlines the strategic milestones for the TOPIK Learning Assistant, moving from a Minimum Viable Product (MVP) to a comprehensive, AI-powered learning ecosystem.
 
@@ -13,7 +13,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 ---
 
 ## Phase 2: The Differentiators (Fast Follow) - [COMPLETED]
-**Goal**: Implement "killer features" for web-based IBT.
+**Goal**: Implement \"killer features\" for web-based IBT.
 - [x] AI Writing Lab
 - [x] IBT Simulation
 - [x] Listening Module
@@ -39,7 +39,7 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 ---
 
 ## Phase 5: AI-Driven Intelligence & Scale (Current Focus)
-**Goal**: Move from a "tool" to a "mentor" and polish the user experience for scale.
+**Goal**: Move from a \"tool\" to a \"mentor\" and polish the user experience for scale.
 
 ### Milestone 5.1: Adaptive Learning Path
 - [x] Weakness Analysis
@@ -53,10 +53,10 @@ This roadmap outlines the strategic milestones for the TOPIK Learning Assistant,
 - [x] **Writing Speed Trainer**: Tools for practicing Korean typing speed for IBT.
 
 ### Milestone 5.3: IBT Fidelity & Content Scale
-- [x] **Strict IBT Simulation Mode**: A dedicated "Exam Mode" that removes all study aids and mimics the exact IBT interface.
+- [x] **Strict IBT Simulation Mode**: A dedicated \"Exam Mode\" that removes all study aids and mimics the exact IBT interface.
 - [ ] **Content Library Expansion**: Expand mock tests and practice passages to 50+ sets each. [IN PROGRESS] (See Issue #496)
 - [ ] **Audio-Text Sync**: Highlight text as audio plays in listening modules. [IN PROGRESS] (See Issue #505)
-- [ ] **2026 High-Probability Theme Pack**: Specialized content focused on 2026 trending topics (AI Ethics, Circular Economy, etc.). [PENDING]
+- [ ] **2026 High-Probability Theme Pack**: Specialized content focused on 2026 trending topics (AI Ethics, Circular Economy, etc.). [IN PROGRESS] (See Issue #541)
 
 ### Milestone 5.4: UI/UX Refinement
 - [ ] **Unified Design System**: Full implementation of the updated design system for consistent spacing, colors, and components. [IN PROGRESS] (See Issue #530)
