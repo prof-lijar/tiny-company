@@ -14,6 +14,7 @@ The TOPIK (Test of Proficiency in Korean) market is undergoing a seismic shift d
     - **New Feature: Entrance Test.** Users can evaluate their current level and identify weaknesses before starting.
     - **New Feature: Personalized Roadmap.** Generates a tailored study path based on the entrance test and time goals.
     - **IBT Focus**: Expanding into specialized IBT-specific training.
+    - **Update Cycle**: Frequent APK updates (May 2026) indicating active maintenance and feature rollout.
 
 ### 2. thinkbig TOPIK
 - **Model**: B2B / Institutional targeting
@@ -34,7 +35,7 @@ The TOPIK (Test of Proficiency in Korean) market is undergoing a seismic shift d
 - **Web-First IBT Simulation**: We provide the exact desktop environment of the 2026 IBT, which is a critical gap in the market (competitors are mostly mobile).
 - **Anti-Template AI Writing Feedback**: While others provide generic feedback, we implement the new 2026 rubric that specifically penalizes formulaic templates.
 - **High-Speed Listening Training**: Integrating 1.1x speed audio to prepare users for the faster 2026 audio tracks.
-- **Integrated Study Loop**: Combining SRS $\\rightarrow$ Grammar $\\rightarrow$ Reading/Listening $\\rightarrow$ Mock Test.
+- **Integrated Study Loop**: Combining SRS $\rightarrow$ Grammar $\rightarrow$ Reading/Listening $\rightarrow$ Mock Test.
 - **AI-Powered Speaking Simulator**: Providing a full-cycle recording and evaluation loop for the standalone Speaking IBT.
 - **Diagnostic-to-Plan Pipeline**: Our Placement Test (Issue #528) is designed to feed directly into the Dynamic Study Plan, mirroring the "Personalized Roadmap" trend but with higher IBT fidelity.
 

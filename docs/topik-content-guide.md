@@ -450,3 +450,27 @@ Based on 2026 market research, the following themes are prioritized for content 
 - **Lifelong Education**: Necessity of continuous learning in a changing job market.
 - **Critical Thinking**: Media literacy in the age of misinformation.
 - **Holistic Education**: Balancing academic achievement with emotional intelligence.
+
+## 18. 2026 Specialized Vocabulary: Digital Transformation & AI Ethics
+To support the 2026 focus on technology and ethics, the following vocabulary should be integrated into Level 5-6 sets:
+
+| Korean | English | Context |
+|---|---|---|
+| 알고리즘 편향 | algorithm bias | AI Ethics / Sociology |
+| 디지털 격차 | digital divide | Social Issues / Technology |
+| 데이터 주권 | data sovereignty | Law / Technology |
+| 생성형 AI | generative AI | Technology / Education |
+| 윤리적 가이드라인 | ethical guidelines | Law / AI Ethics |
+| 자동화 시스템 | automation system | Economics / Work |
+| 정보 리터러시 | information literacy | Education / Media |
+| 가상 현실 | virtual reality | Technology / Culture |
+| 맞춤형 학습 | personalized learning | Education / AI |
+| 기술적 특이점 | technological singularity | Philosophy / Science |
+
+## 19. 2026 High-Frequency Grammar for Advanced Writing (Task 54)
+These patterns are increasingly common in academic and formal essays regarding social change:
+
+- **Expressing a paradoxical situation**: `...-음에도 불구하고` (despite the fact that...), `...-기에는 너무 ...` (too ... to ...).
+- **Emphasizing a necessary condition**: `...-기 위해서라면 ...-어야만 한다` (if one wants to ..., one must ...).
+- **Comparing current trends with the past**: `...-던 것과 달리, 이제는 ...` (unlike the fact that ... used to ..., now ...).
+- **Suggesting a nuanced solution**: `...-기보다는 ...-는 방향으로 나아가야 한다` (rather than ..., we should move in the direction of ...).
