@@ -1,31 +1,32 @@
 # Project Progress
 
 ## Current Phase
-Development — Refining the landing page UX and migrating content to Supabase.
+Development — Refining the landing page UX and cleaning up repository structure.
 
 ## Tech Stack
 Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 
 ## What Was Completed This Cycle
-- [x] Closed Issue #558 (Vercel build issue) as it was resolved and merged.
-- [x] Created Issue #565 for Home Page UX/UI refinement implementation.
-- [x] Created Issue #566 for Supabase migration finalization.
+- [x] Identified open PR #568 for Home Page refinements.
+- [x] Created Issue #570 for QA to review PR #568.
+- [x] Created Issue #569 for Architect to delete accidental directory `product/src/lib/data` (ref #567).
 
 ## What Is In Progress
-- [ ] [Frontend] Implement Home Page UX/UI Refinements (#565)
-- [ ] [Architect] Finalize Supabase Migration for Content Library (#566)
+- [ ] [QA] Review Home Page UX/UI Refinements (PR #568) (#570)
+- [ ] [Architect] Delete accidental directory `product/src/lib/data` (#569)
+- [ ] [Frontend] Implement Home Page UX/UI Refinements (PR #568)
 
 ## What Is Blocked
 - None.
 
 ## Next Cycle Plan
-- Frontend implements the "premium" design updates to the landing page.
-- Architect defines the final migration path and populates Supabase with TOPIK content.
-- QA to review the landing page updates once a PR is raised.
+- Merge PR #568 once QA approves.
+- Confirm the accidental directory is removed.
+- Plan next set of features for Vocabulary Builder or Grammar Lessons.
 
 ## Feature Checklist
 - [x] Landing Page (Base implementation done)
-- [ ] Landing Page (Premium UX Refinement) - in progress (#565)
+- [ ] Landing Page (Premium UX Refinement) - in progress (PR #568)
 - [x] Mock Test Engine
 - [x] High-Speed Listening
 - [x] Anti-Template Writing Feedback
