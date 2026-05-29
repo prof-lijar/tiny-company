@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { modelEssays } from '@/lib/data/model-essays';
+import { modelEssays } from '@/lib/model-essays';
 
 interface VocabularyUpgrade {
   from: string;
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     // This is a simplified version of what an LLM would do
     const upgradeMap: Record<string, VocabularyUpgrade> = {
       '많이': { from: '많이', to: '비약적으로', reason: 'In Level 6 writing, \"비약적으로\" (exponentially) is more precise than \"많이\" (a lot) for describing trends.' },
-      '좋다': { from: '좋다', to: '바람직하다', reason: ' \"바람직하다\" (desirable) is a more academic way to express a positive or correct state.' },
+      '잡다': { from: '잡다', to: '바람직하다', reason: ' \"바람직하다\" (desirable) is a more academic way to express a positive or correct state.' },
       '생각한다': { from: '생각한다', to: '판단된다', reason: 'Using \"판단된다\" (it is judged/considered) creates a more objective, academic tone.' },
       '문제': { from: '문제', to: '쟁점', reason: ' \"쟁점\" (issue/point of contention) is more specific than the general \"문제\" (problem) in argumentative essays.' },
     };

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { typingPracticeTexts } from '@/lib/data/typing-practice';
+import { typingPracticeTexts } from '@/lib/typing-practice';
 import TypingTrainer from '@/components/writing/TypingTrainer';
 import { Keyboard, Trophy, Target } from 'lucide-react';
 

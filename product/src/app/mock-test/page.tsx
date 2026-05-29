@@ -403,27 +403,25 @@ export default function MockTestSimulator() {
                 </div>
                 
                 <div className="space-y-6">
-                  {test.sections.map((sec: any, sIdx: number) => {
-                    return (
-                      <div key={sec.id} className="space-y-3">
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{sec.name}</div>
-                        <div className="flex flex-wrap gap-2">
-                          {sec.questions.map((q: any, qIdx: number) => (
-                            <QuestionPaletteItem 
-                              key={q.id}
-                              index={qIdx}
-                              isActive={currentSectionIndex === sIdx && currentQuestionIndex === qIdx}
-                              isAnswered={answers[q.id] !== undefined}
-                              onClick={() => {
-                               handleSectionChange(sIdx);
-                               handleQuestionChange(qIdx);
-                              }}
-                            />
-                          ))}</div>
-                        </div>
-                      })}</div>
+                  {test.sections.map((sec: any, sIdx: number) => (
+                    <div key={sec.id} className="space-y-3">
+                      <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{sec.name}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {sec.questions.map((q: any, qIdx: number) => (
+                          <QuestionPaletteItem 
+                            key={q.id}
+                            index={qIdx}
+                            isActive={currentSectionIndex === sIdx && currentQuestionIndex === qIdx}
+                            isAnswered={answers[q.id] !== undefined}
+                            onClick={() => {
+                              handleSectionChange(sIdx);
+                              handleQuestionChange(qIdx);
+                            }}
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { EssayOutline, WritingFeedback } from '@/lib/types';
-import { writingPrompts } from '@/lib/data/writing-prompts';
+import { writingPrompts } from '@/lib/writing-prompts';
 import WritingInterface from '@/components/writing/WritingInterface';
 import EssayOutliner from '@/components/writing/EssayOutliner';
 import { AlertTriangle, CheckCircle2, Lightbulb } from 'lucide-react';
@@ -27,7 +27,7 @@ export default function WritingPage() {
         body: JSON.stringify({ 
           answer, 
           prompt: currentPrompt.prompt,
-          context: currentPrompt.context 
+          context: currentPrompt.guidelines.join(' ') 
         }),
       });
 
@@ -60,17 +60,15 @@ export default function WritingPage() {
             <h2 className="text-2xl font-bold text-slate-800">
               {currentPrompt.title}
             </h2>
-            {currentPrompt.taskNumber === 54 && (
-              <button 
-                onClick={() => {
-                  setCurrentOutline(undefined);
-                  setIsOutlinerOpen(true);
-                }}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2"
-              >
-                <span className="text-sm">✨ Get AI Outline</span>
-              </button>
-            )}
+            <button 
+              onClick={() => {
+                setCurrentOutline(undefined);
+                setIsOutlinerOpen(true);
+              }}
+              className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2"
+            >
+              <span className="text-sm">✨ Get AI Outline</span>
+            </button>
           </div>
 
           <WritingInterface 
@@ -187,7 +185,7 @@ export default function WritingPage() {
 
       {isOutlinerOpen && (
         <EssayOutliner 
-          prompt={currentPrompt.context} 
+          prompt={currentPrompt.prompt} 
           onOutlineGenerated={(outline) => setCurrentOutline(outline)}
           onClose={() => setIsOutlinerOpen(false)}
         />
