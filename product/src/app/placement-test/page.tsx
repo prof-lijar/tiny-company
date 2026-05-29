@@ -201,7 +201,7 @@ export default function PlacementTestPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="p-6 bg-slate-50 border-slate-200 sticky top-6 h-fit">
             <h2 className="text-2xl font-bold mb-4">{passage.title}</h2>
-            <p className="text-lg leading-relaxed text-slate-800 font-medium" lang="ko">{passage.content}</p>
+            <p className="text-lg leading-relaxed text-slate-800 font-medium" lang="ko-KR">{passage.content}</p>
           </Card>
           <div className="space-y-8">
             {passage.questions.map((q: any, qIdx: number) => (
