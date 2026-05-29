@@ -1,9 +1,9 @@
 {
-  "cycle_reasoning": "Prioritizing the PR pipeline: QA must review the Placement Test UI before any other features or migrations proceed.",
+  "cycle_reasoning": "Prioritizing the clearance of the PR pipeline by assigning QA to review the TOPIK Placement Test UI and Architect to merge it once approved.",
   "current_phase": "quality",
   "tech_stack": "Next.js, TypeScript, Tailwind CSS, Supabase",
   "assignments": [
-    {"role": "qa", "turns": 2, "priority": "P0"},
+    {"role": "qa", "turns": 3, "priority": "P0"},
     {"role": "architect", "turns": 1, "priority": "P0"}
   ]
 }
