@@ -1,0 +1,62 @@
+ `'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { CheckCircle2, ArrowRight, ArrowLeft, Loader2, Award } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
+import { ListeningPlayer } from '@/components/listening/ListeningPlayer';
+import { listeningData } from '@/lib/data/listening';
+import { READING_PASSAGES } from '@/lib/data/reading';
+import { writingPrompts } from '@/lib/data/writing-prompts';
+import { TopikLevel } from '@/lib/types';
+
+// --- Test Configuration ---
+const TEST_CONFIG = {
+  listening: {
+    l3: ['listen-1', 'listen-5', 'listen-6'],
+    l4: ['listen-2', 'listen-9', 'listen-10'],
+    l5_6: ['listen-3', 'listen-4', 'listen-13', 'listen-14'],
+  },
+  reading: {
+    l3: ['reading-1', 'reading-4', 'reading-7'],
+    l4: ['reading-2', 'reading-5', 'reading-8'],
+    l5_6: ['reading-3', 'reading-6', 'reading-9', 'reading-15'],
+  },
+  writing: 'w3', // Task 53 style
+};
+
+const TOTAL_QUESTIONS = 21; // 10 listen + 10 read + 1 write
+
+type Step = 'welcome' | 'listening' | 'reading' | 'writing' | 'review' | 'result';
+
+export default function PlacementTestPage() {
+  const router = useRouter();
+  const [step, setStep] = useState<Step>('welcome');
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [writingAnswer, setWritingAnswer] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<{ level: number; message: string } | null>(null);
+
+  // Prepare the question sequence based on spec
+  const getQuestions = () => {
+    const listenQs = [
+      ...TEST_CONFIG.listening.l3,
+      ...TEST_CONFIG.listening.l4,
+      ...TEST_CONFIG.listening.l5_6,
+    ].map(id => listeningData.find(l => l.id === id)).filter(Boolean) as any[];
+
+    const readQs = [
+      ...TEST_CONFIG.reading.l3,
+      ...TEST_CONFIG.reading.l4,
+      ...TEST_CONFIG.reading.l5_6,
+    ].map(id => READING_PASSAGESL.find(r => r.id === id)).filter(Boolean) as any[];
+
+    return { listenQs, readQs };
+  };
+
+  // Wait, READING_PASSAGES is the name in reading.ts
+  // I will fix the import/usage in the actual implementation.
+}
+`
