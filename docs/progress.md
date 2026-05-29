@@ -1,24 +1,23 @@
 # Project Progress
 
 ## Current Phase
-Development/Iteration — Transitioning from MVP to a production-ready platform with 2026 TOPIK alignment.
+Quality — Resolving the PR pipeline for the Placement Test feature.
 
 ## Tech Stack
 Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 
 ## What Was Completed This Cycle
-- (Cycle 1) Initialized project documentation and mapped legacy CTO tasks to dev-team roles.
-- (Cycle 1) Frontend implemented the TOPIK Placement Test UI (PR #553).
+- Created QA issue #554 to review PR #553 (Placement Test UI).
 
 ## What Is In Progress
-- [ ] QA Review of PR #553 (Placement Test UI)
+- [ ] QA Review of PR #553 (Issue #554)
 
 ## What Is Blocked
-- New feature development is currently blocked by the PR pipeline rule until PR #553 is merged.
+- New feature development (Backend APIs, Supabase migration) is blocked by the PR pipeline rule until PR #553 is merged.
 
 ## Next Cycle Plan
-- Once PR #553 is merged, assign Backend to implement the AI Writing and Analysis APIs.
-- Assign Architect to proceed with the Supabase content migration.
+- Merge PR #553 after QA approval.
+- Unblock Backend and Architect for AI APIs and Supabase migration.
 
 ## Feature Checklist
 - [x] Landing Page
@@ -41,7 +40,6 @@ Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 - [x] Strict IBT Simulation Mode
 - [ ] Content Library Expansion (In Progress - Supabase Migration)
 - [ ] Writing Comparative Analysis (Needs Improvement)
-- [x] Writing Sample Library
 - [ ] Essay Outliner (Needs Improvement)
 - [ ] Audio-Text Sync (In Progress)
 - [ ] Unified Design System (In Progress)
