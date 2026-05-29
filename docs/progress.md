@@ -1,28 +1,28 @@
 # Project Progress
 
 ## Current Phase
-Development — Refining the landing page UX and cleaning up repository structure.
+Development — Refining the landing page UX, cleaning up repository structure, and resolving deployment issues.
 
 ## Tech Stack
 Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 
 ## What Was Completed This Cycle
-- [x] Identified open PR #568 for Home Page refinements.
-- [x] Created Issue #570 for QA to review PR #568.
-- [x] Created Issue #569 for Architect to delete accidental directory `product/src/lib/data` (ref #567).
+- [x] Created Issue #572 to address Vercel deployment failures.
+- [x] Updated work plan to prioritize deployment fix and QA review.
 
 ## What Is In Progress
 - [ ] [QA] Review Home Page UX/UI Refinements (PR #568) (#570)
 - [ ] [Architect] Delete accidental directory `product/src/lib/data` (#569)
-- [ ] [Frontend] Implement Home Page UX/UI Refinements (PR #568)
+- [ ] [Architect] Resolve Vercel Deployment Failures (#572)
 
 ## What Is Blocked
-- None.
+- Production deployment is currently failing on Vercel.
 
 ## Next Cycle Plan
-- Merge PR #568 once QA approves.
-- Confirm the accidental directory is removed.
-- Plan next set of features for Vocabulary Builder or Grammar Lessons.
+- Resolve Vercel deployment issues (P0).
+- Complete QA review and merge PR #568 for Home Page refinements.
+- Complete the cleanup of accidental directories.
+- Plan next features for Vocabulary Builder or Grammar Lessons.
 
 ## Feature Checklist
 - [x] Landing Page (Base implementation done)
