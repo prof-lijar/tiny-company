@@ -1,12 +1,10 @@
 {
-  "cycle_reasoning": "Addressing critical QA feedback on PR #553 to unblock the placement test feature and subsequent backend/architect work.",
+  "cycle_reasoning": "Priority is to fix the critical bugs and type safety issues in the TOPIK Placement Test UI (PR #553) as flagged by QA. The PR pipeline is blocked until this is resolved.",
   "current_phase": "quality",
-  "tech_stack": "Next.js, TypeScript, Tailwind CSS, Supabase",
+  "tech_stack": "Next.js + TypeScript + Tailwind CSS + Supabase",
   "assignments": [
-    {
-      "role": "frontend",
-      "turns": 3,
-      "priority": "P0"
-    }
+    {"role": "frontend", "turns": 3, "priority": "P0"},
+    {"role": "qa", "turns": 2, "priority": "P0"},
+    {"role": "architect", "turns": 1, "priority": "P0"}
   ]
 }
