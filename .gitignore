@@ -13,3 +13,5 @@ product/node_modules/
 product/.next/
 product/out/
 *.tsbuildinfo
+.env.*
+!.env.example
