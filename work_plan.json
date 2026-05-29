@@ -1,9 +1,9 @@
 {
-  "cycle_reasoning": "Prioritizing the PR pipeline to fix landing page responsiveness and resolve the Vercel build error.",
+  "cycle_reasoning": "Focusing on improving the Home Page's premium feel and finalizing the Supabase migration for content scalability.",
   "current_phase": "development",
-  "tech_stack": "Next.js, TypeScript, Tailwind CSS, Supabase",
+  "tech_stack": "Next.js/TypeScript + Tailwind CSS + Supabase",
   "assignments": [
-    {"role": "qa", "turns": 2, "priority": "P0"},
-    {"role": "architect", "turns": 1, "priority": "P0"}
+    {"role": "architect", "turns": 2, "priority": "P1"},
+    {"role": "frontend", "turns": 3, "priority": "P1"}
   ]
 }

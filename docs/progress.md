@@ -1,33 +1,33 @@
 # Project Progress
 
 ## Current Phase
-Development — Fixing landing page responsiveness and resolving Vercel build errors.
+Development — Refining the landing page UX and migrating content to Supabase.
 
 ## Tech Stack
 Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 
 ## What Was Completed This Cycle
-- [x] Created QA issue #564 to review PR #563 (Landing Page Responsiveness & Build Fix).
-- [x] Identified that PR #563 addresses the Vercel build error reported in Issue #558.
+- [x] Closed Issue #558 (Vercel build issue) as it was resolved and merged.
+- [x] Created Issue #565 for Home Page UX/UI refinement implementation.
+- [x] Created Issue #566 for Supabase migration finalization.
 
 ## What Is In Progress
-- [ ] [Frontend] Fix Landing Page Responsiveness (PR #563) - **P0**
-- [ ] [CEO] Fix Vercel Build Issue (Issue #558) - **P0** (Fixed in PR #563)
-- [ ] [QA] Review PR #563 (Issue #564) - **P0**
+- [ ] [Frontend] Implement Home Page UX/UI Refinements (#565)
+- [ ] [Architect] Finalize Supabase Migration for Content Library (#566)
 
 ## What Is Blocked
 - None.
 
 ## Next Cycle Plan
-- QA reviews PR #563.
-- Architect merges PR #563 upon approval.
-- Close Issue #558 and #559 once PR #563 is merged.
-- Move on to next features from the product spec.
+- Frontend implements the "premium" design updates to the landing page.
+- Architect defines the final migration path and populates Supabase with TOPIK content.
+- QA to review the landing page updates once a PR is raised.
 
 ## Feature Checklist
-- [x] Landing Page (Pending PR #563 merge)
-- [x] Mock Test Engine (2026)
-- [x] High-Speed Listening (2026)
+- [x] Landing Page (Base implementation done)
+- [ ] Landing Page (Premium UX Refinement) - in progress (#565)
+- [x] Mock Test Engine
+- [x] High-Speed Listening
 - [x] Anti-Template Writing Feedback
 - [x] Reading Speed Training
 - [ ] Vocabulary Builder with SRS (Needs Improvement)
@@ -43,7 +43,7 @@ Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 - [x] Dynamic Study Plan
 - [x] Writing Speed Trainer
 - [x] Strict IBT Simulation Mode
-- [ ] Content Library Expansion (In Progress - Supabase Migration)
+- [ ] Content Library Expansion (In Progress - Supabase Migration #566)
 - [ ] Writing Comparative Analysis (Needs Improvement)
 - [ ] Essay Outliner (Needs Improvement)
 - [ ] Audio-Text Sync (In Progress)
