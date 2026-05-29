@@ -1,9 +1,11 @@
 {
-  "cycle_reasoning": "Prioritizing the fix for Vercel deployment and clearing the PR queue for Home Page refinements.",
+  "cycle_reasoning": "Prioritizing recovery of production deployment and initiating the AI Pronunciation Trainer pipeline while cleaning up technical debt.",
   "current_phase": "development",
-  "tech_stack": "Next.js/TypeScript + Tailwind + Supabase",
+  "tech_stack": "Next.js, TypeScript, Tailwind CSS, Supabase",
   "assignments": [
-    {"role": "qa", "turns": 2, "priority": "P0"},
-    {"role": "architect", "turns": 2, "priority": "P0"}
+    {"role": "architect", "turns": 3, "priority": "P0"},
+    {"role": "designer", "turns": 2, "priority": "P0"},
+    {"role": "backend", "turns": 2, "priority": "P1"},
+    {"role": "frontend", "turns": 2, "priority": "P1"}
   ]
 }
