@@ -1,0 +1,190 @@
+'use client';
+
+import React, { useState } from 'react';
+import { EssayOutline, WritingFeedback } from '@/lib/types';
+import { writingPrompts } from '@/lib/data/writing-prompts';
+import WritingInterface from '@/components/writing/WritingInterface';
+import EssayOutliner from '@/components/writing/EssayOutliner';
+import { AlertTriangle, CheckCircle2, Lightbulb, TrendingUp } from 'lucide-react';
+
+export default function WritingPage() {
+  const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
+  const [feedback, setFeedback] = useState<WritingFeedback | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isOutlinerOpen, setIsOutlinerOpen] = useState(false);
+  const [currentOutline, setCurrentOutline] = useState<EssayOutline | undefined>(undefined);
+
+  const currentPrompt = writingPrompts[currentPromptIndex];
+
+  const handleSubmit = async (answer: string) => {
+    setIsAnalyzing(true);
+    setFeedback(null);
+    
+    try {
+      const response = await fetch('/api/writing-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          answer, 
+          prompt: currentPrompt.prompt,
+          context: currentPrompt.context 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI feedback');
+      }
+
+      const data: WritingFeedback = await response.json();
+      setFeedback(data);
+    } catch (error) {
+      console.error('Error submitting writing:', error);
+      alert('An error occurred while analyzing your writing. Please try again.');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  return (
+    <div className=\"max-w-4xl mx-auto py-12 px-4\">
+      <header className=\"mb-12 text-center\">
+        <h1 className=\"text-4xl font-extrabold text-slate-900 mb-4\">Writing Practice</h1>
+        <p className=\"text-xl text-slate-600\">
+          Improve your TOPIK II writing skills with AI-powered feedback.
+        </p>
+      </header>
+
+      <div className=\"grid grid-cols-1 lg:grid-cols-3 gap-8\">
+        <div className=\"lg:col-span-2\">
+          <div className=\"flex justify-between items-center mb-6\">
+            <h2 className=\"text-2xl font-bold text-slate-800\">
+              {currentPrompt.title}
+            </h2>
+            {currentPrompt.taskNumber === 54 && (
+              <button 
+                onClick={() => {
+                  setCurrentOutline(undefined);
+                  setIsOutlinerOpen(true);
+                }}
+                className=\"px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2\"
+              >
+                <span className=\"text-sm\">✨ Get AI Outline</span>
+              </button>
+            )}
+          </div>
+
+          <WritingInterface 
+            prompt={currentPrompt} 
+            onSubmit={handleSubmit}
+            outline={currentOutline}
+          />
+          
+          <div className=\"flex justify-between items-center mt-8\">
+            <button 
+              disabled={currentPromptIndex === 0}
+              onClick={() => {
+                setCurrentPromptIndex(prev => prev - 1);
+                setFeedback(null);
+                setCurrentOutline(undefined);
+              }}
+              className=\"px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg disabled:opacity-50 transition-colors\"
+            >
+              Previous Prompt
+            </button>
+            <button 
+              disabled={currentPromptIndex === writingPrompts.length - 1}
+              onClick={() => {
+                setCurrentPromptIndex(prev => prev + 1);
+                setFeedback(null);
+                setCurrentOutline(undefined);
+              }}
+              className=\"px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg disabled:opacity-50 transition-colors\"
+            >
+              Next Prompt
+            </button>
+          </div>
+        </div>
+
+        <div className=\"lg:col-span-1\">
+          {isAnalyzing ? (
+            <div className=\"bg-indigo-50 p-6 rounded-xl border border-indigo-100 text-center\">
+              <div className=\"animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600 mx-auto mb-4\"></div>
+              <p className=\"text-indigo-600 font-medium\">AI is analyzing your writing...</p>
+            </div>
+          ) : feedback ? (
+            <div className=\"bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6\">
+              <div className=\"text-center mb-6">
+                <div className=\"text-sm text-slate-500 uppercase tracking-wider font-semibold mb-1\">Predicted Level & Score</div>
+                <div className=\"text-5xl font-bold text-indigo-600\">L{feedback.score.predicted_level} ({feedback.score.scaled_score})</div>
+              </div>
+              
+              <div className=\"space-y-4\">
+                <h4 className=\"font-bold text-slate-800 flex items-center gap-2\">
+                  <TrendingUp size={18} className=\"text-indigo-500\" />
+                  Rubric Breakdown
+                </h4>
+                <div className=\"space-y-3\">
+                  {Object.entries(feedback.rubric_breakdown).map(([key, value]) => (
+                    <div key={key} className=\"p-3 bg-slate-50 rounded-lg border border-slate-100\">
+                      <div className=\"flex justify-between items-center mb-1\">
+                        <span className=\"text-xs font-bold uppercase text-slate-500\">{key}</span>
+                        <span className=\"text-xs font-bold text-indigo-600\">{value.score}/5</span>
+                      </div>
+                      <p className=\"text-xs text-slate-600\">{value.feedback}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {feedback.template_usage.detected && (
+                <div className=\"p-4 bg-amber-50 rounded-lg border border-amber-100 space-y-3\">
+                  <h4 className=\"font-bold text-amber-800 text-sm flex items-center gap-2\">
+                    <AlertTriangle size={16} />
+                    Template Warning
+                  </h4>
+                  <p className=\"text-xs text-amber-700\">{feedback.template_usage.analysis}</p>
+                  <div className=\"text-xs bg-white p-2 rounded border border-amber-200 text-amber-800 italic">
+                    <Lightbulb size={12} className=\"inline mr-1\" /> {feedback.template_usage.suggestions}
+                  </div>
+                </div>
+              )}
+
+              <div className=\"space-y-4 pt-4 border-t border-slate-100\">
+                <h4 className=\"font-bold text-slate-800 flex items-center gap-2\">
+                  <CheckCircle2 size={18} className=\"text-green-500\" />
+                  Key Corrections
+                </h4>
+                <div className=\"space-y-3\">
+                  {feedback.corrections.map((corr, i) => (
+                    <div key={i} className=\"p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs space-y-1\">
+                      <div className=\"text-slate-400 line-through\">{corr.original}</div>
+                      <div className=\"text-indigo-700 font-medium\">{corr.corrected}</div>
+                      <div className=\"text-slate-500 italic\">{corr.reason}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className=\"space-y-2 pt-4 border-t border-slate-100\">
+                <h4 className=\"font-bold text-slate-800 text-sm\">Overall Advice</h4>
+                <p className=\"text-sm text-slate-600 leading-relaxed\">{feedback.overall_advice}</p>
+              </div>
+            </div>
+          ) : (
+            <div className=\"bg-slate-50 p-6 rounded-xl border border-slate-200 text-center text-slate-500 italic\">
+              Submit your writing to receive AI feedback.
+            </div>
+          )}
+        </div>
+      </div>
+
+      {isOutlinerOpen && (
+        <EssayOutliner 
+          prompt={currentPrompt.context} 
+          onOutlineGenerated={(outline) => setCurrentOutline(outline)}
+          onClose={() => setIsOutlinerOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
