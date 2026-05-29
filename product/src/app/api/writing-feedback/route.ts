@@ -2,10 +2,6 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { logger } from '@/lib/logger';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 const SYSTEM_PROMPT = `You are an expert TOPIK II examiner specializing in the 2026 Reform standards. Your task is to evaluate a user's essay (Task 51, 52, 53, or 54) and provide a detailed report.
 
 ### 2026 Grading Rubric:
@@ -40,6 +36,10 @@ const SYSTEM_PROMPT = `You are an expert TOPIK II examiner specializing in the 2
 
 export async function POST(req: Request) {
   try {
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+
     const { answer, prompt, context } = await req.json();
 
     if (!answer || !prompt) {

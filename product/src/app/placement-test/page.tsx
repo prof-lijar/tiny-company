@@ -150,7 +150,7 @@ export default function PlacementTestPage() {
     return (
       <div className="max-w-4xl mx-auto p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <Button variant="ghost" onClick={() => setStep('welcome')} className="text-slate-500">
+          <Button variant="outline" onClick={() => setStep('welcome')} className="text-slate-500">
             <ArrowLeft className="mr-2" size={16} /> Back
           </Button>
           <div className="text-sm font-bold text-blue-600">Listening Section {currentIdx + 1}/{listenPassages.length}</div>
@@ -206,7 +206,7 @@ export default function PlacementTestPage() {
     return (
       <div className="max-w-5xl mx-auto p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <Button variant="ghost" onClick={() => setStep('listening')} className="text-slate-500">
+          <Button variant="outline" onClick={() => setStep('listening')} className="text-slate-500">
             <ArrowLeft className="mr-2" size={16} /> Back
           </Button>
           <div className="text-sm font-bold text-blue-600">Reading Section {currentIdx + 1}/{readPassages.length}</div>
@@ -259,7 +259,7 @@ export default function PlacementTestPage() {
     return (
       <div className="max-w-3xl mx-auto p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <Button variant="ghost" onClick={() => setStep('reading')} className="text-slate-500">
+          <Button variant="outline" onClick={() => setStep('reading')} className="text-slate-500">
             <ArrowLeft className="mr-2" size={16} /> Back
           </Button>
           <div className="text-sm font-bold text-blue-600">Writing Section</div>
@@ -337,7 +337,7 @@ export default function PlacementTestPage() {
             </div>
           </div>
           <div className="flex justify-between pt-6">
-            <Button variant="ghost" onClick={() => setStep('writing')}>
+            <Button variant="outline" onClick={() => setStep('writing')}>
               <ArrowLeft className="mr-2" size={18} /> Edit Answers
             </Button>
             <Button 
