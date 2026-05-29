@@ -1,14 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle2, ArrowRight, ArrowLeft, Loader2, Award, Volume2, BookOpen, PenTool, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { ListeningPlayer } from '@/components/listening/ListeningPlayer';
-import { listeningData } from '@/lib/data/listening';
-import { READING_PASSAGES } from '@/lib/data/reading';
-import { writingPrompts } from '@/lib/data/writing-prompts';
 
 type Step = 'welcome' | 'listening' | 'reading' | 'writing' | 'review' | 'result';
 
@@ -34,20 +31,42 @@ export default function PlacementTestPage() {
   const [writingAnswer, setWritingAnswer] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [prediction, setPrediction] = useState<{ level: number; label: string } | null>(null);
+  
+  // State for fetched data to avoid importing from @/lib/data
+  const [testData, setTestData] = useState<{
+    listening: any[],
+    reading: any[],
+    writing: any
+  } | null>(null);
 
-  const listenPassages = [
-    ...TEST_CONFIG.listening.l3,
-    ...TEST_CONFIG.listening.l4,
-    ...TEST_CONFIG.listening.l5_6,
-  ].map(id => listeningData.find(l => l.id === id)).filter(Boolean) as any[];
+  useEffect(() => {
+    async function loadTestData() {
+      try {
+        // In a real app, we'd call an API. For this placement test, 
+        // we simulate fetching the specific set of IDs defined in TEST_CONFIG.
+        // Since we can't use server components in 'use client', we'd typically 
+        // fetch from an API route that uses ContentService.
+        const response = await fetch('/api/placement-test/content');
+        const data = await response.json();
+        setTestData(data);
+      } catch (e) {
+        console.error("Failed to load placement test data", e);
+      }
+    }
+    loadTestData();
+  }, []);
 
-  const readPassages = [
-    ...TEST_CONFIG.reading.l3,
-    ...TEST_CONFIG.reading.l4,
-    ...TEST_CONFIG.reading.l5_6,
-  ].map(id => READING_PASSAGES.find(r => r.id === id)).filter(Boolean) as any[];
+  if (!testData) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="animate-spin text-blue-600" size={48} />
+      </div>
+    );
+  }
 
-  const writingPrompt = writingPrompts.find(w => w.id === TEST_CONFIG.writingId);
+  const listenPassages = testData.listening;
+  const readPassages = testData.reading;
+  const writingPrompt = testData.writing;
 
   const handleAnswer = (qId: string, optionIdx: number) => {
     setAnswers(prev => ({ ...prev, [qId]: optionIdx }));
@@ -55,13 +74,11 @@ export default function PlacementTestPage() {
 
   const calculateResult = () => {
     let score = 0;
-    // Listening
     listenPassages.forEach(p => {
       p.questions.forEach((q: any) => {
         if (answers[q.id] === q.correctAnswer) score++;
       });
     });
-    // Reading
     readPassages.forEach(p => {
       p.questions.forEach((q: any) => {
         if (answers[q.id] === q.correctAnswer) score++;
@@ -76,7 +93,6 @@ export default function PlacementTestPage() {
 
   const submitTest = async () => {
     setIsLoading(true);
-    // Simulate API call to save results and trigger study plan
     await new Promise(resolve => setTimeout(resolve, 2000));
     const res = calculateResult();
     setPrediction(res);
@@ -174,7 +190,7 @@ export default function PlacementTestPage() {
                 if (currentIdx < listenPassages.length - 1) setCurrentIdx(prev => prev + 1);
                 else setStep('reading');
               }}
-              disabled={Object.keys(answers).length < (currentIdx + 1) * 2} // Assume 2 questions per passage
+              disabled={Object.keys(answers).length < (currentIdx + 1) * 2} 
               className="px-6"
             >
               {currentIdx < listenPassages.length - 1 ? 'Next Passage' : 'Start Reading'} <ArrowRight className="ml-2" size={18} />

@@ -1,12 +1,16 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { grammarData } from '@/lib/data/grammar';
+import { createServerContentService } from '@/lib/services/content-service';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
 export default async function GrammarLessonPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  
+  const contentService = await createServerContentService();
+  const grammarData = await contentService.getGrammar();
+  
   const pattern = grammarData.find(p => p.id === id);
 
   if (!pattern) {
@@ -52,7 +56,7 @@ export default async function GrammarLessonPage({ params }: { params: Promise<{ 
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-slate-800 border-b pb-2">Examples</h2>
           <div className="grid gap-4">
-            {pattern.examples.map((example, idx) => (
+            {pattern.examples.map((example: any, idx: number) => (
               <Card key={idx} className="p-6">
                 <div className="space-y-2">
                   <p className="text-xl font-medium text-slate-900" lang="ko">
