@@ -1,23 +1,25 @@
 # Project Progress
 
 ## Current Phase
-Quality — Resolving the PR pipeline for the Placement Test feature.
+Quality — Clearing the PR pipeline for the TOPIK Placement Test.
 
 ## Tech Stack
 Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 
 ## What Was Completed This Cycle
-- Created QA issue #554 to review PR #553 (Placement Test UI).
+- Assigned QA to review PR #553 (Placement Test UI) via Issue #554.
+- Updated `work_plan.json` to prioritize QA and Architect merge turns.
 
 ## What Is In Progress
 - [ ] QA Review of PR #553 (Issue #554)
+- [ ] Merge PR #553 (Pending QA approval)
 
 ## What Is Blocked
-- New feature development (Backend APIs, Supabase migration) is blocked by the PR pipeline rule until PR #553 is merged.
+- New feature development (Backend AI APIs, Supabase Migration) remains blocked by the PR pipeline rule until PR #553 is merged.
 
 ## Next Cycle Plan
-- Merge PR #553 after QA approval.
-- Unblock Backend and Architect for AI APIs and Supabase migration.
+- Merge PR #553 upon QA approval.
+- Once the PR queue is empty, unblock the Architect for Supabase migration and Backend for AI APIs.
 
 ## Feature Checklist
 - [x] Landing Page
