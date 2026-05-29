@@ -19,26 +19,8 @@ export async function GET() {
     const writingId = 'w3';
 
     // Fetch all grammar/vocab etc if needed, but here we need specific content
-    // Since ContentService doesn't have getByIds, we fetch all and filter or implement it.
-    // For simplicity in the placement test, we can fetch all and filter.
-    
-    const allListening = await contentService.getListeningPassages();
-    const allReading = await contentService.getReadingPassages();
     const allWriting = await contentService.getWritingPrompts();
 
-    const listening = allListening
-      .filter(l => listeningIds.includes(l.id))
-      .map(l => {
-        // We need the questions too. ContentService.getListeningPassageWithQuestions is for one.
-        // For the test, we might need to adjust ContentService or just mock the questions if they are in the object.
-        // Actually, getListeningPassages just returns the passages. 
-        // This is a problem. I should check ContentService again.
-        return l;
-      });
-
-    // Wait, the placement test needs questions. 
-    // I will implement a helper in this route to fetch questions for each passage.
-    
     const listeningWithQuestions = await Promise.all(
       listeningIds.map(async id => {
         try {
@@ -62,14 +44,18 @@ export async function GET() {
     const writing = allWriting.find(w => w.id === writingId);
 
     return NextResponse.json({
-      listening: listeningWithQuestions.filter(Boolean).map(res => ({
-        ...res.passage,
-        questions: res.questions
-      })),
-      reading: readingWithQuestions.filter(Boolean).map(res => ({
-        ...res.passage,
-        questions: res.questions
-      })),
+      listening: listeningWithQuestions
+        .filter((res): res is NonNullable<typeof listeningWithQuestions[0]> => res !== null)
+        .map(res => ({
+          ...res.passage,
+          questions: res.questions
+        })),
+      reading: readingWithQuestions
+        .filter((res): res is NonNullable<typeof readingWithQuestions[0]> => res !== null)
+        .map(res => ({
+          ...res.passage,
+          questions: res.questions
+        })),
       writing: writing || { title: 'Writing Assessment', instruction: 'Write a short essay.', context: 'TOPIK Style' }
     });
   } catch (error) {

@@ -5,7 +5,7 @@ import { calculateNextReview, SRSResult } from '@/lib/srs';
 import { FlashCard } from '@/components/vocabulary/FlashCard';
 import { Button } from '@/components/ui/Button';
 import { createClient } from '@/lib/supabase/client';
-import { VocabularyWord } from '@/lib/data/vocabulary';
+import { VocabularyWord } from '@/lib/types';
 
 interface UserProgress {
   [key: string]: {
