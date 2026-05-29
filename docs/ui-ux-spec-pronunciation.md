@@ -103,3 +103,38 @@ This is the most critical component. A coordinate system where X = Time and Y = 
 - **Audio-Visual Sync**: When replaying the reference audio, a vertical "playhead" line should move across the pitch contour.
 - **Contrast**: Ensure the `emerald-500` (User) and `indigo-500` (Native) lines are clearly distinguishable.
 - **Korean Typography**: Use `font-noto-sans-kr` for the target phrases, ensuring `leading-relaxed` and `tracking-tight` for a modern look.
+
+## 7. Responsive Layout Strategy
+
+To ensure the Trainer is intuitive across all devices, the layout adapts as follows:
+
+### 7.1 Mobile ( < 640px )
+- **Layout**: Single column, full-width.
+- **Phrase Browser**: Single column list of cards.- **Trainer Workspace**:
+    - **Prompt Area**: Fixed at top, compact.
+    - **Pitch Canvas**: Height reduced to `h-48` to leave room for controls.
+    - **Feedback Card**: Appears as a bottom-sheet or overlay when AI feedback is ready.
+    - **Controls**: Large, thumb-friendly buttons (min 48px height).
+
+### 7.2 Tablet ( 640px - 1024px )
+- **Layout**: Centered container (`max-w-3xl`).
+- **Phrase Browser**: 2-column grid of cards.
+- **Trainer Workspace**:
+    - **Pitch Canvas**: Height `h-64`.
+    - **Feedback Card**: Positioned below the canvas, integrated into the flow.
+
+### 7.3 Desktop ( > 1024px )
+- **Layout**: Two-pane layout for the Trainer Workspace.
+    - **Left Pane (60%)**: Pitch Visualization Canvas (Expanded height `h-96`).
+    - **Right Pane (40%)**: Prompt Area, AI Feedback Card, and Controls.
+- **Phrase Browser**: 3-column grid of cards.
+
+## 8. State Transition Map
+
+| State | UI Trigger | Visual Change |
+|---|---|---|
+| **Idle** | Page Load | "Record" button is Primary Indigo; Canvas shows only Reference line. |
+| **Listening** | Play Reference | Playhead moves across Native path; Audio plays. |
+| **Recording** | Click Record | Button turns Red (Pulse animation); User path draws in real-time; Amplitude waveform active. |
+| **Processing** | Stop Record | Button shows Spinner; "Analyzing..." badge active. |
+| **Feedback** | Analysis Complete | AI Feedback Card slides in; Divergence highlights appear on Canvas; "Try Again" becomes primary action. |

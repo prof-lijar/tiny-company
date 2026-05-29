@@ -8,8 +8,9 @@ All components must adhere to the specifications in `design/component-spec.md`.
 - **Primary Color**: `indigo-600` (Main actions, branding)
 - **Secondary Color**: `slate-100` (Section backgrounds, subtle dividers)
 - **Accent Color**: `amber-400` (Achievements, streaks, highlights)
-- **Success Color**: `emerald-500` (Correct answers, progress bars)
-- **Error Color**: `rose-500` (Incorrect answers, critical timers)
+- **Success Color**: `emerald-500` (Correct answers, progress bars, User Pitch Contour)
+- **Error Color**: `rose-500` (Incorrect answers, critical timers, Pitch Divergence)
+- **Reference Color**: `indigo-400` (Native Speaker Pitch Contour)
 - **Typography**: `Noto Sans KR` for all Korean text, `Inter` for English/UI.
 
 ## 2. Audit & Mapping
@@ -25,6 +26,7 @@ The following pages must be audited for custom Tailwind classes that should be r
 | `mock-test` | High | IBT layout, Question palette, Submission modal |
 | `writing` | High | Text editors, Feedback reports, Outliner |
 | `landing` | Low | Hero buttons, Pricing cards |
+| `pronunciation` | High | Pitch Canvas, Recording Controls, AI Feedback Card |
 
 ## 3. Core Component Library (`product/src/components/ui/`)
 The CTO should ensure the following components are fully implemented and used exclusively:
@@ -50,6 +52,19 @@ The CTO should ensure the following components are fully implemented and used ex
 
 ### D. `Modal.tsx`
 - **Requirements**: Backdrop blur, centered positioning, consistent transition animations.
+
+### E. Specialized Components (Pronunciation Trainer)
+These components handle complex data visualization and real-time audio interaction:
+- **`PitchCanvas.tsx`**: 
+    - SVG-based visualization of F0 pitch contours.
+    - Must support overlaying two paths (Native vs User).
+    - Must implement vertical "divergence" highlights using `bg-rose-100`.
+- **`RecordingControl.tsx`**: 
+    - State-driven button (Idle $\rightarrow$ Recording $\rightarrow$ Processing).
+    - Integrated real-time amplitude waveform for mic feedback.
+- **`AIFeedbackCard.tsx`**: 
+    - Specialized alert component using `bg-amber-50` and `border-amber-400`.
+    - Focuses on "Actionable Tips" with high readability.
 
 ## 4. Implementation Workflow
 1. **Component Hardening**: Update `product/src/components/ui/` to match `design/component-spec.md` exactly.
