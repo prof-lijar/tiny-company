@@ -1,30 +1,11 @@
 {
-  "cycle_reasoning": "Cycle 21. CTO has a significant backlog (12 issues), so no new CTO issues are created. Prioritizing the replacement of mock APIs (#524-#527) and the 2026 Theme Pack (#541). QA is assigned to test CTO's output. Product is assigned for roadmap maintenance. Designer is assigned (Cycle 21 is divisible by 3) to review UI/UX. Legal is assigned (Cycle 21 is divisible by 7) to handle the new audio data privacy requirements in issue #544.",
+  "cycle_reasoning": "Initialize the production-ready phase by migrating content to Supabase, replacing mock AI APIs with real implementations, and cleaning up technical debt.",
+  "current_phase": "development",
+  "tech_stack": "Next.js/TypeScript + Tailwind + Supabase",
   "assignments": [
-    {
-      "role": "cto",
-      "turns": 5,
-      "priority": "P0"
-    },
-    {
-      "role": "qa",
-      "turns": 1,
-      "priority": "P1"
-    },
-    {
-      "role": "product",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "designer",
-      "turns": 1,
-      "priority": "P2"
-    },
-    {
-      "role": "legal",
-      "turns": 1,
-      "priority": "P1"
-    }
+    {"role": "architect", "turns": 2, "priority": "P0"},
+    {"role": "backend", "turns": 3, "priority": "P1"},
+    {"role": "qa", "turns": 2, "priority": "P2"},
+    {"role": "frontend", "turns": 2, "priority": "P2"}
   ]
 }
