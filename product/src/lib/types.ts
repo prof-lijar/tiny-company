@@ -166,14 +166,26 @@ export interface WritingSample {
 
 export interface WritingFeedback {
   score: number;
+  predictedLevel: number;
   strengths: string[];
   improvements: string[];
-  correctedText: string;
   templateUsage: {
+    detected: boolean;
     detectedTemplates: string[];
-    naturalAlternatives: { template: string; alternative: string }[];
     structuralVarietyScore: number;
+    naturalAlternatives: {
+      template: string;
+      alternative: string;
+    }[];
   };
+  rubricBreakdown: {
+    content: { score: number; feedback: string };
+    vocabulary: { score: number; feedback: string };
+    grammar: { score: number; feedback: string };
+    structure: { score: number; feedback: string };
+  };
+  correctedText: string;
+  overallAdvice: string;
 }
 
 export interface SRSState {
