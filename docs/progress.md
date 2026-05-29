@@ -1,31 +1,31 @@
 # Project Progress
 
 ## Current Phase
-Development — Addressing Home Page responsiveness and migrating content to Supabase.
+Development — Fixing landing page responsiveness and resolving Vercel build errors.
 
 ## Tech Stack
 Next.js (App Router), TypeScript, Tailwind CSS, Supabase, NextAuth.js.
 
 ## What Was Completed This Cycle
-- [x] Merged PR #553: TOPIK Placement Test UI (after QA fixes).
-- [x] Merged PR #552: Real AI Writing Feedback API.
-- [x] Decomposed CEO's home page feedback (Issue #557) into actionable tasks for Designer and Frontend.
+- [x] Created QA issue #564 to review PR #563 (Landing Page Responsiveness & Build Fix).
+- [x] Identified that PR #563 addresses the Vercel build error reported in Issue #558.
 
 ## What Is In Progress
-- [ ] [Frontend] Fix Landing Page Responsiveness (Issue #559) - **P0**
-- [ ] [Designer] Audit and Refine Home Page UX/UI (Issue #560) - **P1**
-- [ ] [Backend] Migrate Content Library to Supabase (Issue #561) - **P1**
+- [ ] [Frontend] Fix Landing Page Responsiveness (PR #563) - **P0**
+- [ ] [CEO] Fix Vercel Build Issue (Issue #558) - **P0** (Fixed in PR #563)
+- [ ] [QA] Review PR #563 (Issue #564) - **P0**
 
 ## What Is Blocked
-- None. The PR queue is clear.
+- None.
 
 ## Next Cycle Plan
-- Designer to provide a UX audit and refinement plan for the home page.
-- Frontend to fix immediate responsiveness issues and implement design refinements.
-- Backend to implement the Supabase schema and begin data migration.
+- QA reviews PR #563.
+- Architect merges PR #563 upon approval.
+- Close Issue #558 and #559 once PR #563 is merged.
+- Move on to next features from the product spec.
 
 ## Feature Checklist
-- [x] Landing Page (Needs Responsiveness Fixes)
+- [x] Landing Page (Pending PR #563 merge)
 - [x] Mock Test Engine (2026)
 - [x] High-Speed Listening (2026)
 - [x] Anti-Template Writing Feedback
