@@ -1,13 +1,14 @@
 import React from 'react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { Mockup } from '@/components/ui/Mockup';
+import { HeroMockup } from '@/components/home/HeroMockup';
+import { HowItWorks } from '@/components/home/HowItWorks';
 
 const FEATURES = [
   {
     title: 'Vocabulary Builder',
     description: 'Master TOPIK vocabulary with our Spaced Repetition System (SRS) and curated lists by level.',
-    icon: '📚',
+    icon: '📖',
     category: 'Study',
   },
   {
@@ -19,7 +20,7 @@ const FEATURES = [
   {
     title: 'Reading Practice',
     description: 'Real-world reading passages and comprehension exercises tailored to the exam format.',
-    icon: '📖',
+    icon: '📚',
     category: 'Study',
   },
   {
@@ -32,7 +33,7 @@ const FEATURES = [
     title: 'Listening Exercises',
     description: 'Targeted listening practice with high-quality audio and exam-style questions.',
     icon: '🎧',
-    category: 'Study',
+    category: 'AI Tools',
   },
   {
     title: 'Mock Test Simulator',
@@ -57,86 +58,44 @@ const PRICING_PLANS = [
   },
 ];
 
-const HowItWorks = () => {
-  return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
-            How it Works
-          </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">
-            Our methodology is designed to take you from beginner to advanced proficiency.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          {/* Connecting Lines (Desktop) */}
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 -z-10"></div>
-          
-          {[
-            { step: '01', title: 'Assess', description: 'Take a placement test to determine your current TOPIK level and identify gaps.' },
-            { step: '02', title: 'Study', description: 'Use SRS vocabulary and grammar lessons tailored to your specific level.' },
-            { step: '03', title: 'Master', description: 'Apply your knowledge with reading, writing, and full-length mock tests.' },
-          ].map((item, index) => (
-            <div key={index} className="flex flex-col items-center text-center relative z-10">
-              <div className="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6 ring-8 ring-indigo-50">
-                {item.step}
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
-              <p className="text-slate-600">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden bg-white">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none" 
-             style={{ backgroundImage: 'radial-gradient(#4f46e5 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}>
+        {/* Background Grid Pattern */}
+        <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/50 to-transparent"></div>
         </div>
-        
+
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-6 border border-indigo-100">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-indigo-400"></span>
-                </span>
-                Trusted by 1,000+ Korean learners
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-6 border border-indigo-100 animate-fade-in">
+                ✨ Trusted by 1,000+ Korean learners
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
                 Master TOPIK II with <span className="text-indigo-600">Confidence</span>
               </h1>
-              <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 The ultimate study platform for TOPIK II (Levels 3-6). Combine SRS vocabulary, 
                 comprehensive grammar, and AI-powered writing feedback to reach your goal score.
               </p>
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto px-8">
                   Start Learning for Free
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto px-8">
                   View Study Plan
                 </Button>
               </div>
             </div>
-            <div className="flex-1 relative">
-              <Mockup />
+            <div className="flex-1 relative w-full max-w-2xl">
+              <HeroMockup />
             </div>
           </div>
         </div>
-        
-        {/* Background Blobs */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-400 rounded-full blur-3xl opacity-20 -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-violet-400 rounded-full blur-3xl opacity-20 -z-10"></div>
       </section>
 
       {/* Features Section */}
@@ -153,11 +112,11 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {FEATURES.map((feature, index) => (
-              <Card key={index} className="p-6 md:p-8 border-t-4 border-t-indigo-600 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group bg-white">
-                <div className="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <Card key={index} className="p-6 md:p-8 relative group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-indigo-600 shadow-sm hover:shadow-xl">
+                <div className="text-4xl mb-4 w-14 h-14 flex items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-2 tracking-tight">{feature.title}</h3>
                 <p className="text-slate-600 leading-relaxed">
                   {feature.description}
                 </p>
@@ -167,7 +126,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How it Works Section */}
+      {/* How It Works Section */}
       <HowItWorks />
 
       {/* Pricing Section */}
@@ -183,14 +142,14 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
             {PRICING_PLANS.map((plan) => (
-              <Card key={plan.name} className={`p-6 md:p-8 relative transition-all duration-300 ${
+              <Card key={plan.name} className={`p-6 md:p-8 relative ${
                 plan.highlighted 
-                ? 'border-indigo-600 ring-2 ring-indigo-600 scale-105 shadow-xl bg-gradient-to-br from-white to-indigo-50' 
-                : 'border-slate-200'
+                ? 'border-indigo-600 ring-2 ring-indigo-600 scale-105 z-10 bg-gradient-to-br from-white to-indigo-50/30 shadow-2xl' 
+                : 'border-slate-200 shadow-sm'
               }`}>
                 <div className="text-center mb-8">
                   {plan.highlighted && (
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest animate-pulse">
                       MOST POPULAR
                     </div>
                   )}
@@ -205,14 +164,14 @@ export default function LandingPage() {
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3 text-slate-600">
-                      <span className="text-indigo-500 font-bold">✓</span>
+                      <span className="text-indigo-500 text-lg">✓</span>
                       {feature}
                     </li>
                   ))}
                 </ul>
                 <Button 
                   variant={plan.highlighted ? 'primary' : 'outline'} 
-                  size="lg"
+                  size="lg" 
                   className="w-full"
                 >
                   {plan.highlighted ? 'Upgrade to Pro' : 'Get Started'}
@@ -227,13 +186,13 @@ export default function LandingPage() {
       <section className="py-20 bg-gradient-to-r from-indigo-600 to-violet-700 text-white">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-tight animate-fade-in">
               Ready to ace your TOPIK test?
             </h2>
             <p className="text-xl mb-10 opacity-90">
               Join thousands of students mastering Korean proficiency.
             </p>
-            <Button variant="secondary" size="lg" className="bg-white text-indigo-600 hover:bg-slate-100 border-none">
+            <Button variant="secondary" size="lg" className="bg-white text-indigo-600 hover:bg-slate-100 shadow-xl px-8">
               Get Started Now
             </Button>
           </div>
