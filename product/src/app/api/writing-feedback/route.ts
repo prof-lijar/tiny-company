@@ -16,22 +16,26 @@ const SYSTEM_PROMPT = `You are an expert TOPIK II examiner specializing in the 2
 
 ### Feedback Format (JSON):
 {
-  "score": { "predicted_level": 3-6, "scaled_score": 0-100 },
-  "template_usage": {
+  "score": 0-100,
+  "predictedLevel": 3-6,
+  "strengths": ["List of key strengths"],
+  "improvements": ["List of key areas for improvement"],
+  "templateUsage": {
     "detected": boolean,
-    "analysis": "Explain which parts felt formulaic",
-    "suggestions": "Provide natural alternatives to the template phrases"
+    "detectedTemplates": ["List of detected template phrases"],
+    "structuralVarietyScore": 1-5,
+    "naturalAlternatives": [
+      { "template": "the detected phrase", "alternative": "a more natural way to say it" }
+    ]
   },
-  "rubric_breakdown": {
+  "rubricBreakdown": {
     "content": { "score": 1-5, "feedback": "..." },
     "vocabulary": { "score": 1-5, "feedback": "..." },
     "grammar": { "score": 1-5, "feedback": "..." },
     "structure": { "score": 1-5, "feedback": "..." }
   },
-  "corrections": [
-    { "original": "...", "corrected": "...", "reason": "..." }
-  ],
-  "overall_advice": "..."
+  "correctedText": "The fully corrected version of the essay",
+  "overallAdvice": "Comprehensive final advice"
 }`;
 
 export async function POST(req: Request) {

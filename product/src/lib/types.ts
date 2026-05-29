@@ -165,27 +165,27 @@ export interface WritingSample {
 }
 
 export interface WritingFeedback {
-  score: {
-    predicted_level: number;
-    scaled_score: number;
-  };
-  template_usage: {
+  score: number;
+  predictedLevel: number;
+  strengths: string[];
+  improvements: string[];
+  templateUsage: {
     detected: boolean;
-    analysis: string;
-    suggestions: string;
+    detectedTemplates: string[];
+    structuralVarietyScore: number;
+    naturalAlternatives: {
+      template: string;
+      alternative: string;
+    }[];
   };
-  rubric_breakdown: {
+  rubricBreakdown: {
     content: { score: number; feedback: string };
     vocabulary: { score: number; feedback: string };
     grammar: { score: number; feedback: string };
     structure: { score: number; feedback: string };
   };
-  corrections: {
-    original: string;
-    corrected: string;
-    reason: string;
-  }[];
-  overall_advice: string;
+  correctedText: string;
+  overallAdvice: string;
 }
 
 export interface SRSState {
