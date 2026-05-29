@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { VocabularyWord } from '@/lib/data/vocabulary';
+import { VocabularyWord } from '@/lib/types';
 
 interface FlashCardProps {
   word: VocabularyWord;
@@ -29,7 +29,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({ word, onFlip, isFlipped })
           <h3 className="text-2xl font-bold text-blue-600 mb-2">{word.english}</h3>
           <div className="mt-4 p-3 bg-white rounded-lg border border-blue-100 text-left w-full">
             <p className="text-slate-800 text-sm font-medium mb-1" lang="ko">{word.example}</p>
-            <p className="text-slate-500 text-xs italic">{word.exampleTranslation}</p>
+            <p className="text-slate-500 text-xs italic">{word.example_translation}</p>
           </div>
         </div>
       </div>

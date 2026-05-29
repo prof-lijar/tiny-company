@@ -198,5 +198,6 @@ export interface TypingPracticeText {
   id: string;
   level: TopikLevel;
   text: string;
+  title: string;
   category: 'essay' | 'sentence' | 'grammar' | 'paragraph';
 }

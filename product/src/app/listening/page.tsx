@@ -4,20 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { ListeningPlayer } from '@/components/listening/ListeningPlayer';
 import { Volume2, Zap } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import { ListeningPassage } from '@/lib/types';
 
-interface ListeningPassage {
+interface ListeningQuestion {
   id: string;
-  level: number;
-  title: string;
-  audio_url: string;
-  transcript: string;
-  questions: {
-    id: string;
-    question: string;
-    options: string[];
-    correctAnswer: number;
-    explanation: string;
-  }[];
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
 }
 
 export default function ListeningPage() {
@@ -76,7 +70,7 @@ export default function ListeningPage() {
             <button
               key={level}
               onClick={() => setSelectedLevel(level)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 selectedLevel === level ? 'bg-indigo-600 text-white' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
               }`}
             >

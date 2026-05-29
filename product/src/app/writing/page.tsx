@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { EssayOutline, WritingFeedback } from '@/lib/types';
+import { EssayOutline, WritingFeedback, WritingPrompt } from '@/lib/types';
 import { writingPrompts } from '@/lib/writing-prompts';
 import WritingInterface from '@/components/writing/WritingInterface';
 import EssayOutliner from '@/components/writing/EssayOutliner';
@@ -27,7 +27,7 @@ export default function WritingPage() {
         body: JSON.stringify({ 
           answer, 
           prompt: currentPrompt.prompt,
-          context: currentPrompt.guidelines.join(' ') 
+          context: currentPrompt.context 
         }),
       });
 
@@ -136,7 +136,7 @@ export default function WritingPage() {
                   <AlertTriangle size={18} className="text-amber-500" />
                   Improvements
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-4">
                   {feedback.improvements.map((imp, i) => (
                     <li key={i} className="flex items-start gap-2 text-slate-600 text-sm">
                       <span className="text-amber-500">•</span>
