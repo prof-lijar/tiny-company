@@ -52,11 +52,11 @@ const PRICING_PLANS = [
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden bg-white">
         <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">
             Master TOPIK II with <span className="text-blue-600">Confidence</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
@@ -91,9 +91,9 @@ export default function LandingPage() {
               structured path from Level 3 to Level 6.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {FEATURES.map((feature, index) => (
-              <Card key={index} className="p-8 hover:shadow-md transition-shadow group">
+              <Card key={index} className="p-6 md:p-8 hover:shadow-md transition-shadow group">
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </div>
@@ -118,9 +118,9 @@ export default function LandingPage() {
               Choose the plan that fits your study goals.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
             {PRICING_PLANS.map((plan) => (
-              <Card key={plan.name} className={`p-8 relative ${plan.highlighted ? 'border-blue-600 ring-2 ring-blue-600' : 'border-slate-200'}`}>
+              <Card key={plan.name} className={`p-6 md:p-8 relative ${plan.highlighted ? 'border-blue-600 ring-2 ring-blue-600' : 'border-slate-200'}`}>
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
                   <div className="text-4xl font-bold text-slate-900 mb-4">
@@ -140,6 +140,7 @@ export default function LandingPage() {
                 </ul>
                 <Button 
                   variant={plan.highlighted ? 'primary' : 'outline'} 
+                  size="lg"
                   className="w-full"
                 >
                   {plan.highlighted ? 'Upgrade to Pro' : 'Get Started'}
@@ -154,7 +155,7 @@ export default function LandingPage() {
       <section className="py-20 bg-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Ready to ace your TOPIK test?
             </h2>
             <p className="text-xl mb-10 opacity-90">
